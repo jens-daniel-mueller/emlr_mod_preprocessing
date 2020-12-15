@@ -1,0 +1,68 @@
+---
+title: "Atmospheric pCO2"
+author: "Jens Daniel Müller"
+date:  "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  workflowr::wflow_html:
+    number_sections: true
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+editor_options:
+  chunk_output_type: console
+---
+
+```{r parent, child = "/nfs/kryo/work/jenmueller/emlr_cant/utilities/setup.Rmd"}
+# this chunk runs the code stored in setup.Rmd
+# if required, please refer to instructions given here:
+# https://jdblischak.github.io/workflowr/articles/wflow-07-common-code.html
+```
+
+```{r define_paths, include=FALSE}
+path_atm_pCO2    <- "/nfs/kryo/work/updata/atm_pco2_noaa/"
+path_preprocessing  <- paste(path_root, "/observations/preprocessing/", sep = "")
+```
+
+# Read data
+
+- Data source: `Globally averaged marine surface annual mean data` from [ESRL-NOAA](https://www.esrl.noaa.gov/gmd/ccgg/trends/gl_data.html)
+
+```{r read_atm_co2}
+
+co2_atm <- read_table2(
+  paste(path_atm_pCO2,
+        "co2_annmean_gl.txt",
+        sep = ""),
+  col_names = FALSE,
+  comment = "#"
+)
+
+co2_atm <- co2_atm %>% 
+  select(-X3)
+
+names(co2_atm) <- c("year", "pCO2")
+  
+  
+```
+
+# Time series
+
+```{r co2_atm_time_series}
+
+co2_atm %>% 
+  ggplot(aes(year, pCO2)) +
+  geom_path() +
+  geom_point()
+
+```
+
+# Write clean file
+
+```{r write_co2_atm_clean_file}
+
+co2_atm %>%
+  write_csv(paste(path_preprocessing,
+                  "co2_atm.csv",
+                  sep = ""))
+
+```
