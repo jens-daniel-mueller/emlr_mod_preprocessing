@@ -20,7 +20,7 @@ editor_options:
 
 ```{r define_paths, include=FALSE}
 path_atm_pCO2    <- "/nfs/kryo/work/updata/atm_pco2_noaa/"
-path_preprocessing  <- paste(path_root, "/observations/preprocessing/", sep = "")
+path_preprocessing  <- paste(path_root, "/model/preprocessing/", sep = "")
 ```
 
 # Read data

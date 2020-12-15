@@ -21,7 +21,7 @@ editor_options:
 
 ```{r define_paths, include=FALSE}
 path_glodapv2_2016b   <- "/nfs/kryo/work/updata/glodapv2.2016b/"
-path_preprocessing    <- paste(path_root, "/observations/preprocessing/", sep = "")
+path_preprocessing    <- paste(path_root, "/model/preprocessing/", sep = "")
 ```
 
 ```{r load_libraries_specific, include=FALSE}
