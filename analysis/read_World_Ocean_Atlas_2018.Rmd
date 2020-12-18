@@ -79,7 +79,7 @@ cmorized_climatology_temp <- tidync(paste(
 cmorized_climatology <- cmorized_climatology_temp %>% hyper_tibble()
 
 # select annual cmorized 2007 as climatology
-cmorized_climatology <- cmorized_climatology  %>%
+cmorized_climatology <- cmorized_climatology %>%
   select(-epc) %>%
   rename(year = time_ann,
     sal = so,
@@ -94,7 +94,8 @@ cmorized_climatology <- cmorized_climatology  %>%
   # select annual value in year of 2007
   filter(year == 10036) %>%
   drop_na() %>%
-  mutate(lon = if_else(lon < 20, lon + 360, lon))
+  mutate(lon = if_else(lon < 20, lon + 360, lon)) %>%
+  mutate(depth = round(depth))
 
 rm(cmorized_climatology_temp)
 

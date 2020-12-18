@@ -1,0 +1,187 @@
+---
+title: "Annual cmorized Cant field"
+author: "Jens Daniel Müller"
+date:  "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  workflowr::wflow_html:
+    number_sections: true
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+editor_options:
+  chunk_output_type: console
+---
+
+```{r parent, child = "/nfs/kryo/work/jenmueller/emlr_cant/utilities/setup.Rmd"}
+# this chunk runs the code stored in setup.Rmd
+# if required, please refer to instructions given here:
+# https://jdblischak.github.io/workflowr/articles/wflow-07-common-code.html
+```
+
+```{r define_paths, include=FALSE}
+path_cmorized <-
+  "/nfs/kryo/work/loher/CESM_output/RECCAP2/cmorized_Dec2020/"
+path_preprocessing  <-
+  paste(path_root, "/model/preprocessing/", sep = "")
+```
+
+```{r load_libraries_specific, include=FALSE}
+library(tidync)
+library(stars)
+library(gsw)
+```
+
+
+# Calculate annual Cant field
+
+## Read in cmorized RunA file
+
+```{r read_cmorized_RunA}
+
+# read in cmorized variable forcing model file
+A_annual <- tidync(paste(path_cmorized,
+                         "RECCAP2_RunA.nc",
+                         sep = ""))
+
+A_annual <- A_annual %>% hyper_tibble()
+
+# harmonize column names and coordinates
+A_annual <- A_annual  %>%
+  select(year = time_ann, lon, lat, depth, tco2_A = dissic, sal = so, theta = thetao) %>%
+  # select annual value in year of 2007
+  mutate(year = (year - 181) / 365 + 1980) %>%
+  mutate(lon = if_else(lon < 20, lon + 360, lon))
+
+# calculate model temperature
+A_annual <- A_annual %>%
+  mutate(temp = gsw_pt_from_t(
+    SA = sal,
+    t = theta,
+    p = 10.1325,
+    p_ref = depth
+  ))
+
+# unit transfer from mol/m3 to µmol/kg
+A_annual <- A_annual %>%
+  mutate(
+    rho = gsw_pot_rho_t_exact(
+      SA = sal,
+      t = temp,
+      p = depth,
+      p_ref = 10.1325
+    ),
+    tco2_A = tco2_A * (1000000 / rho)
+  ) %>%
+  select(year, lon, lat, depth, tco2_A)
+
+```
+
+## Read in cmorized RunB file
+
+```{r read_cmorized_RunB}
+
+# read in cmorized variable forcing model file
+B_annual <- tidync(paste(path_cmorized,
+                         "RECCAP2_RunB.nc",
+                         sep = ""))
+
+B_annual <- B_annual %>% hyper_tibble()
+
+# harmonize column names and coordinates
+B_annual <- B_annual  %>%
+  select(year = time_ann, lon, lat, depth, tco2_B = dissic, sal = so, theta = thetao) %>%
+  # select annual value in year of 2007
+  mutate(year = (year - 181) / 365 + 1980) %>%
+  mutate(lon = if_else(lon < 20, lon + 360, lon))
+
+# calculate model temperature
+B_annual <- B_annual %>%
+  mutate(temp = gsw_pt_from_t(
+    SA = sal,
+    t = theta,
+    p = 10.1325,
+    p_ref = depth
+  ))
+
+# unit transfer from mol/m3 to µmol/kg
+B_annual <- B_annual %>%
+  mutate(
+    rho = gsw_pot_rho_t_exact(
+      SA = sal,
+      t = temp,
+      p = depth,
+      p_ref = 10.1325
+    ),
+    tco2_B = tco2_B * (1000000 / rho)
+  ) %>%
+  select(year, lon, lat, depth, tco2_B)
+
+# join files and calculate Cant field
+cant_annual <- inner_join(A_annual, B_annual) %>%
+  mutate(cant = tco2_A - tco2_B)
+
+rm(A_annual, B_annual)
+
+```
+
+## Apply basin mask
+
+```{r apply_basin_mask}
+
+# use only three basin to assign general basin mask
+# ie this is not specific to the MLR fitting
+basinmask <- basinmask %>% 
+  filter(MLR_basins == "2") %>% 
+  select(lat, lon, basin_AIP)
+
+# restrict predictor fields to basin mask grid
+cant_annual <- inner_join(cant_annual, basinmask)
+
+```
+
+## Write Cant files
+
+```{r write_annual_Cant_files}
+
+years <- c(1982:2019)
+for (i_year in years) {
+  
+ # i_year = years[1]
+  cant_annual_year <- cant_annual %>%
+    filter(year == i_year) %>%
+    select(year, lon, lat, depth, cant)
+  
+  cant_annual_year %>%
+    write_csv(paste(path_preprocessing,
+                    "cant_annual_field/cant_", i_year, ".csv",
+                    sep = ""))
+}
+
+# Cant plot in year 2019
+cant_annual_year <- cant_annual_year %>%
+  mutate(depth = round(depth))
+p_map_climatology(df = cant_annual_year, var = "cant")
+
+```
+
+# Zonal mean section
+
+```{r calculate_zonal_mean_section}
+
+#cant_zonal <- m_zonal_mean_section(cant_annual_year)
+
+```
+
+# Column inventory 
+
+## Calculation
+
+```{r calculate_column_inventory}
+
+#cant_inv_layers <- m_cant_inv(cant_3d)
+
+#cant_inv <- cant_inv_layers %>% 
+#  filter(inv_depth == params_global$inventory_depth_standard)
+
+```
+
