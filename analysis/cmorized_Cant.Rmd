@@ -157,24 +157,25 @@ for (i_year in years) {
                     sep = ""))
 }
 
-# Cant plot in year 2019
-cant_annual_year <- cant_annual_year %>%
-  mutate(depth = round(depth))
-p_map_climatology(df = cant_annual_year, var = "cant")
-
 ```
 
 # Zonal mean section
 
 ```{r calculate_zonal_mean_section}
 
-#cant_zonal <- m_zonal_mean_section(cant_annual_year)
+cant_annual_zonal <- cant_annual %>%
+  select(-c(lon, tco2_A, tco2_B)) %>%
+  fgroup_by(lat, depth, year, basin_AIP) %>% {
+    add_vars(
+      fgroup_vars(., "unique"),
+      fmean(., keep.group_vars = FALSE) %>% add_stub(pre = FALSE, "_mean"),
+      fsd(., keep.group_vars = FALSE) %>% add_stub(pre = FALSE, "_sd")
+    )
+  }
 
 ```
 
 # Column inventory 
-
-## Calculation
 
 ```{r calculate_column_inventory}
 
@@ -182,6 +183,104 @@ p_map_climatology(df = cant_annual_year, var = "cant")
 
 #cant_inv <- cant_inv_layers %>% 
 #  filter(inv_depth == params_global$inventory_depth_standard)
+
+
+for (i_inventory_depth in params_global$inventory_depths) {
+  # filter integration depth
+  cant_annual_temp <- cant_annual %>%
+    filter(depth <= i_inventory_depth)
+  
+  depth_level_volume <- tibble(depth = unique(cant_annual_temp$depth)) %>%
+    arrange(depth)
+  
+  # determine depth level volume of each depth layer
+  depth_level_volume <- depth_level_volume %>%
+    mutate(
+      layer_thickness_above = replace_na((depth - lag(depth)) / 2, 0),
+      layer_thickness_below = replace_na((lead(depth) - depth) / 2, 0),
+      layer_thickness = layer_thickness_above + layer_thickness_below
+    ) %>%
+    select(-c(layer_thickness_above,
+              layer_thickness_below))
+  
+  cant_annual_temp <-
+    full_join(cant_annual_temp, depth_level_volume)
+  
+  # calculate cant layer inventory
+  cant_annual_temp <- cant_annual_temp %>%
+    mutate(cant_layer_inv = cant * layer_thickness * 1.03) %>%
+    select(-layer_thickness)
+  
+  # sum up layer inventories to column inventories
+  cant_annual_inv_temp <- cant_annual_temp %>%
+    group_by(lon, lat, basin_AIP, year) %>%
+    summarise(cant_inv     = sum(cant_layer_inv, na.rm = TRUE) / 1000) %>%
+    ungroup()
+  
+  cant_annual_inv_temp <- cant_annual_inv_temp %>%
+    mutate(inv_depth = i_inventory_depth)
+  
+  if (exists("cant_annual_inv")) {
+    cant_annual_inv <- bind_rows(cant_annual_inv, cant_annual_inv_temp)
+  }
+  
+  if (!exists("cant_annual_inv")) {
+    cant_annual_inv <- cant_annual_inv_temp
+  }
+}
+
+cant_annual_inv <- cant_annual_inv %>%
+  filter(inv_depth == params_global$inventory_depth_standard)
+
+rm(cant_annual_inv_temp, cant_annual_temp)
+
+```
+
+# Plots in 2007
+
+## Horizontal plane maps
+
+```{r plot_cant_horizontal}
+
+# Cant horizontal plane plot in year 2007
+cant_annual_year <- cant_annual %>%
+  filter(year == 2007) %>%
+  mutate(depth = round(depth))
+
+p_map_climatology(df = cant_annual_year, var = "cant")
+
+```
+
+## Zonal mean section plot
+
+```{r plot_cant_zonal_mean_section}
+
+# Cant zonal mean section plot in year 2007
+for (i_basin_AIP in unique(cant_annual_zonal$basin_AIP)) {
+  print(
+    p_section_zonal(
+      df = cant_annual_zonal %>% filter(basin_AIP == i_basin_AIP),
+      var = "cant_mean",
+      plot_slabs = "n",
+      subtitle_text = paste("Basin:", i_basin_AIP)
+    )
+  )
+}
+
+```
+
+## Global sections plot
+
+```{r plot_cant_global_section}
+
+# Cant global mean section plot in year 2007
+cant_annual_year <- cant_annual %>%
+  filter(year == 2007)
+
+p_section_global(
+  df = cant_annual_year,
+  var = "cant",
+  col = "divergent")
 
 ```
 
