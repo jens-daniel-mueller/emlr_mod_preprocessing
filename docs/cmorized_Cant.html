@@ -414,7 +414,7 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="cmorized_Cant.html">Gruber 2019</a>
+      <a href="cmorized_Cant.html">Cmorized Cant</a>
     </li>
   </ul>
 </li>
@@ -572,16 +572,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree1b06f98a052424ad7cfd18cb80d4dbdaa67d8f78targetblank1b06f98a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/1b06f98a052424ad7cfd18cb80d4dbdaa67d8f78" target="_blank">1b06f98</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree0e3fd9739ad6bda76bfb00c3d7d707b9f21f7ae9targetblank0e3fd97a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/0e3fd9739ad6bda76bfb00c3d7d707b9f21f7ae9" target="_blank">0e3fd97</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree1b06f98a052424ad7cfd18cb80d4dbdaa67d8f78targetblank1b06f98a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree0e3fd9739ad6bda76bfb00c3d7d707b9f21f7ae9targetblank0e3fd97a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/1b06f98a052424ad7cfd18cb80d4dbdaa67d8f78" target="_blank">1b06f98</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/0e3fd9739ad6bda76bfb00c3d7d707b9f21f7ae9" target="_blank">0e3fd97</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -636,6 +636,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0e3fd9739ad6bda76bfb00c3d7d707b9f21f7ae9/analysis/cmorized_Cant.Rmd" target="_blank">0e3fd97</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2020-12-18
+</td>
+<td>
+rebuild final cleaned version
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/7c12d28e06f8b9b3f5f8586f5209c8fd255f1a98/docs/cmorized_Cant.html" target="_blank">7c12d28</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2020-12-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -769,27 +803,116 @@ for (i_year in years) {
     write_csv(paste(path_preprocessing,
                     &quot;cant_annual_field/cant_&quot;, i_year, &quot;.csv&quot;,
                     sep = &quot;&quot;))
-}
-
-# Cant plot in year 2019
-cant_annual_year &lt;- cant_annual_year %&gt;%
-  mutate(depth = round(depth))
-p_map_climatology(df = cant_annual_year, var = &quot;cant&quot;)</code></pre>
-<p><img src="figure/cmorized_Cant.Rmd/write_annual_Cant_files-1.png" width="672" style="display: block; margin: auto;" /></p>
+}</code></pre>
 </div>
 </div>
 <div id="zonal-mean-section" class="section level1">
 <h1><span class="header-section-number">2</span> Zonal mean section</h1>
-<pre class="r"><code>#cant_zonal &lt;- m_zonal_mean_section(cant_annual_year)</code></pre>
+<pre class="r"><code>cant_annual_zonal &lt;- cant_annual %&gt;%
+  select(-c(lon, tco2_A, tco2_B)) %&gt;%
+  fgroup_by(lat, depth, year, basin_AIP) %&gt;% {
+    add_vars(
+      fgroup_vars(., &quot;unique&quot;),
+      fmean(., keep.group_vars = FALSE) %&gt;% add_stub(pre = FALSE, &quot;_mean&quot;),
+      fsd(., keep.group_vars = FALSE) %&gt;% add_stub(pre = FALSE, &quot;_sd&quot;)
+    )
+  }</code></pre>
 </div>
 <div id="column-inventory" class="section level1">
 <h1><span class="header-section-number">3</span> Column inventory</h1>
-<div id="calculation" class="section level2">
-<h2><span class="header-section-number">3.1</span> Calculation</h2>
 <pre class="r"><code>#cant_inv_layers &lt;- m_cant_inv(cant_3d)
 
 #cant_inv &lt;- cant_inv_layers %&gt;% 
-#  filter(inv_depth == params_global$inventory_depth_standard)</code></pre>
+#  filter(inv_depth == params_global$inventory_depth_standard)
+
+
+for (i_inventory_depth in params_global$inventory_depths) {
+  # filter integration depth
+  cant_annual_temp &lt;- cant_annual %&gt;%
+    filter(depth &lt;= i_inventory_depth)
+  
+  depth_level_volume &lt;- tibble(depth = unique(cant_annual_temp$depth)) %&gt;%
+    arrange(depth)
+  
+  # determine depth level volume of each depth layer
+  depth_level_volume &lt;- depth_level_volume %&gt;%
+    mutate(
+      layer_thickness_above = replace_na((depth - lag(depth)) / 2, 0),
+      layer_thickness_below = replace_na((lead(depth) - depth) / 2, 0),
+      layer_thickness = layer_thickness_above + layer_thickness_below
+    ) %&gt;%
+    select(-c(layer_thickness_above,
+              layer_thickness_below))
+  
+  cant_annual_temp &lt;-
+    full_join(cant_annual_temp, depth_level_volume)
+  
+  # calculate cant layer inventory
+  cant_annual_temp &lt;- cant_annual_temp %&gt;%
+    mutate(cant_layer_inv = cant * layer_thickness * 1.03) %&gt;%
+    select(-layer_thickness)
+  
+  # sum up layer inventories to column inventories
+  cant_annual_inv_temp &lt;- cant_annual_temp %&gt;%
+    group_by(lon, lat, basin_AIP, year) %&gt;%
+    summarise(cant_inv     = sum(cant_layer_inv, na.rm = TRUE) / 1000) %&gt;%
+    ungroup()
+  
+  cant_annual_inv_temp &lt;- cant_annual_inv_temp %&gt;%
+    mutate(inv_depth = i_inventory_depth)
+  
+  if (exists(&quot;cant_annual_inv&quot;)) {
+    cant_annual_inv &lt;- bind_rows(cant_annual_inv, cant_annual_inv_temp)
+  }
+  
+  if (!exists(&quot;cant_annual_inv&quot;)) {
+    cant_annual_inv &lt;- cant_annual_inv_temp
+  }
+}
+
+cant_annual_inv &lt;- cant_annual_inv %&gt;%
+  filter(inv_depth == params_global$inventory_depth_standard)
+
+rm(cant_annual_inv_temp, cant_annual_temp)</code></pre>
+</div>
+<div id="plots-in-2007" class="section level1">
+<h1><span class="header-section-number">4</span> Plots in 2007</h1>
+<div id="horizontal-plane-maps" class="section level2">
+<h2><span class="header-section-number">4.1</span> Horizontal plane maps</h2>
+<pre class="r"><code># Cant horizontal plane plot in year 2007
+cant_annual_year &lt;- cant_annual %&gt;%
+  filter(year == 2007) %&gt;%
+  mutate(depth = round(depth))
+
+p_map_climatology(df = cant_annual_year, var = &quot;cant&quot;)</code></pre>
+<p><img src="figure/cmorized_Cant.Rmd/plot_cant_horizontal-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="zonal-mean-section-plot" class="section level2">
+<h2><span class="header-section-number">4.2</span> Zonal mean section plot</h2>
+<pre class="r"><code># Cant zonal mean section plot in year 2007
+for (i_basin_AIP in unique(cant_annual_zonal$basin_AIP)) {
+  print(
+    p_section_zonal(
+      df = cant_annual_zonal %&gt;% filter(basin_AIP == i_basin_AIP),
+      var = &quot;cant_mean&quot;,
+      plot_slabs = &quot;n&quot;,
+      subtitle_text = paste(&quot;Basin:&quot;, i_basin_AIP)
+    )
+  )
+}</code></pre>
+<p><img src="figure/cmorized_Cant.Rmd/plot_cant_zonal_mean_section-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/cmorized_Cant.Rmd/plot_cant_zonal_mean_section-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/cmorized_Cant.Rmd/plot_cant_zonal_mean_section-3.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="global-sections-plot" class="section level2">
+<h2><span class="header-section-number">4.3</span> Global sections plot</h2>
+<pre class="r"><code># Cant global mean section plot in year 2007
+cant_annual_year &lt;- cant_annual %&gt;%
+  filter(year == 2007)
+
+p_section_global(
+  df = cant_annual_year,
+  var = &quot;cant&quot;,
+  col = &quot;divergent&quot;)</code></pre>
+<p><img src="figure/cmorized_Cant.Rmd/plot_cant_global_section-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -831,25 +954,26 @@ loaded via a namespace (and not attached):
 [10] colorspace_1.4-1         withr_2.3.0              tidyselect_1.1.0        
 [13] compiler_4.0.3           git2r_0.27.1             cli_2.1.0               
 [16] rvest_0.3.6              RNetCDF_2.4-2            xml2_1.3.2              
-[19] labeling_0.4.2           scales_1.1.1             checkmate_2.0.0         
-[22] classInt_0.4-3           digest_0.6.27            rmarkdown_2.5           
-[25] pkgconfig_2.0.3          htmltools_0.5.0          dbplyr_1.4.4            
-[28] rlang_0.4.8              readxl_1.3.1             rstudioapi_0.11         
-[31] farver_2.0.3             generics_0.0.2           jsonlite_1.7.1          
-[34] magrittr_1.5             ncmeta_0.3.0             Matrix_1.2-18           
-[37] Rcpp_1.0.5               munsell_0.5.0            fansi_0.4.1             
-[40] lifecycle_0.2.0          stringi_1.5.3            whisker_0.4             
-[43] yaml_2.2.1               grid_4.0.3               blob_1.2.1              
-[46] parallel_4.0.3           promises_1.1.1           crayon_1.3.4            
-[49] lattice_0.20-41          haven_2.3.1              hms_0.5.3               
-[52] knitr_1.30               pillar_1.4.6             reprex_0.3.0            
-[55] glue_1.4.2               evaluate_0.14            RcppArmadillo_0.10.1.0.0
-[58] data.table_1.13.2        modelr_0.1.8             vctrs_0.3.4             
-[61] httpuv_1.5.4             cellranger_1.1.0         gtable_0.3.0            
-[64] assertthat_0.2.1         xfun_0.18                lwgeom_0.2-5            
-[67] broom_0.7.2              RcppEigen_0.3.3.7.0      e1071_1.7-4             
-[70] later_1.1.0.1            viridisLite_0.3.0        class_7.3-17            
-[73] ncdf4_1.17               units_0.6-7              ellipsis_0.3.1          </code></pre>
+[19] isoband_0.2.2            labeling_0.4.2           scales_1.1.1            
+[22] checkmate_2.0.0          classInt_0.4-3           digest_0.6.27           
+[25] rmarkdown_2.5            pkgconfig_2.0.3          htmltools_0.5.0         
+[28] dbplyr_1.4.4             rlang_0.4.8              readxl_1.3.1            
+[31] rstudioapi_0.11          farver_2.0.3             generics_0.0.2          
+[34] jsonlite_1.7.1           magrittr_1.5             ncmeta_0.3.0            
+[37] Matrix_1.2-18            Rcpp_1.0.5               munsell_0.5.0           
+[40] fansi_0.4.1              lifecycle_0.2.0          stringi_1.5.3           
+[43] whisker_0.4              yaml_2.2.1               grid_4.0.3              
+[46] blob_1.2.1               parallel_4.0.3           promises_1.1.1          
+[49] crayon_1.3.4             lattice_0.20-41          haven_2.3.1             
+[52] hms_0.5.3                knitr_1.30               pillar_1.4.6            
+[55] reprex_0.3.0             glue_1.4.2               evaluate_0.14           
+[58] RcppArmadillo_0.10.1.0.0 data.table_1.13.2        modelr_0.1.8            
+[61] vctrs_0.3.4              httpuv_1.5.4             cellranger_1.1.0        
+[64] gtable_0.3.0             assertthat_0.2.1         xfun_0.18               
+[67] lwgeom_0.2-5             broom_0.7.2              RcppEigen_0.3.3.7.0     
+[70] e1071_1.7-4              later_1.1.0.1            viridisLite_0.3.0       
+[73] class_7.3-17             ncdf4_1.17               units_0.6-7             
+[76] ellipsis_0.3.1          </code></pre>
 </div>
 </div>
 </div>
