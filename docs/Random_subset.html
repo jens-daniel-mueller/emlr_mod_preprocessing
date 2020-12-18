@@ -12,7 +12,7 @@
 <meta name="author" content="Jens Daniel Müller" />
 
 
-<title>Home</title>
+<title>Random subset</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,6 +20,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
@@ -274,6 +277,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -281,6 +353,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -372,7 +454,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Home</h1>
+<h1 class="title toc-ignore">Random subset</h1>
 <h4 class="author">Jens Daniel Müller</h4>
 <h4 class="date">18 December, 2020</h4>
 
@@ -530,7 +612,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/index.Rmd</code>) and HTML (<code>docs/index.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/Random_subset.Rmd</code>) and HTML (<code>docs/Random_subset.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -556,36 +638,19 @@ Message
 <tbody>
 <tr>
 <td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/92a8b4239fa98c9c52d47397c780f0ea89a35022/docs/index.html" target="_blank">92a8b42</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2020-12-16
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
 Rmd
 </td>
 <td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/076c8aa462cb67bf5cb17b0f0b611291206d3050/analysis/index.Rmd" target="_blank">076c8aa</a>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/1b06f98a052424ad7cfd18cb80d4dbdaa67d8f78/analysis/Random_subset.Rmd" target="_blank">1b06f98</a>
 </td>
 <td>
-Jens Müller
+Donghe-Zhu
 </td>
 <td>
-2020-12-15
+2020-12-18
 </td>
 <td>
-Initial commit
+rebuild final cleaned version
 </td>
 </tr>
 </tbody>
@@ -595,10 +660,287 @@ Initial commit
 </div>
 </div>
 </div>
-<div id="welcome" class="section level1">
-<h1>WELCOME!</h1>
-<p>On this website we present our ongoing ambition to quantify anthropogenic CO<sub>2</sub> in the ocean based on observations.</p>
-<p>Navigate trough the navbar on top to take a look at the various chapters of this project. The links in the upper right corner bring you to the source code of this project and to Jens’ homepage.</p>
+<pre class="r"><code>path_GLODAP_preprocessing &lt;-
+  paste(path_root, &quot;/observations/preprocessing/&quot;, sep = &quot;&quot;)
+path_cmorized &lt;-
+  &quot;/nfs/kryo/work/loher/CESM_output/RECCAP2/cmorized_Dec2020/split_monthly/&quot;
+path_preprocessing  &lt;-
+  paste(path_root, &quot;/model/preprocessing/&quot;, sep = &quot;&quot;)</code></pre>
+<div id="select-basin-mask" class="section level1">
+<h1><span class="header-section-number">1</span> Select basin mask</h1>
+<pre class="r"><code># use only three basin to assign general basin mask
+# ie this is not specific to the MLR fitting
+basinmask &lt;- basinmask %&gt;%
+  filter(MLR_basins == &quot;2&quot;) %&gt;%
+  select(lat, lon, basin_AIP)</code></pre>
+</div>
+<div id="read-glodapv2_2020-preprocessed-files" class="section level1">
+<h1><span class="header-section-number">2</span> Read GLODAPv2_2020 preprocessed files</h1>
+<pre class="r"><code>GLODAP &lt;-
+  read_csv(paste(path_GLODAP_preprocessing,
+                 &quot;GLODAPv2.2020_preprocessed.csv&quot;,
+                 sep = &quot;&quot;))
+GLODAP &lt;- GLODAP %&gt;%
+  mutate(month = month(date))</code></pre>
+</div>
+<div id="randomly-subset-cmorized-model-data" class="section level1">
+<h1><span class="header-section-number">3</span> Randomly subset cmorized model data</h1>
+<p>Here we randomly subset cmorized (1x1) data from the model with variable forcing, according to the total number of GLODAP observations for the whole period from a previously cleaned file. The number for the annual subset remains the same for each year, which could be expressed by the total number of observations divided by number of years.</p>
+<p>Besides, Model results are given in [mol m<sup>-3</sup>], whereas GLODAP data are in [µmol kg<sup>-1</sup>]. This refers to the variables:</p>
+<ul>
+<li>DIC<br />
+</li>
+<li>ALK<br />
+</li>
+<li>O2<br />
+</li>
+<li>NO3<br />
+</li>
+<li>PO4<br />
+</li>
+<li>SiO3<br />
+</li>
+<li>AOU (calculated)</li>
+</ul>
+<p>For comparison, model results were converted from [mol m<sup>-3</sup>] to [µmol kg<sup>-1</sup>]</p>
+<pre class="r"><code># read in a random model
+model &lt;-
+  read_ncdf(paste(path_cmorized, &quot;dissic_CESM-ETHZ_A_1_gr_1982.nc&quot;, sep = &quot;&quot;)) %&gt;%
+  as_tibble() %&gt;%
+  drop_na()
+
+# convert longitudes and mutate month
+model &lt;- model %&gt;%
+  mutate(lon = if_else(lon &lt; 20, lon + 360, lon)) %&gt;%
+  mutate(month = month(time_mon))
+
+# only consider model grids within basinmask
+model &lt;- inner_join(model, basinmask)
+
+# model grid with depth
+model_grid_depth &lt;- model %&gt;%
+  select(month, lat, lon, depth)
+
+rm(model)
+
+# set name of model to be subsetted
+model_ID &lt;- &quot;A&quot;
+
+# for loop across years
+years &lt;- c(&quot;1982&quot;:&quot;2019&quot;)
+
+# set equal number of random model sampling will be made for each year
+n = floor(nrow(GLODAP) / length(years))
+
+for (i_year in years) {
+  # for manual testing
+  i_year &lt;- years[1]
+  
+  # random sample n = GLODAP / years from model grid depth
+  model_resample_grid_depth &lt;- sample_n(model_grid_depth, n) %&gt;%
+    arrange(lat, lon, depth, month) %&gt;%
+    mutate(year = i_year)
+  
+  # for loop across variables
+  variables &lt;-
+    c(&quot;so&quot;, &quot;thetao&quot;, &quot;dissic&quot;, &quot;talk&quot;, &quot;o2&quot;, &quot;no3&quot;, &quot;po4&quot;, &quot;si&quot;)
+  # &quot;SALT&quot;, &quot;TEMP&quot;, &quot;DIC&quot;, &quot;ALK&quot;, &quot;O2&quot;, &quot;NO3&quot;, &quot;PO4&quot;, &quot;SiO3&quot;
+  
+  for (i_variable in variables) {
+    # Uncomment line below for manual testing
+    i_variable &lt;- variables[1]
+    
+    # read list of all files
+    file &lt;-
+      list.files(
+        path = path_cmorized,
+        pattern = paste(
+          &quot;^&quot;,
+          i_variable,
+          &quot;_CESM-ETHZ_&quot;,
+          model_ID,
+          &quot;_1_gr_&quot;,
+          i_year,
+          &quot;.nc&quot;,
+          sep = &quot;&quot;
+        )
+      )
+    print(file)
+    
+    # read in data
+    variable_data &lt;-
+      read_ncdf(paste(path_cmorized,
+                      file,
+                      sep = &quot;&quot;))
+    
+    # convert to tibble
+    variable_data_tibble &lt;- variable_data %&gt;%
+      as_tibble()
+    
+    # remove open link to nc file
+    rm(variable_data)
+    
+    # remove na values -&gt; do this early, to speed up subsequent tasks
+    variable_data_tibble &lt;-
+      variable_data_tibble %&gt;%
+      filter(!is.na(!!sym(i_variable)))
+    
+    # convert longitudes
+    variable_data_tibble &lt;- variable_data_tibble %&gt;%
+      mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
+    
+    # only consider model grids within basinmask
+    variable_data_tibble &lt;- inner_join(variable_data_tibble, basinmask) %&gt;%
+      select(-basin_AIP)
+    
+    # mutate variables
+    variable_data_tibble &lt;- variable_data_tibble %&gt;%
+      mutate(month = month(time_mon), !!sym(i_variable) := as.numeric(!!sym(i_variable))) %&gt;%
+      select(-time_mon)
+    
+    # random sample for each model variable in specific year
+    model_resample_grid_depth &lt;-
+      left_join(model_resample_grid_depth, variable_data_tibble)
+  }
+  
+  # add random sample model subset for each year together
+  if (exists(&quot;model_resample&quot;)) {
+    model_resample &lt;-
+      bind_rows(model_resample, model_resample_grid_depth)
+  }
+  
+  if (!exists(&quot;model_resample&quot;)) {
+    model_resample &lt;- model_resample_grid_depth
+  }
+  
+}
+
+# calculate model temperature
+model_resample &lt;- model_resample %&gt;%
+  mutate(temp = gsw_pt_from_t(
+    SA = so,
+    t = thetao,
+    p = 10.1325,
+    p_ref = depth
+  ))
+
+# unit transfer from mol/m3 to µmol/kg
+model_resample &lt;- model_resample %&gt;%
+  mutate(
+    rho = gsw_pot_rho_t_exact(
+      SA = so,
+      t = temp,
+      p = depth,
+      p_ref = 10.1325
+    ),
+    dissic = dissic * (1000000 / rho),
+    talk = talk * (1000000 / rho),
+    o2 = o2 * (1000000 / rho),
+    no3 = no3 * (1000000 / rho),
+    po4 = po4 * (1000000 / rho),
+    si = si * (1000000 / rho)
+  )
+
+# calculate AOU
+model_resample &lt;- model_resample %&gt;%
+  mutate(
+    oxygen_sat_m3 = gas_satconc(
+      S = so,
+      t = temp,
+      P = 1.013253,
+      species = &quot;O2&quot;
+    ),
+    oxygen_sat_kg = oxygen_sat_m3 * (1000 / rho),
+    aou = oxygen_sat_kg - o2
+  ) %&gt;%
+  select(-oxygen_sat_kg,-oxygen_sat_m3)
+
+# write file for random model sampling
+model_resample %&gt;%
+  write_csv(paste(path_preprocessing, &quot;random_subset.csv&quot;,
+                  sep = &quot;&quot;))</code></pre>
+<pre class="r"><code># read in random model sampling file
+model_resample &lt;-
+  read_csv(paste(path_preprocessing, &quot;random_subset.csv&quot;,
+                 sep = &quot;&quot;))
+
+# plot random sampling cmorized grids in each year
+years &lt;- c(&quot;1982&quot;, &quot;1990&quot;, &quot;2000&quot;, &quot;2010&quot;, &quot;2019&quot;)
+for (i_year in years) {
+  # i_year &lt;- years[1]
+  
+  model_resample_year &lt;- model_resample %&gt;%
+    filter(year == i_year)
+  
+  print(
+    ggplot() +
+      geom_bin2d(data = model_resample_year,
+                 aes(lon, lat),
+                 binwidth = 1) +
+      scale_fill_viridis_c(direction = -1) +
+      coord_quickmap(expand = 0) +
+      labs(
+        title = paste(&quot;Random Model Sampling of year&quot;, i_year),
+        subtitle = paste(&quot;Nr of observations&quot;, nrow(model_resample_year)),
+        x = &quot;Longitude&quot;,
+        y = &quot;Latitude&quot;
+      ) +
+      geom_raster(data = landmask,
+                  aes(lon, lat), fill = &quot;grey80&quot;)
+  )
+
+}
+
+# Calculate and plot depth distribution of model subset
+model_resample_depth &lt;- model_resample %&gt;%
+  count(depth, year)
+
+model_resample_depth_average &lt;- model_resample_depth %&gt;%
+  group_by(depth) %&gt;%
+  summarise(n = mean(n))
+
+model_resample_depth_average %&gt;%
+  arrange(depth) %&gt;%
+  ggplot(aes(n, depth)) +
+  geom_point(data = model_resample_depth,
+             aes(n, depth, col = &quot;All years&quot;)) +
+  geom_point(aes(n, depth, col = &quot;Average&quot;)) +
+  geom_path(aes(n, depth, col = &quot;Average&quot;)) +
+  scale_color_brewer(palette = &quot;Set1&quot;,
+                     name = &quot;&quot;,
+                     direction = -1) +
+  scale_y_reverse() +
+  coord_cartesian(xlim = c(0,500),
+                  ylim = c(6000,0)) +
+  labs(title = &quot;Depth distribution of random model subset&quot;)
+
+
+# Calculate and plot depth distribution of GLODAP data
+# Depths gridded to model depth levels for comparison
+GLODAP_depth &lt;- GLODAP %&gt;%
+  mutate(depth = as.numeric(as.character(cut(depth,
+                     c(0,unique(model_resample_depth_average$depth)),
+                     labels = unique(model_resample_depth_average$depth))))) %&gt;% 
+  count(depth, year)
+
+GLODAP_depth_average &lt;- GLODAP_depth %&gt;%
+  group_by(depth) %&gt;%
+  summarise(n = mean(n))
+
+GLODAP_depth_average %&gt;%
+  arrange(depth) %&gt;%
+  ggplot(aes(n, depth)) +
+  geom_point(data = GLODAP_depth,
+             aes(n, depth, col = &quot;All years&quot;)) +
+  geom_point(aes(n, depth, col = &quot;Average&quot;)) +
+  geom_path(aes(n, depth, col = &quot;Average&quot;)) +
+  scale_color_brewer(palette = &quot;Set1&quot;,
+                     name = &quot;&quot;,
+                     direction = -1) +
+  scale_y_reverse() +
+  coord_cartesian(xlim = c(0,500),
+                  ylim = c(6000,0)) +
+  labs(title = &quot;Depth distribution of GLODAP observations&quot;)</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -627,17 +969,39 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] workflowr_1.6.2
+ [1] marelac_2.1.10    shape_1.4.5       gsw_1.0-5         testthat_2.3.2   
+ [5] rqdatatable_1.2.9 rquery_1.4.6      wrapr_2.0.4       lubridate_1.7.9  
+ [9] stars_0.4-3       sf_0.9-6          abind_1.4-5       metR_0.8.0       
+[13] scico_1.2.0       patchwork_1.1.0   collapse_1.4.2    forcats_0.5.0    
+[17] stringr_1.4.0     dplyr_1.0.2       purrr_0.3.4       readr_1.4.0      
+[21] tidyr_1.1.2       tibble_3.0.4      ggplot2_3.3.2     tidyverse_1.3.0  
+[25] workflowr_1.6.2  
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.5       rstudioapi_0.11  whisker_0.4      knitr_1.30      
- [5] magrittr_1.5     R6_2.5.0         rlang_0.4.8      stringr_1.4.0   
- [9] tools_4.0.3      xfun_0.18        git2r_0.27.1     htmltools_0.5.0 
-[13] ellipsis_0.3.1   rprojroot_1.3-2  yaml_2.2.1       digest_0.6.27   
-[17] tibble_3.0.4     lifecycle_0.2.0  crayon_1.3.4     later_1.1.0.1   
-[21] vctrs_0.3.4      promises_1.1.1   fs_1.5.0         glue_1.4.2      
-[25] evaluate_0.14    rmarkdown_2.5    stringi_1.5.3    compiler_4.0.3  
-[29] pillar_1.4.6     backports_1.1.10 httpuv_1.5.4     pkgconfig_2.0.3 </code></pre>
+ [1] fs_1.5.0                 httr_1.4.2               rprojroot_1.3-2         
+ [4] tools_4.0.3              backports_1.1.10         R6_2.5.0                
+ [7] KernSmooth_2.23-18       DBI_1.1.0                colorspace_1.4-1        
+[10] withr_2.3.0              tidyselect_1.1.0         compiler_4.0.3          
+[13] git2r_0.27.1             cli_2.1.0                rvest_0.3.6             
+[16] xml2_1.3.2               scales_1.1.1             checkmate_2.0.0         
+[19] classInt_0.4-3           digest_0.6.27            oce_1.2-0               
+[22] rmarkdown_2.5            pkgconfig_2.0.3          htmltools_0.5.0         
+[25] dbplyr_1.4.4             rlang_0.4.8              readxl_1.3.1            
+[28] rstudioapi_0.11          generics_0.0.2           jsonlite_1.7.1          
+[31] magrittr_1.5             Matrix_1.2-18            Rcpp_1.0.5              
+[34] munsell_0.5.0            fansi_0.4.1              lifecycle_0.2.0         
+[37] stringi_1.5.3            whisker_0.4              yaml_2.2.1              
+[40] grid_4.0.3               blob_1.2.1               parallel_4.0.3          
+[43] promises_1.1.1           crayon_1.3.4             lattice_0.20-41         
+[46] haven_2.3.1              seacarb_3.2.14           hms_0.5.3               
+[49] knitr_1.30               pillar_1.4.6             reprex_0.3.0            
+[52] glue_1.4.2               evaluate_0.14            RcppArmadillo_0.10.1.0.0
+[55] data.table_1.13.2        modelr_0.1.8             vctrs_0.3.4             
+[58] httpuv_1.5.4             cellranger_1.1.0         gtable_0.3.0            
+[61] assertthat_0.2.1         xfun_0.18                lwgeom_0.2-5            
+[64] broom_0.7.2              RcppEigen_0.3.3.7.0      e1071_1.7-4             
+[67] later_1.1.0.1            class_7.3-17             units_0.6-7             
+[70] ellipsis_0.3.1          </code></pre>
 </div>
 </div>
 
@@ -655,6 +1019,8 @@ footer is added to webpages before the MathJax javascript. -->
 </script>
 
 
+</div>
+</div>
 
 </div>
 
@@ -692,6 +1058,32 @@ $(document).ready(function () {
 });
 </script>
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

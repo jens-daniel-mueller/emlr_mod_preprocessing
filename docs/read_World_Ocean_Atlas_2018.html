@@ -375,13 +375,13 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">eMLR mod preprocessing</a>
+      <a class="navbar-brand" href="index.html">eMLR obs preprocessing</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Predictors
+    Climatology
      
     <span class="caret"></span>
   </a>
@@ -389,13 +389,22 @@ div.tocify {
     <li>
       <a href="read_World_Ocean_Atlas_2018.html">World Ocean Atlas 2018</a>
     </li>
-    <li>
-      <a href="read_GLODAPv2_2016_MappedClimatologies.html">GLODAPv2_2016_MappedClimatologies</a>
-    </li>
   </ul>
 </li>
-<li>
-  <a href="read_GLODAPv2_2020.html">GLODAPv2_2020</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Synthetic data
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="GLODAP_based_subset.html">Regular subset</a>
+    </li>
+    <li>
+      <a href="Random_subset.html">Random subset</a>
+    </li>
+  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -405,10 +414,7 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="read_Gruber_2019_Cant.html">Gruber 2019</a>
-    </li>
-    <li>
-      <a href="read_Sabine_2004_Cant.html">Sabine 2004</a>
+      <a href="cmorized_Cant.html">Gruber 2019</a>
     </li>
   </ul>
 </li>
@@ -418,7 +424,7 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing">
+  <a href="https://github.com/jens-daniel-mueller/emlr_obs_preprocessing">
     <span class="fa fa-github"></span>
      
     Source code
@@ -450,7 +456,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">World Ocean Atlas 2018</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">15 December, 2020</h4>
+<h4 class="date">18 December, 2020</h4>
 
 </div>
 
@@ -475,13 +481,13 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-12-15
+<strong>Last updated:</strong> 2020-12-18
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
-<strong>Knit directory:</strong> <code>emlr_mod_preprocessing/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong> <code>model/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
@@ -566,28 +572,31 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree57f69db9ca78733a12898d09e6e4bcdba96b9e49targetblank57f69dba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/57f69db9ca78733a12898d09e6e4bcdba96b9e49" target="_blank">57f69db</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree1b06f98a052424ad7cfd18cb80d4dbdaa67d8f78targetblank1b06f98a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/1b06f98a052424ad7cfd18cb80d4dbdaa67d8f78" target="_blank">1b06f98</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree57f69db9ca78733a12898d09e6e4bcdba96b9e49targetblank57f69dba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree1b06f98a052424ad7cfd18cb80d4dbdaa67d8f78targetblank1b06f98a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/57f69db9ca78733a12898d09e6e4bcdba96b9e49" target="_blank">57f69db</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/1b06f98a052424ad7cfd18cb80d4dbdaa67d8f78" target="_blank">1b06f98</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
 
 Unstaged changes:
     Modified:   analysis/_site.yml
-    Deleted:    analysis/config_dependencies.Rmd
-    Deleted:    analysis/config_parameterization.Rmd
+    Deleted:    analysis/read_GLODAPv2_2016_MappedClimatologies.Rmd
+    Deleted:    analysis/read_GLODAPv2_2020.Rmd
+    Deleted:    analysis/read_Gruber_2019_Cant.Rmd
+    Deleted:    analysis/read_Sabine_2004_Cant.Rmd
     Modified:   code/Workflowr_project_managment.R
 
 </code></pre>
@@ -632,6 +641,57 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/1b06f98a052424ad7cfd18cb80d4dbdaa67d8f78/analysis/read_World_Ocean_Atlas_2018.Rmd" target="_blank">1b06f98</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2020-12-18
+</td>
+<td>
+rebuild final cleaned version
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/5f65de11c4d4c95535760f64af6e445728c20eb5/analysis/read_World_Ocean_Atlas_2018.Rmd" target="_blank">5f65de1</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2020-12-17
+</td>
+<td>
+read in cmorized annual data
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/92a8b4239fa98c9c52d47397c780f0ea89a35022/docs/read_World_Ocean_Atlas_2018.html" target="_blank">92a8b42</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-12-16
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/57f69db9ca78733a12898d09e6e4bcdba96b9e49/analysis/read_World_Ocean_Atlas_2018.Rmd" target="_blank">57f69db</a>
 </td>
 <td>
@@ -668,270 +728,8 @@ Initial commit
 </div>
 </div>
 </div>
-<div id="data-source" class="section level1">
-<h1><span class="header-section-number">1</span> Data source</h1>
-<ul>
-<li>Data source: <a href="https://www.nodc.noaa.gov/OC5/woa18/woa18data.html" target="_blank">World Ocean Atlas 2018</a></li>
-</ul>
-</div>
-<div id="masks" class="section level1">
-<h1><span class="header-section-number">2</span> Masks</h1>
-<div id="land" class="section level2">
-<h2><span class="header-section-number">2.1</span> Land</h2>
-<div id="read-mask" class="section level3">
-<h3><span class="header-section-number">2.1.1</span> Read mask</h3>
-<p>The land sea mask with 1x1° resolution from the file <code>landsea_01.msk</code> was used.</p>
-<pre class="r"><code>landsea_01 &lt;- read_csv(
-  paste(
-    path_woa2018,
-    &quot;masks/landsea_01.msk&quot;,
-    sep = &quot;&quot;),
-  skip = 1,
-  col_types = list(.default = &quot;d&quot;))</code></pre>
-</div>
-<div id="label" class="section level3">
-<h3><span class="header-section-number">2.1.2</span> Label</h3>
-<p>According to the <a href="https://data.nodc.noaa.gov/woa/WOA18/DOC/woa18documentation.pdf" target="_blank">WOA18 documentation</a> document:</p>
-<p><em>“The landsea_XX.msk contains the standard depth level number at which the bottom of the ocean is first encountered at each quarter-degree or one-degree square for the entire world. Land will have a value of 1, corresponding to the surface.”</em></p>
-<p>The landmask was derived as coordinates with value 1.</p>
-<pre class="r"><code>landmask &lt;- landsea_01 %&gt;%
-  mutate(region = if_else(Bottom_Standard_Level == &quot;1&quot;,
-                          &quot;land&quot;, &quot;ocean&quot;)) %&gt;%
-  select(-Bottom_Standard_Level)
-
-landmask &lt;- landmask %&gt;%
-  rename(lat = Latitude,
-         lon = Longitude) %&gt;%
-  mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
-
-landmask &lt;- landmask %&gt;%
-  filter(region == &quot;land&quot;,
-         lat &gt;= params_global$lat_min,
-         lat &lt;= params_global$lat_max
-         ) %&gt;%
-  select(-region)
-
-rm(landsea_01)</code></pre>
-</div>
-</div>
-<div id="basins" class="section level2">
-<h2><span class="header-section-number">2.2</span> Basins</h2>
-<div id="read-mask-1" class="section level3">
-<h3><span class="header-section-number">2.2.1</span> Read mask</h3>
-<p>The surface mask (0m) with 1x1° resolution from the file <code>basinmask_01.msk</code> was used.</p>
-<pre class="r"><code>basinmask_01 &lt;- read_csv(
-  paste(
-    path_woa2018,
-    &quot;masks/basinmask_01.msk&quot;,
-    sep = &quot;&quot;),
-  skip = 1,
-  col_types = list(.default = &quot;d&quot;))
-
-basinmask_01 &lt;- basinmask_01 %&gt;% 
-  select(Latitude:Basin_0m) %&gt;% 
-  mutate(Basin_0m = as.factor(Basin_0m)) %&gt;% 
-  rename(lat = Latitude, lon = Longitude)</code></pre>
-</div>
-<div id="basins-for-budgets" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> Basins for budgets</h3>
-<p>According to <a href="https://www.nodc.noaa.gov/OC5/WOD/wod-woa-faqs.html" target="_blank">WOA FAQ</a> website and <a href="https://data.nodc.noaa.gov/woa/WOA18/DOC/woa18documentation.pdf" target="_blank">WOA18 documentation</a>, number codes in the mask files were used to assign ocean basins as follows:</p>
-<p>Atlantic Ocean:</p>
-<ul>
-<li>1: Atlantic Ocean</li>
-<li>10: Southern Ocean between 63°W and 20°E</li>
-<li>11: Arctic Ocean (restricted by northern latitude limit 65N)</li>
-</ul>
-<p>Indian Ocean:</p>
-<ul>
-<li>3: Indian Ocean</li>
-<li>10: Southern Ocean between 20°E and 147°E</li>
-<li>56: Bay of Bengal</li>
-</ul>
-<p>Pacific Ocean:</p>
-<ul>
-<li>2: Pacific Ocean</li>
-<li>10: Southern Ocean between 147°E and 63°W</li>
-<li>12: Sea of Japan</li>
-</ul>
-<pre class="r"><code># assign basin labels
-basinmask_01 &lt;- basinmask_01 %&gt;%
-  filter(Basin_0m %in% c(&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;10&quot;, &quot;11&quot;, &quot;12&quot;, &quot;56&quot;)) %&gt;%
-  mutate(
-    basin_AIP = &quot;none&quot;,
-    basin_AIP = case_when(
-      Basin_0m == &quot;1&quot; ~ &quot;Atlantic&quot;,
-      Basin_0m == &quot;10&quot; &amp; lon &gt;= -63 &amp; lon &lt; 20 ~ &quot;Atlantic&quot;,
-      Basin_0m == &quot;11&quot; ~ &quot;Atlantic&quot;,
-      Basin_0m == &quot;3&quot; ~ &quot;Indian&quot;,
-      Basin_0m == &quot;56&quot; ~ &quot;Indian&quot;,
-      Basin_0m == &quot;10&quot; &amp; lon &gt;= 20 &amp; lon &lt; 147 ~ &quot;Indian&quot;,
-      Basin_0m == &quot;2&quot; ~ &quot;Pacific&quot;,
-      Basin_0m == &quot;12&quot; ~ &quot;Pacific&quot;,
-      Basin_0m == &quot;10&quot; &amp;
-        lon &gt;= 147 | lon &lt; -63 ~ &quot;Pacific&quot;
-    )
-  ) %&gt;%
-  select(-Basin_0m)
-
-# apply northern latitude boundary
-basinmask_01 &lt;- basinmask_01 %&gt;%
-  filter(lat &lt;= params_global$lat_max)
-
-# harmonize lon scale
-basinmask_01 &lt;- basinmask_01  %&gt;%
-  mutate(lon = if_else(lon &lt; 20, lon + 360, lon))</code></pre>
-<pre class="r"><code># generate base map, which is further used throughout the project
-map &lt;- 
-  ggplot() +
-  geom_raster(data = landmask,
-              aes(lon, lat), fill = &quot;grey80&quot;) +
-  coord_quickmap(expand = 0) +
-  theme(axis.title = element_blank())
-
-# plot basin_AIP map
-map +
-  geom_raster(data = basinmask_01,
-              aes(lon, lat, fill = basin_AIP)) +
-  scale_fill_brewer(palette = &quot;Dark2&quot;)</code></pre>
-<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/basin_AIP_masks_WOA18_map-1.png" width="672" style="display: block; margin: auto;" /></p>
-</div>
-<div id="basins-for-mlr-fitting" class="section level3">
-<h3><span class="header-section-number">2.2.3</span> Basins for MLR fitting</h3>
-<p>For the MLR fitting, ocean basins are further split up, as plotted below.</p>
-<pre class="r"><code># 2 basins
-basinmask_01 &lt;- basinmask_01 %&gt;%
-  mutate(basin = if_else(basin_AIP == &quot;Atlantic&quot;,
-                         &quot;Atlantic&quot;,
-                         &quot;Indo-Pacific&quot;),
-         MLR_basins = &quot;2&quot;)
-
-# 5 basins
-basinmask_5 &lt;- basinmask_01 %&gt;%
-  mutate(
-    basin = case_when(
-      basin_AIP ==  &quot;Atlantic&quot; &amp; lat &gt; params_global$lat_equator ~ &quot;N_Atlantic&quot;,
-      basin_AIP ==  &quot;Atlantic&quot; &amp; lat &lt; params_global$lat_equator ~ &quot;S_Atlantic&quot;,
-      basin_AIP ==  &quot;Pacific&quot; &amp; lat &gt; params_global$lat_equator ~ &quot;N_Pacific&quot;,
-      basin_AIP ==  &quot;Pacific&quot; &amp; lat &lt; params_global$lat_equator ~ &quot;S_Pacific&quot;,
-      basin_AIP ==  &quot;Indian&quot; ~ &quot;Indian&quot;
-    )
-  ) %&gt;%
-  mutate(MLR_basins = &quot;5&quot;)
-
-
-# SO basin separate
-basinmask_SO &lt;- basinmask_01 %&gt;%
-  mutate(
-    basin = if_else(
-      lat &lt; params_global$lat_min_SO, &quot;SO&quot;, basin)
-  ) %&gt;%
-  mutate(MLR_basins = &quot;SO&quot;)
-
-# 3 basins
-basinmask_AIP &lt;- basinmask_01 %&gt;%
-  mutate(
-    basin = basin_AIP) %&gt;%
-  mutate(MLR_basins = &quot;AIP&quot;)
-
-# join basin masks into one file
-basinmask_01 &lt;- bind_rows(basinmask_01, basinmask_5, basinmask_SO, basinmask_AIP)</code></pre>
-<pre class="r"><code>for (i_MLR_basins in unique(basinmask_01$MLR_basins)) {
-  
-  print(
-    map +
-      geom_raster(
-        data = basinmask_01 %&gt;% filter(MLR_basins == i_MLR_basins),
-        aes(lon, lat, fill = basin)
-      ) +
-      scale_fill_brewer(palette = &quot;Dark2&quot;) +
-      labs(title = paste(&quot;MLR basin label:&quot;, i_MLR_basins))
-  )
-  
-}</code></pre>
-<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/basin_masks_WOA18_map-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/read_World_Ocean_Atlas_2018.Rmd/basin_masks_WOA18_map-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/read_World_Ocean_Atlas_2018.Rmd/basin_masks_WOA18_map-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/read_World_Ocean_Atlas_2018.Rmd/basin_masks_WOA18_map-4.png" width="672" style="display: block; margin: auto;" /></p>
-</div>
-</div>
-<div id="global-section" class="section level2">
-<h2><span class="header-section-number">2.3</span> Global section</h2>
-<p>To plot sections from the North Atlantic south to the Southern Ocean, around Antarctica and back North across the Pacific Ocean, corresponding coordinates were subsetted from the basin mask and distances between coordinate grid points calculated.</p>
-<pre class="r"><code>section &lt;- basinmask_01 %&gt;%
-  select(lon, lat)
-
-# subset individual section parts
-Atl_NS &lt;- section %&gt;%
-  filter(
-    lon == params_global$lon_Atl_section,
-    lat &lt;= params_global$lat_section_N,
-    lat &gt;= params_global$lat_section_S
-  ) %&gt;%
-  arrange(-lat)
-
-Atl_SO &lt;- section %&gt;%
-  filter(lon &gt; params_global$lon_Atl_section,
-         lat == params_global$lat_section_S) %&gt;%
-  arrange(lon)
-
-Pac_SO &lt;- section %&gt;%
-  filter(lon &lt; params_global$lon_Pac_section,
-         lat == params_global$lat_section_S) %&gt;%
-  arrange(lon)
-
-Pac_SN &lt;- section %&gt;%
-  filter(
-    lon == params_global$lon_Pac_section,
-    lat &lt;= params_global$lat_section_N,
-    lat &gt;= params_global$lat_section_S
-  ) %&gt;%
-  arrange(lat)
-
-# join individual section parts
-section_global_coordinates &lt;- bind_rows(Atl_NS,
-                     Atl_SO,
-                     Pac_SO,
-                     Pac_SN)
-
-# convert to regular lon coordinates for distance calculation
-section_global_coordinates &lt;- section_global_coordinates %&gt;%
-  mutate(lon_180 = if_else(lon &gt; 180, lon - 360, lon))
-
-# calculate distance along section
-section_global_coordinates &lt;- section_global_coordinates %&gt;%
-  mutate(dist_int = distGeo(cbind(lon_180, lat)) / 1e6) %&gt;%
-  mutate(dist = cumsum(dist_int))
-
-section_global_coordinates &lt;- section_global_coordinates %&gt;%
-  select(lon, lat, dist) %&gt;% 
-  drop_na()
-
-rm(Atl_NS, Atl_SO, Pac_SN, Pac_SO, section)</code></pre>
-<pre class="r"><code>map +
-  geom_point(data = section_global_coordinates,
-             aes(lon, lat, col = dist)) +
-  scale_colour_viridis_b(name = &quot;Distance (Mm)&quot;)</code></pre>
-<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/section_global_map-1.png" width="672" style="display: block; margin: auto;" /></p>
-</div>
-<div id="write-files" class="section level2">
-<h2><span class="header-section-number">2.4</span> Write files</h2>
-<pre class="r"><code># basin mask
-basinmask_01 %&gt;%
-  write_csv(paste(path_files,
-                  &quot;basin_mask_WOA18.csv&quot;,
-                  sep = &quot;&quot;))
-# global section
-section_global_coordinates %&gt;%
-  write_csv(paste(path_files,
-                  &quot;section_global_coordinates.csv&quot;,
-                  sep = &quot;&quot;))
-
-# base map ggplot
-map %&gt;%
-  write_rds(paste(path_files,
-                  &quot;map_landmask_WOA18.rds&quot;,
-                  sep = &quot;&quot;))</code></pre>
-</div>
-</div>
 <div id="climatology-s-and-t" class="section level1">
-<h1><span class="header-section-number">3</span> Climatology S and T</h1>
+<h1><span class="header-section-number">1</span> Climatology S and T</h1>
 <p>Copied from the WOA FAQ website, the file naming conventions is:</p>
 <p>PREF_DDDD_VTTFFGG.EXT, where:</p>
 <ul>
@@ -957,75 +755,62 @@ map %&gt;%
 <p>According to the <a href="https://data.nodc.noaa.gov/woa/WOA18/DOC/woa18documentation.pdf" target="_blank">WOA18 documentation</a> document:</p>
 <p><em>What are the units for temperature and salinity in the WOA18?</em></p>
 <p><em>In situ temperatures used for WOA18 are not converted from their original scale, so there is a mix of IPTS-48, IPTS-68, and ITS-90 (and pre IPTS-48 temperatures). The differences between scales are small (on the order of 0.01°C) and should not have much effect on the climatological means, except, possibly at very deep depths. Values for salinity are on the Practical salinity scale (PSS-78). Pre-1978 salinity values converted from conductivity may have used a different salinity scale. Pre-conductivity salinities use the Knudsen method.</em></p>
-<div id="read-nc-files" class="section level2">
-<h2><span class="header-section-number">3.1</span> Read nc files</h2>
-<pre class="r"><code># temperature
-
-WOA18_temp &lt;- tidync(paste(
-  path_woa2018,
-  &quot;temperature/decav/1.00/woa18_decav_t00_01.nc&quot;,
+<div id="read-nc-file" class="section level2">
+<h2><span class="header-section-number">1.1</span> Read nc file</h2>
+<pre class="r"><code># read in RECCAP2 RunA file
+cmorized_climatology_temp &lt;- tidync(paste(
+  path_cmorized,
+  &quot;RECCAP2_RunA.nc&quot;,
   sep = &quot;&quot;
 ))
 
-WOA18_temp_tibble &lt;- WOA18_temp %&gt;% hyper_tibble()
+cmorized_climatology &lt;- cmorized_climatology_temp %&gt;% hyper_tibble()
 
-WOA18_temp_tibble &lt;- WOA18_temp_tibble  %&gt;%
-  select(temp = t_an, lon, lat, depth) %&gt;%
+# select annual cmorized 2007 as climatology
+cmorized_climatology &lt;- cmorized_climatology %&gt;%
+  select(-epc) %&gt;%
+  rename(year = time_ann,
+    sal = so,
+    THETA = thetao,
+    tco2 = dissic,
+    talk = talk,
+    oxygen = o2,
+    nitrate = no3,
+    phosphate = po4,
+    silicate = si
+  ) %&gt;%
+  # select annual value in year of 2007
+  filter(year == 10036) %&gt;%
   drop_na() %&gt;%
-  mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
+  mutate(lon = if_else(lon &lt; 20, lon + 360, lon)) %&gt;%
+  mutate(depth = round(depth))
 
-# salinity
-
-WOA18_sal &lt;- tidync(paste(
-  path_woa2018,
-  &quot;salinity/decav/1.00/woa18_decav_s00_01.nc&quot;,
-  sep = &quot;&quot;
-))
-
-WOA18_sal_tibble &lt;- WOA18_sal %&gt;% hyper_tibble()
-
-WOA18_sal_tibble &lt;- WOA18_sal_tibble  %&gt;%
-  select(sal = s_an, lon, lat, depth) %&gt;%
-  drop_na() %&gt;%
-  mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
-
-rm(WOA18_sal, WOA18_temp)</code></pre>
-</div>
-<div id="join-predictors" class="section level2">
-<h2><span class="header-section-number">3.2</span> Join predictors</h2>
-<pre class="r"><code>WOA18_sal_temp &lt;- full_join(WOA18_sal_tibble, WOA18_temp_tibble)
-rm(WOA18_sal_tibble, WOA18_temp_tibble)</code></pre>
+rm(cmorized_climatology_temp)</code></pre>
 </div>
 <div id="apply-basin-mask" class="section level2">
-<h2><span class="header-section-number">3.3</span> Apply basin mask</h2>
+<h2><span class="header-section-number">1.2</span> Apply basin mask</h2>
 <pre class="r"><code># use only three basin to assign general basin mask
 # ie this is not specific to the MLR fitting
-
-basinmask_01 &lt;- basinmask_01 %&gt;% 
+basinmask &lt;- basinmask %&gt;% 
   filter(MLR_basins == &quot;2&quot;) %&gt;% 
   select(lat, lon, basin_AIP)
 
 # restrict predictor fields to basin mask grid
-
-WOA18_sal_temp &lt;- inner_join(WOA18_sal_temp, basinmask_01)</code></pre>
+cmorized_climatology &lt;- inner_join(cmorized_climatology, basinmask)</code></pre>
 </div>
-<div id="potential-temperature" class="section level2">
-<h2><span class="header-section-number">3.4</span> Potential temperature</h2>
-<p>Potential temperature is calculated as in input variable for the neutral density calculation.</p>
-<div id="calculation" class="section level3">
-<h3><span class="header-section-number">3.4.1</span> Calculation</h3>
-<pre class="r"><code>WOA18_sal_temp &lt;- WOA18_sal_temp %&gt;% 
-  mutate(THETA = swTheta(salinity = sal,
-                         temperature = temp,
-                         pressure = depth,
-                         referencePressure = 0,
-                         longitude = lon - 180,
-                         latitude = lat))</code></pre>
-</div>
+<div id="calculate-in-situ-temperature" class="section level2">
+<h2><span class="header-section-number">1.3</span> Calculate in-situ temperature</h2>
+<pre class="r"><code>cmorized_climatology &lt;- cmorized_climatology %&gt;%
+  mutate(temp = gsw_pt_from_t(
+    SA = sal,
+    t = THETA,
+    p = 10.1325,
+    p_ref = depth
+  ))</code></pre>
 <div id="profile" class="section level3">
-<h3><span class="header-section-number">3.4.2</span> Profile</h3>
+<h3><span class="header-section-number">1.3.1</span> Profile</h3>
 <p>Example profile from North Atlantic Ocean.</p>
-<pre class="r"><code>WOA18_sal_temp %&gt;%
+<pre class="r"><code>cmorized_climatology %&gt;%
   filter(lat == params_global$lat_Atl_profile,
          lon == params_global$lon_Atl_section) %&gt;%
   ggplot() +
@@ -1035,35 +820,60 @@ WOA18_sal_temp &lt;- inner_join(WOA18_sal_temp, basinmask_01)</code></pre>
   geom_point(aes(THETA, depth, col = &quot;theta&quot;)) +
   scale_y_reverse() +
   scale_color_brewer(palette = &quot;Dark2&quot;, name = &quot;Scale&quot;)</code></pre>
-<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/WOA18_potential_temperature_profile-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/temp_theta_profile_plot-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="section" class="section level3">
-<h3><span class="header-section-number">3.4.3</span> Section</h3>
-<pre class="r"><code>p_section_global(
-  df = WOA18_sal_temp,
-  var = &quot;THETA&quot;)</code></pre>
-<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/WOA18_pot_temperature_section-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
+<div id="unit-transfer" class="section level2">
+<h2><span class="header-section-number">1.4</span> Unit transfer</h2>
+<pre class="r"><code># unit transfer from mol/m3 to µmol/kg
+cmorized_climatology &lt;- cmorized_climatology %&gt;%
+  mutate(
+    rho = gsw_pot_rho_t_exact(
+      SA = sal,
+      t = temp,
+      p = depth,
+      p_ref = 10.1325
+    ),
+    tco2 = tco2 * (1000000 / rho),
+    talk = talk * (1000000 / rho),
+    oxygen = oxygen * (1000000 / rho),
+    nitrate = nitrate * (1000000 / rho),
+    phosphate = phosphate * (1000000 / rho),
+    silicate = silicate * (1000000 / rho)
+  )</code></pre>
+</div>
+<div id="calculate-aou" class="section level2">
+<h2><span class="header-section-number">1.5</span> calculate AOU</h2>
+<pre class="r"><code>cmorized_climatology &lt;- cmorized_climatology %&gt;%
+  mutate(
+    oxygen_sat_m3 = gas_satconc(
+      S = sal,
+      t = temp,
+      P = 1.013253,
+      species = &quot;O2&quot;
+    ),
+    oxygen_sat_kg = oxygen_sat_m3 * (1000 / rho),
+    AOU = oxygen_sat_kg - oxygen
+  ) %&gt;%
+  select(-oxygen_sat_kg,-oxygen_sat_m3)</code></pre>
 </div>
 <div id="neutral-density" class="section level2">
-<h2><span class="header-section-number">3.5</span> Neutral density</h2>
+<h2><span class="header-section-number">1.6</span> Neutral density</h2>
 <p>Neutral density gamma was calculated with a Python script provided by Serazin et al (2011), which performs a polynomial approximation of the original gamma calculation.</p>
-<div id="calculation-1" class="section level3">
-<h3><span class="header-section-number">3.5.1</span> Calculation</h3>
+<div id="calculation" class="section level3">
+<h3><span class="header-section-number">1.6.1</span> Calculation</h3>
 <pre class="r"><code># calculate pressure from depth
-
-WOA18_sal_temp &lt;- WOA18_sal_temp %&gt;%
+cmorized_climatology &lt;- cmorized_climatology %&gt;%
   mutate(CTDPRS = gsw_p_from_z(-depth,
                                lat))
-# rename variables according to python script
 
-WOA18_sal_temp_gamma_prep &lt;- WOA18_sal_temp %&gt;%
+# rename variables according to python script
+cmorized_climatology_gamma_prep &lt;- cmorized_climatology %&gt;%
   rename(LATITUDE = lat,
          LONGITUDE = lon,
          SALNTY = sal)
 
 # load python scripts
-
 source_python(paste(
   path_functions,
   &quot;python_scripts/Gamma_GLODAP_python.py&quot;,
@@ -1071,13 +881,11 @@ source_python(paste(
 ))
 
 # calculate gamma
-
-WOA18_sal_temp_gamma_calc &lt;-
-  calculate_gamma(WOA18_sal_temp_gamma_prep)
+cmorized_climatology_gamma_calc &lt;-
+  calculate_gamma(cmorized_climatology_gamma_prep)
 
 # reverse variable naming
-
-WOA18_sal_temp &lt;- WOA18_sal_temp_gamma_calc %&gt;%
+cmorized_climatology &lt;- cmorized_climatology_gamma_calc %&gt;%
   select(-c(CTDPRS, THETA)) %&gt;%
   rename(
     lat = LATITUDE,
@@ -1086,154 +894,140 @@ WOA18_sal_temp &lt;- WOA18_sal_temp_gamma_calc %&gt;%
     gamma  = GAMMA
   )
 
-WOA18_sal_temp &lt;- as_tibble(WOA18_sal_temp)
+cmorized_climatology &lt;- as_tibble(cmorized_climatology)
 
-rm(WOA18_sal_temp_gamma_calc, WOA18_sal_temp_gamma_prep)</code></pre>
+rm(cmorized_climatology_gamma_calc, cmorized_climatology_gamma_prep)</code></pre>
 </div>
 </div>
 <div id="write-file" class="section level2">
-<h2><span class="header-section-number">3.6</span> Write file</h2>
-<pre class="r"><code>WOA18_sal_temp %&gt;%
+<h2><span class="header-section-number">1.7</span> Write file</h2>
+<pre class="r"><code>cmorized_climatology %&gt;%
   write_csv(paste(path_preprocessing,
-                  &quot;WOA18_sal_temp.csv&quot;,
+                  &quot;cmorized_climatology.csv&quot;,
                   sep = &quot;&quot;))</code></pre>
 </div>
 <div id="temperature-plots" class="section level2">
-<h2><span class="header-section-number">3.7</span> Temperature plots</h2>
-<p>Below, following subsets of the climatologies are plotted for all relevant parameters:</p>
+<h2><span class="header-section-number">1.8</span> Temperature plots</h2>
+<p>Below, following subsets of the climatology are plotted for all relevant parameters:</p>
 <ul>
-<li>Horizontal planes at 0, 150, 500, 2000m</li>
+<li>Horizontal planes at 0, 5, 150, 155, 483, 500, 2000, 1969m</li>
 <li>Global section as defined above and indicated as white lines in maps.</li>
 </ul>
 <div id="surface-map" class="section level3">
-<h3><span class="header-section-number">3.7.1</span> Surface map</h3>
+<h3><span class="header-section-number">1.8.1</span> Surface map</h3>
 <pre class="r"><code>p_map_climatology(
-  df = WOA18_sal_temp,
+  df = cmorized_climatology,
   var = &quot;temp&quot;)</code></pre>
-<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/temperature_surface_WOA18_map-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/temperature_surface_climatology_map-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="section-1" class="section level3">
-<h3><span class="header-section-number">3.7.2</span> Section</h3>
+<div id="section" class="section level3">
+<h3><span class="header-section-number">1.8.2</span> Section</h3>
 <pre class="r"><code>p_section_global(
-  df = WOA18_sal_temp,
+  df = cmorized_climatology,
   var = &quot;temp&quot;)</code></pre>
-<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/temperature_sections_WOA18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/temperature_sections_climatology-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="salinity-plots" class="section level2">
-<h2><span class="header-section-number">3.8</span> Salinity plots</h2>
+<h2><span class="header-section-number">1.9</span> Salinity plots</h2>
 <div id="surface-map-1" class="section level3">
-<h3><span class="header-section-number">3.8.1</span> Surface map</h3>
+<h3><span class="header-section-number">1.9.1</span> Surface map</h3>
 <pre class="r"><code>p_map_climatology(
-  df = WOA18_sal_temp,
+  df = cmorized_climatology,
   var = &quot;sal&quot;)</code></pre>
-<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/salinity_surface_WOA18_map-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/salinity_surface_climatology_map-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-1" class="section level3">
+<h3><span class="header-section-number">1.9.2</span> Section</h3>
+<pre class="r"><code>p_section_global(
+  df = cmorized_climatology,
+  var = &quot;sal&quot;)</code></pre>
+<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/salinity_sections_climatology-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="nitrate-plots" class="section level2">
+<h2><span class="header-section-number">1.10</span> Nitrate plots</h2>
+<div id="surface-map-2" class="section level3">
+<h3><span class="header-section-number">1.10.1</span> Surface map</h3>
+<pre class="r"><code>p_map_climatology(
+  df = cmorized_climatology,
+  var = &quot;nitrate&quot;)</code></pre>
+<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/nitrate_surface_climatology_map-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="section-2" class="section level3">
-<h3><span class="header-section-number">3.8.2</span> Section</h3>
+<h3><span class="header-section-number">1.10.2</span> Section</h3>
 <pre class="r"><code>p_section_global(
-  df = WOA18_sal_temp,
-  var = &quot;sal&quot;)</code></pre>
-<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/salinity_sections_WOA18-1.png" width="672" style="display: block; margin: auto;" /></p>
+  df = cmorized_climatology,
+  var = &quot;nitrate&quot;)</code></pre>
+<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/nitrate_sections_climatology-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
-<div id="neutral-density-plots" class="section level2">
-<h2><span class="header-section-number">3.9</span> Neutral density plots</h2>
-<div id="surface-map-2" class="section level3">
-<h3><span class="header-section-number">3.9.1</span> Surface map</h3>
+<div id="phosphate-plots" class="section level2">
+<h2><span class="header-section-number">1.11</span> Phosphate plots</h2>
+<div id="surface-map-3" class="section level3">
+<h3><span class="header-section-number">1.11.1</span> Surface map</h3>
 <pre class="r"><code>p_map_climatology(
-  df = WOA18_sal_temp,
-  var = &quot;gamma&quot;)</code></pre>
-<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/neutral_density_surface_WOA18_map-1.png" width="672" style="display: block; margin: auto;" /></p>
+  df = cmorized_climatology,
+  var = &quot;phosphate&quot;)</code></pre>
+<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/phosphate_surface_climatology_map-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="section-3" class="section level3">
-<h3><span class="header-section-number">3.9.2</span> Section</h3>
+<h3><span class="header-section-number">1.11.2</span> Section</h3>
 <pre class="r"><code>p_section_global(
-  df = WOA18_sal_temp,
-  var = &quot;gamma&quot;)</code></pre>
-<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/neutral_density_sections_WOA18-1.png" width="672" style="display: block; margin: auto;" /></p>
+  df = cmorized_climatology,
+  var = &quot;phosphate&quot;)</code></pre>
+<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/phosphate_sections_climatology-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
+<div id="silicate-plots" class="section level2">
+<h2><span class="header-section-number">1.12</span> Silicate plots</h2>
+<div id="surface-map-4" class="section level3">
+<h3><span class="header-section-number">1.12.1</span> Surface map</h3>
+<pre class="r"><code>p_map_climatology(
+  df = cmorized_climatology,
+  var = &quot;silicate&quot;)</code></pre>
+<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/silicate_surface_climatology_map-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="climatology-nuts-and-o2" class="section level1">
-<h1><span class="header-section-number">4</span> Climatology Nuts and O2</h1>
-<div id="read-nc-files-1" class="section level2">
-<h2><span class="header-section-number">4.1</span> Read nc files</h2>
-<pre class="r"><code># Keep grid cells of WOA18 sal temp data set, to join with
-WOA18_nuts_O2 &lt;-
-  WOA18_sal_temp %&gt;%
-  select(lon, lat, depth)
-rm(WOA18_sal_temp)
-
-# create file list
-file_list &lt;- c(
-  paste(path_woa2018, &quot;phosphate/all/1.00/woa18_all_p00_01.nc&quot;, sep = &quot;&quot;),
-  paste(path_woa2018, &quot;nitrate/all/1.00/woa18_all_n00_01.nc&quot;, sep = &quot;&quot;),
-  paste(path_woa2018, &quot;silicate/all/1.00/woa18_all_i00_01.nc&quot;, sep = &quot;&quot;),
-  paste(path_woa2018, &quot;oxygen/all/1.00/woa18_all_o00_01.nc&quot;, sep = &quot;&quot;),
-  paste(path_woa2018, &quot;AOU/all/1.00/woa18_all_A00_01.nc&quot;, sep = &quot;&quot;)
-)
-
-# file &lt;- file_list[1]
-
-# read, plot and join data sets while looping over file list
-for (file in file_list) {
-
-  # open file
-  WOA18 &lt;- tidync(file)
-  WOA18_tibble &lt;- WOA18 %&gt;% hyper_tibble()
-  
-  # extract parameter name
-  parameter &lt;- str_split(file, pattern = &quot;00_&quot;, simplify = TRUE)[1]
-  parameter &lt;- str_split(parameter, pattern = &quot;all_&quot;, simplify = TRUE)[2]
-  parameter &lt;- paste(parameter, &quot;_an&quot;, sep = &quot;&quot;)
-  print(file)
-  
-  WOA18_tibble &lt;- WOA18_tibble  %&gt;%
-    select(all_of(parameter),
-           lon, lat, depth) %&gt;%
-    mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
-  
-  # apply general basin mask
-  WOA18_tibble &lt;- inner_join(WOA18_tibble, basinmask_01)
-  
-  # join with previous WOA data and keep only rows in existing data frame
-  # this is equal to applying the basinmask
-  WOA18_nuts_O2 &lt;- left_join(
-    x = WOA18_nuts_O2,
-    y = WOA18_tibble)
-
-  # plot maps
-  print(
-    p_map_climatology(
-      df = WOA18_nuts_O2,
-      var = parameter)
-    )
-  
-  # plot sections
-  print(p_section_global(
-    df = WOA18_nuts_O2,
-    var = parameter
-  ))
-  
-}</code></pre>
-<pre><code>[1] &quot;/nfs/kryo/work/updata/woa2018/phosphate/all/1.00/woa18_all_p00_01.nc&quot;</code></pre>
-<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/read_WOA18_nuts_O2_files-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/read_World_Ocean_Atlas_2018.Rmd/read_WOA18_nuts_O2_files-2.png" width="672" style="display: block; margin: auto;" /></p>
-<pre><code>[1] &quot;/nfs/kryo/work/updata/woa2018/nitrate/all/1.00/woa18_all_n00_01.nc&quot;</code></pre>
-<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/read_WOA18_nuts_O2_files-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/read_World_Ocean_Atlas_2018.Rmd/read_WOA18_nuts_O2_files-4.png" width="672" style="display: block; margin: auto;" /></p>
-<pre><code>[1] &quot;/nfs/kryo/work/updata/woa2018/silicate/all/1.00/woa18_all_i00_01.nc&quot;</code></pre>
-<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/read_WOA18_nuts_O2_files-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/read_World_Ocean_Atlas_2018.Rmd/read_WOA18_nuts_O2_files-6.png" width="672" style="display: block; margin: auto;" /></p>
-<pre><code>[1] &quot;/nfs/kryo/work/updata/woa2018/oxygen/all/1.00/woa18_all_o00_01.nc&quot;</code></pre>
-<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/read_WOA18_nuts_O2_files-7.png" width="672" style="display: block; margin: auto;" /><img src="figure/read_World_Ocean_Atlas_2018.Rmd/read_WOA18_nuts_O2_files-8.png" width="672" style="display: block; margin: auto;" /></p>
-<pre><code>[1] &quot;/nfs/kryo/work/updata/woa2018/AOU/all/1.00/woa18_all_A00_01.nc&quot;</code></pre>
-<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/read_WOA18_nuts_O2_files-9.png" width="672" style="display: block; margin: auto;" /><img src="figure/read_World_Ocean_Atlas_2018.Rmd/read_WOA18_nuts_O2_files-10.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="section-4" class="section level3">
+<h3><span class="header-section-number">1.12.2</span> Section</h3>
+<pre class="r"><code>p_section_global(
+  df = cmorized_climatology,
+  var = &quot;silicate&quot;)</code></pre>
+<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/silicate_sections_climatology-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="write-file-1" class="section level2">
-<h2><span class="header-section-number">4.2</span> Write file</h2>
-<pre class="r"><code>WOA18_nuts_O2 %&gt;%
-  write_csv(paste(path_preprocessing,
-                  &quot;WOA18_nuts_O2.csv&quot;,
-                  sep = &quot;&quot;))</code></pre>
+</div>
+<div id="oxygen-plots" class="section level2">
+<h2><span class="header-section-number">1.13</span> Oxygen plots</h2>
+<div id="surface-map-5" class="section level3">
+<h3><span class="header-section-number">1.13.1</span> Surface map</h3>
+<pre class="r"><code>p_map_climatology(
+  df = cmorized_climatology,
+  var = &quot;oxygen&quot;)</code></pre>
+<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/oxygen_surface_climatology_map-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-5" class="section level3">
+<h3><span class="header-section-number">1.13.2</span> Section</h3>
+<pre class="r"><code>p_section_global(
+  df = cmorized_climatology,
+  var = &quot;oxygen&quot;)</code></pre>
+<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/oxygen_sections_climatology-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="aou-plots" class="section level2">
+<h2><span class="header-section-number">1.14</span> AOU plots</h2>
+<div id="surface-map-6" class="section level3">
+<h3><span class="header-section-number">1.14.1</span> Surface map</h3>
+<pre class="r"><code>p_map_climatology(
+  df = cmorized_climatology,
+  var = &quot;AOU&quot;)</code></pre>
+<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/AOU_surface_climatology_map-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-6" class="section level3">
+<h3><span class="header-section-number">1.14.2</span> Section</h3>
+<pre class="r"><code>p_section_global(
+  df = cmorized_climatology,
+  var = &quot;AOU&quot;)</code></pre>
+<p><img src="figure/read_World_Ocean_Atlas_2018.Rmd/AOU_sections_climatology-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1262,30 +1056,40 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] patchwork_1.1.0  geosphere_1.5-10 oce_1.2-0        gsw_1.0-5       
- [5] testthat_3.0.0   reticulate_1.18  tidync_0.2.4     forcats_0.5.0   
- [9] stringr_1.4.0    dplyr_1.0.2      purrr_0.3.4      readr_1.4.0     
-[13] tidyr_1.1.2      tibble_3.0.4     ggplot2_3.3.2    tidyverse_1.3.0 
-[17] workflowr_1.6.2 
+ [1] marelac_2.1.10   shape_1.4.5      geosphere_1.5-10 oce_1.2-0       
+ [5] gsw_1.0-5        testthat_2.3.2   reticulate_1.18  tidync_0.2.4    
+ [9] metR_0.8.0       scico_1.2.0      patchwork_1.1.0  collapse_1.4.2  
+[13] forcats_0.5.0    stringr_1.4.0    dplyr_1.0.2      purrr_0.3.4     
+[17] readr_1.4.0      tidyr_1.1.2      tibble_3.0.4     ggplot2_3.3.2   
+[21] tidyverse_1.3.0  workflowr_1.6.2 
 
 loaded via a namespace (and not attached):
- [1] httr_1.4.2         viridisLite_0.3.0  jsonlite_1.7.1     modelr_0.1.8      
- [5] assertthat_0.2.1   sp_1.4-4           blob_1.2.1         cellranger_1.1.0  
- [9] yaml_2.2.1         pillar_1.4.7       backports_1.1.10   lattice_0.20-41   
-[13] glue_1.4.2         digest_0.6.27      RColorBrewer_1.1-2 promises_1.1.1    
-[17] rvest_0.3.6        colorspace_2.0-0   htmltools_0.5.0    httpuv_1.5.4      
-[21] Matrix_1.2-18      pkgconfig_2.0.3    broom_0.7.2        haven_2.3.1       
-[25] scales_1.1.1       whisker_0.4        later_1.1.0.1      git2r_0.27.1      
-[29] generics_0.0.2     farver_2.0.3       ellipsis_0.3.1     withr_2.3.0       
-[33] cli_2.2.0          magrittr_2.0.1     crayon_1.3.4       readxl_1.3.1      
-[37] evaluate_0.14      fs_1.5.0           ncdf4_1.17         fansi_0.4.1       
-[41] xml2_1.3.2         tools_4.0.3        hms_0.5.3          lifecycle_0.2.0   
-[45] munsell_0.5.0      reprex_0.3.0       isoband_0.2.2      compiler_4.0.3    
-[49] RNetCDF_2.4-2      rlang_0.4.9        grid_4.0.3         rstudioapi_0.13   
-[53] rappdirs_0.3.1     labeling_0.4.2     rmarkdown_2.5      gtable_0.3.0      
-[57] DBI_1.1.0          R6_2.5.0           ncmeta_0.3.0       lubridate_1.7.9   
-[61] knitr_1.30         rprojroot_2.0.2    stringi_1.5.3      Rcpp_1.0.5        
-[65] vctrs_0.3.5        dbplyr_1.4.4       tidyselect_1.1.0   xfun_0.18         </code></pre>
+ [1] fs_1.5.0                 lubridate_1.7.9          RColorBrewer_1.1-2      
+ [4] httr_1.4.2               rprojroot_1.3-2          tools_4.0.3             
+ [7] backports_1.1.10         R6_2.5.0                 DBI_1.1.0               
+[10] colorspace_1.4-1         withr_2.3.0              sp_1.4-4                
+[13] tidyselect_1.1.0         compiler_4.0.3           git2r_0.27.1            
+[16] cli_2.1.0                rvest_0.3.6              RNetCDF_2.4-2           
+[19] xml2_1.3.2               isoband_0.2.2            labeling_0.4.2          
+[22] scales_1.1.1             checkmate_2.0.0          rappdirs_0.3.1          
+[25] digest_0.6.27            rmarkdown_2.5            pkgconfig_2.0.3         
+[28] htmltools_0.5.0          dbplyr_1.4.4             rlang_0.4.8             
+[31] readxl_1.3.1             rstudioapi_0.11          farver_2.0.3            
+[34] generics_0.0.2           jsonlite_1.7.1           magrittr_1.5            
+[37] ncmeta_0.3.0             Matrix_1.2-18            Rcpp_1.0.5              
+[40] munsell_0.5.0            fansi_0.4.1              lifecycle_0.2.0         
+[43] stringi_1.5.3            whisker_0.4              yaml_2.2.1              
+[46] grid_4.0.3               blob_1.2.1               parallel_4.0.3          
+[49] promises_1.1.1           crayon_1.3.4             lattice_0.20-41         
+[52] haven_2.3.1              hms_0.5.3                seacarb_3.2.14          
+[55] knitr_1.30               pillar_1.4.6             reprex_0.3.0            
+[58] glue_1.4.2               evaluate_0.14            RcppArmadillo_0.10.1.0.0
+[61] data.table_1.13.2        modelr_0.1.8             vctrs_0.3.4             
+[64] httpuv_1.5.4             cellranger_1.1.0         gtable_0.3.0            
+[67] assertthat_0.2.1         xfun_0.18                broom_0.7.2             
+[70] RcppEigen_0.3.3.7.0      later_1.1.0.1            viridisLite_0.3.0       
+[73] ncdf4_1.17               ellipsis_0.3.1          </code></pre>
+</div>
 </div>
 </div>
 </div>
