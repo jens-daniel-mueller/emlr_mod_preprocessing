@@ -134,8 +134,29 @@ basinmask <- basinmask %>%
   filter(MLR_basins == "2") %>% 
   select(lat, lon, basin_AIP)
 
-# restrict predictor fields to basin mask grid
+# restrict Cant field to basin mask grid
 cant_annual <- inner_join(cant_annual, basinmask)
+
+```
+
+## Calculate dCant for year 1994 - 2007
+
+```{r calculate_dCant}
+
+cant_annual_1994 <- cant_annual %>%
+  filter(year == 1994) %>%
+  select(-c(tco2_A, tco2_B, year)) %>%
+  rename(cant_1994 = cant)
+
+cant_annual_2007 <- cant_annual %>%
+  filter(year == 2007) %>%
+  select(-c(tco2_A, tco2_B, year)) %>%
+  rename(cant_2007 = cant)
+
+dcant_gruber <- left_join(cant_annual_1994, cant_annual_2007) %>%
+  mutate(dcant = cant_2007 - cant_1994)
+
+rm(cant_annual_1994, cant_annual_2007)
 
 ```
 
@@ -143,6 +164,15 @@ cant_annual <- inner_join(cant_annual, basinmask)
 
 ```{r write_annual_Cant_files}
 
+# write combined Cant file
+cant_annual %>%
+  write_csv(paste(
+    path_preprocessing,
+    "cant_annual_field/cant_all_years.csv",
+    sep = ""
+  ))
+
+# write annual Cant files
 years <- c(1982:2019)
 for (i_year in years) {
   
@@ -157,15 +187,37 @@ for (i_year in years) {
                     sep = ""))
 }
 
+# write dCant gruber file
+dcant_gruber %>%
+  write_csv(paste(
+    path_preprocessing,
+    "cant_annual_field/dcant_gruber.csv",
+    sep = ""
+  ))
+
+rm(cant_annual_year)
+
 ```
 
 # Zonal mean section
 
 ```{r calculate_zonal_mean_section}
 
+# Zonal mean section for Cant
 cant_annual_zonal <- cant_annual %>%
   select(-c(lon, tco2_A, tco2_B)) %>%
   fgroup_by(lat, depth, year, basin_AIP) %>% {
+    add_vars(
+      fgroup_vars(., "unique"),
+      fmean(., keep.group_vars = FALSE) %>% add_stub(pre = FALSE, "_mean"),
+      fsd(., keep.group_vars = FALSE) %>% add_stub(pre = FALSE, "_sd")
+    )
+  }
+
+# Zonal mean section for dCant
+dcant_gruber_zonal <- dcant_gruber %>%
+  select(-c(lon, cant_1994, cant_2007)) %>%
+  fgroup_by(lat, depth, basin_AIP) %>% {
     add_vars(
       fgroup_vars(., "unique"),
       fmean(., keep.group_vars = FALSE) %>% add_stub(pre = FALSE, "_mean"),
@@ -177,18 +229,15 @@ cant_annual_zonal <- cant_annual %>%
 
 # Column inventory 
 
+## Calculation
+
 ```{r calculate_column_inventory}
 
-#cant_inv_layers <- m_cant_inv(cant_3d)
-
-#cant_inv <- cant_inv_layers %>% 
-#  filter(inv_depth == params_global$inventory_depth_standard)
-
-
+# Calculate column inventory for Cant in year 2007
 for (i_inventory_depth in params_global$inventory_depths) {
   # filter integration depth
   cant_annual_temp <- cant_annual %>%
-    filter(depth <= i_inventory_depth)
+    filter(year == 2007, depth <= i_inventory_depth)
   
   depth_level_volume <- tibble(depth = unique(cant_annual_temp$depth)) %>%
     arrange(depth)
@@ -213,8 +262,8 @@ for (i_inventory_depth in params_global$inventory_depths) {
   
   # sum up layer inventories to column inventories
   cant_annual_inv_temp <- cant_annual_temp %>%
-    group_by(lon, lat, basin_AIP, year) %>%
-    summarise(cant_inv     = sum(cant_layer_inv, na.rm = TRUE) / 1000) %>%
+    group_by(lon, lat, basin_AIP) %>%
+    summarise(cant_inv = sum(cant_layer_inv, na.rm = TRUE) / 1000) %>%
     ungroup()
   
   cant_annual_inv_temp <- cant_annual_inv_temp %>%
@@ -234,9 +283,83 @@ cant_annual_inv <- cant_annual_inv %>%
 
 rm(cant_annual_inv_temp, cant_annual_temp)
 
+# Calculate column inventory for dCant
+for (i_inventory_depth in params_global$inventory_depths) {
+  # filter integration depth
+  dcant_gruber_temp <- dcant_gruber %>%
+    filter(depth <= i_inventory_depth)
+  
+  depth_level_volume <- tibble(depth = unique(dcant_gruber_temp$depth)) %>%
+    arrange(depth)
+  
+  # determine depth level volume of each depth layer
+  depth_level_volume <- depth_level_volume %>%
+    mutate(
+      layer_thickness_above = replace_na((depth - lag(depth)) / 2, 0),
+      layer_thickness_below = replace_na((lead(depth) - depth) / 2, 0),
+      layer_thickness = layer_thickness_above + layer_thickness_below
+    ) %>%
+    select(-c(layer_thickness_above,
+              layer_thickness_below))
+  
+  dcant_gruber_temp <-
+    full_join(dcant_gruber_temp, depth_level_volume)
+  
+  # calculate cant layer inventory
+  dcant_gruber_temp <- dcant_gruber_temp %>%
+    mutate(dcant_layer_inv = dcant * layer_thickness * 1.03) %>%
+    select(-layer_thickness)
+  
+  # sum up layer inventories to column inventories
+  dcant_gruber_inv_temp <- dcant_gruber_temp %>%
+    group_by(lon, lat, basin_AIP) %>%
+    summarise(cant_inv = sum(dcant_layer_inv, na.rm = TRUE) / 1000) %>%
+    ungroup()
+  
+  dcant_gruber_inv_temp <- dcant_gruber_inv_temp %>%
+    mutate(inv_depth = i_inventory_depth)
+  
+  if (exists("dcant_gruber_inv")) {
+    dcant_gruber_inv <- bind_rows(dcant_gruber_inv, dcant_gruber_inv_temp)
+  }
+  
+  if (!exists("dcant_gruber_inv")) {
+    dcant_gruber_inv <- dcant_gruber_inv_temp
+  }
+}
+
+dcant_gruber_inv <- dcant_gruber_inv %>%
+  filter(inv_depth == params_global$inventory_depth_standard)
+
+rm(dcant_gruber_inv_temp, dcant_gruber_temp)
+
 ```
 
-# Plots in 2007
+## Inventory plots
+
+### Cant inventory
+
+```{r plot_cant_inventory}
+
+# Cant inventory plot in year 2007
+p_map_cant_inv(
+  df = cant_annual_inv,
+  var = "cant_inv")
+
+```
+
+### dCant inventory
+
+```{r plot_dcant_inventory}
+
+# dCant inventory plot between 1994 to 2007
+p_map_cant_inv(
+  df = dcant_gruber_inv,
+  var = "cant_inv")
+
+```
+
+# Cant plots in 2007
 
 ## Horizontal plane maps
 
@@ -284,3 +407,49 @@ p_section_global(
 
 ```
 
+
+# dCant plots in 2007
+
+## Horizontal plane maps
+
+```{r plot_dcant_horizontal}
+
+# Cant horizontal plane plot in year 2007
+dcant_gruber_round <- dcant_gruber %>%
+  mutate(depth = round(depth))
+
+p_map_climatology(df = dcant_gruber_round, var = "dcant")
+
+rm(dcant_gruber_round)
+
+```
+
+## Zonal mean section plot
+
+```{r plot_dcant_zonal_mean_section}
+
+# Cant zonal mean section plot in year 2007
+for (i_basin_AIP in unique(dcant_gruber_zonal$basin_AIP)) {
+  print(
+    p_section_zonal(
+      df = dcant_gruber_zonal %>% filter(basin_AIP == i_basin_AIP),
+      var = "dcant_mean",
+      plot_slabs = "n",
+      subtitle_text = paste("Basin:", i_basin_AIP)
+    )
+  )
+}
+
+```
+
+## Global sections plot
+
+```{r plot_dcant_global_section}
+
+# Cant global mean section plot in year 2007
+p_section_global(
+  df = dcant_gruber,
+  var = "dcant",
+  col = "divergent")
+
+```

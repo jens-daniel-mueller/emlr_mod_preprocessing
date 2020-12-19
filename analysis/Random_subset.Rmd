@@ -62,7 +62,7 @@ GLODAP <- GLODAP %>%
 
 # Randomly subset cmorized model data
 
-Here we randomly subset cmorized (1x1) data from the model with variable forcing, according to the total number of GLODAP observations for the whole period from a previously cleaned file. The number for the annual subset remains the same for each year, which could be expressed by the total number of observations divided by number of years.
+Here we randomly subset cmorized (1x1) model with variable forcing, according to the total number of GLODAP observations for the whole period from a previously cleaned file. The number for the annual subset remains the same for each year, which could be expressed by the total number of observations divided by number of years.
 
 Besides, Model results are given in [mol m^-3^], whereas GLODAP data are in [µmol kg^-1^]. This refers to the variables:
 
@@ -108,7 +108,7 @@ n = floor(nrow(GLODAP) / length(years))
 
 for (i_year in years) {
   # for manual testing
-  i_year <- years[1]
+  #i_year <- years[1]
   
   # random sample n = GLODAP / years from model grid depth
   model_resample_grid_depth <- sample_n(model_grid_depth, n) %>%
@@ -122,7 +122,7 @@ for (i_year in years) {
   
   for (i_variable in variables) {
     # Uncomment line below for manual testing
-    i_variable <- variables[1]
+    #i_variable <- variables[1]
     
     # read list of all files
     file <-
@@ -237,7 +237,7 @@ model_resample %>%
 ```
 
 
-```{r plot_random_sample_cmorized_data_grid, eval=FALSE}
+```{r plot_random_sample_cmorized_data_grid}
 
 # read in random model sampling file
 model_resample <-
@@ -253,7 +253,7 @@ for (i_year in years) {
     filter(year == i_year)
   
   print(
-    ggplot() +
+    map +
       geom_bin2d(data = model_resample_year,
                  aes(lon, lat),
                  binwidth = 1) +
@@ -264,9 +264,7 @@ for (i_year in years) {
         subtitle = paste("Nr of observations", nrow(model_resample_year)),
         x = "Longitude",
         y = "Latitude"
-      ) +
-      geom_raster(data = landmask,
-                  aes(lon, lat), fill = "grey80")
+      )
   )
 
 }
