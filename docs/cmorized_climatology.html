@@ -12,7 +12,7 @@
 <meta name="author" content="Jens Daniel Müller" />
 
 
-<title>Random subset</title>
+<title>Cmorized climatology</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -436,7 +436,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Random subset</h1>
+<h1 class="title toc-ignore">Cmorized climatology</h1>
 <h4 class="author">Jens Daniel Müller</h4>
 <h4 class="date">19 December, 2020</h4>
 
@@ -595,7 +595,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/Random_subset.Rmd</code>) and HTML (<code>docs/Random_subset.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/cmorized_climatology.Rmd</code>) and HTML (<code>docs/cmorized_climatology.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -624,64 +624,13 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/39657d6b3ecac3d900fed2a0779a7040561cd72b/analysis/Random_subset.Rmd" target="_blank">39657d6</a>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/39657d6b3ecac3d900fed2a0779a7040561cd72b/analysis/cmorized_climatology.Rmd" target="_blank">39657d6</a>
 </td>
 <td>
 Donghe-Zhu
 </td>
 <td>
 2020-12-19
-</td>
-<td>
-rebuild final cleaned version
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/c3590c689a9bb498429938db8be90bb9a70a60c6/docs/Random_subset.html" target="_blank">c3590c6</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-18
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/7c12d28e06f8b9b3f5f8586f5209c8fd255f1a98/docs/Random_subset.html" target="_blank">7c12d28</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-18
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/1b06f98a052424ad7cfd18cb80d4dbdaa67d8f78/analysis/Random_subset.Rmd" target="_blank">1b06f98</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-18
 </td>
 <td>
 rebuild final cleaned version
@@ -694,285 +643,296 @@ rebuild final cleaned version
 </div>
 </div>
 </div>
-<pre class="r"><code>path_GLODAP_preprocessing &lt;-
-  paste(path_root, &quot;/observations/preprocessing/&quot;, sep = &quot;&quot;)
-path_cmorized &lt;-
-  &quot;/nfs/kryo/work/loher/CESM_output/RECCAP2/cmorized_Dec2020/split_monthly/&quot;
-path_preprocessing  &lt;-
-  paste(path_root, &quot;/model/preprocessing/&quot;, sep = &quot;&quot;)</code></pre>
-<div id="select-basin-mask" class="section level1">
-<h1><span class="header-section-number">1</span> Select basin mask</h1>
+<div id="predictor-climatology" class="section level1">
+<h1><span class="header-section-number">1</span> Predictor climatology</h1>
+<p>Here we used annual output of cmorized (1x1) model with variable forcing (RECCAP2 RunA) in year 2007 as the predictor climatology. Predictors include:</p>
+<ul>
+<li>Salinity (sal)</li>
+<li>Potential temperature (theta, not predictor, used for temperature calculation)</li>
+<li>In-situ temperature (temp, calculated)</li>
+<li>DIC (tco2)</li>
+<li>ALK (talk)</li>
+<li>oxygen</li>
+<li>AOU (calculated)</li>
+<li>nitrate</li>
+<li>phosphate</li>
+<li>silicate</li>
+</ul>
+<p>Besides, Model results are given in [mol m<sup>-3</sup>], whereas GLODAP data are in [µmol kg<sup>-1</sup>].</p>
+<p>For comparison, model results were converted from [mol m<sup>-3</sup>] to [µmol kg<sup>-1</sup>]</p>
+<div id="read-nc-file" class="section level2">
+<h2><span class="header-section-number">1.1</span> Read nc file</h2>
+<pre class="r"><code># read in RECCAP2 RunA file
+cmorized_climatology_temp &lt;- tidync(paste(
+  path_cmorized,
+  &quot;RECCAP2_RunA.nc&quot;,
+  sep = &quot;&quot;
+))
+
+cmorized_climatology &lt;- cmorized_climatology_temp %&gt;% hyper_tibble()
+
+# select annual cmorized 2007 as climatology
+cmorized_climatology &lt;- cmorized_climatology %&gt;%
+  select(-epc) %&gt;%
+  rename(year = time_ann,
+    sal = so,
+    THETA = thetao,
+    tco2 = dissic,
+    talk = talk,
+    oxygen = o2,
+    nitrate = no3,
+    phosphate = po4,
+    silicate = si
+  ) %&gt;%
+  # select annual value in year of 2007
+  filter(year == 10036) %&gt;%
+  drop_na() %&gt;%
+  mutate(lon = if_else(lon &lt; 20, lon + 360, lon)) %&gt;%
+  mutate(depth = round(depth))
+
+rm(cmorized_climatology_temp)</code></pre>
+</div>
+<div id="apply-basin-mask" class="section level2">
+<h2><span class="header-section-number">1.2</span> Apply basin mask</h2>
 <pre class="r"><code># use only three basin to assign general basin mask
 # ie this is not specific to the MLR fitting
-basinmask &lt;- basinmask %&gt;%
-  filter(MLR_basins == &quot;2&quot;) %&gt;%
-  select(lat, lon, basin_AIP)</code></pre>
+basinmask &lt;- basinmask %&gt;% 
+  filter(MLR_basins == &quot;2&quot;) %&gt;% 
+  select(lat, lon, basin_AIP)
+
+# restrict predictor fields to basin mask grid
+cmorized_climatology &lt;- inner_join(cmorized_climatology, basinmask)</code></pre>
 </div>
-<div id="read-glodapv2_2020-preprocessed-files" class="section level1">
-<h1><span class="header-section-number">2</span> Read GLODAPv2_2020 preprocessed files</h1>
-<pre class="r"><code>GLODAP &lt;-
-  read_csv(paste(path_GLODAP_preprocessing,
-                 &quot;GLODAPv2.2020_preprocessed.csv&quot;,
-                 sep = &quot;&quot;))
-GLODAP &lt;- GLODAP %&gt;%
-  mutate(month = month(date))</code></pre>
-</div>
-<div id="randomly-subset-cmorized-model-data" class="section level1">
-<h1><span class="header-section-number">3</span> Randomly subset cmorized model data</h1>
-<p>Here we randomly subset cmorized (1x1) model with variable forcing, according to the total number of GLODAP observations for the whole period from a previously cleaned file. The number for the annual subset remains the same for each year, which could be expressed by the total number of observations divided by number of years.</p>
-<p>Besides, Model results are given in [mol m<sup>-3</sup>], whereas GLODAP data are in [µmol kg<sup>-1</sup>]. This refers to the variables:</p>
-<ul>
-<li>DIC<br />
-</li>
-<li>ALK<br />
-</li>
-<li>O2<br />
-</li>
-<li>NO3<br />
-</li>
-<li>PO4<br />
-</li>
-<li>SiO3<br />
-</li>
-<li>AOU (calculated)</li>
-</ul>
-<p>For comparison, model results were converted from [mol m<sup>-3</sup>] to [µmol kg<sup>-1</sup>]</p>
-<pre class="r"><code># read in a random model
-model &lt;-
-  read_ncdf(paste(path_cmorized, &quot;dissic_CESM-ETHZ_A_1_gr_1982.nc&quot;, sep = &quot;&quot;)) %&gt;%
-  as_tibble() %&gt;%
-  drop_na()
-
-# convert longitudes and mutate month
-model &lt;- model %&gt;%
-  mutate(lon = if_else(lon &lt; 20, lon + 360, lon)) %&gt;%
-  mutate(month = month(time_mon))
-
-# only consider model grids within basinmask
-model &lt;- inner_join(model, basinmask)
-
-# model grid with depth
-model_grid_depth &lt;- model %&gt;%
-  select(month, lat, lon, depth)
-
-rm(model)
-
-# set name of model to be subsetted
-model_ID &lt;- &quot;A&quot;
-
-# for loop across years
-years &lt;- c(&quot;1982&quot;:&quot;2019&quot;)
-
-# set equal number of random model sampling will be made for each year
-n = floor(nrow(GLODAP) / length(years))
-
-for (i_year in years) {
-  # for manual testing
-  #i_year &lt;- years[1]
-  
-  # random sample n = GLODAP / years from model grid depth
-  model_resample_grid_depth &lt;- sample_n(model_grid_depth, n) %&gt;%
-    arrange(lat, lon, depth, month) %&gt;%
-    mutate(year = i_year)
-  
-  # for loop across variables
-  variables &lt;-
-    c(&quot;so&quot;, &quot;thetao&quot;, &quot;dissic&quot;, &quot;talk&quot;, &quot;o2&quot;, &quot;no3&quot;, &quot;po4&quot;, &quot;si&quot;)
-  # &quot;SALT&quot;, &quot;TEMP&quot;, &quot;DIC&quot;, &quot;ALK&quot;, &quot;O2&quot;, &quot;NO3&quot;, &quot;PO4&quot;, &quot;SiO3&quot;
-  
-  for (i_variable in variables) {
-    # Uncomment line below for manual testing
-    #i_variable &lt;- variables[1]
-    
-    # read list of all files
-    file &lt;-
-      list.files(
-        path = path_cmorized,
-        pattern = paste(
-          &quot;^&quot;,
-          i_variable,
-          &quot;_CESM-ETHZ_&quot;,
-          model_ID,
-          &quot;_1_gr_&quot;,
-          i_year,
-          &quot;.nc&quot;,
-          sep = &quot;&quot;
-        )
-      )
-    print(file)
-    
-    # read in data
-    variable_data &lt;-
-      read_ncdf(paste(path_cmorized,
-                      file,
-                      sep = &quot;&quot;))
-    
-    # convert to tibble
-    variable_data_tibble &lt;- variable_data %&gt;%
-      as_tibble()
-    
-    # remove open link to nc file
-    rm(variable_data)
-    
-    # remove na values -&gt; do this early, to speed up subsequent tasks
-    variable_data_tibble &lt;-
-      variable_data_tibble %&gt;%
-      filter(!is.na(!!sym(i_variable)))
-    
-    # convert longitudes
-    variable_data_tibble &lt;- variable_data_tibble %&gt;%
-      mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
-    
-    # only consider model grids within basinmask
-    variable_data_tibble &lt;- inner_join(variable_data_tibble, basinmask) %&gt;%
-      select(-basin_AIP)
-    
-    # mutate variables
-    variable_data_tibble &lt;- variable_data_tibble %&gt;%
-      mutate(month = month(time_mon), !!sym(i_variable) := as.numeric(!!sym(i_variable))) %&gt;%
-      select(-time_mon)
-    
-    # random sample for each model variable in specific year
-    model_resample_grid_depth &lt;-
-      left_join(model_resample_grid_depth, variable_data_tibble)
-  }
-  
-  # add random sample model subset for each year together
-  if (exists(&quot;model_resample&quot;)) {
-    model_resample &lt;-
-      bind_rows(model_resample, model_resample_grid_depth)
-  }
-  
-  if (!exists(&quot;model_resample&quot;)) {
-    model_resample &lt;- model_resample_grid_depth
-  }
-  
-}
-
-# calculate model temperature
-model_resample &lt;- model_resample %&gt;%
+<div id="calculate-in-situ-temperature" class="section level2">
+<h2><span class="header-section-number">1.3</span> Calculate in-situ temperature</h2>
+<pre class="r"><code>cmorized_climatology &lt;- cmorized_climatology %&gt;%
   mutate(temp = gsw_pt_from_t(
-    SA = so,
-    t = thetao,
+    SA = sal,
+    t = THETA,
     p = 10.1325,
     p_ref = depth
-  ))
-
-# unit transfer from mol/m3 to µmol/kg
-model_resample &lt;- model_resample %&gt;%
+  ))</code></pre>
+<div id="profile" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> Profile</h3>
+<p>Example profile from North Atlantic Ocean.</p>
+<pre class="r"><code>cmorized_climatology %&gt;%
+  filter(lat == params_global$lat_Atl_profile,
+         lon == params_global$lon_Atl_section) %&gt;%
+  ggplot() +
+  geom_line(aes(temp, depth, col = &quot;insitu&quot;)) +
+  geom_point(aes(temp, depth, col = &quot;insitu&quot;)) +
+  geom_line(aes(THETA, depth, col = &quot;theta&quot;)) +
+  geom_point(aes(THETA, depth, col = &quot;theta&quot;)) +
+  scale_y_reverse() +
+  scale_color_brewer(palette = &quot;Dark2&quot;, name = &quot;Scale&quot;)</code></pre>
+<p><img src="figure/cmorized_climatology.Rmd/temp_theta_profile_plot-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="unit-transfer" class="section level2">
+<h2><span class="header-section-number">1.4</span> Unit transfer</h2>
+<pre class="r"><code># unit transfer from mol/m3 to µmol/kg
+cmorized_climatology &lt;- cmorized_climatology %&gt;%
   mutate(
     rho = gsw_pot_rho_t_exact(
-      SA = so,
+      SA = sal,
       t = temp,
       p = depth,
       p_ref = 10.1325
     ),
-    dissic = dissic * (1000000 / rho),
+    tco2 = tco2 * (1000000 / rho),
     talk = talk * (1000000 / rho),
-    o2 = o2 * (1000000 / rho),
-    no3 = no3 * (1000000 / rho),
-    po4 = po4 * (1000000 / rho),
-    si = si * (1000000 / rho)
-  )
-
-# calculate AOU
-model_resample &lt;- model_resample %&gt;%
+    oxygen = oxygen * (1000000 / rho),
+    nitrate = nitrate * (1000000 / rho),
+    phosphate = phosphate * (1000000 / rho),
+    silicate = silicate * (1000000 / rho)
+  )</code></pre>
+</div>
+<div id="calculate-aou" class="section level2">
+<h2><span class="header-section-number">1.5</span> calculate AOU</h2>
+<pre class="r"><code>cmorized_climatology &lt;- cmorized_climatology %&gt;%
   mutate(
     oxygen_sat_m3 = gas_satconc(
-      S = so,
+      S = sal,
       t = temp,
       P = 1.013253,
       species = &quot;O2&quot;
     ),
     oxygen_sat_kg = oxygen_sat_m3 * (1000 / rho),
-    aou = oxygen_sat_kg - o2
+    AOU = oxygen_sat_kg - oxygen
   ) %&gt;%
-  select(-oxygen_sat_kg,-oxygen_sat_m3)
+  select(-oxygen_sat_kg,-oxygen_sat_m3)</code></pre>
+</div>
+<div id="calculate-neutral-density" class="section level2">
+<h2><span class="header-section-number">1.6</span> Calculate neutral density</h2>
+<p>Neutral density gamma was calculated with a Python script provided by Serazin et al (2011), which performs a polynomial approximation of the original gamma calculation.</p>
+<pre class="r"><code># calculate pressure from depth
+cmorized_climatology &lt;- cmorized_climatology %&gt;%
+  mutate(CTDPRS = gsw_p_from_z(-depth,
+                               lat))
 
-# write file for random model sampling
-model_resample %&gt;%
-  write_csv(paste(path_preprocessing, &quot;random_subset.csv&quot;,
-                  sep = &quot;&quot;))</code></pre>
-<pre class="r"><code># read in random model sampling file
-model_resample &lt;-
-  read_csv(paste(path_preprocessing, &quot;random_subset.csv&quot;,
-                 sep = &quot;&quot;))
+# rename variables according to python script
+cmorized_climatology_gamma_prep &lt;- cmorized_climatology %&gt;%
+  rename(LATITUDE = lat,
+         LONGITUDE = lon,
+         SALNTY = sal)
 
-# plot random sampling cmorized grids in each year
-years &lt;- c(&quot;1982&quot;, &quot;1990&quot;, &quot;2000&quot;, &quot;2010&quot;, &quot;2019&quot;)
-for (i_year in years) {
-  # i_year &lt;- years[1]
-  
-  model_resample_year &lt;- model_resample %&gt;%
-    filter(year == i_year)
-  
-  print(
-    map +
-      geom_bin2d(data = model_resample_year,
-                 aes(lon, lat),
-                 binwidth = 1) +
-      scale_fill_viridis_c(direction = -1) +
-      coord_quickmap(expand = 0) +
-      labs(
-        title = paste(&quot;Random Model Sampling of year&quot;, i_year),
-        subtitle = paste(&quot;Nr of observations&quot;, nrow(model_resample_year)),
-        x = &quot;Longitude&quot;,
-        y = &quot;Latitude&quot;
-      )
+# load python scripts
+source_python(paste(
+  path_functions,
+  &quot;python_scripts/Gamma_GLODAP_python.py&quot;,
+  sep = &quot;&quot;
+))
+
+# calculate gamma
+cmorized_climatology_gamma_calc &lt;-
+  calculate_gamma(cmorized_climatology_gamma_prep)
+
+# reverse variable naming
+cmorized_climatology &lt;- cmorized_climatology_gamma_calc %&gt;%
+  select(-c(CTDPRS, THETA)) %&gt;%
+  rename(
+    lat = LATITUDE,
+    lon = LONGITUDE,
+    sal = SALNTY,
+    gamma  = GAMMA
   )
 
-}</code></pre>
-<p><img src="figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-5.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code># Calculate and plot depth distribution of model subset
-model_resample_depth &lt;- model_resample %&gt;%
-  count(depth, year)
+cmorized_climatology &lt;- as_tibble(cmorized_climatology)
 
-model_resample_depth_average &lt;- model_resample_depth %&gt;%
-  group_by(depth) %&gt;%
-  summarise(n = mean(n))
-
-model_resample_depth_average %&gt;%
-  arrange(depth) %&gt;%
-  ggplot(aes(n, depth)) +
-  geom_point(data = model_resample_depth,
-             aes(n, depth, col = &quot;All years&quot;)) +
-  geom_point(aes(n, depth, col = &quot;Average&quot;)) +
-  geom_path(aes(n, depth, col = &quot;Average&quot;)) +
-  scale_color_brewer(palette = &quot;Set1&quot;,
-                     name = &quot;&quot;,
-                     direction = -1) +
-  scale_y_reverse() +
-  coord_cartesian(xlim = c(0,500),
-                  ylim = c(6000,0)) +
-  labs(title = &quot;Depth distribution of random model subset&quot;)</code></pre>
-<p><img src="figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-6.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code># Calculate and plot depth distribution of GLODAP data
-# Depths gridded to model depth levels for comparison
-GLODAP_depth &lt;- GLODAP %&gt;%
-  mutate(depth = as.numeric(as.character(cut(depth,
-                     c(0,unique(model_resample_depth_average$depth)),
-                     labels = unique(model_resample_depth_average$depth))))) %&gt;% 
-  count(depth, year)
-
-GLODAP_depth_average &lt;- GLODAP_depth %&gt;%
-  group_by(depth) %&gt;%
-  summarise(n = mean(n))
-
-GLODAP_depth_average %&gt;%
-  arrange(depth) %&gt;%
-  ggplot(aes(n, depth)) +
-  geom_point(data = GLODAP_depth,
-             aes(n, depth, col = &quot;All years&quot;)) +
-  geom_point(aes(n, depth, col = &quot;Average&quot;)) +
-  geom_path(aes(n, depth, col = &quot;Average&quot;)) +
-  scale_color_brewer(palette = &quot;Set1&quot;,
-                     name = &quot;&quot;,
-                     direction = -1) +
-  scale_y_reverse() +
-  coord_cartesian(xlim = c(0,500),
-                  ylim = c(6000,0)) +
-  labs(title = &quot;Depth distribution of GLODAP observations&quot;)</code></pre>
-<p><img src="figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-7.png" width="672" style="display: block; margin: auto;" /></p>
+rm(cmorized_climatology_gamma_calc, cmorized_climatology_gamma_prep)</code></pre>
+</div>
+<div id="write-file" class="section level2">
+<h2><span class="header-section-number">1.7</span> Write file</h2>
+<pre class="r"><code>cmorized_climatology %&gt;%
+  write_csv(paste(path_preprocessing,
+                  &quot;cmorized_climatology.csv&quot;,
+                  sep = &quot;&quot;))</code></pre>
+</div>
+</div>
+<div id="plots" class="section level1">
+<h1><span class="header-section-number">2</span> Plots</h1>
+<div id="temperature-plots" class="section level2">
+<h2><span class="header-section-number">2.1</span> Temperature plots</h2>
+<p>Below, following subsets of the climatology are plotted for all relevant predictors:</p>
+<ul>
+<li>Horizontal planes at 0, 5, 150, 155, 483, 500, 2000, 1969m</li>
+<li>Global section as defined above and indicated as white lines in maps.</li>
+</ul>
+<div id="surface-map" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Surface map</h3>
+<pre class="r"><code>p_map_climatology(
+  df = cmorized_climatology,
+  var = &quot;temp&quot;)</code></pre>
+<p><img src="figure/cmorized_climatology.Rmd/temperature_surface_climatology_map-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Section</h3>
+<pre class="r"><code>p_section_global(
+  df = cmorized_climatology,
+  var = &quot;temp&quot;)</code></pre>
+<p><img src="figure/cmorized_climatology.Rmd/temperature_sections_climatology-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="salinity-plots" class="section level2">
+<h2><span class="header-section-number">2.2</span> Salinity plots</h2>
+<div id="surface-map-1" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Surface map</h3>
+<pre class="r"><code>p_map_climatology(
+  df = cmorized_climatology,
+  var = &quot;sal&quot;)</code></pre>
+<p><img src="figure/cmorized_climatology.Rmd/salinity_surface_climatology_map-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-1" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Section</h3>
+<pre class="r"><code>p_section_global(
+  df = cmorized_climatology,
+  var = &quot;sal&quot;)</code></pre>
+<p><img src="figure/cmorized_climatology.Rmd/salinity_sections_climatology-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="nitrate-plots" class="section level2">
+<h2><span class="header-section-number">2.3</span> Nitrate plots</h2>
+<div id="surface-map-2" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Surface map</h3>
+<pre class="r"><code>p_map_climatology(
+  df = cmorized_climatology,
+  var = &quot;nitrate&quot;)</code></pre>
+<p><img src="figure/cmorized_climatology.Rmd/nitrate_surface_climatology_map-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-2" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Section</h3>
+<pre class="r"><code>p_section_global(
+  df = cmorized_climatology,
+  var = &quot;nitrate&quot;)</code></pre>
+<p><img src="figure/cmorized_climatology.Rmd/nitrate_sections_climatology-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="phosphate-plots" class="section level2">
+<h2><span class="header-section-number">2.4</span> Phosphate plots</h2>
+<div id="surface-map-3" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Surface map</h3>
+<pre class="r"><code>p_map_climatology(
+  df = cmorized_climatology,
+  var = &quot;phosphate&quot;)</code></pre>
+<p><img src="figure/cmorized_climatology.Rmd/phosphate_surface_climatology_map-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-3" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> Section</h3>
+<pre class="r"><code>p_section_global(
+  df = cmorized_climatology,
+  var = &quot;phosphate&quot;)</code></pre>
+<p><img src="figure/cmorized_climatology.Rmd/phosphate_sections_climatology-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="silicate-plots" class="section level2">
+<h2><span class="header-section-number">2.5</span> Silicate plots</h2>
+<div id="surface-map-4" class="section level3">
+<h3><span class="header-section-number">2.5.1</span> Surface map</h3>
+<pre class="r"><code>p_map_climatology(
+  df = cmorized_climatology,
+  var = &quot;silicate&quot;)</code></pre>
+<p><img src="figure/cmorized_climatology.Rmd/silicate_surface_climatology_map-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-4" class="section level3">
+<h3><span class="header-section-number">2.5.2</span> Section</h3>
+<pre class="r"><code>p_section_global(
+  df = cmorized_climatology,
+  var = &quot;silicate&quot;)</code></pre>
+<p><img src="figure/cmorized_climatology.Rmd/silicate_sections_climatology-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="oxygen-plots" class="section level2">
+<h2><span class="header-section-number">2.6</span> Oxygen plots</h2>
+<div id="surface-map-5" class="section level3">
+<h3><span class="header-section-number">2.6.1</span> Surface map</h3>
+<pre class="r"><code>p_map_climatology(
+  df = cmorized_climatology,
+  var = &quot;oxygen&quot;)</code></pre>
+<p><img src="figure/cmorized_climatology.Rmd/oxygen_surface_climatology_map-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-5" class="section level3">
+<h3><span class="header-section-number">2.6.2</span> Section</h3>
+<pre class="r"><code>p_section_global(
+  df = cmorized_climatology,
+  var = &quot;oxygen&quot;)</code></pre>
+<p><img src="figure/cmorized_climatology.Rmd/oxygen_sections_climatology-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="aou-plots" class="section level2">
+<h2><span class="header-section-number">2.7</span> AOU plots</h2>
+<div id="surface-map-6" class="section level3">
+<h3><span class="header-section-number">2.7.1</span> Surface map</h3>
+<pre class="r"><code>p_map_climatology(
+  df = cmorized_climatology,
+  var = &quot;AOU&quot;)</code></pre>
+<p><img src="figure/cmorized_climatology.Rmd/AOU_surface_climatology_map-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-6" class="section level3">
+<h3><span class="header-section-number">2.7.2</span> Section</h3>
+<pre class="r"><code>p_section_global(
+  df = cmorized_climatology,
+  var = &quot;AOU&quot;)</code></pre>
+<p><img src="figure/cmorized_climatology.Rmd/AOU_sections_climatology-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1001,40 +961,41 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] marelac_2.1.10    shape_1.4.5       gsw_1.0-5         testthat_2.3.2   
- [5] rqdatatable_1.2.9 rquery_1.4.6      wrapr_2.0.4       lubridate_1.7.9  
- [9] stars_0.4-3       sf_0.9-6          abind_1.4-5       metR_0.8.0       
-[13] scico_1.2.0       patchwork_1.1.0   collapse_1.4.2    forcats_0.5.0    
-[17] stringr_1.4.0     dplyr_1.0.2       purrr_0.3.4       readr_1.4.0      
-[21] tidyr_1.1.2       tibble_3.0.4      ggplot2_3.3.2     tidyverse_1.3.0  
-[25] workflowr_1.6.2  
+ [1] marelac_2.1.10   shape_1.4.5      geosphere_1.5-10 oce_1.2-0       
+ [5] gsw_1.0-5        testthat_2.3.2   reticulate_1.18  tidync_0.2.4    
+ [9] metR_0.8.0       scico_1.2.0      patchwork_1.1.0  collapse_1.4.2  
+[13] forcats_0.5.0    stringr_1.4.0    dplyr_1.0.2      purrr_0.3.4     
+[17] readr_1.4.0      tidyr_1.1.2      tibble_3.0.4     ggplot2_3.3.2   
+[21] tidyverse_1.3.0  workflowr_1.6.2 
 
 loaded via a namespace (and not attached):
- [1] fs_1.5.0                 RColorBrewer_1.1-2       httr_1.4.2              
- [4] rprojroot_1.3-2          tools_4.0.3              backports_1.1.10        
- [7] R6_2.5.0                 KernSmooth_2.23-18       DBI_1.1.0               
-[10] colorspace_1.4-1         withr_2.3.0              tidyselect_1.1.0        
-[13] compiler_4.0.3           git2r_0.27.1             cli_2.1.0               
-[16] rvest_0.3.6              xml2_1.3.2               labeling_0.4.2          
-[19] scales_1.1.1             checkmate_2.0.0          classInt_0.4-3          
-[22] digest_0.6.27            oce_1.2-0                rmarkdown_2.5           
-[25] pkgconfig_2.0.3          htmltools_0.5.0          dbplyr_1.4.4            
-[28] rlang_0.4.8              readxl_1.3.1             rstudioapi_0.11         
-[31] farver_2.0.3             generics_0.0.2           jsonlite_1.7.1          
-[34] magrittr_1.5             Matrix_1.2-18            Rcpp_1.0.5              
-[37] munsell_0.5.0            fansi_0.4.1              lifecycle_0.2.0         
-[40] stringi_1.5.3            whisker_0.4              yaml_2.2.1              
-[43] grid_4.0.3               blob_1.2.1               parallel_4.0.3          
-[46] promises_1.1.1           crayon_1.3.4             lattice_0.20-41         
-[49] haven_2.3.1              seacarb_3.2.14           hms_0.5.3               
-[52] knitr_1.30               pillar_1.4.6             reprex_0.3.0            
-[55] glue_1.4.2               evaluate_0.14            RcppArmadillo_0.10.1.0.0
-[58] data.table_1.13.2        modelr_0.1.8             vctrs_0.3.4             
-[61] httpuv_1.5.4             cellranger_1.1.0         gtable_0.3.0            
-[64] assertthat_0.2.1         xfun_0.18                lwgeom_0.2-5            
-[67] broom_0.7.2              RcppEigen_0.3.3.7.0      e1071_1.7-4             
-[70] later_1.1.0.1            viridisLite_0.3.0        class_7.3-17            
-[73] units_0.6-7              ellipsis_0.3.1          </code></pre>
+ [1] fs_1.5.0                 lubridate_1.7.9          RColorBrewer_1.1-2      
+ [4] httr_1.4.2               rprojroot_1.3-2          tools_4.0.3             
+ [7] backports_1.1.10         R6_2.5.0                 DBI_1.1.0               
+[10] colorspace_1.4-1         withr_2.3.0              sp_1.4-4                
+[13] tidyselect_1.1.0         compiler_4.0.3           git2r_0.27.1            
+[16] cli_2.1.0                rvest_0.3.6              RNetCDF_2.4-2           
+[19] xml2_1.3.2               isoband_0.2.2            labeling_0.4.2          
+[22] scales_1.1.1             checkmate_2.0.0          rappdirs_0.3.1          
+[25] digest_0.6.27            rmarkdown_2.5            pkgconfig_2.0.3         
+[28] htmltools_0.5.0          dbplyr_1.4.4             rlang_0.4.8             
+[31] readxl_1.3.1             rstudioapi_0.11          farver_2.0.3            
+[34] generics_0.0.2           jsonlite_1.7.1           magrittr_1.5            
+[37] ncmeta_0.3.0             Matrix_1.2-18            Rcpp_1.0.5              
+[40] munsell_0.5.0            fansi_0.4.1              lifecycle_0.2.0         
+[43] stringi_1.5.3            whisker_0.4              yaml_2.2.1              
+[46] grid_4.0.3               blob_1.2.1               parallel_4.0.3          
+[49] promises_1.1.1           crayon_1.3.4             lattice_0.20-41         
+[52] haven_2.3.1              hms_0.5.3                seacarb_3.2.14          
+[55] knitr_1.30               pillar_1.4.6             reprex_0.3.0            
+[58] glue_1.4.2               evaluate_0.14            RcppArmadillo_0.10.1.0.0
+[61] data.table_1.13.2        modelr_0.1.8             vctrs_0.3.4             
+[64] httpuv_1.5.4             cellranger_1.1.0         gtable_0.3.0            
+[67] assertthat_0.2.1         xfun_0.18                broom_0.7.2             
+[70] RcppEigen_0.3.3.7.0      later_1.1.0.1            viridisLite_0.3.0       
+[73] ncdf4_1.17               ellipsis_0.3.1          </code></pre>
+</div>
+</div>
 </div>
 </div>
 
