@@ -1,7 +1,7 @@
-name: eMLR_obs_preprocessing
+name: eMLR_mod_preprocessing
 output_dir: ../docs
 navbar:
-  title: eMLR obs preprocessing
+  title: eMLR model preprocessing
   left:
   - text: Cmorized_climatology
     href: cmorized_climatology.html
