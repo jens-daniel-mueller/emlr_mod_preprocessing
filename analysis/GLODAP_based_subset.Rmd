@@ -475,6 +475,50 @@ ggplot() +
 
 ```
 
+# Test for obs-model depth offset
+
+```{r test_for_depth_offset}
+
+GLODAP_max_depth <- GLODAP %>%
+  select(lon, lat, depth) %>%
+  group_by(lon, lat) %>%
+  mutate(depth = max(depth)) %>%
+  rename(depth_GLODAP = depth) %>%
+  unique()
+
+model_max_depth <- variable_data_tibble %>%
+  select(lon, lat, depth) %>%
+  group_by(lon, lat) %>%
+  mutate(depth = max(depth)) %>%
+  rename(depth_model = depth) %>%
+  unique()
+
+GLODAP_model_depth_offset <-
+  left_join(GLODAP_max_depth, model_max_depth) %>%
+  mutate(offset = depth_GLODAP - depth_model)
+
+map +
+  geom_point(
+    data = GLODAP_model_depth_offset %>%
+      filter(offset > 0),
+    aes(lon, lat, col = "Obs beyond model"),
+    size = 1
+  ) +
+  geom_point(
+    data = GLODAP_model_depth_offset %>%
+      filter(offset < 0),
+    aes(lon, lat, col = "Obs below model"),
+    size = 1
+  ) +
+  labs(
+    title = "GLODAP-model max sampling depth offset",
+    subtitle = "Year 1971 - 2019",
+    x = "Longitude",
+    y = "Latitude"
+  )
+
+```
+
 
 # GLODAP observations vs cmorized subset comparison
 
