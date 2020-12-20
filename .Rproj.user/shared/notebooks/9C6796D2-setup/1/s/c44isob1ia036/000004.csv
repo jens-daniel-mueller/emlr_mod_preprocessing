@@ -1,0 +1,4 @@
+"0","map <-"
+"0","  read_rds(paste(path_files,"
+"0","                 ""map_landmask_WOA18.rds"","
+"0","                 sep = """"))"

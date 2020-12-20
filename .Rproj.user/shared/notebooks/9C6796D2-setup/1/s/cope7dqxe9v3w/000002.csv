@@ -1,0 +1,6 @@
+"0","basinmask <-"
+"0","  read_csv(paste(path_files,"
+"0","                 ""basin_mask_WOA18.csv"","
+"0","                 sep = """"),"
+"0","           col_types = cols(""MLR_basins"" = col_character()))"
+"0",""
