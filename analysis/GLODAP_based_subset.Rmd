@@ -318,7 +318,7 @@ GLODAP <- GLODAP %>%
 # write file for GLODAP observations + subsetted model variables
 GLODAP %>%
   write_csv(paste(path_preprocessing,
-                  "GLODAP_with_cmorized_subset.csv",
+                  "GLODAPv2.2020_preprocessed_with_model_runA.csv",
                   sep = ""))
 
 # mutate Nan for var -> var_model
@@ -370,7 +370,7 @@ GLODAP <- GLODAP %>%
 # write file for GLODAP-based subsetting model variables
 GLODAP %>%
   write_csv(paste(path_preprocessing,
-                  "original_subset.csv",
+                  "GLODAPv2.2020_preprocessed_model_runA.csv",
                   sep = ""))
 
 # write file for model summary statistics (original cmorized unit)
@@ -525,7 +525,7 @@ map +
 ```{r read_GLODAP_with_cmorized_subset_file}
 
 GLODAP_cmorized <- read_csv(paste(path_preprocessing,
-                                  "GLODAP_with_cmorized_subset.csv",
+                                  "GLODAPv2.2020_preprocessed_with_model_runA.csv",
                                   sep = ""))
 
 ```
