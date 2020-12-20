@@ -203,10 +203,11 @@ rm(cant_annual_year)
 
 ```{r calculate_zonal_mean_section}
 
-# Zonal mean section for Cant
+# Zonal mean section for Cant in 2007
 cant_annual_zonal <- cant_annual %>%
-  select(-c(lon, tco2_A, tco2_B)) %>%
-  fgroup_by(lat, depth, year, basin_AIP) %>% {
+  filter(year == 2007) %>%
+  select(-c(lon, tco2_A, tco2_B, year)) %>%
+  fgroup_by(lat, depth, basin_AIP) %>% {
     add_vars(
       fgroup_vars(., "unique"),
       fmean(., keep.group_vars = FALSE) %>% add_stub(pre = FALSE, "_mean"),
@@ -283,6 +284,8 @@ cant_annual_inv <- cant_annual_inv %>%
 
 rm(cant_annual_inv_temp, cant_annual_temp)
 
+#######################################################
+
 # Calculate column inventory for dCant
 for (i_inventory_depth in params_global$inventory_depths) {
   # filter integration depth
@@ -313,7 +316,7 @@ for (i_inventory_depth in params_global$inventory_depths) {
   # sum up layer inventories to column inventories
   dcant_gruber_inv_temp <- dcant_gruber_temp %>%
     group_by(lon, lat, basin_AIP) %>%
-    summarise(cant_inv = sum(dcant_layer_inv, na.rm = TRUE) / 1000) %>%
+    summarise(dcant_inv = sum(dcant_layer_inv, na.rm = TRUE) / 1000) %>%
     ungroup()
   
   dcant_gruber_inv_temp <- dcant_gruber_inv_temp %>%
@@ -331,7 +334,7 @@ for (i_inventory_depth in params_global$inventory_depths) {
 dcant_gruber_inv <- dcant_gruber_inv %>%
   filter(inv_depth == params_global$inventory_depth_standard)
 
-rm(dcant_gruber_inv_temp, dcant_gruber_temp)
+rm(dcant_gruber_inv_temp, dcant_gruber_temp, depth_level_volume)
 
 ```
 
@@ -344,7 +347,8 @@ rm(dcant_gruber_inv_temp, dcant_gruber_temp)
 # Cant inventory plot in year 2007
 p_map_cant_inv(
   df = cant_annual_inv,
-  var = "cant_inv")
+  var = "cant_inv",
+  col = "divergent")
 
 ```
 
@@ -355,7 +359,8 @@ p_map_cant_inv(
 # dCant inventory plot between 1994 to 2007
 p_map_cant_inv(
   df = dcant_gruber_inv,
-  var = "cant_inv")
+  var = "dcant_inv",
+  col = "divergent")
 
 ```
 
@@ -370,7 +375,9 @@ cant_annual_year <- cant_annual %>%
   filter(year == 2007) %>%
   mutate(depth = round(depth))
 
-p_map_climatology(df = cant_annual_year, var = "cant")
+p_map_climatology(df = cant_annual_year, var = "cant", col = "divergent")
+
+rm(cant_annual_year)
 
 ```
 
@@ -418,7 +425,7 @@ p_section_global(
 dcant_gruber_round <- dcant_gruber %>%
   mutate(depth = round(depth))
 
-p_map_climatology(df = dcant_gruber_round, var = "dcant")
+p_map_climatology(df = dcant_gruber_round, var = "dcant", col = "divergent")
 
 rm(dcant_gruber_round)
 

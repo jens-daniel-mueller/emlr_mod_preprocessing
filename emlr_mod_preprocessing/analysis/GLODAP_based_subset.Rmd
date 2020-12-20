@@ -454,18 +454,18 @@ model_obs_interpo <- model_obs %>%
 ggplot() +
   geom_path(
     data = model_obs_interpo %>%
-      filter(lat == -48.5, lon == 305.5, !is.na(dissic), month == 4) %>%
+      filter(lat == -47.5, lon == 306.5, !is.na(dissic), month == 4) %>%
       arrange(depth),
     aes(dissic, depth, col = "model")
   ) +
   geom_point(
     data = model_obs_interpo %>%
-      filter(lat == -48.5, lon == 305.5, month == 4),
+      filter(lat == -47.5, lon == 306.5, month == 4),
     aes(dissic_interpolate, depth, col = "interpolated")
   ) +
   geom_point(
     data = model_obs_interpo %>%
-      filter(lat == -48.5, lon == 305.5, !is.na(dissic), month == 4) %>%
+      filter(lat == -47.5, lon == 306.5, !is.na(dissic), month == 4) %>%
       arrange(depth),
     aes(dissic, depth, col = "model")
   ) +
