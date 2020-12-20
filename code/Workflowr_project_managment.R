@@ -13,13 +13,10 @@ wflow_publish(here::here(
   "analysis",
   c(
     "index.Rmd",
-    "config_dependencies.Rmd",
-    "config_parameterization.Rmd",
-    "read_World_Ocean_Atlas_2018.Rmd",
-    "read_GLODAPv2_2016_MappedClimatologies.Rmd",
-    "read_GLODAPv2_2020.Rmd",
-    "read_Gruber_2019_Cant.Rmd",
-    "read_Sabine_2004_Cant.Rmd",
+    "cmorized_climatology.Rmd",
+    "GLODAP_based_subset.Rmd",
+    "Random_subset.Rmd",
+    "cmorized_Cant.Rmd",
     "read_CO2_atm.Rmd"
   )
 ),
