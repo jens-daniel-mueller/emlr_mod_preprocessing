@@ -1,4 +1,0 @@
-"0","params_global <-"
-"0","  read_rds(paste(path_files,"
-"0","                 ""params_global.rds"","
-"0","                 sep = """"))"

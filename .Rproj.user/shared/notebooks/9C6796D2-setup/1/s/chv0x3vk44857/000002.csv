@@ -1,3 +1,0 @@
-"0","path_root           <- ""/nfs/kryo/work/jenmueller/emlr_cant"""
-"0","path_functions      <- paste(path_root, ""/utilities/functions/"", sep = """")"
-"0","path_files          <- paste(path_root, ""/utilities/files/"", sep = """")"
