@@ -1,7 +1,7 @@
 name: eMLR_mod_preprocessing
 output_dir: ../docs
 navbar:
-  title: eMLR model preprocessing
+  title: eMLR mod preprocessing
   left:
   - text: Cmorized_climatology
     href: cmorized_climatology.html
@@ -18,7 +18,7 @@ navbar:
   right:
   - icon: fa-github
     text: Source code
-    href: https://github.com/jens-daniel-mueller/emlr_obs_preprocessing
+    href: https://github.com/jens-daniel-mueller/emlr_mod_preprocessing
   - icon: fa-home
     text: Jens' homepage
     href: https://jens-daniel-mueller.github.io/
