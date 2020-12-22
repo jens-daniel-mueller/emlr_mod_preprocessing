@@ -375,12 +375,12 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">eMLR obs preprocessing</a>
+      <a class="navbar-brand" href="index.html">eMLR mod preprocessing</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="cmorized_climatology.html">Cmorized_climatology</a>
+  <a href="Climatology.html">Climatology</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -390,7 +390,7 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="GLODAP_based_subset.html">Regular subset</a>
+      <a href="GLODAP_subset.html">GLODAP subset</a>
     </li>
     <li>
       <a href="Random_subset.html">Random subset</a>
@@ -398,7 +398,7 @@ div.tocify {
   </ul>
 </li>
 <li>
-  <a href="cmorized_Cant.html">Cmorized Cant</a>
+  <a href="Cant.html">Cant</a>
 </li>
 <li>
   <a href="read_CO2_atm.html">Atmospheric CO2</a>
@@ -406,7 +406,7 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/jens-daniel-mueller/emlr_obs_preprocessing">
+  <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing">
     <span class="fa fa-github"></span>
      
     Source code
@@ -438,7 +438,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Random subset</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">20 December, 2020</h4>
+<h4 class="date">22 December, 2020</h4>
 
 </div>
 
@@ -463,13 +463,13 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-12-20
+<strong>Last updated:</strong> 2020-12-22
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
-<strong>Knit directory:</strong> <code>model/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong> <code>emlr_mod_preprocessing/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
@@ -554,16 +554,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree5373a489e2fa463efdd718f0d9126cdf43c066ebtargetblank5373a48a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/5373a489e2fa463efdd718f0d9126cdf43c066eb" target="_blank">5373a48</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree47d36e504be146c70e8bbaad0cf323725ed07255targetblank47d36e5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/47d36e504be146c70e8bbaad0cf323725ed07255" target="_blank">47d36e5</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree5373a489e2fa463efdd718f0d9126cdf43c066ebtargetblank5373a48a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree47d36e504be146c70e8bbaad0cf323725ed07255targetblank47d36e5a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/5373a489e2fa463efdd718f0d9126cdf43c066eb" target="_blank">5373a48</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/47d36e504be146c70e8bbaad0cf323725ed07255" target="_blank">47d36e5</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -571,19 +571,17 @@ Note that you need to be careful to ensure that all relevant files for the analy
 <pre><code>
 Ignored files:
     Ignored:    .Rhistory
-    Ignored:    .Rproj.user/37E0A669/ctx/
-    Ignored:    .Rproj.user/37E0A669/presentation/
-    Ignored:    .Rproj.user/37E0A669/profiles-cache/
-    Ignored:    .Rproj.user/37E0A669/sources/per/u/
-    Ignored:    .Rproj.user/37E0A669/sources/s-1fc1686a/
-    Ignored:    .Rproj.user/37E0A669/tutorial/
+    Ignored:    .Rproj.user/
+
+Untracked files:
+    Untracked:  analysis/Cant.Rmd
 
 Unstaged changes:
-    Modified:   .Rproj.user/37E0A669/pcs/files-pane.pper
-    Modified:   .Rproj.user/37E0A669/pcs/source-pane.pper
-    Modified:   .Rproj.user/37E0A669/pcs/windowlayoutstate.pper
-    Modified:   .Rproj.user/37E0A669/sources/prop/294C3683
-    Modified:   .Rproj.user/37E0A669/sources/prop/7D1E37A6
+    Deleted:    analysis/GLODAP_based_subset.Rmd
+    Modified:   analysis/_site.yml
+    Deleted:    analysis/cmorized_Cant.Rmd
+    Deleted:    analysis/cmorized_climatology.Rmd
+    Modified:   code/Workflowr_project_managment.R
 
 </code></pre>
 <p>
@@ -622,6 +620,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/47d36e504be146c70e8bbaad0cf323725ed07255/analysis/Random_subset.Rmd" target="_blank">47d36e5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-12-22
+</td>
+<td>
+rebuild after Jens revision
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/53b63ba39e53e16fe1a9bc3fe68ed8506d99975a/docs/Random_subset.html" target="_blank">53b63ba</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2020-12-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -788,25 +820,23 @@ path_cmorized &lt;-
   &quot;/nfs/kryo/work/loher/CESM_output/RECCAP2/cmorized_Dec2020/split_monthly/&quot;
 path_preprocessing  &lt;-
   paste(path_root, &quot;/model/preprocessing/&quot;, sep = &quot;&quot;)</code></pre>
-<div id="select-basin-mask" class="section level1">
-<h1><span class="header-section-number">1</span> Select basin mask</h1>
 <pre class="r"><code># use only three basin to assign general basin mask
 # ie this is not specific to the MLR fitting
 basinmask &lt;- basinmask %&gt;%
   filter(MLR_basins == &quot;2&quot;) %&gt;%
   select(lat, lon, basin_AIP)</code></pre>
-</div>
 <div id="read-glodapv2_2020-preprocessed-files" class="section level1">
-<h1><span class="header-section-number">2</span> Read GLODAPv2_2020 preprocessed files</h1>
+<h1><span class="header-section-number">1</span> Read GLODAPv2_2020 preprocessed files</h1>
 <pre class="r"><code>GLODAP &lt;-
   read_csv(paste(path_GLODAP_preprocessing,
                  &quot;GLODAPv2.2020_preprocessed.csv&quot;,
                  sep = &quot;&quot;))
+
 GLODAP &lt;- GLODAP %&gt;%
   mutate(month = month(date))</code></pre>
 </div>
-<div id="randomly-subset-cmorized-model-data" class="section level1">
-<h1><span class="header-section-number">3</span> Randomly subset cmorized model data</h1>
+<div id="randomly-subset-model-data" class="section level1">
+<h1><span class="header-section-number">2</span> Randomly subset model data</h1>
 <p>Here we randomly subset cmorized (1x1) model with variable forcing, according to the total number of GLODAP observations for the whole period from a previously cleaned file. The number for the annual subset remains the same for each year, which could be expressed by the total number of observations divided by number of years.</p>
 <p>Besides, Model results are given in [mol m<sup>-3</sup>], whereas GLODAP data are in [µmol kg<sup>-1</sup>]. This refers to the variables:</p>
 <ul>
@@ -855,8 +885,7 @@ years &lt;- c(&quot;1982&quot;:&quot;2019&quot;)
 n = floor(nrow(GLODAP) / length(years))
 
 for (i_year in years) {
-  # for manual testing
-  #i_year &lt;- years[1]
+  # i_year &lt;- years[1]
   
   # random sample n = GLODAP / years from model grid depth
   model_resample_grid_depth &lt;- sample_n(model_grid_depth, n) %&gt;%
@@ -866,11 +895,9 @@ for (i_year in years) {
   # for loop across variables
   variables &lt;-
     c(&quot;so&quot;, &quot;thetao&quot;, &quot;dissic&quot;, &quot;talk&quot;, &quot;o2&quot;, &quot;no3&quot;, &quot;po4&quot;, &quot;si&quot;)
-  # &quot;SALT&quot;, &quot;TEMP&quot;, &quot;DIC&quot;, &quot;ALK&quot;, &quot;O2&quot;, &quot;NO3&quot;, &quot;PO4&quot;, &quot;SiO3&quot;
   
   for (i_variable in variables) {
-    # Uncomment line below for manual testing
-    #i_variable &lt;- variables[1]
+    # i_variable &lt;- variables[2]
     
     # read list of all files
     file &lt;-
@@ -902,7 +929,7 @@ for (i_year in years) {
     # remove open link to nc file
     rm(variable_data)
     
-    # remove na values -&gt; do this early, to speed up subsequent tasks
+    # remove na values
     variable_data_tibble &lt;-
       variable_data_tibble %&gt;%
       filter(!is.na(!!sym(i_variable)))
@@ -917,7 +944,8 @@ for (i_year in years) {
     
     # mutate variables
     variable_data_tibble &lt;- variable_data_tibble %&gt;%
-      mutate(month = month(time_mon), !!sym(i_variable) := as.numeric(!!sym(i_variable))) %&gt;%
+      mutate(month = month(time_mon),
+             !!sym(i_variable) := as.numeric(!!sym(i_variable))) %&gt;%
       select(-time_mon)
     
     # random sample for each model variable in specific year
@@ -955,12 +983,12 @@ model_resample &lt;- model_resample %&gt;%
       p = depth,
       p_ref = 10.1325
     ),
-    dissic = dissic * (1000000 / rho),
-    talk = talk * (1000000 / rho),
-    o2 = o2 * (1000000 / rho),
-    no3 = no3 * (1000000 / rho),
-    po4 = po4 * (1000000 / rho),
-    si = si * (1000000 / rho)
+    dissic = dissic * (1e+6 / rho),
+    talk = talk * (1e+6 / rho),
+    o2 = o2 * (1e+6 / rho),
+    no3 = no3 * (1e+6 / rho),
+    po4 = po4 * (1e+6 / rho),
+    si = si * (1e+6 / rho)
   )
 
 # calculate AOU
@@ -972,18 +1000,25 @@ model_resample &lt;- model_resample %&gt;%
       P = 1.013253,
       species = &quot;O2&quot;
     ),
-    oxygen_sat_kg = oxygen_sat_m3 * (1000 / rho),
+    oxygen_sat_kg = oxygen_sat_m3 * (1e+3 / rho),
     aou = oxygen_sat_kg - o2
   ) %&gt;%
   select(-oxygen_sat_kg,-oxygen_sat_m3)
 
 # write file for random model sampling
 model_resample %&gt;%
-  write_csv(paste(path_preprocessing, &quot;random_subset.csv&quot;,
+  write_csv(paste(path_preprocessing,
+                  &quot;GLODAPv2.2020_preprocessed_model_runA_random_subset.csv&quot;,
                   sep = &quot;&quot;))</code></pre>
+</div>
+<div id="control-plots" class="section level1">
+<h1><span class="header-section-number">3</span> Control plots</h1>
+<div id="spatial-distribution" class="section level2">
+<h2><span class="header-section-number">3.1</span> Spatial distribution</h2>
 <pre class="r"><code># read in random model sampling file
 model_resample &lt;-
-  read_csv(paste(path_preprocessing, &quot;random_subset.csv&quot;,
+  read_csv(paste(path_preprocessing,
+                 &quot;GLODAPv2.2020_preprocessed_model_runA_random_subset.csv&quot;,
                  sep = &quot;&quot;))
 
 # plot random sampling cmorized grids in each year
@@ -1010,306 +1045,10 @@ for (i_year in years) {
   )
 
 }</code></pre>
-<p><img src="figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_random_sample_cmorized_data_grid-1">
-Past versions of plot_random_sample_cmorized_data_grid-1.png
-</button>
-</p>
-<div id="fig-plot_random_sample_cmorized_data_grid-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f5e55005832b926a45e0c36aabbb36a2787e7ff3/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-1.png" target="_blank">f5e5500</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/07af163d1edfe981349be313a80f41794363b050/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-1.png" target="_blank">07af163</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9614d927d03a9ab1e64a41a6810d1875bd592df2/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-1.png" target="_blank">9614d92</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-19
-</td>
-</tr>
-</tbody>
-</table>
+<p><img src="figure/Random_subset.Rmd/random_sample_distribution_maps-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/Random_subset.Rmd/random_sample_distribution_maps-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/Random_subset.Rmd/random_sample_distribution_maps-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/Random_subset.Rmd/random_sample_distribution_maps-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/Random_subset.Rmd/random_sample_distribution_maps-5.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-</div>
-<p><img src="figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_random_sample_cmorized_data_grid-2">
-Past versions of plot_random_sample_cmorized_data_grid-2.png
-</button>
-</p>
-<div id="fig-plot_random_sample_cmorized_data_grid-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f5e55005832b926a45e0c36aabbb36a2787e7ff3/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-2.png" target="_blank">f5e5500</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/07af163d1edfe981349be313a80f41794363b050/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-2.png" target="_blank">07af163</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9614d927d03a9ab1e64a41a6810d1875bd592df2/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-2.png" target="_blank">9614d92</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-19
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-3.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_random_sample_cmorized_data_grid-3">
-Past versions of plot_random_sample_cmorized_data_grid-3.png
-</button>
-</p>
-<div id="fig-plot_random_sample_cmorized_data_grid-3" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f5e55005832b926a45e0c36aabbb36a2787e7ff3/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-3.png" target="_blank">f5e5500</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/07af163d1edfe981349be313a80f41794363b050/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-3.png" target="_blank">07af163</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9614d927d03a9ab1e64a41a6810d1875bd592df2/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-3.png" target="_blank">9614d92</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-19
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-4.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_random_sample_cmorized_data_grid-4">
-Past versions of plot_random_sample_cmorized_data_grid-4.png
-</button>
-</p>
-<div id="fig-plot_random_sample_cmorized_data_grid-4" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f5e55005832b926a45e0c36aabbb36a2787e7ff3/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-4.png" target="_blank">f5e5500</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/07af163d1edfe981349be313a80f41794363b050/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-4.png" target="_blank">07af163</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9614d927d03a9ab1e64a41a6810d1875bd592df2/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-4.png" target="_blank">9614d92</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-19
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-5.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_random_sample_cmorized_data_grid-5">
-Past versions of plot_random_sample_cmorized_data_grid-5.png
-</button>
-</p>
-<div id="fig-plot_random_sample_cmorized_data_grid-5" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f5e55005832b926a45e0c36aabbb36a2787e7ff3/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-5.png" target="_blank">f5e5500</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/07af163d1edfe981349be313a80f41794363b050/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-5.png" target="_blank">07af163</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9614d927d03a9ab1e64a41a6810d1875bd592df2/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-5.png" target="_blank">9614d92</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-19
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<div id="depth-distribution" class="section level2">
+<h2><span class="header-section-number">3.2</span> Depth distribution</h2>
 <pre class="r"><code># Calculate and plot depth distribution of model subset
 model_resample_depth &lt;- model_resample %&gt;%
   count(depth, year)
@@ -1332,66 +1071,7 @@ model_resample_depth_average %&gt;%
   coord_cartesian(xlim = c(0,500),
                   ylim = c(6000,0)) +
   labs(title = &quot;Depth distribution of random model subset&quot;)</code></pre>
-<p><img src="figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-6.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_random_sample_cmorized_data_grid-6">
-Past versions of plot_random_sample_cmorized_data_grid-6.png
-</button>
-</p>
-<div id="fig-plot_random_sample_cmorized_data_grid-6" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f5e55005832b926a45e0c36aabbb36a2787e7ff3/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-6.png" target="_blank">f5e5500</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/07af163d1edfe981349be313a80f41794363b050/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-6.png" target="_blank">07af163</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9614d927d03a9ab1e64a41a6810d1875bd592df2/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-6.png" target="_blank">9614d92</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-19
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/Random_subset.Rmd/random_sample_depth_distribution-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Calculate and plot depth distribution of GLODAP data
 # Depths gridded to model depth levels for comparison
 GLODAP_depth &lt;- GLODAP %&gt;%
@@ -1418,66 +1098,7 @@ GLODAP_depth_average %&gt;%
   coord_cartesian(xlim = c(0,500),
                   ylim = c(6000,0)) +
   labs(title = &quot;Depth distribution of GLODAP observations&quot;)</code></pre>
-<p><img src="figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-7.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_random_sample_cmorized_data_grid-7">
-Past versions of plot_random_sample_cmorized_data_grid-7.png
-</button>
-</p>
-<div id="fig-plot_random_sample_cmorized_data_grid-7" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f5e55005832b926a45e0c36aabbb36a2787e7ff3/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-7.png" target="_blank">f5e5500</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/07af163d1edfe981349be313a80f41794363b050/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-7.png" target="_blank">07af163</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9614d927d03a9ab1e64a41a6810d1875bd592df2/docs/figure/Random_subset.Rmd/plot_random_sample_cmorized_data_grid-7.png" target="_blank">9614d92</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-19
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/Random_subset.Rmd/GLODAP_depth_distribution-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1506,9 +1127,9 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] marelac_2.1.10    shape_1.4.5       gsw_1.0-5         testthat_2.3.2   
+ [1] marelac_2.1.10    shape_1.4.5       gsw_1.0-5         testthat_3.0.0   
  [5] rqdatatable_1.2.9 rquery_1.4.6      wrapr_2.0.4       lubridate_1.7.9  
- [9] stars_0.4-3       sf_0.9-6          abind_1.4-5       metR_0.8.0       
+ [9] stars_0.4-3       sf_0.9-6          abind_1.4-5       metR_0.9.0       
 [13] scico_1.2.0       patchwork_1.1.0   collapse_1.4.2    forcats_0.5.0    
 [17] stringr_1.4.0     dplyr_1.0.2       purrr_0.3.4       readr_1.4.0      
 [21] tidyr_1.1.2       tibble_3.0.4      ggplot2_3.3.2     tidyverse_1.3.0  
@@ -1516,30 +1137,31 @@ other attached packages:
 
 loaded via a namespace (and not attached):
  [1] fs_1.5.0                 RColorBrewer_1.1-2       httr_1.4.2              
- [4] rprojroot_1.3-2          tools_4.0.3              backports_1.1.10        
+ [4] rprojroot_2.0.2          tools_4.0.3              backports_1.1.10        
  [7] R6_2.5.0                 KernSmooth_2.23-18       DBI_1.1.0               
-[10] colorspace_1.4-1         withr_2.3.0              tidyselect_1.1.0        
-[13] compiler_4.0.3           git2r_0.27.1             cli_2.1.0               
+[10] colorspace_2.0-0         withr_2.3.0              tidyselect_1.1.0        
+[13] compiler_4.0.3           git2r_0.27.1             cli_2.2.0               
 [16] rvest_0.3.6              xml2_1.3.2               labeling_0.4.2          
 [19] scales_1.1.1             checkmate_2.0.0          classInt_0.4-3          
 [22] digest_0.6.27            oce_1.2-0                rmarkdown_2.5           
 [25] pkgconfig_2.0.3          htmltools_0.5.0          dbplyr_1.4.4            
-[28] rlang_0.4.8              readxl_1.3.1             rstudioapi_0.11         
+[28] rlang_0.4.9              readxl_1.3.1             rstudioapi_0.13         
 [31] farver_2.0.3             generics_0.0.2           jsonlite_1.7.1          
-[34] magrittr_1.5             Matrix_1.2-18            Rcpp_1.0.5              
+[34] magrittr_2.0.1           Matrix_1.2-18            Rcpp_1.0.5              
 [37] munsell_0.5.0            fansi_0.4.1              lifecycle_0.2.0         
 [40] stringi_1.5.3            whisker_0.4              yaml_2.2.1              
 [43] grid_4.0.3               blob_1.2.1               parallel_4.0.3          
 [46] promises_1.1.1           crayon_1.3.4             lattice_0.20-41         
 [49] haven_2.3.1              seacarb_3.2.14           hms_0.5.3               
-[52] knitr_1.30               pillar_1.4.6             reprex_0.3.0            
-[55] glue_1.4.2               evaluate_0.14            RcppArmadillo_0.10.1.0.0
-[58] data.table_1.13.2        modelr_0.1.8             vctrs_0.3.4             
+[52] knitr_1.30               pillar_1.4.7             reprex_0.3.0            
+[55] glue_1.4.2               evaluate_0.14            RcppArmadillo_0.10.1.2.0
+[58] data.table_1.13.2        modelr_0.1.8             vctrs_0.3.5             
 [61] httpuv_1.5.4             cellranger_1.1.0         gtable_0.3.0            
 [64] assertthat_0.2.1         xfun_0.18                lwgeom_0.2-5            
 [67] broom_0.7.2              RcppEigen_0.3.3.7.0      e1071_1.7-4             
 [70] later_1.1.0.1            viridisLite_0.3.0        class_7.3-17            
 [73] units_0.6-7              ellipsis_0.3.1          </code></pre>
+</div>
 </div>
 </div>
 
