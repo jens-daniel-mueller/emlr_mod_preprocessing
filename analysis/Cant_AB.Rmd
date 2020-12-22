@@ -1,0 +1,301 @@
+---
+title: "Cant variable climate"
+author: "Jens Daniel Müller"
+date:  "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  workflowr::wflow_html:
+    number_sections: true
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+editor_options:
+  chunk_output_type: console
+---
+
+```{r parent, child = "/nfs/kryo/work/jenmueller/emlr_cant/utilities/setup.Rmd"}
+# this chunk runs the code stored in setup.Rmd
+# if required, please refer to instructions given here:
+# https://jdblischak.github.io/workflowr/articles/wflow-07-common-code.html
+```
+
+```{r define_paths, include=FALSE}
+path_cmorized <-
+  "/nfs/kryo/work/loher/CESM_output/RECCAP2/cmorized_Dec2020/"
+path_preprocessing  <-
+  paste(path_root, "/model/preprocessing/", sep = "")
+```
+
+```{r load_libraries_specific, include=FALSE}
+library(tidync)
+library(stars)
+library(gsw)
+```
+
+```{r select_basin_mask}
+
+# use only three basin to assign general basin mask
+# ie this is not specific to the MLR fitting
+basinmask <- basinmask %>%
+  filter(MLR_basins == "2") %>%
+  select(lat, lon, basin_AIP)
+
+```
+
+
+# Calculate annual Cant field
+
+## Read in Run A
+
+```{r read_cmorized_RunA}
+
+# read in cmorized variable forcing model file
+A_annual <- tidync(paste(path_cmorized,
+                         "RECCAP2_RunA.nc",
+                         sep = ""))
+
+A_annual <- A_annual %>% hyper_tibble()
+
+
+# harmonize column names and coordinates
+A_annual <- A_annual  %>%
+  select(
+    year = time_ann,
+    lon,
+    lat,
+    depth,
+    tco2_A = dissic,
+    sal = so,
+    theta = thetao
+  ) %>%
+  # select annual value in year of 2007
+  mutate(year = (year - 181) / 365 + 1980) %>%
+  mutate(lon = if_else(lon < 20, lon + 360, lon))
+
+# calculate model temperature
+A_annual <- A_annual %>%
+  mutate(temp = gsw_pt_from_t(
+    SA = sal,
+    t = theta,
+    p = 10.1325,
+    p_ref = depth
+  ))
+
+# unit transfer from mol/m3 to µmol/kg
+A_annual <- A_annual %>%
+  mutate(
+    rho = gsw_pot_rho_t_exact(
+      SA = sal,
+      t = temp,
+      p = depth,
+      p_ref = 10.1325
+    ),
+    tco2_A = tco2_A * (1e+6 / rho)
+  ) %>%
+  select(year, lon, lat, depth, tco2_A)
+
+```
+
+## Read in Run B
+
+```{r read_cmorized_RunB}
+
+# read in cmorized variable forcing model file
+B_annual <- tidync(paste(path_cmorized,
+                         "RECCAP2_RunB.nc",
+                         sep = ""))
+
+B_annual <- B_annual %>% hyper_tibble()
+
+# harmonize column names and coordinates
+B_annual <- B_annual  %>%
+  select(year = time_ann, lon, lat, depth, tco2_B = dissic, sal = so, theta = thetao) %>%
+  # select annual value in year of 2007
+  mutate(year = (year - 181) / 365 + 1980) %>%
+  mutate(lon = if_else(lon < 20, lon + 360, lon))
+
+# calculate model temperature
+B_annual <- B_annual %>%
+  mutate(temp = gsw_pt_from_t(
+    SA = sal,
+    t = theta,
+    p = 10.1325,
+    p_ref = depth
+  ))
+
+# unit transfer from mol/m3 to µmol/kg
+B_annual <- B_annual %>%
+  mutate(
+    rho = gsw_pot_rho_t_exact(
+      SA = sal,
+      t = temp,
+      p = depth,
+      p_ref = 10.1325
+    ),
+    tco2_B = tco2_B * (1e+6 / rho)
+  ) %>%
+  select(year, lon, lat, depth, tco2_B)
+
+
+```
+
+## Join tco2 fields
+
+```{r join_tco2_fields}
+
+cant <- inner_join(A_annual, B_annual)
+rm(A_annual, B_annual)
+
+```
+
+## Apply basin mask
+
+```{r apply_basin_mask}
+
+# restrict Cant field to basin mask grid
+cant <- inner_join(cant, basinmask)
+
+```
+
+## Calculate Cant total
+
+```{r calc_cant}
+
+cant <- cant %>%
+  mutate(cant_total = tco2_A - tco2_B) %>% 
+  select(-c(tco2_A, tco2_B))
+
+
+```
+
+## Write Cant files
+
+```{r write_annual_Cant_files}
+
+# write annual Cant files
+years <- c(1982:2019)
+
+for (i_year in years) {
+  
+ # i_year = years[1]
+  cant_year <- cant %>%
+    filter(year == i_year)
+  
+  cant_year %>%
+    write_csv(paste(path_preprocessing,
+                    "cant_annual_field/cant_", i_year, ".csv",
+                    sep = ""))
+}
+
+```
+
+
+# Calculate change in Cant 1994 - 2007
+
+```{r calculate_cant_1994_2007}
+
+cant_1994 <- cant %>%
+  filter(year == 1994) %>%
+  select(-c(year)) %>%
+  rename(cant_1994 = cant_total)
+
+cant_2007 <- cant %>%
+  filter(year == 2007) %>%
+  select(-c(year)) %>%
+  rename(cant_2007 = cant_total)
+
+cant_gruber <- left_join(cant_1994, cant_2007) %>%
+  mutate(cant = cant_2007 - cant_1994)
+
+cant_gruber <- cant_gruber %>% 
+   mutate(cant_pos = if_else(cant <= 0, 0, cant))
+
+rm(cant_1994, cant_2007)
+
+```
+
+
+# Zonal mean sections
+
+```{r calc_zonal_mean_gruber}
+
+cant_gruber <- cant_gruber %>% 
+  mutate(eras = "JGOFS/WOCE")
+
+cant_gruber_zonal <- m_zonal_mean_section(cant_gruber)
+
+```
+
+## 1994 - 2007
+
+```{r zonal_mean_section_cant_gruber}
+
+for (i_basin_AIP in unique(cant_gruber_zonal$basin_AIP)) {
+  print(
+    p_section_zonal(
+      cant_gruber_zonal %>% filter(basin_AIP == i_basin_AIP),
+      var = "cant_pos_mean",
+      plot_slabs = "n",
+      subtitle_text = paste("Basin: ", i_basin_AIP)
+    )
+  )
+}
+
+```
+
+## Cant total 2007
+
+```{r zonal_mean_section_cant_total_2007}
+
+for (i_basin_AIP in unique(cant_gruber_zonal$basin_AIP)) {
+  print(
+    p_section_zonal(
+      cant_gruber_zonal %>% filter(basin_AIP == i_basin_AIP),
+      var = "cant_2007_mean",
+      plot_slabs = "n",
+      breaks = seq(0,100,10),
+      subtitle_text = paste("Basin: ", i_basin_AIP)
+    )
+  )
+}
+
+```
+
+
+# Column inventory 
+
+## 1994 - 2007
+
+```{r calc_inventory_gruber}
+
+cant_gruber_inv <- m_cant_inv(cant_gruber)
+
+```
+
+```{r cant_inventory_gruber}
+
+p_map_cant_inv(cant_gruber_inv %>% filter(inv_depth == 3000))
+
+```
+
+
+## Cant total 2007
+
+```{r calc_total_inventory_2007}
+
+# this is just a work around, because the function is designed to calculate cant inventories, but not cant_total inventories
+
+cant_gruber_total_inv <- m_cant_inv(
+  cant_gruber %>% 
+    select(-cant_pos) %>% 
+    rename(cant_pos = cant_2007))
+
+```
+
+```{r cant_inventory_2007}
+
+p_map_cant_inv(cant_gruber_total_inv %>% filter(inv_depth == 3000),
+               breaks = seq(0,100,10),
+               subtitle_text = "Cant total in 2007")
+
+```
+
