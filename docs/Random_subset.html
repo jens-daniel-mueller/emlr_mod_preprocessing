@@ -397,8 +397,17 @@ div.tocify {
     </li>
   </ul>
 </li>
-<li>
-  <a href="Cant.html">Cant</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Cant
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Cant_AB.html">Variable climate</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="read_CO2_atm.html">Atmospheric CO2</a>
@@ -554,16 +563,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree47d36e504be146c70e8bbaad0cf323725ed07255targetblank47d36e5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/47d36e504be146c70e8bbaad0cf323725ed07255" target="_blank">47d36e5</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree1c663710107acb912384be6d61a424eecc2c8a30targetblank1c66371a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/1c663710107acb912384be6d61a424eecc2c8a30" target="_blank">1c66371</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree47d36e504be146c70e8bbaad0cf323725ed07255targetblank47d36e5a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree1c663710107acb912384be6d61a424eecc2c8a30targetblank1c66371a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/47d36e504be146c70e8bbaad0cf323725ed07255" target="_blank">47d36e5</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/1c663710107acb912384be6d61a424eecc2c8a30" target="_blank">1c66371</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -572,9 +581,6 @@ Note that you need to be careful to ensure that all relevant files for the analy
 Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-
-Untracked files:
-    Untracked:  analysis/Cant.Rmd
 
 Unstaged changes:
     Deleted:    analysis/GLODAP_based_subset.Rmd
@@ -620,6 +626,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/1c663710107acb912384be6d61a424eecc2c8a30/analysis/Random_subset.Rmd" target="_blank">1c66371</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-12-22
+</td>
+<td>
+complete rebuild after jens revision
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/6e83d29293b7883b3dc610ece1485427d1e42345/docs/Random_subset.html" target="_blank">6e83d29</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-12-22
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -963,9 +1003,312 @@ for (i_year in years) {
     model_resample &lt;- model_resample_grid_depth
   }
   
-}
-
-# calculate model temperature
+}</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1982.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1982.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1982.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_1982.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_1982.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_1982.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_1982.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_1982.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_1983.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1983.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1983.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_1983.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_1983.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_1983.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_1983.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_1983.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_1984.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1984.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1984.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_1984.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_1984.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_1984.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_1984.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_1984.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_1985.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1985.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1985.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_1985.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_1985.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_1985.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_1985.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_1985.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_1986.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1986.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1986.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_1986.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_1986.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_1986.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_1986.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_1986.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_1987.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1987.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1987.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_1987.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_1987.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_1987.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_1987.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_1987.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_1988.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1988.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1988.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_1988.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_1988.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_1988.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_1988.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_1988.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_1989.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1989.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1989.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_1989.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_1989.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_1989.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_1989.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_1989.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_1990.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1990.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1990.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_1990.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_1990.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_1990.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_1990.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_1990.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_1991.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1991.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1991.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_1991.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_1991.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_1991.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_1991.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_1991.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_1992.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1992.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1992.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_1992.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_1992.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_1992.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_1992.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_1992.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_1993.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1993.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1993.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_1993.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_1993.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_1993.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_1993.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_1993.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_1994.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1994.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1994.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_1994.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_1994.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_1994.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_1994.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_1994.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_1995.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1995.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1995.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_1995.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_1995.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_1995.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_1995.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_1995.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_1996.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1996.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1996.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_1996.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_1996.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_1996.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_1996.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_1996.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_1997.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1997.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1997.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_1997.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_1997.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_1997.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_1997.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_1997.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_1998.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1998.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1998.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_1998.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_1998.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_1998.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_1998.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_1998.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_1999.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1999.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1999.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_1999.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_1999.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_1999.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_1999.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_1999.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2000.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2000.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2000.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2000.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2000.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2000.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2000.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2000.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2001.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2001.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2001.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2001.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2001.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2001.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2001.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2001.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2002.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2002.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2002.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2002.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2002.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2002.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2002.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2002.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2003.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2003.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2003.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2003.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2003.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2003.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2003.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2003.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2004.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2004.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2004.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2004.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2004.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2004.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2004.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2004.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2005.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2005.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2005.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2005.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2005.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2005.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2005.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2005.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2006.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2006.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2006.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2006.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2006.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2006.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2006.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2006.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2007.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2007.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2007.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2007.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2007.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2007.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2007.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2007.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2008.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2008.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2008.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2008.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2008.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2008.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2008.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2008.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2009.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2009.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2009.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2009.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2009.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2009.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2009.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2009.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2010.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2010.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2010.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2010.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2010.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2010.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2010.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2010.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2011.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2011.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2011.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2011.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2011.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2011.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2011.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2011.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2012.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2012.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2012.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2012.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2012.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2012.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2012.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2012.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2013.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2013.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2013.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2013.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2013.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2013.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2013.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2013.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2014.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2014.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2014.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2014.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2014.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2014.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2014.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2014.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2015.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2015.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2015.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2015.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2015.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2015.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2015.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2015.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2016.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2016.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2016.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2016.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2016.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2016.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2016.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2016.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2017.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2017.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2017.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2017.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2017.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2017.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2017.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2017.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2018.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2018.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2018.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2018.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2018.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2018.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2018.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2018.nc&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_2019.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_2019.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_2019.nc&quot;
+[1] &quot;talk_CESM-ETHZ_A_1_gr_2019.nc&quot;
+[1] &quot;o2_CESM-ETHZ_A_1_gr_2019.nc&quot;
+[1] &quot;no3_CESM-ETHZ_A_1_gr_2019.nc&quot;
+[1] &quot;po4_CESM-ETHZ_A_1_gr_2019.nc&quot;
+[1] &quot;si_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre class="r"><code># calculate model temperature
 model_resample &lt;- model_resample %&gt;%
   mutate(temp = gsw_pt_from_t(
     SA = so,
@@ -1045,7 +1388,196 @@ for (i_year in years) {
   )
 
 }</code></pre>
-<p><img src="figure/Random_subset.Rmd/random_sample_distribution_maps-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/Random_subset.Rmd/random_sample_distribution_maps-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/Random_subset.Rmd/random_sample_distribution_maps-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/Random_subset.Rmd/random_sample_distribution_maps-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/Random_subset.Rmd/random_sample_distribution_maps-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Random_subset.Rmd/random_sample_distribution_maps-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-random_sample_distribution_maps-1">
+Past versions of random_sample_distribution_maps-1.png
+</button>
+</p>
+<div id="fig-random_sample_distribution_maps-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/6e83d29293b7883b3dc610ece1485427d1e42345/docs/figure/Random_subset.Rmd/random_sample_distribution_maps-1.png" target="_blank">6e83d29</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-12-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/Random_subset.Rmd/random_sample_distribution_maps-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-random_sample_distribution_maps-2">
+Past versions of random_sample_distribution_maps-2.png
+</button>
+</p>
+<div id="fig-random_sample_distribution_maps-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/6e83d29293b7883b3dc610ece1485427d1e42345/docs/figure/Random_subset.Rmd/random_sample_distribution_maps-2.png" target="_blank">6e83d29</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-12-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/Random_subset.Rmd/random_sample_distribution_maps-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-random_sample_distribution_maps-3">
+Past versions of random_sample_distribution_maps-3.png
+</button>
+</p>
+<div id="fig-random_sample_distribution_maps-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/6e83d29293b7883b3dc610ece1485427d1e42345/docs/figure/Random_subset.Rmd/random_sample_distribution_maps-3.png" target="_blank">6e83d29</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-12-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/Random_subset.Rmd/random_sample_distribution_maps-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-random_sample_distribution_maps-4">
+Past versions of random_sample_distribution_maps-4.png
+</button>
+</p>
+<div id="fig-random_sample_distribution_maps-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/6e83d29293b7883b3dc610ece1485427d1e42345/docs/figure/Random_subset.Rmd/random_sample_distribution_maps-4.png" target="_blank">6e83d29</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-12-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/Random_subset.Rmd/random_sample_distribution_maps-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-random_sample_distribution_maps-5">
+Past versions of random_sample_distribution_maps-5.png
+</button>
+</p>
+<div id="fig-random_sample_distribution_maps-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/6e83d29293b7883b3dc610ece1485427d1e42345/docs/figure/Random_subset.Rmd/random_sample_distribution_maps-5.png" target="_blank">6e83d29</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-12-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="depth-distribution" class="section level2">
 <h2><span class="header-section-number">3.2</span> Depth distribution</h2>
@@ -1072,6 +1604,43 @@ model_resample_depth_average %&gt;%
                   ylim = c(6000,0)) +
   labs(title = &quot;Depth distribution of random model subset&quot;)</code></pre>
 <p><img src="figure/Random_subset.Rmd/random_sample_depth_distribution-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-random_sample_depth_distribution-1">
+Past versions of random_sample_depth_distribution-1.png
+</button>
+</p>
+<div id="fig-random_sample_depth_distribution-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/6e83d29293b7883b3dc610ece1485427d1e42345/docs/figure/Random_subset.Rmd/random_sample_depth_distribution-1.png" target="_blank">6e83d29</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-12-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Calculate and plot depth distribution of GLODAP data
 # Depths gridded to model depth levels for comparison
 GLODAP_depth &lt;- GLODAP %&gt;%
@@ -1099,6 +1668,43 @@ GLODAP_depth_average %&gt;%
                   ylim = c(6000,0)) +
   labs(title = &quot;Depth distribution of GLODAP observations&quot;)</code></pre>
 <p><img src="figure/Random_subset.Rmd/GLODAP_depth_distribution-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_depth_distribution-1">
+Past versions of GLODAP_depth_distribution-1.png
+</button>
+</p>
+<div id="fig-GLODAP_depth_distribution-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/6e83d29293b7883b3dc610ece1485427d1e42345/docs/figure/Random_subset.Rmd/GLODAP_depth_distribution-1.png" target="_blank">6e83d29</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-12-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1141,26 +1747,27 @@ loaded via a namespace (and not attached):
  [7] R6_2.5.0                 KernSmooth_2.23-18       DBI_1.1.0               
 [10] colorspace_2.0-0         withr_2.3.0              tidyselect_1.1.0        
 [13] compiler_4.0.3           git2r_0.27.1             cli_2.2.0               
-[16] rvest_0.3.6              xml2_1.3.2               labeling_0.4.2          
-[19] scales_1.1.1             checkmate_2.0.0          classInt_0.4-3          
-[22] digest_0.6.27            oce_1.2-0                rmarkdown_2.5           
-[25] pkgconfig_2.0.3          htmltools_0.5.0          dbplyr_1.4.4            
-[28] rlang_0.4.9              readxl_1.3.1             rstudioapi_0.13         
-[31] farver_2.0.3             generics_0.0.2           jsonlite_1.7.1          
-[34] magrittr_2.0.1           Matrix_1.2-18            Rcpp_1.0.5              
-[37] munsell_0.5.0            fansi_0.4.1              lifecycle_0.2.0         
-[40] stringi_1.5.3            whisker_0.4              yaml_2.2.1              
-[43] grid_4.0.3               blob_1.2.1               parallel_4.0.3          
-[46] promises_1.1.1           crayon_1.3.4             lattice_0.20-41         
-[49] haven_2.3.1              seacarb_3.2.14           hms_0.5.3               
-[52] knitr_1.30               pillar_1.4.7             reprex_0.3.0            
-[55] glue_1.4.2               evaluate_0.14            RcppArmadillo_0.10.1.2.0
-[58] data.table_1.13.2        modelr_0.1.8             vctrs_0.3.5             
-[61] httpuv_1.5.4             cellranger_1.1.0         gtable_0.3.0            
-[64] assertthat_0.2.1         xfun_0.18                lwgeom_0.2-5            
-[67] broom_0.7.2              RcppEigen_0.3.3.7.0      e1071_1.7-4             
-[70] later_1.1.0.1            viridisLite_0.3.0        class_7.3-17            
-[73] units_0.6-7              ellipsis_0.3.1          </code></pre>
+[16] rvest_0.3.6              RNetCDF_2.4-2            xml2_1.3.2              
+[19] labeling_0.4.2           scales_1.1.1             checkmate_2.0.0         
+[22] classInt_0.4-3           digest_0.6.27            oce_1.2-0               
+[25] rmarkdown_2.5            pkgconfig_2.0.3          htmltools_0.5.0         
+[28] dbplyr_1.4.4             rlang_0.4.9              readxl_1.3.1            
+[31] rstudioapi_0.13          farver_2.0.3             generics_0.0.2          
+[34] jsonlite_1.7.1           magrittr_2.0.1           ncmeta_0.3.0            
+[37] Matrix_1.2-18            Rcpp_1.0.5               munsell_0.5.0           
+[40] fansi_0.4.1              lifecycle_0.2.0          stringi_1.5.3           
+[43] whisker_0.4              yaml_2.2.1               grid_4.0.3              
+[46] blob_1.2.1               parallel_4.0.3           promises_1.1.1          
+[49] crayon_1.3.4             lattice_0.20-41          haven_2.3.1             
+[52] seacarb_3.2.14           hms_0.5.3                knitr_1.30              
+[55] pillar_1.4.7             reprex_0.3.0             glue_1.4.2              
+[58] evaluate_0.14            RcppArmadillo_0.10.1.2.0 data.table_1.13.2       
+[61] modelr_0.1.8             vctrs_0.3.5              httpuv_1.5.4            
+[64] cellranger_1.1.0         gtable_0.3.0             assertthat_0.2.1        
+[67] xfun_0.18                lwgeom_0.2-5             broom_0.7.2             
+[70] RcppEigen_0.3.3.7.0      e1071_1.7-4              later_1.1.0.1           
+[73] viridisLite_0.3.0        class_7.3-17             units_0.6-7             
+[76] ellipsis_0.3.1          </code></pre>
 </div>
 </div>
 </div>
