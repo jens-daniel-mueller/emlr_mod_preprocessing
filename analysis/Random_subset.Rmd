@@ -35,8 +35,6 @@ library(gsw)
 library(marelac)
 ```
 
-# Select basin mask
-
 ```{r select_basin_mask}
 
 # use only three basin to assign general basin mask
@@ -55,12 +53,13 @@ GLODAP <-
   read_csv(paste(path_GLODAP_preprocessing,
                  "GLODAPv2.2020_preprocessed.csv",
                  sep = ""))
+
 GLODAP <- GLODAP %>%
   mutate(month = month(date))
 
 ```
 
-# Randomly subset cmorized model data
+# Randomly subset model data
 
 Here we randomly subset cmorized (1x1) model with variable forcing, according to the total number of GLODAP observations for the whole period from a previously cleaned file. The number for the annual subset remains the same for each year, which could be expressed by the total number of observations divided by number of years.
 
@@ -107,8 +106,7 @@ years <- c("1982":"2019")
 n = floor(nrow(GLODAP) / length(years))
 
 for (i_year in years) {
-  # for manual testing
-  #i_year <- years[1]
+  # i_year <- years[1]
   
   # random sample n = GLODAP / years from model grid depth
   model_resample_grid_depth <- sample_n(model_grid_depth, n) %>%
@@ -118,11 +116,9 @@ for (i_year in years) {
   # for loop across variables
   variables <-
     c("so", "thetao", "dissic", "talk", "o2", "no3", "po4", "si")
-  # "SALT", "TEMP", "DIC", "ALK", "O2", "NO3", "PO4", "SiO3"
   
   for (i_variable in variables) {
-    # Uncomment line below for manual testing
-    #i_variable <- variables[1]
+    # i_variable <- variables[2]
     
     # read list of all files
     file <-
@@ -154,7 +150,7 @@ for (i_year in years) {
     # remove open link to nc file
     rm(variable_data)
     
-    # remove na values -> do this early, to speed up subsequent tasks
+    # remove na values
     variable_data_tibble <-
       variable_data_tibble %>%
       filter(!is.na(!!sym(i_variable)))
@@ -169,7 +165,8 @@ for (i_year in years) {
     
     # mutate variables
     variable_data_tibble <- variable_data_tibble %>%
-      mutate(month = month(time_mon), !!sym(i_variable) := as.numeric(!!sym(i_variable))) %>%
+      mutate(month = month(time_mon),
+             !!sym(i_variable) := as.numeric(!!sym(i_variable))) %>%
       select(-time_mon)
     
     # random sample for each model variable in specific year
@@ -207,12 +204,12 @@ model_resample <- model_resample %>%
       p = depth,
       p_ref = 10.1325
     ),
-    dissic = dissic * (1000000 / rho),
-    talk = talk * (1000000 / rho),
-    o2 = o2 * (1000000 / rho),
-    no3 = no3 * (1000000 / rho),
-    po4 = po4 * (1000000 / rho),
-    si = si * (1000000 / rho)
+    dissic = dissic * (1e+6 / rho),
+    talk = talk * (1e+6 / rho),
+    o2 = o2 * (1e+6 / rho),
+    no3 = no3 * (1e+6 / rho),
+    po4 = po4 * (1e+6 / rho),
+    si = si * (1e+6 / rho)
   )
 
 # calculate AOU
@@ -224,24 +221,29 @@ model_resample <- model_resample %>%
       P = 1.013253,
       species = "O2"
     ),
-    oxygen_sat_kg = oxygen_sat_m3 * (1000 / rho),
+    oxygen_sat_kg = oxygen_sat_m3 * (1e+3 / rho),
     aou = oxygen_sat_kg - o2
   ) %>%
   select(-oxygen_sat_kg,-oxygen_sat_m3)
 
 # write file for random model sampling
 model_resample %>%
-  write_csv(paste(path_preprocessing, "random_subset.csv",
+  write_csv(paste(path_preprocessing,
+                  "GLODAPv2.2020_preprocessed_model_runA_random_subset.csv",
                   sep = ""))
 
 ```
 
+# Control plots
 
-```{r plot_random_sample_cmorized_data_grid}
+## Spatial distribution
+
+```{r random_sample_distribution_maps}
 
 # read in random model sampling file
 model_resample <-
-  read_csv(paste(path_preprocessing, "random_subset.csv",
+  read_csv(paste(path_preprocessing,
+                 "GLODAPv2.2020_preprocessed_model_runA_random_subset.csv",
                  sep = ""))
 
 # plot random sampling cmorized grids in each year
@@ -269,6 +271,12 @@ for (i_year in years) {
 
 }
 
+```
+
+## Depth distribution
+
+```{r random_sample_depth_distribution}
+
 # Calculate and plot depth distribution of model subset
 model_resample_depth <- model_resample %>%
   count(depth, year)
@@ -292,6 +300,10 @@ model_resample_depth_average %>%
                   ylim = c(6000,0)) +
   labs(title = "Depth distribution of random model subset")
 
+
+```
+
+```{r GLODAP_depth_distribution}
 
 # Calculate and plot depth distribution of GLODAP data
 # Depths gridded to model depth levels for comparison
