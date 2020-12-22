@@ -33,7 +33,7 @@ library(marelac)
 ```
 
 
-# Predictor climatology
+# Read nc file
 
 Here we used annual output of cmorized (1x1) model with variable forcing (RECCAP2 RunA) in year 2007 as the predictor climatology. Predictors include:
 
@@ -48,7 +48,6 @@ Here we used annual output of cmorized (1x1) model with variable forcing (RECCAP
 - phosphate
 - silicate
 
-## Read nc file
 
 ```{r read_climatology}
 
@@ -91,7 +90,7 @@ rm(climatology_temp)
 ```
 
 
-## Apply basin mask
+# Apply basin mask
 
 ```{r apply_basin_mask}
 
@@ -107,7 +106,9 @@ climatology <- inner_join(climatology, basinmask)
 ```
 
 
-## Calculate in-situ temperature
+# In-situ temperature
+
+In-situ temperature was calculated as input paramter for AOU calculation.
 
 ```{r calc_insitu_temp}
 
@@ -121,7 +122,6 @@ climatology <- climatology %>%
 
 ```
 
-### Profile
 
 Example profile from North Atlantic Ocean.
 
@@ -141,7 +141,7 @@ climatology %>%
 ```
 
 
-## Unit conversion
+# Unit conversion
 
 Model results are given in [mol m^-3^], whereas GLODAP data are in [µmol kg^-1^].
 
@@ -168,8 +168,7 @@ climatology <- climatology %>%
 
 ```
 
-
-## Calculate AOU
+# AOU calculation
 
 ```{r calc_AOU}
 
@@ -181,7 +180,7 @@ climatology <- climatology %>%
       P = 1.013253,
       species = "O2"
     ),
-    oxygen_sat_kg = oxygen_sat_m3 * (1000 / rho),
+    oxygen_sat_kg = oxygen_sat_m3 * (1e+3 / rho),
     AOU = oxygen_sat_kg - oxygen
   ) %>%
   select(-oxygen_sat_kg,-oxygen_sat_m3)
@@ -189,7 +188,7 @@ climatology <- climatology %>%
 ```
 
 
-## Calculate neutral density
+# Neutral density calculation
 
 Neutral density gamma was calculated with a Python script provided by Serazin et al (2011), which performs a polynomial approximation of the original gamma calculation.
 
@@ -233,7 +232,7 @@ rm(climatology_gamma_calc, climatology_gamma_prep)
 
 ```
 
-## Write file
+# Write file
 
 ```{r write_climatology_predictor_file}
 
