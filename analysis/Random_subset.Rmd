@@ -75,7 +75,7 @@ Besides, Model results are given in [mol m^-3^], whereas GLODAP data are in [µm
 
 For comparison, model results were converted from [mol m^-3^] to [µmol kg^-1^]
 
-```{r random_subset_cmorized_variable_forcing_data, eval=FALSE}
+```{r random_subset_cmorized_variable_forcing_data}
 # read in a random model
 model <-
   read_ncdf(paste(path_cmorized, "dissic_CESM-ETHZ_A_1_gr_1982.nc", sep = "")) %>%
