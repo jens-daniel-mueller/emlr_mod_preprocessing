@@ -3,16 +3,18 @@ output_dir: ../docs
 navbar:
   title: eMLR mod preprocessing
   left:
-  - text: Cmorized_climatology
-    href: cmorized_climatology.html
+  - text: Climatology
+    href: Climatology.html
   - text: Synthetic data
     menu:
-    - text: Regular subset
-      href: GLODAP_based_subset.html
+    - text: GLODAP subset
+      href: GLODAP_subset.html
     - text: Random subset
       href: Random_subset.html
-  - text: Cmorized Cant
-    href: cmorized_Cant.html
+  - text: Cant
+    menu:
+    - text: Variable climate
+      href: Cant_AB.html
   - text: Atmospheric CO2
     href: read_CO2_atm.html
   right:

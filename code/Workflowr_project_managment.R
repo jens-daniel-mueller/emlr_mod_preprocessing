@@ -13,15 +13,16 @@ wflow_publish(here::here(
   "analysis",
   c(
     "index.Rmd",
-    "cmorized_climatology.Rmd",
-    "GLODAP_based_subset.Rmd",
+    "Climatology.Rmd",
+    "GLODAP_subset.Rmd",
     "Random_subset.Rmd",
-    "cmorized_Cant.Rmd",
+    "Cant_AB.Rmd",
     "read_CO2_atm.Rmd"
   )
 ),
-message = "rebuild final cleaned version",
+message = "complete rebuild after jens revision",
 republish = TRUE)
+
 
 # Push latest version to GitHub
 wflow_git_push()
