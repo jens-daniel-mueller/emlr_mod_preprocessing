@@ -447,7 +447,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Atmospheric pCO2</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">22 December, 2020</h4>
+<h4 class="date">23 December, 2020</h4>
 
 </div>
 
@@ -472,7 +472,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-12-22
+<strong>Last updated:</strong> 2020-12-23
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -563,31 +563,23 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree1c663710107acb912384be6d61a424eecc2c8a30targetblank1c66371a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/1c663710107acb912384be6d61a424eecc2c8a30" target="_blank">1c66371</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree37281b2f8ce24ef3a4d2820f098d6229db50428ftargetblank37281b2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/37281b2f8ce24ef3a4d2820f098d6229db50428f" target="_blank">37281b2</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree1c663710107acb912384be6d61a424eecc2c8a30targetblank1c66371a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree37281b2f8ce24ef3a4d2820f098d6229db50428ftargetblank37281b2a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/1c663710107acb912384be6d61a424eecc2c8a30" target="_blank">1c66371</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/37281b2f8ce24ef3a4d2820f098d6229db50428f" target="_blank">37281b2</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
-    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-
-Unstaged changes:
-    Deleted:    analysis/GLODAP_based_subset.Rmd
-    Modified:   analysis/_site.yml
-    Deleted:    analysis/cmorized_Cant.Rmd
-    Deleted:    analysis/cmorized_climatology.Rmd
-    Modified:   code/Workflowr_project_managment.R
 
 </code></pre>
 <p>
@@ -626,6 +618,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/37281b2f8ce24ef3a4d2820f098d6229db50428f/analysis/read_CO2_atm.Rmd" target="_blank">37281b2</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2020-12-23
+</td>
+<td>
+complete rebuild after jens revision
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/e73a8c490a1f4bf95ed1faf41b82e7c21aa2f796/docs/read_CO2_atm.html" target="_blank">e73a8c4</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2020-12-22
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -842,18 +868,18 @@ Initial commit
 <ul>
 <li>Data source: <code>Globally averaged marine surface annual mean data</code> from <a href="https://www.esrl.noaa.gov/gmd/ccgg/trends/gl_data.html">ESRL-NOAA</a></li>
 </ul>
-<pre class="r"><code>co2_atm &lt;- read_table2(
+<pre class="r"><code>co2_atm &lt;- read_ncdf(
   paste(path_atm_pCO2,
-        &quot;co2_annmean_gl.txt&quot;,
-        sep = &quot;&quot;),
-  col_names = FALSE,
-  comment = &quot;#&quot;
+        &quot;Atm_CO2_1980-2019.nc&quot;,
+        sep = &quot;&quot;)
 )
 
 co2_atm &lt;- co2_atm %&gt;% 
-  select(-X3)
+  as_tibble()
 
-names(co2_atm) &lt;- c(&quot;year&quot;, &quot;pCO2&quot;)</code></pre>
+co2_atm &lt;- co2_atm %&gt;% 
+  mutate(pCO2 = as.numeric(Atm_CO2), year = time + 1979.5) %&gt;%
+  select(year, pCO2)</code></pre>
 </div>
 <div id="time-series" class="section level1">
 <h1><span class="header-section-number">2</span> Time series</h1>
@@ -956,34 +982,38 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] metR_0.9.0      scico_1.2.0     patchwork_1.1.0 collapse_1.4.2 
- [5] forcats_0.5.0   stringr_1.4.0   dplyr_1.0.2     purrr_0.3.4    
- [9] readr_1.4.0     tidyr_1.1.2     tibble_3.0.4    ggplot2_3.3.2  
-[13] tidyverse_1.3.0 workflowr_1.6.2
+ [1] stars_0.4-3     sf_0.9-6        abind_1.4-5     metR_0.8.0     
+ [5] scico_1.2.0     patchwork_1.1.0 collapse_1.4.2  forcats_0.5.0  
+ [9] stringr_1.4.0   dplyr_1.0.2     purrr_0.3.4     readr_1.4.0    
+[13] tidyr_1.1.2     tibble_3.0.4    ggplot2_3.3.2   tidyverse_1.3.0
+[17] workflowr_1.6.2
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.5               lubridate_1.7.9          lattice_0.20-41         
- [4] assertthat_0.2.1         rprojroot_2.0.2          digest_0.6.27           
- [7] R6_2.5.0                 cellranger_1.1.0         backports_1.1.10        
-[10] reprex_0.3.0             evaluate_0.14            httr_1.4.2              
-[13] pillar_1.4.7             rlang_0.4.9              readxl_1.3.1            
-[16] data.table_1.13.2        rstudioapi_0.13          whisker_0.4             
-[19] blob_1.2.1               Matrix_1.2-18            checkmate_2.0.0         
-[22] rmarkdown_2.5            labeling_0.4.2           RcppEigen_0.3.3.7.0     
-[25] munsell_0.5.0            broom_0.7.2              compiler_4.0.3          
-[28] httpuv_1.5.4             modelr_0.1.8             xfun_0.18               
-[31] pkgconfig_2.0.3          htmltools_0.5.0          tidyselect_1.1.0        
-[34] fansi_0.4.1              crayon_1.3.4             dbplyr_1.4.4            
-[37] withr_2.3.0              later_1.1.0.1            grid_4.0.3              
-[40] jsonlite_1.7.1           gtable_0.3.0             lifecycle_0.2.0         
-[43] DBI_1.1.0                git2r_0.27.1             magrittr_2.0.1          
-[46] scales_1.1.1             cli_2.2.0                stringi_1.5.3           
-[49] farver_2.0.3             fs_1.5.0                 promises_1.1.1          
-[52] RcppArmadillo_0.10.1.2.0 xml2_1.3.2               ellipsis_0.3.1          
-[55] generics_0.0.2           vctrs_0.3.5              tools_4.0.3             
-[58] glue_1.4.2               hms_0.5.3                parallel_4.0.3          
-[61] yaml_2.2.1               colorspace_2.0-0         rvest_0.3.6             
-[64] knitr_1.30               haven_2.3.1             </code></pre>
+ [1] httr_1.4.2               jsonlite_1.7.2           modelr_0.1.8            
+ [4] assertthat_0.2.1         blob_1.2.1               cellranger_1.1.0        
+ [7] yaml_2.2.1               pillar_1.4.7             backports_1.2.1         
+[10] lattice_0.20-41          glue_1.4.2               RcppEigen_0.3.3.9.1     
+[13] digest_0.6.27            promises_1.1.1           checkmate_2.0.0         
+[16] rvest_0.3.6              colorspace_2.0-0         htmltools_0.5.0         
+[19] httpuv_1.5.4             Matrix_1.2-18            pkgconfig_2.0.3         
+[22] broom_0.7.3              haven_2.3.1              scales_1.1.1            
+[25] whisker_0.4              later_1.1.0.1            git2r_0.27.1            
+[28] farver_2.0.3             generics_0.1.0           ellipsis_0.3.1          
+[31] withr_2.3.0              cli_2.2.0                magrittr_2.0.1          
+[34] crayon_1.3.4             readxl_1.3.1             evaluate_0.14           
+[37] fs_1.5.0                 fansi_0.4.1              lwgeom_0.2-5            
+[40] xml2_1.3.2               RcppArmadillo_0.10.1.2.0 class_7.3-17            
+[43] tools_4.0.3              data.table_1.13.4        hms_0.5.3               
+[46] lifecycle_0.2.0          munsell_0.5.0            reprex_0.3.0            
+[49] compiler_4.0.3           e1071_1.7-4              RNetCDF_2.4-2           
+[52] rlang_0.4.9              units_0.6-7              classInt_0.4-3          
+[55] grid_4.0.3               rstudioapi_0.13          labeling_0.4.2          
+[58] rmarkdown_2.5            gtable_0.3.0             DBI_1.1.0               
+[61] R6_2.5.0                 ncmeta_0.3.0             lubridate_1.7.9         
+[64] knitr_1.30               rprojroot_2.0.2          KernSmooth_2.23-18      
+[67] stringi_1.5.3            parallel_4.0.3           Rcpp_1.0.5              
+[70] vctrs_0.3.6              dbplyr_1.4.4             tidyselect_1.1.0        
+[73] xfun_0.19               </code></pre>
 </div>
 </div>
 
