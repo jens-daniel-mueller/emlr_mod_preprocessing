@@ -79,7 +79,7 @@ Besides, Model results are given in [mol m^-3^], whereas GLODAP data are in [µm
 
 For comparison, model results were converted from [mol m^-3^] to [µmol kg^-1^]
 
-```{r subset_cmorized_variable_forcing_data}
+```{r subset_cmorized_variable_forcing_data, eval=FALSE}
 
 # set name of model to be subsetted
 model_ID <- "A"
@@ -304,7 +304,7 @@ stats_summary %>%
 
 ```
 
-```{r prepare_model_subset}
+```{r prepare_model_subset, eval=FALSE}
 
 # write file for GLODAP-based subsetting model variables
 GLODAP <-
@@ -444,7 +444,7 @@ GLODAP <- GLODAP %>%
 
 # Write files
 
-```{r write_files}
+```{r write_files, eval=FALSE}
 
 # write final file for GLODAP-based subsetting model variables
 GLODAP %>%
@@ -561,34 +561,24 @@ ggplot() +
 GLODAP_max_depth <- GLODAP %>%
   select(lon, lat, depth) %>%
   group_by(lon, lat) %>%
-  mutate(depth = max(depth)) %>%
-  rename(depth_GLODAP = depth) %>%
-  unique()
+  summarise(max_depth_GLODAP = max(depth))
 
 model_max_depth <- variable_data_tibble %>%
   select(lon, lat, depth) %>%
   group_by(lon, lat) %>%
-  mutate(depth = max(depth)) %>%
-  rename(depth_model = depth) %>%
-  unique()
+  summarise(max_depth_model = max(depth))
 
 GLODAP_model_depth_offset <-
   left_join(GLODAP_max_depth, model_max_depth) %>%
-  mutate(offset = depth_GLODAP - depth_model)
+  mutate(offset = max_depth_GLODAP - max_depth_model)
 
 map +
-  geom_point(
-    data = GLODAP_model_depth_offset %>%
-      filter(offset > 0),
-    aes(lon, lat, col = "Obs beyond model"),
-    size = 1
+  geom_raster(
+    data = GLODAP_model_depth_offset %>% 
+      filter(offset > 500),
+    aes(lon, lat, fill = offset)
   ) +
-  geom_point(
-    data = GLODAP_model_depth_offset %>%
-      filter(offset < 0),
-    aes(lon, lat, col = "Obs below model"),
-    size = 1
-  ) +
+  scale_fill_viridis_c(direction =  -1) +
   labs(
     title = "GLODAP-model max sampling depth offset",
     subtitle = "Year 1971 - 2019",

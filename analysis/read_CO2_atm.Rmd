@@ -19,10 +19,13 @@ editor_options:
 ```
 
 ```{r define_paths, include=FALSE}
-path_atm_pCO2    <- "/nfs/kryo/work/updata/atm_pco2_noaa/"
+path_atm_pCO2    <- "/net/kryo/work/loher/CESM_output/RECCAP2/cmorized_Dec2020/split/"
 path_preprocessing  <- paste(path_root, "/model/preprocessing/", sep = "")
 ```
 
+```{r load_libraries_specific, include=FALSE}
+library(stars)
+```
 
 # Read data
 
@@ -30,18 +33,18 @@ path_preprocessing  <- paste(path_root, "/model/preprocessing/", sep = "")
 
 ```{r read_atm_co2}
 
-co2_atm <- read_table2(
+co2_atm <- read_ncdf(
   paste(path_atm_pCO2,
-        "co2_annmean_gl.txt",
-        sep = ""),
-  col_names = FALSE,
-  comment = "#"
+        "Atm_CO2_1980-2019.nc",
+        sep = "")
 )
 
 co2_atm <- co2_atm %>% 
-  select(-X3)
+  as_tibble()
 
-names(co2_atm) <- c("year", "pCO2")
+co2_atm <- co2_atm %>% 
+  mutate(pCO2 = as.numeric(Atm_CO2), year = time + 1979.5) %>%
+  select(year, pCO2)
   
 ```
 
