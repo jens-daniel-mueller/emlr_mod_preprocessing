@@ -14,6 +14,7 @@
 
 <title>Random subset</title>
 
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -39,6 +40,8 @@ div.section {
   padding-top: 12px;
 }
 </style>
+
+
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -407,6 +410,9 @@ div.tocify {
     <li>
       <a href="Cant_AB.html">Variable climate</a>
     </li>
+    <li>
+      <a href="Cant_AD.html">Constant climate</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -447,7 +453,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Random subset</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">23 December, 2020</h4>
+<h4 class="date">05 January, 2021</h4>
 
 </div>
 
@@ -472,7 +478,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-12-23
+<strong>Last updated:</strong> 2021-01-05
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -563,23 +569,27 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree37281b2f8ce24ef3a4d2820f098d6229db50428ftargetblank37281b2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/37281b2f8ce24ef3a4d2820f098d6229db50428f" target="_blank">37281b2</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree8d533126b252c68a00fbae17cefe7f89b241ccd3targetblank8d53312a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/8d533126b252c68a00fbae17cefe7f89b241ccd3" target="_blank">8d53312</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree37281b2f8ce24ef3a4d2820f098d6229db50428ftargetblank37281b2a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree8d533126b252c68a00fbae17cefe7f89b241ccd3targetblank8d53312a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/37281b2f8ce24ef3a4d2820f098d6229db50428f" target="_blank">37281b2</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/8d533126b252c68a00fbae17cefe7f89b241ccd3" target="_blank">8d53312</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+
+Unstaged changes:
+    Modified:   code/Workflowr_project_managment.R
 
 </code></pre>
 <p>
@@ -618,6 +628,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/051c55a857d41aa46768a284a2e8937362087744/docs/Random_subset.html" target="_blank">051c55a</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2020-12-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -891,8 +918,8 @@ path_preprocessing  &lt;-
 basinmask &lt;- basinmask %&gt;%
   filter(MLR_basins == &quot;2&quot;) %&gt;%
   select(lat, lon, basin_AIP)</code></pre>
-<div id="read-glodapv2_2020-preprocessed-files" class="section level1">
-<h1><span class="header-section-number">1</span> Read GLODAPv2_2020 preprocessed files</h1>
+<div id="read-glodapv2_2020-preprocessed-files" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Read GLODAPv2_2020 preprocessed files</h1>
 <pre class="r"><code>GLODAP &lt;-
   read_csv(paste(path_GLODAP_preprocessing,
                  &quot;GLODAPv2.2020_preprocessed.csv&quot;,
@@ -901,8 +928,8 @@ basinmask &lt;- basinmask %&gt;%
 GLODAP &lt;- GLODAP %&gt;%
   mutate(month = month(date))</code></pre>
 </div>
-<div id="randomly-subset-model-data" class="section level1">
-<h1><span class="header-section-number">2</span> Randomly subset model data</h1>
+<div id="randomly-subset-model-data" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Randomly subset model data</h1>
 <p>Here we randomly subset cmorized (1x1) model with variable forcing, according to the total number of GLODAP observations for the whole period from a previously cleaned file. The number for the annual subset remains the same for each year, which could be expressed by the total number of observations divided by number of years.</p>
 <p>Besides, Model results are given in [mol m<sup>-3</sup>], whereas GLODAP data are in [µmol kg<sup>-1</sup>]. This refers to the variables:</p>
 <ul>
@@ -1077,10 +1104,10 @@ model_resample %&gt;%
                   &quot;GLODAPv2.2020_preprocessed_model_runA_random_subset.csv&quot;,
                   sep = &quot;&quot;))</code></pre>
 </div>
-<div id="control-plots" class="section level1">
-<h1><span class="header-section-number">3</span> Control plots</h1>
-<div id="spatial-distribution" class="section level2">
-<h2><span class="header-section-number">3.1</span> Spatial distribution</h2>
+<div id="control-plots" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Control plots</h1>
+<div id="spatial-distribution" class="section level2" number="3.1">
+<h2 number="3.1"><span class="header-section-number">3.1</span> Spatial distribution</h2>
 <pre class="r"><code># read in random model sampling file
 model_resample &lt;-
   read_csv(paste(path_preprocessing,
@@ -1357,8 +1384,8 @@ jens-daniel-mueller
 </div>
 </div>
 </div>
-<div id="depth-distribution" class="section level2">
-<h2><span class="header-section-number">3.2</span> Depth distribution</h2>
+<div id="depth-distribution" class="section level2" number="3.2">
+<h2 number="3.2"><span class="header-section-number">3.2</span> Depth distribution</h2>
 <pre class="r"><code># Calculate and plot depth distribution of model subset
 model_resample_depth &lt;- model_resample %&gt;%
   count(depth, year)
@@ -1504,7 +1531,7 @@ jens-daniel-mueller
 <pre class="r"><code>sessionInfo()</code></pre>
 <pre><code>R version 4.0.3 (2020-10-10)
 Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: openSUSE Leap 15.1
+Running under: openSUSE Leap 15.2
 
 Matrix products: default
 BLAS:   /usr/local/R-4.0.3/lib64/R/lib/libRblas.so
@@ -1524,8 +1551,8 @@ attached base packages:
 other attached packages:
  [1] marelac_2.1.10    shape_1.4.5       gsw_1.0-5         testthat_3.0.1   
  [5] rqdatatable_1.2.9 rquery_1.4.6      wrapr_2.0.4       lubridate_1.7.9  
- [9] stars_0.4-3       sf_0.9-6          abind_1.4-5       metR_0.8.0       
-[13] scico_1.2.0       patchwork_1.1.0   collapse_1.4.2    forcats_0.5.0    
+ [9] stars_0.4-3       sf_0.9-6          abind_1.4-5       metR_0.9.0       
+[13] scico_1.2.0       patchwork_1.1.1   collapse_1.4.2    forcats_0.5.0    
 [17] stringr_1.4.0     dplyr_1.0.2       purrr_0.3.4       readr_1.4.0      
 [21] tidyr_1.1.2       tibble_3.0.4      ggplot2_3.3.2     tidyverse_1.3.0  
 [25] workflowr_1.6.2  
@@ -1533,7 +1560,7 @@ other attached packages:
 loaded via a namespace (and not attached):
  [1] fs_1.5.0                 RColorBrewer_1.1-2       httr_1.4.2              
  [4] rprojroot_2.0.2          tools_4.0.3              backports_1.2.1         
- [7] R6_2.5.0                 KernSmooth_2.23-18       DBI_1.1.0               
+ [7] R6_2.5.0                 KernSmooth_2.23-17       DBI_1.1.0               
 [10] colorspace_2.0-0         withr_2.3.0              tidyselect_1.1.0        
 [13] compiler_4.0.3           git2r_0.27.1             cli_2.2.0               
 [16] rvest_0.3.6              xml2_1.3.2               labeling_0.4.2          
@@ -1572,6 +1599,8 @@ footer is added to webpages before the MathJax javascript. -->
     "HTML-CSS": { availableFonts: ["TeX"] }
   });
 </script>
+
+
 
 
 </div>
