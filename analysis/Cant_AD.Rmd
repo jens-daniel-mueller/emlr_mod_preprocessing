@@ -145,6 +145,15 @@ rm(A_annual, D_annual)
 
 ```
 
+## Round depth levels
+
+```{r round_depth_levels}
+
+cant <- cant %>%
+  mutate(depth = round(depth))
+
+```
+
 ## Apply basin mask
 
 ```{r apply_basin_mask}

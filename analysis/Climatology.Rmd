@@ -82,10 +82,18 @@ climatology <- climatology %>%
     phosphate = po4,
     silicate = si
   ) %>%
-  mutate(lon = if_else(lon < 20, lon + 360, lon)) %>%
-  mutate(depth = round(depth))
+  mutate(lon = if_else(lon < 20, lon + 360, lon))
 
 rm(climatology_temp)
+
+```
+
+## Round depth levels
+
+```{r round_depth_levels}
+
+climatology <- climatology %>%
+  mutate(depth = round(depth))
 
 ```
 
