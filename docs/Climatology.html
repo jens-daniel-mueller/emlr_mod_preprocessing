@@ -453,7 +453,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Climatology</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">05 January, 2021</h4>
+<h4 class="date">06 January, 2021</h4>
 
 </div>
 
@@ -478,7 +478,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-01-05
+<strong>Last updated:</strong> 2021-01-06
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -569,16 +569,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree8d533126b252c68a00fbae17cefe7f89b241ccd3targetblank8d53312a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/8d533126b252c68a00fbae17cefe7f89b241ccd3" target="_blank">8d53312</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree056177f1eb13c07bf7f2d3323b5aceea488f26d3targetblank056177fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/056177f1eb13c07bf7f2d3323b5aceea488f26d3" target="_blank">056177f</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree8d533126b252c68a00fbae17cefe7f89b241ccd3targetblank8d53312a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree056177f1eb13c07bf7f2d3323b5aceea488f26d3targetblank056177fa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/8d533126b252c68a00fbae17cefe7f89b241ccd3" target="_blank">8d53312</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/056177f1eb13c07bf7f2d3323b5aceea488f26d3" target="_blank">056177f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -587,9 +587,6 @@ Note that you need to be careful to ensure that all relevant files for the analy
 Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-
-Unstaged changes:
-    Modified:   code/Workflowr_project_managment.R
 
 </code></pre>
 <p>
@@ -628,6 +625,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/056177f1eb13c07bf7f2d3323b5aceea488f26d3/analysis/Climatology.Rmd" target="_blank">056177f</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-06
+</td>
+<td>
+revised depth level rounding
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/2c85fafc9189af28ef74052d6870afd18a812103/docs/Climatology.html" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -783,10 +814,14 @@ climatology &lt;- climatology %&gt;%
     phosphate = po4,
     silicate = si
   ) %&gt;%
-  mutate(lon = if_else(lon &lt; 20, lon + 360, lon)) %&gt;%
-  mutate(depth = round(depth))
+  mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
 
 rm(climatology_temp)</code></pre>
+<div id="round-depth-levels" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Round depth levels</h2>
+<pre class="r"><code>climatology &lt;- climatology %&gt;%
+  mutate(depth = round(depth))</code></pre>
+</div>
 </div>
 <div id="apply-basin-mask" class="section level1" number="2">
 <h1 number="2"><span class="header-section-number">2</span> Apply basin mask</h1>
@@ -843,6 +878,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/temp_theta_profile_plot-1.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/temp_theta_profile_plot-1.png" target="_blank">f6c7b00</a>
@@ -1006,6 +1052,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-1.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-1.png" target="_blank">f6c7b00</a>
 </td>
 <td>
@@ -1042,6 +1099,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-2.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-2.png" target="_blank">f6c7b00</a>
@@ -1082,6 +1150,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-3.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-3.png" target="_blank">f6c7b00</a>
 </td>
 <td>
@@ -1118,6 +1197,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-4.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-4.png" target="_blank">f6c7b00</a>
@@ -1158,6 +1248,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-5.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-5.png" target="_blank">f6c7b00</a>
 </td>
 <td>
@@ -1194,6 +1295,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-6.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-6.png" target="_blank">f6c7b00</a>
@@ -1234,6 +1346,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-7.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-7.png" target="_blank">f6c7b00</a>
 </td>
 <td>
@@ -1270,6 +1393,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-8.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-8.png" target="_blank">f6c7b00</a>
@@ -1310,6 +1444,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-9.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-9.png" target="_blank">f6c7b00</a>
 </td>
 <td>
@@ -1346,6 +1491,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-10.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-10.png" target="_blank">f6c7b00</a>
@@ -1386,6 +1542,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-11.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-11.png" target="_blank">f6c7b00</a>
 </td>
 <td>
@@ -1422,6 +1589,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-12.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-12.png" target="_blank">f6c7b00</a>
@@ -1462,6 +1640,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-13.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-13.png" target="_blank">f6c7b00</a>
 </td>
 <td>
@@ -1498,6 +1687,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-14.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-14.png" target="_blank">f6c7b00</a>
@@ -1538,6 +1738,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-15.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-15.png" target="_blank">f6c7b00</a>
 </td>
 <td>
@@ -1574,6 +1785,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-16.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-16.png" target="_blank">f6c7b00</a>
@@ -1614,6 +1836,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-17.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-17.png" target="_blank">f6c7b00</a>
 </td>
 <td>
@@ -1650,6 +1883,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-18.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-18.png" target="_blank">f6c7b00</a>
@@ -1690,6 +1934,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-19.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-19.png" target="_blank">f6c7b00</a>
 </td>
 <td>
@@ -1726,6 +1981,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2c85fafc9189af28ef74052d6870afd18a812103/docs/figure/Climatology.Rmd/climatology_maps_and_sections-20.png" target="_blank">2c85faf</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-01-05
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/figure/Climatology.Rmd/climatology_maps_and_sections-20.png" target="_blank">f6c7b00</a>
@@ -1770,8 +2036,8 @@ attached base packages:
 
 other attached packages:
  [1] marelac_2.1.10   shape_1.4.5      geosphere_1.5-10 oce_1.2-0       
- [5] gsw_1.0-5        testthat_3.0.1   reticulate_1.18  tidync_0.2.4    
- [9] metR_0.9.0       scico_1.2.0      patchwork_1.1.1  collapse_1.4.2  
+ [5] gsw_1.0-5        testthat_2.3.2   reticulate_1.18  tidync_0.2.4    
+ [9] metR_0.9.0       scico_1.2.0      patchwork_1.1.1  collapse_1.5.0  
 [13] forcats_0.5.0    stringr_1.4.0    dplyr_1.0.2      purrr_0.3.4     
 [17] readr_1.4.0      tidyr_1.1.2      tibble_3.0.4     ggplot2_3.3.2   
 [21] tidyverse_1.3.0  workflowr_1.6.2 
@@ -1779,16 +2045,16 @@ other attached packages:
 loaded via a namespace (and not attached):
  [1] fs_1.5.0                 lubridate_1.7.9          RColorBrewer_1.1-2      
  [4] httr_1.4.2               rprojroot_2.0.2          tools_4.0.3             
- [7] backports_1.2.1          R6_2.5.0                 DBI_1.1.0               
-[10] colorspace_2.0-0         withr_2.3.0              sp_1.4-4                
+ [7] backports_1.1.10         R6_2.5.0                 DBI_1.1.0               
+[10] colorspace_1.4-1         withr_2.3.0              sp_1.4-4                
 [13] tidyselect_1.1.0         compiler_4.0.3           git2r_0.27.1            
-[16] cli_2.2.0                rvest_0.3.6              RNetCDF_2.4-2           
-[19] xml2_1.3.2               isoband_0.2.3            labeling_0.4.2          
+[16] cli_2.1.0                rvest_0.3.6              RNetCDF_2.4-2           
+[19] xml2_1.3.2               isoband_0.2.2            labeling_0.4.2          
 [22] scales_1.1.1             checkmate_2.0.0          rappdirs_0.3.1          
 [25] digest_0.6.27            rmarkdown_2.5            pkgconfig_2.0.3         
 [28] htmltools_0.5.0          dbplyr_1.4.4             rlang_0.4.9             
 [31] readxl_1.3.1             rstudioapi_0.13          farver_2.0.3            
-[34] generics_0.1.0           jsonlite_1.7.2           magrittr_2.0.1          
+[34] generics_0.0.2           jsonlite_1.7.1           magrittr_1.5            
 [37] ncmeta_0.3.0             Matrix_1.2-18            Rcpp_1.0.5              
 [40] munsell_0.5.0            fansi_0.4.1              lifecycle_0.2.0         
 [43] stringi_1.5.3            whisker_0.4              yaml_2.2.1              
@@ -1797,10 +2063,10 @@ loaded via a namespace (and not attached):
 [52] haven_2.3.1              hms_0.5.3                seacarb_3.2.14          
 [55] knitr_1.30               pillar_1.4.7             reprex_0.3.0            
 [58] glue_1.4.2               evaluate_0.14            RcppArmadillo_0.10.1.2.0
-[61] data.table_1.13.4        modelr_0.1.8             vctrs_0.3.6             
+[61] data.table_1.13.2        modelr_0.1.8             vctrs_0.3.5             
 [64] httpuv_1.5.4             cellranger_1.1.0         gtable_0.3.0            
-[67] assertthat_0.2.1         xfun_0.19                broom_0.7.3             
-[70] RcppEigen_0.3.3.9.1      later_1.1.0.1            viridisLite_0.3.0       
+[67] assertthat_0.2.1         xfun_0.18                broom_0.7.2             
+[70] RcppEigen_0.3.3.7.0      later_1.1.0.1            viridisLite_0.3.0       
 [73] ncdf4_1.17               ellipsis_0.3.1          </code></pre>
 </div>
 </div>
