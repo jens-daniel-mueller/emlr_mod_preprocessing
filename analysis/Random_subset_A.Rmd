@@ -1,5 +1,5 @@
 ---
-title: "Random subset"
+title: "Random subset variable A"
 author: "Jens Daniel Müller"
 date:  "`r format(Sys.time(), '%d %B, %Y')`"
 output: 

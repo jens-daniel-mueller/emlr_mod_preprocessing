@@ -13,14 +13,17 @@ wflow_publish(here::here(
   "analysis",
   c(
     "index.Rmd",
-    "Climatology.Rmd",
+    "Climatology_A.Rmd",
+    "Climatology_C.Rmd",
     "GLODAP_subset.Rmd",
-    "Random_subset.Rmd",
-    "Cant_AB.Rmd",
+    "Random_subset_A.Rmd",
+    "Random_subset_C.Rmd",
+    "Cant_AD.Rmd",
+    "Cant_CB.Rmd",
     "read_CO2_atm.Rmd"
   )
 ),
-message = "complete rebuild after jens revision",
+message = "complete rebuild after add constant climate",
 republish = TRUE)
 
 

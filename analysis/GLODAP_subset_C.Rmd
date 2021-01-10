@@ -1,5 +1,5 @@
 ---
-title: "GLODAP subset"
+title: "GLODAP subset constant climate C"
 author: "Jens Daniel Müller"
 date:  "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
@@ -65,7 +65,7 @@ GLODAP <- GLODAP %>%
 
 # Subset cmorized data according to GLODAP observation
 
-Here we subset cmorized (1x1) data from the model with variable forcing, according to the presence of GLODAP observations in a previously cleaned file.
+Here we subset cmorized (1x1) data from the model with constant forcing, according to the presence of GLODAP observations in a previously cleaned file.
 
 Besides, Model results are given in [mol m^-3^], whereas GLODAP data are in [µmol kg^-1^]. This refers to the variables:
 
@@ -79,10 +79,10 @@ Besides, Model results are given in [mol m^-3^], whereas GLODAP data are in [µm
 
 For comparison, model results were converted from [mol m^-3^] to [µmol kg^-1^]
 
-```{r subset_cmorized_variable_forcing_data, eval=FALSE}
+```{r subset_cmorized_constant_forcing_data, eval=FALSE}
 
 # set name of model to be subsetted
-model_ID <- "A"
+model_ID <- "C"
 
 # for loop across years
 years <- c("1982":"2019")
@@ -269,7 +269,7 @@ for (i_year in years) {
     ggsave(
       paste(
         path_preprocessing,
-        "regular_subset_distribution/",
+        "regular_subset_distribution_runC/",
         i_variable,
         "_",
         i_year,
@@ -286,7 +286,7 @@ for (i_year in years) {
 # write raw data file for GLODAP-based subsetting model variables
 GLODAP %>%
   write_csv(paste(path_preprocessing,
-                  "GLODAPv2.2020_preprocessed_model_runA_raw_subset.csv",
+                  "GLODAPv2.2020_preprocessed_model_runC_raw_subset.csv",
                   sep = ""))
 
 # write file for model summary statistics (original cmorized unit)
@@ -294,7 +294,7 @@ stats_summary %>%
   write_csv(
     paste(
       path_preprocessing,
-      "regular_subset_distribution/",
+      "regular_subset_distribution_runC/",
       model_ID,
       "_summary_stats.csv",
       sep = ""
@@ -311,7 +311,7 @@ GLODAP <-
   read_csv(
     paste(
       path_preprocessing,
-      "GLODAPv2.2020_preprocessed_model_runA_raw_subset.csv",
+      "GLODAPv2.2020_preprocessed_model_runC_raw_subset.csv",
       sep = ""
     ),
     col_types = cols(
@@ -409,7 +409,7 @@ GLODAP$aou_model <-
 # write file for GLODAP observations + subsetted model variables
 GLODAP %>%
   write_csv(paste(path_preprocessing,
-                  "GLODAPv2.2020_preprocessed_model_runA_both.csv",
+                  "GLODAPv2.2020_preprocessed_model_runC_both.csv",
                   sep = ""))
 
 # remove GLODAP observations and rename model subset
@@ -449,9 +449,8 @@ GLODAP <- GLODAP %>%
 # write final file for GLODAP-based subsetting model variables
 GLODAP %>%
   write_csv(paste(path_preprocessing,
-                  "GLODAPv2.2020_preprocessed_model_runA_final.csv",
+                  "GLODAPv2.2020_preprocessed_model_runC_final.csv",
                   sep = ""))
-
 
 ```
 
@@ -484,9 +483,10 @@ Glodap_year_grid_depth <- GLODAP_2019 %>%
 
 # read in cmorized tco2 output in year 2019
 variable_data_tibble <-
-  read_ncdf(
-    "/nfs/kryo/work/loher/CESM_output/RECCAP2/cmorized_Dec2020/split_monthly/dissic_CESM-ETHZ_A_1_gr_2019.nc"
-  ) %>%
+  read_ncdf(paste(path_cmorized, 
+    "dissic_CESM-ETHZ_C_1_gr_2019.nc",
+    sep = ""
+  )) %>%
   as_tibble()
 
 # remove na values
@@ -594,7 +594,7 @@ map +
 ```{r read_GLODAP_with_cmorized_subset_file}
 
 GLODAP_cmorized <- read_csv(paste(path_preprocessing,
-                                  "GLODAPv2.2020_preprocessed_model_runA_both.csv",
+                                  "GLODAPv2.2020_preprocessed_model_runC_both.csv",
                                   sep = ""))
 
 ```

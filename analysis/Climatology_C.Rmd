@@ -1,5 +1,5 @@
 ---
-title: "Climatology"
+title: "Climatology constant C"
 author: "Jens Daniel Müller"
 date:  "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
@@ -35,7 +35,7 @@ library(marelac)
 
 # Read nc file
 
-Here we used annual output of cmorized (1x1) model with variable forcing (RECCAP2 RunA) in year 2007 as the predictor climatology. Predictors include:
+Here we used annual output of cmorized (1x1) model with constant forcing (RECCAP2 RunC) in year 2007 as the predictor climatology. Predictors include:
 
 - Salinity (sal)
 - Potential temperature (theta, not predictor, used for temperature calculation)
@@ -51,22 +51,21 @@ Here we used annual output of cmorized (1x1) model with variable forcing (RECCAP
 
 ```{r read_climatology}
 
-# read in RECCAP2 RunA file
+# read in RECCAP2 RunC file
 climatology_temp <- tidync(paste(
   path_cmorized,
-  "RECCAP2_RunA.nc",
+  "RECCAP2_RunC.nc",
   sep = ""
 ))
 
 # read-in 2007 as tibble
 climatology <- climatology_temp %>% 
-  hyper_filter(time_ann = time_ann == 10036) %>% 
+  hyper_filter(time_ann = time_ann == 867110400) %>% 
   hyper_tibble()
 
 # convert data variable to year
 climatology <- climatology %>% 
-  mutate(year = format(as.Date(climatology$time_ann, origin = '1980-01-01'), "%Y"),
-         year = as.numeric(year)) %>% 
+  mutate(year = round(1980 + unique(climatology$time_ann)/(60*60*24*365))) %>% 
   select(-time_ann)
 
 # select annual cmorized 2007 as climatology
@@ -251,7 +250,7 @@ climatology <- climatology %>%
 # write csv file
 climatology %>%
   write_csv(paste(path_preprocessing,
-                  "climatology_runA_2007.csv",
+                  "climatology_runC_2007.csv",
                   sep = ""))
 
 ```
@@ -265,7 +264,6 @@ Below, following subsets of the climatology are plotted for all relevant predict
 - Global section along track indicated by white lines in maps.
 
 ```{r climatology_maps_and_sections}
-
 
 # define plotting variables
 vars <- c(

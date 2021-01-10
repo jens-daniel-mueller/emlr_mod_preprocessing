@@ -4,19 +4,27 @@ navbar:
   title: eMLR mod preprocessing
   left:
   - text: Climatology
-    href: Climatology.html
+    menu:
+    - text: Variable climatology
+      href: Climatology_A.html
+    - text: Constant climatology
+      href: Climatology_C.html
   - text: Synthetic data
     menu:
-    - text: GLODAP subset
-      href: GLODAP_subset.html
-    - text: Random subset
-      href: Random_subset.html
+    - text: GLODAP subset variable climate
+      href: GLODAP_subset_A.html
+    - text: GLODAP subset constant climate
+      href: GLODAP_subset_C.html
+    - text: Random subset variable climate
+      href: Random_subset_A.html
+    - text: Random subset constant climate
+      href: Random_subset_C.html
   - text: Cant
     menu:
-    - text: Variable climate
-      href: Cant_AB.html
-    - text: Constant climate
+    - text: Cant variable climate
       href: Cant_AD.html
+    - text: Cant constant climate
+      href: Cant_CB.html
   - text: Atmospheric CO2
     href: read_CO2_atm.html
   right:

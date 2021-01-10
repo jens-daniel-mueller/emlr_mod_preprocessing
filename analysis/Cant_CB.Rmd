@@ -1,5 +1,5 @@
 ---
-title: "Cant variable climate"
+title: "Cant constant climate CB"
 author: "Jens Daniel Müller"
 date:  "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
@@ -44,35 +44,35 @@ basinmask <- basinmask %>%
 
 # Calculate annual Cant field
 
-## Read in Run A
+## Read in Run C
 
-```{r read_cmorized_RunA}
+```{r read_cmorized_RunC}
 
-# read in cmorized variable forcing model file
-A_annual <- tidync(paste(path_cmorized,
-                         "RECCAP2_RunA.nc",
+# read in cmorized constant forcing model file
+C_annual <- tidync(paste(path_cmorized,
+                         "RECCAP2_RunC.nc",
                          sep = ""))
 
-A_annual <- A_annual %>% hyper_tibble()
+C_annual <- C_annual %>% hyper_tibble()
 
 
 # harmonize column names and coordinates
-A_annual <- A_annual  %>%
+C_annual <- C_annual  %>%
   select(
     year = time_ann,
     lon,
     lat,
     depth,
-    tco2_A = dissic,
+    tco2_C = dissic,
     sal = so,
     theta = thetao
   ) %>%
-  # select annual value in year of 2007
-  mutate(year = (year - 181) / 365 + 1980) %>%
+  # mutate year from seconds since Jan 1, 1980
+  mutate(year = (year - 15638400) / 31536000 + 1980) %>%
   mutate(lon = if_else(lon < 20, lon + 360, lon))
 
 # calculate model temperature
-A_annual <- A_annual %>%
+C_annual <- C_annual %>%
   mutate(temp = gsw_pt_from_t(
     SA = sal,
     t = theta,
@@ -81,7 +81,7 @@ A_annual <- A_annual %>%
   ))
 
 # unit transfer from mol/m3 to µmol/kg
-A_annual <- A_annual %>%
+C_annual <- C_annual %>%
   mutate(
     rho = gsw_pot_rho_t_exact(
       SA = sal,
@@ -89,17 +89,17 @@ A_annual <- A_annual %>%
       p = depth,
       p_ref = 10.1325
     ),
-    tco2_A = tco2_A * (1e+6 / rho)
+    tco2_C = tco2_C * (1e+6 / rho)
   ) %>%
-  select(year, lon, lat, depth, tco2_A)
+  select(year, lon, lat, depth, tco2_C)
 
 ```
 
-## Read in Run B
+## Read in Run 
 
 ```{r read_cmorized_RunB}
 
-# read in cmorized variable forcing model file
+# read in cmorized constant forcing model file
 B_annual <- tidync(paste(path_cmorized,
                          "RECCAP2_RunB.nc",
                          sep = ""))
@@ -108,9 +108,17 @@ B_annual <- B_annual %>% hyper_tibble()
 
 # harmonize column names and coordinates
 B_annual <- B_annual  %>%
-  select(year = time_ann, lon, lat, depth, tco2_B = dissic, sal = so, theta = thetao) %>%
-  # select annual value in year of 2007
-  mutate(year = (year - 181) / 365 + 1980) %>%
+  select(
+    year = time_ann,
+    lon,
+    lat,
+    depth,
+    tco2_B = dissic,
+    sal = so,
+    theta = thetao
+  ) %>%
+  # mutate year from seconds since Jan 1, 1980
+  mutate(year = (year - 15638400) / 31536000 + 1980) %>%
   mutate(lon = if_else(lon < 20, lon + 360, lon))
 
 # calculate model temperature
@@ -141,8 +149,8 @@ B_annual <- B_annual %>%
 
 ```{r join_tco2_fields}
 
-cant <- inner_join(A_annual, B_annual)
-rm(A_annual, B_annual)
+cant <- inner_join(C_annual, B_annual)
+rm(C_annual, B_annual)
 
 ```
 
@@ -169,8 +177,8 @@ cant <- inner_join(cant, basinmask)
 ```{r calc_cant}
 
 cant <- cant %>%
-  mutate(cant_total = tco2_A - tco2_B) %>% 
-  select(-c(tco2_A, tco2_B))
+  mutate(cant_total = tco2_C - tco2_B) %>% 
+  select(-c(tco2_C, tco2_B))
 
 
 ```
@@ -190,7 +198,7 @@ for (i_year in years) {
   
   cant_year %>%
     write_csv(paste(path_preprocessing,
-                    "cant_annual_field_AB/cant_", i_year, ".csv",
+                    "cant_annual_field_CB/cant_", i_year, ".csv",
                     sep = ""))
 }
 
