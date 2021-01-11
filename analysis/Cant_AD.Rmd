@@ -117,7 +117,7 @@ D_annual <- D_annual  %>%
     theta = thetao
   ) %>%
   # mutate year from seconds since Jan 1, 1980
-  mutate(year = (year - 181) / 365 + 1980) %>%
+  mutate(year = (year - 15638400) / 31536000 + 1980) %>%
   mutate(lon = if_else(lon < 20, lon + 360, lon))
 
 # calculate model temperature
