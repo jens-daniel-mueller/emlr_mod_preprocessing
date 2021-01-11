@@ -227,6 +227,23 @@ model_resample <- model_resample %>%
   ) %>%
   select(-oxygen_sat_kg,-oxygen_sat_m3)
 
+# rename as variable
+model_resample <- model_resample %>%
+  rename(
+    sal = so,
+    theta = thetao,
+    temp = temp,
+    tco2 = dissic,
+    talk = talk,
+    oxygen = o2,
+    nitrate = no3,
+    phosphate = po4,
+    silicate = si,
+    aou = aou
+  )
+
+model_resample <- inner_join(model_resample, basinmask)
+
 # write file for random model sampling
 model_resample %>%
   write_csv(paste(path_preprocessing,
