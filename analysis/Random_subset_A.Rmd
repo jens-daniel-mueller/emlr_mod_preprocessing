@@ -272,10 +272,14 @@ source_python(
   )
 )
 
-model_resample <- calculate_gamma(GLODAP_cruise)
+model_resample <- calculate_gamma(model_resample)
 
 model_resample <- model_resample %>%
-  
+  rename(lat = LATITUDE,
+         lon = LONGITUDE,
+         sal = SALNTY,
+         gamma = GAMMA) %>%
+  select(-CTDPRS, -THETA)
 
 # add basin mask
 model_resample <- inner_join(model_resample, basinmask)

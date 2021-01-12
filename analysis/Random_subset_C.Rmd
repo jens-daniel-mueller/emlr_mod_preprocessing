@@ -242,6 +242,46 @@ model_resample <- model_resample %>%
     aou = aou
   )
 
+# calculate gamma
+library(oce)
+library(gsw)
+
+model_resample <- model_resample %>% 
+  mutate(CTDPRS = gsw_p_from_z(-depth,
+                               lat))
+
+model_resample <- model_resample %>% 
+  mutate(THETA = swTheta(salinity = sal,
+                         temperature = temp,
+                         pressure = CTDPRS,
+                         referencePressure = 0,
+                         longitude = lon-180,
+                         latitude = lat))
+
+model_resample <- model_resample %>% 
+  rename(LATITUDE = lat,
+         LONGITUDE = lon,
+         SALNTY = sal)
+
+library(reticulate)
+source_python(
+  paste(
+    path_root,
+    "/utilities/functions/python_scripts/",
+    "Gamma_GLODAP_python.py",
+    sep = ""
+  )
+)
+
+model_resample <- calculate_gamma(model_resample)
+
+model_resample <- model_resample %>%
+  rename(lat = LATITUDE,
+         lon = LONGITUDE,
+         sal = SALNTY,
+         gamma = GAMMA) %>%
+  select(-CTDPRS, -THETA)
+
 model_resample <- inner_join(model_resample, basinmask)
 
 # write file for random model sampling

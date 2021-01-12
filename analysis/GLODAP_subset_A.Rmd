@@ -374,6 +374,46 @@ GLODAP <- GLODAP %>%
   ) %>%
   select(-oxygen_sat_kg, -oxygen_sat_m3)
 
+# calculate gamma model
+library(oce)
+library(gsw)
+
+GLODAP <- GLODAP %>% 
+  mutate(CTDPRS = gsw_p_from_z(-depth,
+                               lat))
+
+GLODAP <- GLODAP %>% 
+  mutate(THETA = swTheta(salinity = sal,
+                         temperature = temp,
+                         pressure = CTDPRS,
+                         referencePressure = 0,
+                         longitude = lon-180,
+                         latitude = lat))
+
+GLODAP <- GLODAP %>% 
+  rename(LATITUDE = lat,
+         LONGITUDE = lon,
+         SALNTY = sal)
+
+library(reticulate)
+source_python(
+  paste(
+    path_root,
+    "/utilities/functions/python_scripts/",
+    "Gamma_GLODAP_python.py",
+    sep = ""
+  )
+)
+
+GLODAP <- calculate_gamma(GLODAP)
+
+GLODAP <- GLODAP %>%
+  rename(lat = LATITUDE,
+         lon = LONGITUDE,
+         sal = SALNTY,
+         gamma_model = GAMMA) %>%
+  select(-CTDPRS, -THETA)
+
 # Replace model value with NA, if observations are NA
 GLODAP$so_model <-
   ifelse(is.na(GLODAP$sal), NA, GLODAP$so_model)
@@ -424,7 +464,8 @@ GLODAP <- GLODAP %>%
     nitrate,
     phosphate,
     silicate,
-    aou
+    aou,
+    gamma
   )) %>%
   rename(
     sal = so_model,
@@ -436,7 +477,8 @@ GLODAP <- GLODAP %>%
     nitrate = no3_model,
     phosphate = po4_model,
     silicate = si_model,
-    aou = aou_model
+    aou = aou_model,
+    gamma = gamma_model
   )
 
 
@@ -613,7 +655,8 @@ obs_var <-
     "silicate",
     "sal",
     "temp",
-    "theta"
+    "theta",
+    "gamma"
   )
 
 model_var <-
@@ -627,10 +670,11 @@ model_var <-
     "si_model",
     "so_model",
     "temp_model",
-    "thetao_model"
+    "thetao_model",
+    "gamma_model"
   )
 
-for (i in 1:10) {
+for (i in 1:11) {
   #i <- 1
   
   # select correlated observation and model variable
