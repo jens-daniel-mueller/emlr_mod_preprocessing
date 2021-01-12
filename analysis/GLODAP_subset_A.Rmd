@@ -35,6 +35,9 @@ library(lubridate)
 library(rqdatatable)
 library(gsw)
 library(marelac)
+library(oce)
+library(gsw)
+library(reticulate)
 ```
 
 # Select basin mask
@@ -374,28 +377,28 @@ GLODAP <- GLODAP %>%
   ) %>%
   select(-oxygen_sat_kg, -oxygen_sat_m3)
 
-# calculate gamma model
-library(oce)
-library(gsw)
+# calculate gamma model in temporary data frame
+GLODAP_gamma <- GLODAP %>% 
+  select(depth,lat,
+         so_model, temp_model, lon)
 
-GLODAP <- GLODAP %>% 
+GLODAP_gamma <- GLODAP_gamma %>% 
   mutate(CTDPRS = gsw_p_from_z(-depth,
                                lat))
 
-GLODAP <- GLODAP %>% 
-  mutate(THETA = swTheta(salinity = sal,
-                         temperature = temp,
+GLODAP_gamma <- GLODAP_gamma %>% 
+  mutate(THETA = swTheta(salinity = so_model,
+                         temperature = temp_model,
                          pressure = CTDPRS,
                          referencePressure = 0,
                          longitude = lon-180,
                          latitude = lat))
 
-GLODAP <- GLODAP %>% 
+GLODAP_gamma <- GLODAP_gamma %>% 
   rename(LATITUDE = lat,
          LONGITUDE = lon,
-         SALNTY = sal)
+         SALNTY = so_model)
 
-library(reticulate)
 source_python(
   paste(
     path_root,
@@ -405,14 +408,13 @@ source_python(
   )
 )
 
-GLODAP <- calculate_gamma(GLODAP)
+GLODAP_gamma <- calculate_gamma(GLODAP_gamma)
 
-GLODAP <- GLODAP %>%
-  rename(lat = LATITUDE,
-         lon = LONGITUDE,
-         sal = SALNTY,
-         gamma_model = GAMMA) %>%
-  select(-CTDPRS, -THETA)
+# join gamma column with original data frame
+GLODAP <- GLODAP %>% 
+  mutate(gamma_model = GLODAP_gamma$GAMMA)
+
+rm(GLODAP_gamma)
 
 # Replace model value with NA, if observations are NA
 GLODAP$so_model <-
