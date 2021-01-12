@@ -35,6 +35,8 @@ library(lubridate)
 library(rqdatatable)
 library(gsw)
 library(marelac)
+library(oce)
+library(reticulate)
 ```
 
 # Select basin mask
@@ -374,6 +376,38 @@ GLODAP <- GLODAP %>%
   ) %>%
   select(-oxygen_sat_kg, -oxygen_sat_m3)
 
+# calculate gamma model in temporary data frame
+GLODAP_gamma <- GLODAP %>% 
+  select(depth,lat,
+         so_model, thetao_model, lon)
+
+GLODAP_gamma <- GLODAP_gamma %>% 
+  mutate(CTDPRS = gsw_p_from_z(-depth,
+                               lat))
+
+GLODAP_gamma <- GLODAP_gamma %>% 
+  rename(LATITUDE = lat,
+         LONGITUDE = lon,
+         SALNTY = so_model,
+         THETA = thetao_model)
+
+source_python(
+  paste(
+    path_root,
+    "/utilities/functions/python_scripts/",
+    "Gamma_GLODAP_python.py",
+    sep = ""
+  )
+)
+
+GLODAP_gamma <- calculate_gamma(GLODAP_gamma)
+
+# join gamma column with original data frame
+GLODAP <- GLODAP %>% 
+  mutate(gamma_model = GLODAP_gamma$GAMMA)
+
+rm(GLODAP_gamma)
+
 # Replace model value with NA, if observations are NA
 GLODAP$so_model <-
   ifelse(is.na(GLODAP$sal), NA, GLODAP$so_model)
@@ -424,7 +458,8 @@ GLODAP <- GLODAP %>%
     nitrate,
     phosphate,
     silicate,
-    aou
+    aou,
+    gamma
   )) %>%
   rename(
     sal = so_model,
@@ -436,9 +471,9 @@ GLODAP <- GLODAP %>%
     nitrate = no3_model,
     phosphate = po4_model,
     silicate = si_model,
-    aou = aou_model
+    aou = aou_model,
+    gamma = gamma_model
   )
-
 
 ```
 

@@ -36,7 +36,6 @@ library(rqdatatable)
 library(gsw)
 library(marelac)
 library(oce)
-library(gsw)
 library(reticulate)
 ```
 
@@ -380,24 +379,17 @@ GLODAP <- GLODAP %>%
 # calculate gamma model in temporary data frame
 GLODAP_gamma <- GLODAP %>% 
   select(depth,lat,
-         so_model, temp_model, lon)
+         so_model, thetao_model, lon)
 
 GLODAP_gamma <- GLODAP_gamma %>% 
   mutate(CTDPRS = gsw_p_from_z(-depth,
                                lat))
 
 GLODAP_gamma <- GLODAP_gamma %>% 
-  mutate(THETA = swTheta(salinity = so_model,
-                         temperature = temp_model,
-                         pressure = CTDPRS,
-                         referencePressure = 0,
-                         longitude = lon-180,
-                         latitude = lat))
-
-GLODAP_gamma <- GLODAP_gamma %>% 
   rename(LATITUDE = lat,
          LONGITUDE = lon,
-         SALNTY = so_model)
+         SALNTY = so_model,
+         THETA = thetao_model)
 
 source_python(
   paste(
@@ -482,7 +474,6 @@ GLODAP <- GLODAP %>%
     aou = aou_model,
     gamma = gamma_model
   )
-
 
 ```
 
