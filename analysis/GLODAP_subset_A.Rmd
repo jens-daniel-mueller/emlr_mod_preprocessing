@@ -825,7 +825,7 @@ for (i in 1:11) {
   for (i_basin_AIP in unique(GLODAP_cmorized_var$basin_AIP)) {
    # i_basin_AIP = "Atlantic"
     GLODAP_cmorized_var_zonal <- GLODAP_cmorized_var %>%
-      filter(basin_AIP == "Atlantic") %>%
+      filter(basin_AIP == i_basin_AIP) %>%
       group_by(lat, depth) %>%
       summarise(offset = mean(offset, na.rm=TRUE)) %>%
       ungroup()
