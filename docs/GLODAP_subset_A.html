@@ -587,16 +587,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree9daa2e888e558060507ac6cf71266181958dd012targetblank9daa2e8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/9daa2e888e558060507ac6cf71266181958dd012" target="_blank">9daa2e8</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree24029da03c54803c65d5a4a48319b13bdec86911targetblank24029daa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/24029da03c54803c65d5a4a48319b13bdec86911" target="_blank">24029da</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree9daa2e888e558060507ac6cf71266181958dd012targetblank9daa2e8a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree24029da03c54803c65d5a4a48319b13bdec86911targetblank24029daa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/9daa2e888e558060507ac6cf71266181958dd012" target="_blank">9daa2e8</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/24029da03c54803c65d5a4a48319b13bdec86911" target="_blank">24029da</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -643,6 +643,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/24029da03c54803c65d5a4a48319b13bdec86911/analysis/GLODAP_subset_A.Rmd" target="_blank">24029da</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+<td>
+revised offset zonal mean section
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/9b28f09675e112680a8f6dd039001b22be76d573/docs/GLODAP_subset_A.html" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1603,7 +1637,7 @@ for (i in 1:11) {
   for (i_basin_AIP in unique(GLODAP_cmorized_var$basin_AIP)) {
    # i_basin_AIP = &quot;Atlantic&quot;
     GLODAP_cmorized_var_zonal &lt;- GLODAP_cmorized_var %&gt;%
-      filter(basin_AIP == &quot;Atlantic&quot;) %&gt;%
+      filter(basin_AIP == i_basin_AIP) %&gt;%
       group_by(lat, depth) %&gt;%
       summarise(offset = mean(offset, na.rm=TRUE)) %&gt;%
       ungroup()
@@ -2083,6 +2117,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-12.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-12.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -2119,6 +2164,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-13.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-13.png" target="_blank">843587f</a>
@@ -2159,6 +2215,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-14.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-14.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -2195,6 +2262,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-15.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-15.png" target="_blank">843587f</a>
@@ -2235,6 +2313,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-16.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-16.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -2271,6 +2360,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-17.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-17.png" target="_blank">843587f</a>
@@ -2311,6 +2411,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-18.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-18.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -2347,6 +2458,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-19.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-19.png" target="_blank">843587f</a>
@@ -2387,6 +2509,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-20.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-20.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -2423,6 +2556,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-21.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-21.png" target="_blank">843587f</a>
@@ -2463,6 +2607,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-22.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-22.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -2499,6 +2654,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-23.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-23.png" target="_blank">843587f</a>
@@ -2539,6 +2705,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-24.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-24.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -2575,6 +2752,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-25.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-25.png" target="_blank">843587f</a>
@@ -2615,6 +2803,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-26.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-26.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -2651,6 +2850,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-27.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-27.png" target="_blank">843587f</a>
@@ -2691,6 +2901,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-28.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-28.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -2727,6 +2948,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-29.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-29.png" target="_blank">843587f</a>
@@ -2767,6 +2999,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-30.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-30.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -2803,6 +3046,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-31.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-31.png" target="_blank">843587f</a>
@@ -2843,6 +3097,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-32.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-32.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -2879,6 +3144,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-33.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-33.png" target="_blank">843587f</a>
@@ -2919,6 +3195,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-34.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-34.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -2955,6 +3242,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-35.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-35.png" target="_blank">843587f</a>
@@ -2995,6 +3293,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-36.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-36.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -3031,6 +3340,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-37.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-37.png" target="_blank">843587f</a>
@@ -3071,6 +3391,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-38.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-38.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -3107,6 +3438,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-39.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-39.png" target="_blank">843587f</a>
@@ -3147,6 +3489,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-40.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-40.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -3183,6 +3536,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-41.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-41.png" target="_blank">843587f</a>
@@ -3223,6 +3587,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-42.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-42.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -3259,6 +3634,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-43.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-43.png" target="_blank">843587f</a>
@@ -3299,6 +3685,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-44.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-44.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -3335,6 +3732,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-45.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-45.png" target="_blank">843587f</a>
@@ -3375,6 +3783,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-46.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-46.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -3411,6 +3830,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-47.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-47.png" target="_blank">843587f</a>
@@ -3451,6 +3881,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-48.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-48.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -3487,6 +3928,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-49.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-49.png" target="_blank">843587f</a>
@@ -3527,6 +3979,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-50.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-50.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -3563,6 +4026,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-51.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-51.png" target="_blank">843587f</a>
@@ -3603,6 +4077,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-52.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-52.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -3639,6 +4124,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-53.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-53.png" target="_blank">843587f</a>
@@ -3679,6 +4175,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-54.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-54.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -3715,6 +4222,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-55.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-55.png" target="_blank">843587f</a>
@@ -3755,6 +4273,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-56.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-56.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -3791,6 +4320,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-57.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-57.png" target="_blank">843587f</a>
@@ -3831,6 +4371,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-58.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-58.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -3867,6 +4418,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-59.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-59.png" target="_blank">843587f</a>
@@ -3907,6 +4469,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-60.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-60.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -3943,6 +4516,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-61.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-61.png" target="_blank">843587f</a>
@@ -3983,6 +4567,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-62.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-62.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -4019,6 +4614,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-63.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-63.png" target="_blank">843587f</a>
@@ -4059,6 +4665,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-64.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-64.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -4095,6 +4712,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-65.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-65.png" target="_blank">843587f</a>
@@ -4135,6 +4763,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-66.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-66.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -4171,6 +4810,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-67.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-67.png" target="_blank">843587f</a>
@@ -4211,6 +4861,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-68.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-68.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -4247,6 +4908,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-69.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-69.png" target="_blank">843587f</a>
@@ -4287,6 +4959,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-70.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-70.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -4323,6 +5006,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-71.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-71.png" target="_blank">843587f</a>
@@ -4363,6 +5057,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-72.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-72.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -4399,6 +5104,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-73.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-73.png" target="_blank">843587f</a>
@@ -4439,6 +5155,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-74.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-74.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -4475,6 +5202,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-75.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-75.png" target="_blank">843587f</a>
@@ -4515,6 +5253,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-76.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-76.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -4551,6 +5300,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-77.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-77.png" target="_blank">843587f</a>
@@ -4591,6 +5351,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-78.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-78.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -4627,6 +5398,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-79.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-79.png" target="_blank">843587f</a>
@@ -4667,6 +5449,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-80.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-80.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -4703,6 +5496,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-81.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-81.png" target="_blank">843587f</a>
@@ -4743,6 +5547,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-82.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-82.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -4779,6 +5594,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-83.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-83.png" target="_blank">843587f</a>
@@ -4819,6 +5645,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-84.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-84.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -4855,6 +5692,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-85.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-85.png" target="_blank">843587f</a>
@@ -4895,6 +5743,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-86.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-86.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -4931,6 +5790,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-87.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-87.png" target="_blank">843587f</a>
@@ -4971,6 +5841,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-88.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-88.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -5007,6 +5888,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-89.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-89.png" target="_blank">843587f</a>
@@ -5047,6 +5939,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-90.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-90.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -5083,6 +5986,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-91.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-91.png" target="_blank">843587f</a>
@@ -5123,6 +6037,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-92.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-92.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -5159,6 +6084,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-93.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-93.png" target="_blank">843587f</a>
@@ -5199,6 +6135,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-94.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-94.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -5235,6 +6182,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-95.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-95.png" target="_blank">843587f</a>
@@ -5275,6 +6233,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-96.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-96.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -5311,6 +6280,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-97.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-97.png" target="_blank">843587f</a>
@@ -5351,6 +6331,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-98.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-98.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -5387,6 +6378,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-99.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-99.png" target="_blank">843587f</a>
@@ -5427,6 +6429,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-100.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-100.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -5463,6 +6476,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-101.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-101.png" target="_blank">843587f</a>
@@ -5503,6 +6527,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-102.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-102.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -5539,6 +6574,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-103.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-103.png" target="_blank">843587f</a>
@@ -5579,6 +6625,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-104.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-104.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -5615,6 +6672,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-105.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-105.png" target="_blank">843587f</a>
@@ -5655,6 +6723,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-106.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-106.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -5691,6 +6770,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-107.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-107.png" target="_blank">843587f</a>
@@ -5731,6 +6821,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-108.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-108.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -5767,6 +6868,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-109.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-109.png" target="_blank">843587f</a>
@@ -5807,6 +6919,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-110.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-110.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -5820,7 +6943,1678 @@ Donghe-Zhu
 </table>
 </div>
 </div>
-<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-111.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-112.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-113.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-114.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-115.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-116.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-117.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-118.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-119.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-120.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-121.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-122.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-123.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-124.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-125.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-126.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-127.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-128.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-129.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-130.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-131.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-132.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-133.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-134.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-135.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-136.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-137.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-138.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-139.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-140.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-141.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-142.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-143.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-144.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-145.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-146.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-147.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-148.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-149.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-150.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-151.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-152.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-153.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-154.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-111.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-111">
+Past versions of GLODAP_vs_cmorized_subset_comparison-111.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-111" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-111.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-112.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-112">
+Past versions of GLODAP_vs_cmorized_subset_comparison-112.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-112" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-112.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-113.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-113">
+Past versions of GLODAP_vs_cmorized_subset_comparison-113.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-113" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-113.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-114.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-114">
+Past versions of GLODAP_vs_cmorized_subset_comparison-114.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-114" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-114.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-115.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-115">
+Past versions of GLODAP_vs_cmorized_subset_comparison-115.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-115" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-115.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-116.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-116">
+Past versions of GLODAP_vs_cmorized_subset_comparison-116.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-116" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-116.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-117.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-117">
+Past versions of GLODAP_vs_cmorized_subset_comparison-117.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-117" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-117.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-118.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-118">
+Past versions of GLODAP_vs_cmorized_subset_comparison-118.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-118" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-118.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-119.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-119">
+Past versions of GLODAP_vs_cmorized_subset_comparison-119.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-119" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-119.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-120.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-120">
+Past versions of GLODAP_vs_cmorized_subset_comparison-120.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-120" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-120.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-121.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-121">
+Past versions of GLODAP_vs_cmorized_subset_comparison-121.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-121" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-121.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-122.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-122">
+Past versions of GLODAP_vs_cmorized_subset_comparison-122.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-122" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-122.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-123.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-123">
+Past versions of GLODAP_vs_cmorized_subset_comparison-123.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-123" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-123.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-124.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-124">
+Past versions of GLODAP_vs_cmorized_subset_comparison-124.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-124" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-124.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-125.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-125">
+Past versions of GLODAP_vs_cmorized_subset_comparison-125.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-125" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-125.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-126.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-126">
+Past versions of GLODAP_vs_cmorized_subset_comparison-126.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-126" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-126.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-127.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-127">
+Past versions of GLODAP_vs_cmorized_subset_comparison-127.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-127" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-127.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-128.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-128">
+Past versions of GLODAP_vs_cmorized_subset_comparison-128.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-128" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-128.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-129.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-129">
+Past versions of GLODAP_vs_cmorized_subset_comparison-129.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-129" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-129.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-130.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-130">
+Past versions of GLODAP_vs_cmorized_subset_comparison-130.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-130" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-130.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-131.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-131">
+Past versions of GLODAP_vs_cmorized_subset_comparison-131.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-131" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-131.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-132.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-132">
+Past versions of GLODAP_vs_cmorized_subset_comparison-132.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-132" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-132.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-133.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-133">
+Past versions of GLODAP_vs_cmorized_subset_comparison-133.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-133" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-133.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-134.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-134">
+Past versions of GLODAP_vs_cmorized_subset_comparison-134.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-134" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-134.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-135.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-135">
+Past versions of GLODAP_vs_cmorized_subset_comparison-135.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-135" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-135.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-136.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-136">
+Past versions of GLODAP_vs_cmorized_subset_comparison-136.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-136" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-136.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-137.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-137">
+Past versions of GLODAP_vs_cmorized_subset_comparison-137.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-137" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-137.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-138.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-138">
+Past versions of GLODAP_vs_cmorized_subset_comparison-138.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-138" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-138.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-139.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-139">
+Past versions of GLODAP_vs_cmorized_subset_comparison-139.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-139" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-139.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-140.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-140">
+Past versions of GLODAP_vs_cmorized_subset_comparison-140.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-140" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-140.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-141.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-141">
+Past versions of GLODAP_vs_cmorized_subset_comparison-141.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-141" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-141.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-142.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-142">
+Past versions of GLODAP_vs_cmorized_subset_comparison-142.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-142" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-142.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-143.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-143">
+Past versions of GLODAP_vs_cmorized_subset_comparison-143.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-143" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-143.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-144.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-144">
+Past versions of GLODAP_vs_cmorized_subset_comparison-144.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-144" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-144.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-145.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-145">
+Past versions of GLODAP_vs_cmorized_subset_comparison-145.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-145" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-145.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-146.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-146">
+Past versions of GLODAP_vs_cmorized_subset_comparison-146.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-146" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-146.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-147.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-147">
+Past versions of GLODAP_vs_cmorized_subset_comparison-147.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-147" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-147.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-148.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-148">
+Past versions of GLODAP_vs_cmorized_subset_comparison-148.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-148" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-148.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-149.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-149">
+Past versions of GLODAP_vs_cmorized_subset_comparison-149.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-149" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-149.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-150.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-150">
+Past versions of GLODAP_vs_cmorized_subset_comparison-150.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-150" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-150.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-151.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-151">
+Past versions of GLODAP_vs_cmorized_subset_comparison-151.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-151" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-151.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-152.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-152">
+Past versions of GLODAP_vs_cmorized_subset_comparison-152.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-152" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-152.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-153.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-153">
+Past versions of GLODAP_vs_cmorized_subset_comparison-153.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-153" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-153.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-154.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-GLODAP_vs_cmorized_subset_comparison-154">
+Past versions of GLODAP_vs_cmorized_subset_comparison-154.png
+</button>
+</p>
+<div id="fig-GLODAP_vs_cmorized_subset_comparison-154" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9b28f09675e112680a8f6dd039001b22be76d573/docs/figure/GLODAP_subset_A.Rmd/GLODAP_vs_cmorized_subset_comparison-154.png" target="_blank">9b28f09</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-01-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
