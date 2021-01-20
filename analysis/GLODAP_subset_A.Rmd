@@ -308,7 +308,7 @@ stats_summary %>%
 
 ```{r prepare_model_subset, eval=FALSE}
 
-# write file for GLODAP-based subsetting model variables
+# read file for GLODAP-based subsetting model variables
 GLODAP <-
   read_csv(
     paste(
@@ -822,7 +822,7 @@ for (i in 1:11) {
   }
   
   # zonal mean section of the model-observations offset for each basin
-  for (i_basin_AIP in unique(GLODAP_cmorized_var_zonal$basin_AIP)) {
+  for (i_basin_AIP in unique(GLODAP_cmorized_var$basin_AIP)) {
    # i_basin_AIP = "Atlantic"
     GLODAP_cmorized_var_zonal <- GLODAP_cmorized_var %>%
       filter(basin_AIP == "Atlantic") %>%
@@ -831,13 +831,21 @@ for (i in 1:11) {
       ungroup()
     
     # plot zonal mean section (model - obs)
-    lat_max <- max(GLODAP_cmorized_var_zonal$lat)
-    lat_min <- min(GLODAP_cmorized_var_zonal$lat)
+    lat_max <- params_global$lat_max
+    lat_min <- params_global$lat_min
+    limit <-
+      quantile(abs(GLODAP_cmorized_var_zonal$offset), 0.98) * c(-1, 1)
+    
     print(
       GLODAP_cmorized_var_zonal %>%
         ggplot(aes(lat, depth, z = offset)) +
-        geom_contour_filled() +
-        scale_fill_viridis_d(name = "offset") +
+        stat_summary_2d(binwidth = c(1,100)) +
+        scale_fill_scico(
+          palette = "vik",
+          name = "offset",
+          limit = limit,
+          na.value = "red"
+        ) +
         coord_cartesian(expand = 0,
                         xlim = c(lat_min, lat_max)) +
         scale_y_reverse() +
