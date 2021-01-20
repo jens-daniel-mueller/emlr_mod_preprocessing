@@ -668,7 +668,7 @@ model_var <-
   )
 
 for (i in 1:11) {
-  #i <- 1
+#  i <- 1
   
   # select correlated observation and model variable
   GLODAP_cmorized_var <- GLODAP_cmorized %>%
@@ -677,6 +677,7 @@ for (i in 1:11) {
            lat,
            lon,
            depth,
+           basin_AIP,
            !!sym(obs_var[i]),
            !!sym(model_var[i])) %>%
     drop_na() %>%
@@ -817,6 +818,39 @@ for (i in 1:11) {
                            intervals[j], "-", intervals[j + 1], "m")
         ) +
         coord_cartesian(expand = FALSE)
+    )
+  }
+  
+  # zonal mean section of the model-observations offset for each basin
+  for (i_basin_AIP in unique(GLODAP_cmorized_var_zonal$basin_AIP)) {
+   # i_basin_AIP = "Atlantic"
+    GLODAP_cmorized_var_zonal <- GLODAP_cmorized_var %>%
+      filter(basin_AIP == "Atlantic") %>%
+      group_by(lat, depth) %>%
+      summarise(offset = mean(offset, na.rm=TRUE)) %>%
+      ungroup()
+    
+    # plot zonal mean section (model - obs)
+    lat_max <- max(GLODAP_cmorized_var_zonal$lat)
+    lat_min <- min(GLODAP_cmorized_var_zonal$lat)
+    print(
+      GLODAP_cmorized_var_zonal %>%
+        ggplot(aes(lat, depth, z = offset)) +
+        geom_contour_filled() +
+        scale_fill_viridis_d(name = "offset") +
+        coord_cartesian(expand = 0,
+                        xlim = c(lat_min, lat_max)) +
+        scale_y_reverse() +
+        labs(
+          title = paste(model_var[i],
+                        "-",
+                        obs_var[i],
+                        " | zonal mean offset"),
+          subtitle = paste("Basin:",
+                           i_basin_AIP),
+          x = "Latitude",
+          y = "Depth"
+        )
     )
   }
 }

@@ -257,6 +257,24 @@ for (i_basin_AIP in unique(cant_gruber_zonal$basin_AIP)) {
 
 ```
 
+## Cant total 1994
+
+```{r zonal_mean_section_cant_total_1994}
+
+for (i_basin_AIP in unique(cant_gruber_zonal$basin_AIP)) {
+  print(
+    p_section_zonal(
+      cant_gruber_zonal %>% filter(basin_AIP == i_basin_AIP),
+      var = "cant_1994_mean",
+      plot_slabs = "n",
+      breaks = seq(0,100,10),
+      subtitle_text = paste("Basin: ", i_basin_AIP)
+    )
+  )
+}
+
+```
+
 ## Cant total 2007
 
 ```{r zonal_mean_section_cant_total_2007}
@@ -292,6 +310,26 @@ p_map_cant_inv(cant_gruber_inv %>% filter(inv_depth == 3000))
 
 ```
 
+## Cant total 1994
+
+```{r calc_total_inventory_1994}
+
+# this is just a work around, because the function is designed to calculate cant inventories, but not cant_total inventories
+
+cant_gruber_total_inv <- m_cant_inv(
+  cant_gruber %>% 
+    select(-cant_pos) %>% 
+    rename(cant_pos = cant_1994))
+
+```
+
+```{r cant_inventory_1994}
+
+p_map_cant_inv(cant_gruber_total_inv %>% filter(inv_depth == 3000),
+               breaks = seq(0,100,10),
+               subtitle_text = "Cant total in 1994")
+
+```
 
 ## Cant total 2007
 
