@@ -287,7 +287,7 @@ model_resample <- inner_join(model_resample, basinmask)
 # write file for random model sampling
 model_resample %>%
   write_csv(paste(path_preprocessing,
-                  "GLODAPv2.2020_preprocessed_model_runA_random_subset.csv",
+                  "GLODAPv2.2020_preprocessed_model_runA_random_subset_grid.csv",
                   sep = ""))
 
 ```
@@ -301,7 +301,7 @@ model_resample %>%
 # read in random model sampling file
 model_resample <-
   read_csv(paste(path_preprocessing,
-                 "GLODAPv2.2020_preprocessed_model_runA_random_subset.csv",
+                 "GLODAPv2.2020_preprocessed_model_runA_random_subset_grid.csv",
                  sep = ""))
 
 # plot random sampling cmorized grids in each year
@@ -389,5 +389,80 @@ GLODAP_depth_average %>%
   coord_cartesian(xlim = c(0,500),
                   ylim = c(6000,0)) +
   labs(title = "Depth distribution of GLODAP observations")
+
+```
+
+```{r resample_with_less_high_lat_points, eval=FALSE}
+
+# read in random model sampling file
+resample_grid <-
+  read_csv(paste(path_preprocessing,
+                 "GLODAPv2.2020_preprocessed_model_runA_random_subset_grid.csv",
+                 sep = ""))
+
+for (i in unique(resample_grid$lat)) {
+  # i <- unique(model_resample$lat)[1]
+  
+  resample_grid_lat <- resample_grid %>%
+    filter(lat == i)
+  
+  n <- nrow(resample_grid_lat)
+  
+  resample_grid_lat <- sample_n(resample_grid_lat, floor(n*cospi(i/180)))
+  
+  # resample the random subset according to the latitude
+  if (exists("resample_lat")) {
+    resample_lat <-
+      bind_rows(resample_lat, resample_grid_lat)
+  }
+  
+  if (!exists("resample_lat")) {
+    resample_lat <- resample_grid_lat
+  }
+  
+}
+
+# write resampling file
+resample_lat %>%
+  write_csv(paste(path_preprocessing,
+                 "GLODAPv2.2020_preprocessed_model_runA_random_subset_lat.csv",
+                 sep = ""))
+
+```
+
+# Spatial distribution
+
+```{r random_resample_distribution_maps}
+
+# read in random model sampling file
+resample_lat <-
+  read_csv(paste(path_preprocessing,
+                 "GLODAPv2.2020_preprocessed_model_runA_random_subset_lat.csv",
+                 sep = ""))
+
+# plot random sampling cmorized grids in each year
+years <- c("1982", "1990", "2000", "2010", "2019")
+for (i_year in years) {
+  # i_year <- years[1]
+  
+  resample_lat_year <- resample_lat %>%
+    filter(year == i_year)
+  
+  print(
+    map +
+      geom_bin2d(data = resample_lat_year,
+                 aes(lon, lat),
+                 binwidth = 1) +
+      scale_fill_viridis_c(direction = -1) +
+      coord_quickmap(expand = 0) +
+      labs(
+        title = paste("Random model resampling with lat of year", i_year),
+        subtitle = paste("Nr of observations", nrow(resample_lat_year)),
+        x = "Longitude",
+        y = "Latitude"
+      )
+  )
+
+}
 
 ```
