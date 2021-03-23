@@ -83,6 +83,7 @@ For comparison, model results were converted from [mol m^-3^] to [µmol kg^-1^]
 
 ```{r subset_cmorized_constant_forcing_data, eval=FALSE}
 
+
 # set name of model to be subsetted
 model_ID <- "C"
 
@@ -91,20 +92,18 @@ years <- c("1982":"2019")
 
 for (i_year in years) {
   # i_year <- years[1]
-
+  
   # select GLODAP data for that year
   GLODAP_year <- GLODAP %>%
     filter(year == i_year)
   
   # create month x lat x lon grid of observations
   Glodap_year_grid_horizontal <- GLODAP_year %>%
-    select(month, lat, lon) %>%
-    distinct()
+    distinct(month, lat, lon)
   
   # create month x lat x lon x depth grid of observations
   Glodap_year_grid_depth <- GLODAP_year %>%
-    select(month, lat, lon, depth) %>%
-    distinct()
+    distinct(month, lat, lon, depth)
   
   # for loop across variables
   variables <-
@@ -159,7 +158,7 @@ for (i_year in years) {
     
     # mutate variables
     variable_data_tibble <- variable_data_tibble %>%
-      mutate(month = month(time_mon),!!sym(i_variable) := as.numeric(!!sym(i_variable))) %>%
+      mutate(month = month(time_mon), !!sym(i_variable) := as.numeric(!!sym(i_variable))) %>%
       select(-time_mon)
     
     # calculate model summary stats
@@ -205,7 +204,7 @@ for (i_year in years) {
       filter(n > 1) %>%
       group_by(lon, lat, month) %>%
       arrange(depth) %>%
-      mutate(!!sym(i_variable) := approxfun(depth,!!sym(i_variable), rule = 2)(depth)) %>%
+      mutate(!!sym(i_variable) := approxfun(depth, !!sym(i_variable), rule = 2)(depth)) %>%
       ungroup()
     
     # join interpolated and set model values
@@ -255,15 +254,17 @@ for (i_year in years) {
     map +
       geom_raster(data = variable_data_tibble_annual_average_surface, aes(lon, lat, fill = !!sym(i_variable))) +
       scale_fill_viridis_c(name = i_variable) +
-      geom_point(data = model_obs_interpo,
-                 aes(lon, lat), col = "black") +
-      geom_point(data = na_model,
-                 aes(lon, lat), col = "red") +
+      geom_raster(data = model_obs_interpo,
+                  aes(lon, lat), fill = "black") +
+      geom_raster(data = na_model,
+                  aes(lon, lat), fill = "red") +
       labs(
         title = "GLODAP-based cmorized subset distribution",
-        subtitle = paste("Model depth: 5m | Annual average of year",
-                         i_year,
-                         "| red = subsetting failed"),
+        subtitle = paste(
+          "Model depth: 5m | Annual average of year",
+          i_year,
+          "| red = subsetting failed"
+        ),
         x = "Longitude",
         y = "Latitude"
       )
@@ -287,9 +288,13 @@ for (i_year in years) {
 
 # write raw data file for GLODAP-based subsetting model variables
 GLODAP %>%
-  write_csv(paste(path_preprocessing,
-                  "GLODAPv2.2020_preprocessed_model_runC_raw_subset.csv",
-                  sep = ""))
+  write_csv(
+    paste(
+      path_preprocessing,
+      "GLODAPv2.2020_preprocessed_model_runC_raw_subset.csv",
+      sep = ""
+    )
+  )
 
 # write file for model summary statistics (original cmorized unit)
 stats_summary %>%
@@ -302,7 +307,6 @@ stats_summary %>%
       sep = ""
     )
   )
-
 
 ```
 
@@ -483,6 +487,7 @@ GLODAP <- GLODAP %>%
 
 # write final file for GLODAP-based subsetting model variables
 GLODAP %>%
+  select(-row_number) %>% 
   write_csv(paste(path_preprocessing,
                   "GLODAPv2.2020_preprocessed_model_runC_final.csv",
                   sep = ""))

@@ -90,21 +90,19 @@ model_ID <- "A"
 years <- c("1982":"2019")
 
 for (i_year in years) {
-  # i_year <- years[1]
-
+  # i_year <- years[30]
+  
   # select GLODAP data for that year
   GLODAP_year <- GLODAP %>%
     filter(year == i_year)
   
   # create month x lat x lon grid of observations
   Glodap_year_grid_horizontal <- GLODAP_year %>%
-    select(month, lat, lon) %>%
-    distinct()
+    distinct(month, lat, lon)
   
   # create month x lat x lon x depth grid of observations
   Glodap_year_grid_depth <- GLODAP_year %>%
-    select(month, lat, lon, depth) %>%
-    distinct()
+    distinct(month, lat, lon, depth)
   
   # for loop across variables
   variables <-
@@ -134,7 +132,8 @@ for (i_year in years) {
     variable_data <-
       read_ncdf(paste(path_cmorized,
                       file,
-                      sep = ""))
+                      sep = ""),
+                make_units = FALSE)
     
     # convert to tibble
     variable_data_tibble <- variable_data %>%
@@ -159,7 +158,7 @@ for (i_year in years) {
     
     # mutate variables
     variable_data_tibble <- variable_data_tibble %>%
-      mutate(month = month(time_mon),!!sym(i_variable) := as.numeric(!!sym(i_variable))) %>%
+      mutate(month = month(time_mon)) %>%
       select(-time_mon)
     
     # calculate model summary stats
@@ -205,7 +204,7 @@ for (i_year in years) {
       filter(n > 1) %>%
       group_by(lon, lat, month) %>%
       arrange(depth) %>%
-      mutate(!!sym(i_variable) := approxfun(depth,!!sym(i_variable), rule = 2)(depth)) %>%
+      mutate(!!sym(i_variable) := approxfun(depth, !!sym(i_variable), rule = 2)(depth)) %>%
       ungroup()
     
     # join interpolated and set model values
@@ -253,17 +252,20 @@ for (i_year in years) {
     
     # surface map of variable
     map +
-      geom_raster(data = variable_data_tibble_annual_average_surface, aes(lon, lat, fill = !!sym(i_variable))) +
+      geom_raster(data = variable_data_tibble_annual_average_surface,
+                  aes(lon, lat, fill = !!sym(i_variable))) +
       scale_fill_viridis_c(name = i_variable) +
-      geom_point(data = model_obs_interpo,
-                 aes(lon, lat), col = "black") +
-      geom_point(data = na_model,
-                 aes(lon, lat), col = "red") +
+      geom_raster(data = model_obs_interpo,
+                  aes(lon, lat), fill = "black") +
+      geom_raster(data = na_model,
+                  aes(lon, lat), fill = "red") +
       labs(
         title = "GLODAP-based cmorized subset distribution",
-        subtitle = paste("Model depth: 5m | Annual average of year",
-                         i_year,
-                         "| red = subsetting failed"),
+        subtitle = paste(
+          "Model depth: 5m | Annual average of year",
+          i_year,
+          "| red = subsetting failed"
+        ),
         x = "Longitude",
         y = "Latitude"
       )
@@ -287,9 +289,13 @@ for (i_year in years) {
 
 # write raw data file for GLODAP-based subsetting model variables
 GLODAP %>%
-  write_csv(paste(path_preprocessing,
-                  "GLODAPv2.2020_preprocessed_model_runA_raw_subset.csv",
-                  sep = ""))
+  write_csv(
+    paste(
+      path_preprocessing,
+      "GLODAPv2.2020_preprocessed_model_runA_raw_subset.csv",
+      sep = ""
+    )
+  )
 
 # write file for model summary statistics (original cmorized unit)
 stats_summary %>%
@@ -303,10 +309,10 @@ stats_summary %>%
     )
   )
 
-
 ```
 
 ```{r prepare_model_subset, eval=FALSE}
+
 
 # read file for GLODAP-based subsetting model variables
 GLODAP <-
@@ -377,19 +383,21 @@ GLODAP <- GLODAP %>%
   select(-oxygen_sat_kg, -oxygen_sat_m3)
 
 # calculate gamma model in temporary data frame
-GLODAP_gamma <- GLODAP %>% 
-  select(depth,lat,
+GLODAP_gamma <- GLODAP %>%
+  select(depth, lat,
          so_model, thetao_model, lon)
 
-GLODAP_gamma <- GLODAP_gamma %>% 
+GLODAP_gamma <- GLODAP_gamma %>%
   mutate(CTDPRS = gsw_p_from_z(-depth,
                                lat))
 
-GLODAP_gamma <- GLODAP_gamma %>% 
-  rename(LATITUDE = lat,
-         LONGITUDE = lon,
-         SALNTY = so_model,
-         THETA = thetao_model)
+GLODAP_gamma <- GLODAP_gamma %>%
+  rename(
+    LATITUDE = lat,
+    LONGITUDE = lon,
+    SALNTY = so_model,
+    THETA = thetao_model
+  )
 
 source_python(
   paste(
@@ -403,7 +411,7 @@ source_python(
 GLODAP_gamma <- calculate_gamma(GLODAP_gamma)
 
 # join gamma column with original data frame
-GLODAP <- GLODAP %>% 
+GLODAP <- GLODAP %>%
   mutate(gamma_model = GLODAP_gamma$GAMMA)
 
 rm(GLODAP_gamma)
@@ -424,7 +432,7 @@ GLODAP$dissic_model <-
 GLODAP$talk_model <-
   ifelse(is.na(GLODAP$talk), NA, GLODAP$talk_model)
 
-GLODAP$o2_model <- 
+GLODAP$o2_model <-
   ifelse(is.na(GLODAP$oxygen), NA, GLODAP$o2_model)
 
 GLODAP$no3_model <-
@@ -436,15 +444,19 @@ GLODAP$po4_model <-
 GLODAP$si_model <-
   ifelse(is.na(GLODAP$silicate), NA, GLODAP$si_model)
 
-GLODAP$aou_model <- 
+GLODAP$aou_model <-
   ifelse(is.na(GLODAP$aou), NA, GLODAP$aou_model)
 
 
 # write file for GLODAP observations + subsetted model variables
 GLODAP %>%
-  write_csv(paste(path_preprocessing,
-                  "GLODAPv2.2020_preprocessed_model_runA_both.csv",
-                  sep = ""))
+  write_csv(
+    paste(
+      path_preprocessing,
+      "GLODAPv2.2020_preprocessed_model_runA_both.csv",
+      sep = ""
+    )
+  )
 
 # remove GLODAP observations and rename model subset
 GLODAP <- GLODAP %>%
@@ -479,10 +491,11 @@ GLODAP <- GLODAP %>%
 
 # Write files
 
-```{r write_files, eval=FALSE}
+```{r write_files}
 
 # write final file for GLODAP-based subsetting model variables
 GLODAP %>%
+  select(-row_number) %>% 
   write_csv(paste(path_preprocessing,
                   "GLODAPv2.2020_preprocessed_model_runA_final.csv",
                   sep = ""))
