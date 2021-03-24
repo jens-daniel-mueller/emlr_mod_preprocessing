@@ -81,7 +81,7 @@ Besides, Model results are given in [mol m^-3^], whereas GLODAP data are in [µm
 
 For comparison, model results were converted from [mol m^-3^] to [µmol kg^-1^]
 
-```{r subset_cmorized_constant_forcing_data, eval=FALSE}
+```{r subset_cmorized_constant_forcing_data}
 
 
 # set name of model to be subsetted
@@ -133,7 +133,8 @@ for (i_year in years) {
     variable_data <-
       read_ncdf(paste(path_cmorized,
                       file,
-                      sep = ""))
+                      sep = ""),
+                make_units = FALSE)
     
     # convert to tibble
     variable_data_tibble <- variable_data %>%
@@ -310,7 +311,7 @@ stats_summary %>%
 
 ```
 
-```{r prepare_model_subset, eval=FALSE}
+```{r prepare_model_subset}
 
 # write file for GLODAP-based subsetting model variables
 GLODAP <-
@@ -483,7 +484,7 @@ GLODAP <- GLODAP %>%
 
 # Write files
 
-```{r write_files, eval=FALSE}
+```{r write_files}
 
 # write final file for GLODAP-based subsetting model variables
 GLODAP %>%
