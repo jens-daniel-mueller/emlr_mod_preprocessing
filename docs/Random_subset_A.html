@@ -408,7 +408,13 @@ div.tocify {
       <a href="GLODAP_subset_A.html">GLODAP subset variable climate</a>
     </li>
     <li>
+      <a href="GLODAP_subset_A_2021.html">GLODAP beta_2021 subset variable climate</a>
+    </li>
+    <li>
       <a href="GLODAP_subset_C.html">GLODAP subset constant climate</a>
+    </li>
+    <li>
+      <a href="GLODAP_subset_C_2021.html">GLODAP beta_2021 subset constant climate</a>
     </li>
     <li>
       <a href="Random_subset_A.html">Random subset variable climate</a>
@@ -471,7 +477,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Random subset variable A</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">20 May, 2021</h4>
+<h4 class="date">01 June, 2021</h4>
 
 </div>
 
@@ -496,7 +502,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-05-20
+<strong>Last updated:</strong> 2021-06-01
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -587,16 +593,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree170916ff455172aa7563334163064111a9d3308btargetblank170916fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/170916ff455172aa7563334163064111a9d3308b" target="_blank">170916f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree9b3014a5d1fdc4a223f1df3e021ee6ba07e08e18targetblank9b3014aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/9b3014a5d1fdc4a223f1df3e021ee6ba07e08e18" target="_blank">9b3014a</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree170916ff455172aa7563334163064111a9d3308btargetblank170916fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree9b3014a5d1fdc4a223f1df3e021ee6ba07e08e18targetblank9b3014aa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/170916ff455172aa7563334163064111a9d3308b" target="_blank">170916f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/9b3014a5d1fdc4a223f1df3e021ee6ba07e08e18" target="_blank">9b3014a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -607,6 +613,10 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Unstaged changes:
+    Modified:   analysis/Cant_AD.Rmd
+    Modified:   analysis/Cant_CB.Rmd
+    Modified:   analysis/_site.yml
+    Modified:   analysis/read_CO2_atm.Rmd
     Modified:   code/Workflowr_project_managment.R
 
 </code></pre>
@@ -646,6 +656,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/312819ff25e2ec45654c69c7893d2eeeefafa9f9/analysis/Random_subset_A.Rmd" target="_blank">312819f</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-01
+</td>
+<td>
+rerun all with GLODAPv2.2021 beta subset, and march2021 cmorization
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/45a1c9e83eb2aab26e27f0e986fd434610ebcbb8/docs/Random_subset_A.html" target="_blank">45a1c9e</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-05-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -809,7 +853,7 @@ adding constant climate for regular and random sampling
 <pre class="r"><code>path_GLODAP_preprocessing &lt;-
   paste(path_root, &quot;/observations/preprocessing/&quot;, sep = &quot;&quot;)
 path_cmorized &lt;-
-  &quot;/nfs/kryo/work/loher/CESM_output/RECCAP2/cmorized_Dec2020/split_monthly/&quot;
+  &quot;/nfs/kryo/work/loher/CESM_output/RECCAP2/cmorized_March2021/split_monthly/&quot;
 path_preprocessing  &lt;-
   paste(path_root, &quot;/model/preprocessing/&quot;, sep = &quot;&quot;)</code></pre>
 <pre class="r"><code># use only three basin to assign general basin mask
@@ -1423,6 +1467,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/45a1c9e83eb2aab26e27f0e986fd434610ebcbb8/docs/figure/Random_subset_A.Rmd/random_sample_distribution_maps-1.png" target="_blank">45a1c9e</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-05-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/Random_subset_A.Rmd/random_sample_distribution_maps-1.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -1459,6 +1514,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/45a1c9e83eb2aab26e27f0e986fd434610ebcbb8/docs/figure/Random_subset_A.Rmd/random_sample_distribution_maps-2.png" target="_blank">45a1c9e</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-05-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/Random_subset_A.Rmd/random_sample_distribution_maps-2.png" target="_blank">843587f</a>
@@ -1499,6 +1565,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/45a1c9e83eb2aab26e27f0e986fd434610ebcbb8/docs/figure/Random_subset_A.Rmd/random_sample_distribution_maps-3.png" target="_blank">45a1c9e</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-05-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/Random_subset_A.Rmd/random_sample_distribution_maps-3.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -1537,6 +1614,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/45a1c9e83eb2aab26e27f0e986fd434610ebcbb8/docs/figure/Random_subset_A.Rmd/random_sample_distribution_maps-4.png" target="_blank">45a1c9e</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-05-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/Random_subset_A.Rmd/random_sample_distribution_maps-4.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -1573,6 +1661,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/45a1c9e83eb2aab26e27f0e986fd434610ebcbb8/docs/figure/Random_subset_A.Rmd/random_sample_distribution_maps-5.png" target="_blank">45a1c9e</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-05-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/Random_subset_A.Rmd/random_sample_distribution_maps-5.png" target="_blank">843587f</a>
@@ -1638,6 +1737,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/45a1c9e83eb2aab26e27f0e986fd434610ebcbb8/docs/figure/Random_subset_A.Rmd/random_sample_depth_distribution-1.png" target="_blank">45a1c9e</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-05-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/Random_subset_A.Rmd/random_sample_depth_distribution-1.png" target="_blank">843587f</a>
 </td>
 <td>
@@ -1700,6 +1810,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/45a1c9e83eb2aab26e27f0e986fd434610ebcbb8/docs/figure/Random_subset_A.Rmd/GLODAP_depth_distribution-1.png" target="_blank">45a1c9e</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-05-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/figure/Random_subset_A.Rmd/GLODAP_depth_distribution-1.png" target="_blank">843587f</a>
@@ -1807,6 +1928,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/45a1c9e83eb2aab26e27f0e986fd434610ebcbb8/docs/figure/Random_subset_A.Rmd/random_resample_distribution_maps-1.png" target="_blank">45a1c9e</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-05-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/6aa4f34c63477784d70be8ce101e844306d9f33f/docs/figure/Random_subset_A.Rmd/random_resample_distribution_maps-1.png" target="_blank">6aa4f34</a>
 </td>
 <td>
@@ -1843,6 +1975,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/45a1c9e83eb2aab26e27f0e986fd434610ebcbb8/docs/figure/Random_subset_A.Rmd/random_resample_distribution_maps-2.png" target="_blank">45a1c9e</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-05-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/6aa4f34c63477784d70be8ce101e844306d9f33f/docs/figure/Random_subset_A.Rmd/random_resample_distribution_maps-2.png" target="_blank">6aa4f34</a>
@@ -1883,6 +2026,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/45a1c9e83eb2aab26e27f0e986fd434610ebcbb8/docs/figure/Random_subset_A.Rmd/random_resample_distribution_maps-3.png" target="_blank">45a1c9e</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-05-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/6aa4f34c63477784d70be8ce101e844306d9f33f/docs/figure/Random_subset_A.Rmd/random_resample_distribution_maps-3.png" target="_blank">6aa4f34</a>
 </td>
 <td>
@@ -1921,6 +2075,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/45a1c9e83eb2aab26e27f0e986fd434610ebcbb8/docs/figure/Random_subset_A.Rmd/random_resample_distribution_maps-4.png" target="_blank">45a1c9e</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-05-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/6aa4f34c63477784d70be8ce101e844306d9f33f/docs/figure/Random_subset_A.Rmd/random_resample_distribution_maps-4.png" target="_blank">6aa4f34</a>
 </td>
 <td>
@@ -1957,6 +2122,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/45a1c9e83eb2aab26e27f0e986fd434610ebcbb8/docs/figure/Random_subset_A.Rmd/random_resample_distribution_maps-5.png" target="_blank">45a1c9e</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-05-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/6aa4f34c63477784d70be8ce101e844306d9f33f/docs/figure/Random_subset_A.Rmd/random_resample_distribution_maps-5.png" target="_blank">6aa4f34</a>
@@ -2019,7 +2195,7 @@ loaded via a namespace (and not attached):
 [22] classInt_0.4-3           rappdirs_0.3.1           digest_0.6.27           
 [25] rmarkdown_2.5            pkgconfig_2.0.3          htmltools_0.5.0         
 [28] dbplyr_1.4.4             rlang_0.4.10             readxl_1.3.1            
-[31] rstudioapi_0.13          farver_2.0.3             generics_0.0.2          
+[31] rstudioapi_0.11          farver_2.0.3             generics_0.0.2          
 [34] jsonlite_1.7.1           magrittr_1.5             ncmeta_0.3.0            
 [37] Matrix_1.2-18            Rcpp_1.0.5               munsell_0.5.0           
 [40] fansi_0.4.1              lifecycle_1.0.0          stringi_1.5.3           
