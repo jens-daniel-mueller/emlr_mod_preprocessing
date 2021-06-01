@@ -1,5 +1,5 @@
 ---
-title: "GLODAP subset variable climate A"
+title: "GLODAP subset constant climate C"
 author: "Jens Daniel Müller"
 date:  "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
@@ -57,7 +57,7 @@ basinmask <- basinmask %>%
 
 GLODAP <-
   read_csv(paste(path_GLODAP_preprocessing,
-                 "GLODAPv2.2020_preprocessed.csv",
+                 "GLODAPv2.2021_preprocessed.csv",
                  sep = ""))
 
 GLODAP <- GLODAP %>%
@@ -67,7 +67,7 @@ GLODAP <- GLODAP %>%
 
 # Subset cmorized data according to GLODAP observation
 
-Here we subset cmorized (1x1) data from the model with variable forcing, according to the presence of GLODAP observations in a previously cleaned file.
+Here we subset cmorized (1x1) data from the model with constant forcing, according to the presence of GLODAP observations in a previously cleaned file.
 
 Besides, Model results are given in [mol m^-3^], whereas GLODAP data are in [µmol kg^-1^]. This refers to the variables:
 
@@ -81,16 +81,17 @@ Besides, Model results are given in [mol m^-3^], whereas GLODAP data are in [µm
 
 For comparison, model results were converted from [mol m^-3^] to [µmol kg^-1^]
 
-```{r subset_cmorized_variable_forcing_data}
+```{r subset_cmorized_constant_forcing_data}
+
 
 # set name of model to be subsetted
-model_ID <- "A"
+model_ID <- "C"
 
 # for loop across years
 years <- c("1982":"2019")
 
 for (i_year in years) {
-  # i_year <- years[30]
+  # i_year <- years[1]
   
   # select GLODAP data for that year
   GLODAP_year <- GLODAP %>%
@@ -158,7 +159,7 @@ for (i_year in years) {
     
     # mutate variables
     variable_data_tibble <- variable_data_tibble %>%
-      mutate(month = month(time_mon)) %>%
+      mutate(month = month(time_mon), !!sym(i_variable) := as.numeric(!!sym(i_variable))) %>%
       select(-time_mon)
     
     # calculate model summary stats
@@ -252,8 +253,7 @@ for (i_year in years) {
     
     # surface map of variable
     map +
-      geom_raster(data = variable_data_tibble_annual_average_surface,
-                  aes(lon, lat, fill = !!sym(i_variable))) +
+      geom_raster(data = variable_data_tibble_annual_average_surface, aes(lon, lat, fill = !!sym(i_variable))) +
       scale_fill_viridis_c(name = i_variable) +
       geom_raster(data = model_obs_interpo,
                   aes(lon, lat), fill = "black") +
@@ -273,7 +273,7 @@ for (i_year in years) {
     ggsave(
       paste(
         path_preprocessing,
-        "regular_subset_distribution_runA/",
+        "regular_subset_distribution_runC_2021/",
         i_variable,
         "_",
         i_year,
@@ -292,7 +292,7 @@ GLODAP %>%
   write_csv(
     paste(
       path_preprocessing,
-      "GLODAPv2.2020_preprocessed_model_runA_raw_subset.csv",
+      "GLODAPv2.2021_preprocessed_model_runC_raw_subset.csv",
       sep = ""
     )
   )
@@ -302,7 +302,7 @@ stats_summary %>%
   write_csv(
     paste(
       path_preprocessing,
-      "regular_subset_distribution_runA/",
+      "regular_subset_distribution_runC_2021/",
       model_ID,
       "_summary_stats.csv",
       sep = ""
@@ -313,13 +313,12 @@ stats_summary %>%
 
 ```{r prepare_model_subset}
 
-
-# read file for GLODAP-based subsetting model variables
+# write file for GLODAP-based subsetting model variables
 GLODAP <-
   read_csv(
     paste(
       path_preprocessing,
-      "GLODAPv2.2020_preprocessed_model_runA_raw_subset.csv",
+      "GLODAPv2.2021_preprocessed_model_runC_raw_subset.csv",
       sep = ""
     ),
     col_types = cols(
@@ -383,21 +382,19 @@ GLODAP <- GLODAP %>%
   select(-oxygen_sat_kg, -oxygen_sat_m3)
 
 # calculate gamma model in temporary data frame
-GLODAP_gamma <- GLODAP %>%
-  select(depth, lat,
+GLODAP_gamma <- GLODAP %>% 
+  select(depth,lat,
          so_model, thetao_model, lon)
 
-GLODAP_gamma <- GLODAP_gamma %>%
+GLODAP_gamma <- GLODAP_gamma %>% 
   mutate(CTDPRS = gsw_p_from_z(-depth,
                                lat))
 
-GLODAP_gamma <- GLODAP_gamma %>%
-  rename(
-    LATITUDE = lat,
-    LONGITUDE = lon,
-    SALNTY = so_model,
-    THETA = thetao_model
-  )
+GLODAP_gamma <- GLODAP_gamma %>% 
+  rename(LATITUDE = lat,
+         LONGITUDE = lon,
+         SALNTY = so_model,
+         THETA = thetao_model)
 
 source_python(
   paste(
@@ -411,7 +408,7 @@ source_python(
 GLODAP_gamma <- calculate_gamma(GLODAP_gamma)
 
 # join gamma column with original data frame
-GLODAP <- GLODAP %>%
+GLODAP <- GLODAP %>% 
   mutate(gamma_model = GLODAP_gamma$GAMMA)
 
 rm(GLODAP_gamma)
@@ -432,7 +429,7 @@ GLODAP$dissic_model <-
 GLODAP$talk_model <-
   ifelse(is.na(GLODAP$talk), NA, GLODAP$talk_model)
 
-GLODAP$o2_model <-
+GLODAP$o2_model <- 
   ifelse(is.na(GLODAP$oxygen), NA, GLODAP$o2_model)
 
 GLODAP$no3_model <-
@@ -444,19 +441,15 @@ GLODAP$po4_model <-
 GLODAP$si_model <-
   ifelse(is.na(GLODAP$silicate), NA, GLODAP$si_model)
 
-GLODAP$aou_model <-
+GLODAP$aou_model <- 
   ifelse(is.na(GLODAP$aou), NA, GLODAP$aou_model)
 
 
 # write file for GLODAP observations + subsetted model variables
 GLODAP %>%
-  write_csv(
-    paste(
-      path_preprocessing,
-      "GLODAPv2.2020_preprocessed_model_runA_both.csv",
-      sep = ""
-    )
-  )
+  write_csv(paste(path_preprocessing,
+                  "GLODAPv2.2021_preprocessed_model_runC_both.csv",
+                  sep = ""))
 
 # remove GLODAP observations and rename model subset
 GLODAP <- GLODAP %>%
@@ -497,7 +490,7 @@ GLODAP <- GLODAP %>%
 GLODAP %>%
   select(-row_number) %>% 
   write_csv(paste(path_preprocessing,
-                  "GLODAPv2.2020_preprocessed_model_runA_final.csv",
+                  "GLODAPv2.2021_preprocessed_model_runC_final.csv",
                   sep = ""))
 
 ```
@@ -509,7 +502,7 @@ GLODAP %>%
 
 GLODAP <-
   read_csv(paste(path_GLODAP_preprocessing,
-                 "GLODAPv2.2020_preprocessed.csv",
+                 "GLODAPv2.2021_preprocessed.csv",
                  sep = ""))
 
 GLODAP <- GLODAP %>%
@@ -532,7 +525,7 @@ Glodap_year_grid_depth <- GLODAP_2019 %>%
 # read in cmorized tco2 output in year 2019
 variable_data_tibble <-
   read_ncdf(paste(path_cmorized, 
-    "dissic_CESM-ETHZ_A_1_gr_2019.nc",
+    "dissic_CESM-ETHZ_C_1_gr_2019.nc",
     sep = ""
   )) %>%
   as_tibble()
@@ -642,7 +635,7 @@ map +
 ```{r read_GLODAP_with_cmorized_subset_file}
 
 GLODAP_cmorized <- read_csv(paste(path_preprocessing,
-                                  "GLODAPv2.2020_preprocessed_model_runA_both.csv",
+                                  "GLODAPv2.2020_preprocessed_model_runC_both.csv",
                                   sep = ""))
 
 ```
@@ -661,8 +654,7 @@ obs_var <-
     "silicate",
     "sal",
     "temp",
-    "theta",
-    "gamma"
+    "theta"
   )
 
 model_var <-
@@ -676,12 +668,11 @@ model_var <-
     "si_model",
     "so_model",
     "temp_model",
-    "thetao_model",
-    "gamma_model"
+    "thetao_model"
   )
 
-for (i in 1:11) {
-#  i <- 1
+for (i in 1:10) {
+  #i <- 1
   
   # select correlated observation and model variable
   GLODAP_cmorized_var <- GLODAP_cmorized %>%
@@ -690,7 +681,6 @@ for (i in 1:11) {
            lat,
            lon,
            depth,
-           basin_AIP,
            !!sym(obs_var[i]),
            !!sym(model_var[i])) %>%
     drop_na() %>%
@@ -831,47 +821,6 @@ for (i in 1:11) {
                            intervals[j], "-", intervals[j + 1], "m")
         ) +
         coord_cartesian(expand = FALSE)
-    )
-  }
-  
-  # zonal mean section of the model-observations offset for each basin
-  for (i_basin_AIP in unique(GLODAP_cmorized_var$basin_AIP)) {
-   # i_basin_AIP = "Atlantic"
-    GLODAP_cmorized_var_zonal <- GLODAP_cmorized_var %>%
-      filter(basin_AIP == i_basin_AIP) %>%
-      group_by(lat, depth) %>%
-      summarise(offset = mean(offset, na.rm=TRUE)) %>%
-      ungroup()
-    
-    # plot zonal mean section (model - obs)
-    lat_max <- params_global$lat_max
-    lat_min <- params_global$lat_min
-    limit <-
-      quantile(abs(GLODAP_cmorized_var_zonal$offset), 0.98) * c(-1, 1)
-    
-    print(
-      GLODAP_cmorized_var_zonal %>%
-        ggplot(aes(lat, depth, z = offset)) +
-        stat_summary_2d(binwidth = c(1,100)) +
-        scale_fill_scico(
-          palette = "vik",
-          name = "offset",
-          limit = limit,
-          na.value = "red"
-        ) +
-        coord_cartesian(expand = 0,
-                        xlim = c(lat_min, lat_max)) +
-        scale_y_reverse() +
-        labs(
-          title = paste(model_var[i],
-                        "-",
-                        obs_var[i],
-                        " | zonal mean offset"),
-          subtitle = paste("Basin:",
-                           i_basin_AIP),
-          x = "Latitude",
-          y = "Depth"
-        )
     )
   }
 }

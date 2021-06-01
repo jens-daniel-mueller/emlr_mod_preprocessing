@@ -22,7 +22,7 @@ editor_options:
 path_GLODAP_preprocessing <-
   paste(path_root, "/observations/preprocessing/", sep = "")
 path_cmorized <-
-  "/nfs/kryo/work/loher/CESM_output/RECCAP2/cmorized_Dec2020/split_monthly/"
+  "/nfs/kryo/work/loher/CESM_output/RECCAP2/cmorized_March2021/split_monthly/"
 path_preprocessing  <-
   paste(path_root, "/model/preprocessing/", sep = "")
 ```
