@@ -63,6 +63,9 @@ climatology <- climatology_temp %>%
   hyper_filter(time_ann = time_ann == 10036) %>% 
   hyper_tibble()
 
+climatology <- climatology %>% 
+  filter(dissic < 1e30)
+
 # convert data variable to year
 climatology <- climatology %>% 
   mutate(year = round(1980 + unique(climatology$time_ann)/(365))) %>% 
