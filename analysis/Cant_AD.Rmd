@@ -20,7 +20,7 @@ editor_options:
 
 ```{r define_paths, include=FALSE}
 path_cmorized <-
-  "/nfs/kryo/work/loher/CESM_output/RECCAP2/cmorized_Dec2020/"
+  "/nfs/kryo/work/loher/CESM_output/RECCAP2/cmorized_March2021/"
 path_preprocessing  <-
   paste(path_root, "/model/preprocessing/", sep = "")
 ```
@@ -66,8 +66,8 @@ A_annual <- A_annual %>%
     sal = so,
     theta = thetao
   ) %>%
-  # mutate year from seconds since Jan 1, 1980
-  mutate(year = (year - 15638400) / 31536000 + 1980) %>%
+  # compute year from days since Jan 1, 1980
+  mutate(year = (year - 181) / 365 + 1980) %>%
   mutate(lon = if_else(lon < 20, lon + 360, lon))
 
 # calculate model temperature
@@ -116,8 +116,8 @@ D_annual <- D_annual  %>%
     sal = so,
     theta = thetao
   ) %>%
-  # mutate year from seconds since Jan 1, 1980
-  mutate(year = (year - 15638400) / 31536000 + 1980) %>%
+  # compute year from days since Jan 1, 1980
+  mutate(year = (year - 181) / 365 + 1980) %>%
   mutate(lon = if_else(lon < 20, lon + 360, lon))
 
 # calculate model temperature
