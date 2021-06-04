@@ -25,6 +25,9 @@ path_GLODAP_preprocessing <-
 path_cmorized <-
   "/nfs/kryo/work/loher/CESM_output/RECCAP2/cmorized_March2021/split_monthly/"
 
+# path_cmorized <-
+#   "/nfs/kryo/work/loher/CESM_output/RECCAP2/cmorized_Dec2020/split_monthly/"
+
 path_preprocessing <-
   paste(path_root, "/model/preprocessing/", sep = "")
 ```

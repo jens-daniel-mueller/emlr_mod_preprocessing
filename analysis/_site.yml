@@ -13,8 +13,12 @@ navbar:
     menu:
     - text: GLODAP subset variable climate
       href: GLODAP_subset_A.html
+    - text: GLODAP beta_2021 subset variable climate
+      href: GLODAP_subset_A_2021.html
     - text: GLODAP subset constant climate
       href: GLODAP_subset_C.html
+    - text: GLODAP beta_2021 subset constant climate
+      href: GLODAP_subset_C_2021.html
     - text: Random subset variable climate
       href: Random_subset_A.html
     - text: Random subset constant climate

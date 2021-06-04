@@ -20,7 +20,6 @@ editor_options:
 
 ```{r define_paths, include=FALSE}
 path_cmorized       <- "/nfs/kryo/work/loher/CESM_output/RECCAP2/cmorized_March2021/"
-# path_cmorized       <- "/nfs/kryo/work/loher/CESM_output/RECCAP2/cmorized_Dec2020/"
 path_preprocessing  <- paste(path_root, "/model/preprocessing/", sep = "")
 ```
 
@@ -63,13 +62,6 @@ climatology_temp <- tidync(paste(
 climatology <- climatology_temp %>% 
   hyper_filter(time_ann = time_ann == 10036) %>% 
   hyper_tibble()
-
-climatology <- climatology %>% 
-  filter(dissic < 1e30)
-
-# climatology <- climatology_temp %>% 
-#   hyper_filter(time_ann = time_ann == 10036*60*60*24) %>% 
-#   hyper_tibble()
 
 # convert data variable to year
 climatology <- climatology %>% 

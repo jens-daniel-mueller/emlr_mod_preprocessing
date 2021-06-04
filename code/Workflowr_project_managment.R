@@ -5,7 +5,7 @@
 
 # commit regular changes (locally) and rebuild site
 # this takes only changed files into account
-wflow_publish(all = TRUE, message = "re-run subsetting with GLODAP row_number column")
+wflow_publish(all = TRUE, message = "re-run with correct NA definition in input files")
 
 # commit changes including _site.yml (locally) and rebuild site in the specified order
 # you can also run this code with only some of the files. In this case remove the rebuild=TRUE command
@@ -16,7 +16,9 @@ wflow_publish(here::here(
     "Climatology_A.Rmd",
     "Climatology_C.Rmd",
     "GLODAP_subset_A.Rmd",
+    "GLODAP_subset_A_2021.Rmd",
     "GLODAP_subset_C.Rmd",
+    "GLODAP_subset_C_2021.Rmd",
     "Random_subset_A.Rmd",
     "Random_subset_C.Rmd",
     "Cant_AD.Rmd",
@@ -24,8 +26,17 @@ wflow_publish(here::here(
     "read_CO2_atm.Rmd"
   )
 ),
-message = "complete rebuild after add constant climate",
+message = "rerun all with GLODAPv2.2021 beta subset, and march2021 cmorization",
 republish = TRUE)
+
+wflow_publish(here::here(
+  "analysis",
+  c(
+    "Climatology_A.Rmd",
+    "Climatology_C.Rmd"
+  )
+),
+message = "rerun all with GLODAPv2.2021 beta subset, and march2021 cmorization")
 
 
 # Push latest version to GitHub
