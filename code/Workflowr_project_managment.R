@@ -16,6 +16,7 @@ wflow_publish(here::here(
     "Climatology_A.Rmd",
     "Climatology_C.Rmd",
     "GLODAP_subset_A.Rmd",
+    "GLODAP_subset_A_2021_annual.Rmd",
     "GLODAP_subset_A_2021.Rmd",
     "GLODAP_subset_C.Rmd",
     "GLODAP_subset_C_2021.Rmd",
