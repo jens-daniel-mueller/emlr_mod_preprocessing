@@ -199,7 +199,7 @@ climatology <- climatology %>%
 
 Neutral density gamma was calculated with a Python script provided by Serazin et al (2011), which performs a polynomial approximation of the original gamma calculation.
 
-```{r calc_neutral_density}
+```{r calc_neutral_density, eval=FALSE}
 
 # calculate pressure from depth
 climatology <- climatology %>%
@@ -241,7 +241,7 @@ rm(climatology_gamma_calc, climatology_gamma_prep)
 
 # Write file
 
-```{r write_climatology_predictor_file}
+```{r write_climatology_predictor_file, eval=FALSE}
 
 # select relevant columns
 climatology <- climatology %>%
@@ -263,7 +263,7 @@ Below, following subsets of the climatology are plotted for all relevant predict
 - Horizontal planes at 4 depth levels
 - Global section along track indicated by white lines in maps.
 
-```{r climatology_maps_and_sections}
+```{r climatology_maps_and_sections, eval=FALSE}
 
 
 # define plotting variables

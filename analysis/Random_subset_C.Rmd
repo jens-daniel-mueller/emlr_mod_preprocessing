@@ -75,7 +75,7 @@ Besides, Model results are given in [mol m^-3^], whereas GLODAP data are in [µm
 
 For comparison, model results were converted from [mol m^-3^] to [µmol kg^-1^]
 
-```{r random_subset_cmorized_constant_forcing_data}
+```{r random_subset_cmorized_constant_forcing_data, eval=FALSE}
 
 # read in a random model
 model <-
@@ -396,7 +396,7 @@ GLODAP_depth_average %>%
 
 The previous sampling was performed randomly across a 1x1 horizontal grid, resulting in a higher number of samples per surface area at higher latitude. This bias is corrected by resampling with a latitude dependend weight.
 
-```{r resample_with_less_high_lat_points}
+```{r resample_with_less_high_lat_points, eval=FALSE}
 
 # read in random model sampling file
 resample_grid <-
