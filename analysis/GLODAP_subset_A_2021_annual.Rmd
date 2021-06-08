@@ -23,7 +23,7 @@ path_GLODAP_preprocessing <-
   paste(path_root, "/observations/preprocessing/", sep = "")
 
 path_cmorized <-
-  "/nfs/kryo/work/loher/CESM_output/RECCAP2/submit_March2021/"
+  "/nfs/kryo/work/loher/CESM_output/RECCAP2/submit_June2021/"
 
 path_preprocessing <-
   paste(path_root, "/model/preprocessing/", sep = "")
@@ -84,7 +84,7 @@ Besides, Model results are given in [mol m^-3^], whereas GLODAP data are in [µm
 
 For comparison, model results were converted from [mol m^-3^] to [µmol kg^-1^]
 
-```{r subset_cmorized_variable_forcing_data, eval=FALSE}
+```{r subset_cmorized_variable_forcing_data}
 
 # set name of model to be subsetted
 model_ID <- "A"
@@ -308,7 +308,7 @@ stats_summary %>%
 
 ```
 
-```{r prepare_model_subset, eval=FALSE}
+```{r prepare_model_subset}
 
 # read file for GLODAP-based subsetting model variables
 GLODAP <-
@@ -487,7 +487,7 @@ GLODAP <- GLODAP %>%
 
 # Write files
 
-```{r write_files, eval=FALSE}
+```{r write_files}
 
 # write final file for GLODAP-based subsetting model variables
 GLODAP %>%
