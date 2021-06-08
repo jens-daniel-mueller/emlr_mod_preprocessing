@@ -148,10 +148,12 @@ for (i_model_ID in model_IDs) {
       }
     
     # surface map of variable
+    print(
     map +
       geom_raster(data = variable_data_tibble_climatology,
                   aes(lon, lat, fill = !!sym(i_variable))) +
       scale_fill_viridis_c(name = i_variable)
+    )
     
     
     # write raw data file for GLODAP-based subsetting model variables
