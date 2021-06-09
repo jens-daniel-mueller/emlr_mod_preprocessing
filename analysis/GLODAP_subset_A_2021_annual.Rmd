@@ -105,7 +105,7 @@ for (i_variable in variables) {
         i_variable,
         "_CESM-ETHZ_",
         model_ID,
-        "_1_gr_1980-2018_v20210312.nc",
+        "_1_gr_1980-2018_v20210607.nc",
         sep = ""
       )
     )
@@ -141,7 +141,7 @@ for (i_variable in variables) {
   
   # mutate variables
   variable_data_tibble <- variable_data_tibble %>%
-    mutate(year = year(time_ann) + 1) %>%
+    mutate(year = year(time_ann)) %>%
     select(-time_ann)
   
   # for loop across years
@@ -501,7 +501,7 @@ GLODAP %>%
 
 # Test for interpolation
 
-```{r test_for_interpolation}
+```{r test_for_interpolation, eval=FALSE}
 
 GLODAP <-
   read_csv(paste(path_GLODAP_preprocessing,
@@ -528,7 +528,7 @@ Glodap_year_grid_depth <- GLODAP_2019 %>%
 # read in cmorized tco2 output in year 2019
 variable_data_tibble <-
   read_ncdf(paste(path_cmorized, 
-    "dissic_CESM-ETHZ_A_1_gr_1980-2018_v20210312.nc",
+    "dissic_CESM-ETHZ_A_1_gr_1980-2018_v20210607.nc",
     sep = ""
   )) %>%
   as_tibble()
