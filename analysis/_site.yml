@@ -15,6 +15,8 @@ navbar:
       href: GLODAP_subset_A.html
     - text: GLODAP beta_2021 subset variable climate
       href: GLODAP_subset_A_2021.html
+    - text: GLODAP beta_2021 subset variable climate annual
+      href: GLODAP_subset_A_2021_annual.html
     - text: GLODAP subset constant climate
       href: GLODAP_subset_C.html
     - text: GLODAP beta_2021 subset constant climate
@@ -29,8 +31,12 @@ navbar:
       href: Cant_AD.html
     - text: Cant constant climate
       href: Cant_CB.html
-  - text: Atmospheric CO2
-    href: read_CO2_atm.html
+  - text: Surface data
+    menu:
+    - text: Surface Ocean
+      href: surface_ocean.html
+    - text: Atmospheric CO2
+      href: read_CO2_atm.html
   right:
   - icon: fa-github
     text: Source code

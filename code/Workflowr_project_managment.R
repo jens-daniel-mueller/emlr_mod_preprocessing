@@ -24,20 +24,20 @@ wflow_publish(here::here(
     "Random_subset_C.Rmd",
     "Cant_AD.Rmd",
     "Cant_CB.Rmd",
-    "read_CO2_atm.Rmd"
+    "read_CO2_atm.Rmd",
+    "surface_ocean.Rmd"
   )
 ),
-message = "rerun all with GLODAPv2.2021 beta subset, and march2021 cmorization",
+message = "rerun all with surface ocean data",
 republish = TRUE)
 
 wflow_publish(here::here(
   "analysis",
   c(
-    "Climatology_A.Rmd",
-    "Climatology_C.Rmd"
+    "surface_ocean.Rmd"
   )
 ),
-message = "rerun all with GLODAPv2.2021 beta subset, and march2021 cmorization")
+message = "testrun surface ocean data")
 
 
 # Push latest version to GitHub
