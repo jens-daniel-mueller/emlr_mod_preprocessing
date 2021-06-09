@@ -198,10 +198,6 @@ area_grid <-
 area_grid <- area_grid %>%
   mutate(lon = if_else(lon < 20, lon + 360, lon))
 
-map +
-  geom_raster(data = area_grid,
-              aes(lon, lat, fill=area))
-
 # for loop across variables
 variables <-
   c("spco2",
@@ -210,7 +206,7 @@ variables <-
 
 
 for (i_model_ID in model_IDs) {
-  # i_model_ID <- model_IDs[1]
+  # i_model_ID <- model_IDs[2]
   
   for (i_variable in variables) {
     # i_variable <- variables[2]
@@ -284,13 +280,16 @@ for (i_model_ID in model_IDs) {
     summarise(delta_pco2 = mean(delta_pco2)) %>%
     ungroup()
   
+  print(
   ggplot() +
     geom_path(data = delta_pco2_monthly,
               aes(decimal_date(time_mon), delta_pco2, col = "monthly")) +
     geom_path(data = delta_pco2_annual,
               aes(year, delta_pco2, col = "annual")) +
     scale_color_brewer(palette = "Set1", name = "Average") +
-    labs(title = i_model_ID)
+    labs(title = paste("model_id:",i_model_ID),
+         x = "year")
+  )
   
   # write raw data file for GLODAP-based subsetting model variables
   delta_pco2_annual %>%
@@ -303,6 +302,8 @@ for (i_model_ID in model_IDs) {
         sep = ""
       )
     )
+  
+  rm(i_variable, all_variables, delta_pco2_annual, delta_pco2_monthly)
   
 }
 
