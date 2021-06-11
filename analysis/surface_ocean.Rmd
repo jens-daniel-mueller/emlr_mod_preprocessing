@@ -66,7 +66,7 @@ Besides, Model results are given in [mol m^-3^], whereas GLODAP data are in [µm
 
 For comparison, model results were converted from [mol m^-3^] to [µmol kg^-1^]
 
-```{r subset_cmorized_variable_forcing_data}
+```{r subset_cmorized_variable_forcing_data, eval=FALSE}
 # set name of model to be subsetted
 model_IDs <- c("A", "D")
 
@@ -202,11 +202,12 @@ area_grid <- area_grid %>%
 variables <-
   c("spco2",
     "Kw",
-    "pco2atm")
+    "pco2atm",
+    "alpha")
 
 
 for (i_model_ID in model_IDs) {
-  # i_model_ID <- model_IDs[2]
+  # i_model_ID <- model_IDs[3]
   
   for (i_variable in variables) {
     # i_variable <- variables[2]
@@ -264,20 +265,22 @@ for (i_model_ID in model_IDs) {
   
   delta_pco2_monthly <- all_variables %>%
     mutate(delta_pco2 = spco2 - pco2atm,
-           delta_pco2_scale = delta_pco2 * area * Kw) %>%
+           scale = area * Kw * alpha,
+           delta_pco2_scale = delta_pco2 * scale) %>%
     group_by(time_mon) %>%
     summarise(
-      scaling_total = sum(area * Kw),
+      scaling_total = sum(scale),
       delta_pco2_scale_total = sum(delta_pco2_scale),
       delta_pco2 = delta_pco2_scale_total / scaling_total
     ) %>%
     ungroup() %>%
-    select(-c(scaling_total, delta_pco2_scale_total))
+    select(-c(delta_pco2_scale_total))
   
   delta_pco2_annual <- delta_pco2_monthly %>%
     mutate(year = year(time_mon)) %>%
     group_by(year) %>%
-    summarise(delta_pco2 = mean(delta_pco2)) %>%
+    summarise(delta_pco2 = mean(delta_pco2),
+              scaling_total = mean(scaling_total)) %>%
     ungroup()
   
   print(
@@ -291,8 +294,20 @@ for (i_model_ID in model_IDs) {
          x = "year")
   )
   
+  print(
+  ggplot() +
+    geom_path(data = delta_pco2_monthly,
+              aes(decimal_date(time_mon), scaling_total, col = "monthly")) +
+    geom_path(data = delta_pco2_annual,
+              aes(year, scaling_total, col = "annual")) +
+    scale_color_brewer(palette = "Set1", name = "Average") +
+    labs(title = paste("model_id:",i_model_ID),
+         x = "year")
+  )
+  
   # write raw data file for GLODAP-based subsetting model variables
   delta_pco2_annual %>%
+    select(-scaling_total) %>% 
     write_csv(
       file = paste(
         path_preprocessing,
