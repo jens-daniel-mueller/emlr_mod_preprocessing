@@ -203,14 +203,15 @@ variables <-
   c("spco2",
     "Kw",
     "pco2atm",
-    "alpha")
+    "alpha",
+    "fice")
 
 
 for (i_model_ID in model_IDs) {
-  # i_model_ID <- model_IDs[3]
+  # i_model_ID <- model_IDs[1]
   
   for (i_variable in variables) {
-    # i_variable <- variables[2]
+    # i_variable <- variables[4]
     
     # read list of all files
     file <- paste(i_variable,
@@ -263,9 +264,17 @@ for (i_model_ID in model_IDs) {
   all_variables <- inner_join(all_variables,
                               area_grid)
   
+  map +
+    geom_raster(data = all_variables %>%
+                  filter(time_mon %in% last(unique(
+                    all_variables$time_mon
+                  ))),
+                aes(lon, lat, fill = fice)) +
+    scale_fill_viridis_c()
+
   delta_pco2_monthly <- all_variables %>%
     mutate(delta_pco2 = spco2 - pco2atm,
-           scale = area * Kw * alpha,
+           scale = area * Kw * alpha * (1-fice),
            delta_pco2_scale = delta_pco2 * scale) %>%
     group_by(time_mon) %>%
     summarise(
@@ -305,9 +314,28 @@ for (i_model_ID in model_IDs) {
          x = "year")
   )
   
+  sec_to_yr <- 60*60*24*365
+  micro <- 1e6
+  mol_to_g <- 12
+  P <- 1e-15
+  m3_to_kg <- 1030
+  
+  scaling_conversion <- micro * sec_to_yr * mol_to_g * P / m3_to_kg
+  
+  print(
+  ggplot() +
+    geom_path(data = delta_pco2_monthly,
+              aes(decimal_date(time_mon), scaling_total*delta_pco2*scaling_conversion, col = "monthly")) +
+    geom_path(data = delta_pco2_annual,
+              aes(year, scaling_total*delta_pco2*scaling_conversion, col = "annual")) +
+    scale_color_brewer(palette = "Set1", name = "Average") +
+    labs(title = paste("model_id:",i_model_ID),
+         x = "year")
+  )
+  
   # write raw data file for GLODAP-based subsetting model variables
   delta_pco2_annual %>%
-    select(-scaling_total) %>% 
+    # select(-scaling_total) %>% 
     write_csv(
       file = paste(
         path_preprocessing,
