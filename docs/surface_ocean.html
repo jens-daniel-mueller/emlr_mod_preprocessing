@@ -492,7 +492,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Surface Ocean data</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">16 June, 2021</h4>
+<h4 class="date">17 June, 2021</h4>
 
 </div>
 
@@ -517,7 +517,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-06-16
+<strong>Last updated:</strong> 2021-06-17
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -608,16 +608,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree366beabb6454c765e7f2ad451385521431ffefb0targetblank366beaba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/366beabb6454c765e7f2ad451385521431ffefb0" target="_blank">366beab</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree29561c948d9c34caeeea2ce41f5d0dd28be66a76targetblank29561c9a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/29561c948d9c34caeeea2ce41f5d0dd28be66a76" target="_blank">29561c9</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree366beabb6454c765e7f2ad451385521431ffefb0targetblank366beaba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree29561c948d9c34caeeea2ce41f5d0dd28be66a76targetblank29561c9a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/366beabb6454c765e7f2ad451385521431ffefb0" target="_blank">366beab</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/29561c948d9c34caeeea2ce41f5d0dd28be66a76" target="_blank">29561c9</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -664,6 +664,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/29561c948d9c34caeeea2ce41f5d0dd28be66a76/analysis/surface_ocean.Rmd" target="_blank">29561c9</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-17
+</td>
+<td>
+derive globally integrated scaling factor
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/surface_ocean.html" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1080,7 +1114,7 @@ for (i_model_ID in model_IDs) {
   # i_model_ID &lt;- model_IDs[1]
   
   for (i_variable in variables) {
-    # i_variable &lt;- variables[4]
+    # i_variable &lt;- variables[5]
     
     # read list of all files
     file &lt;- paste(i_variable,
@@ -1089,8 +1123,7 @@ for (i_model_ID in model_IDs) {
                   &quot;_1_gr_1980-2018_v20210607.nc&quot;,
                   sep = &quot;&quot;)
     print(file)
-    
-    
+
     # read in data
     variable_data &lt;-
       read_ncdf(paste(path_cmorized,
@@ -1133,40 +1166,44 @@ for (i_model_ID in model_IDs) {
   all_variables &lt;- inner_join(all_variables,
                               area_grid)
   
-  map +
-    geom_raster(data = all_variables %&gt;%
-                  filter(time_mon %in% last(unique(
-                    all_variables$time_mon
-                  ))),
-                aes(lon, lat, fill = fice)) +
-    scale_fill_viridis_c()
+  mol_to_g &lt;- 12
+  P &lt;- 1e-15
+  m3_to_kg &lt;- 1030
+  sec_to_yr &lt;- 60*60*24*365
 
-  delta_pco2_monthly &lt;- all_variables %&gt;%
+  unit_conversion_to_PgCyr &lt;- mol_to_g * P * sec_to_yr / m3_to_kg
+
+  all_variables &lt;- all_variables %&gt;%
     mutate(delta_pco2 = spco2 - pco2atm,
            scale = area * Kw * alpha * (1-fice),
-           delta_pco2_scale = delta_pco2 * scale) %&gt;%
+           fgco2 = delta_pco2 * scale)
+  
+  delta_pco2_monthly &lt;- all_variables %&gt;%
     group_by(time_mon) %&gt;%
     summarise(
-      scaling_total = sum(scale),
-      delta_pco2_scale_total = sum(delta_pco2_scale),
-      delta_pco2 = delta_pco2_scale_total / scaling_total
+      scaling_glob = sum(scale),
+      fgco2_glob = sum(fgco2),
+      delta_pco2_glob = fgco2_glob / scaling_glob
     ) %&gt;%
-    ungroup() %&gt;%
-    select(-c(delta_pco2_scale_total))
+    ungroup() %&gt;% 
+    mutate(fgco2_glob = fgco2_glob * unit_conversion_to_PgCyr)
   
   delta_pco2_annual &lt;- delta_pco2_monthly %&gt;%
     mutate(year = year(time_mon)) %&gt;%
     group_by(year) %&gt;%
-    summarise(delta_pco2 = mean(delta_pco2),
-              scaling_total = mean(scaling_total)) %&gt;%
+    summarise(
+      scaling_glob = mean(scaling_glob),
+      fgco2_glob = mean(fgco2_glob),
+      delta_pco2_glob = mean(delta_pco2_glob)
+    ) %&gt;%
     ungroup()
   
   print(
   ggplot() +
     geom_path(data = delta_pco2_monthly,
-              aes(decimal_date(time_mon), delta_pco2, col = &quot;monthly&quot;)) +
+              aes(decimal_date(time_mon), delta_pco2_glob, col = &quot;monthly&quot;)) +
     geom_path(data = delta_pco2_annual,
-              aes(year, delta_pco2, col = &quot;annual&quot;)) +
+              aes(year, delta_pco2_glob, col = &quot;annual&quot;)) +
     scale_color_brewer(palette = &quot;Set1&quot;, name = &quot;Average&quot;) +
     labs(title = paste(&quot;model_id:&quot;,i_model_ID),
          x = &quot;year&quot;)
@@ -1175,36 +1212,48 @@ for (i_model_ID in model_IDs) {
   print(
   ggplot() +
     geom_path(data = delta_pco2_monthly,
-              aes(decimal_date(time_mon), scaling_total, col = &quot;monthly&quot;)) +
+              aes(decimal_date(time_mon), fgco2_glob, col = &quot;monthly&quot;)) +
     geom_path(data = delta_pco2_annual,
-              aes(year, scaling_total, col = &quot;annual&quot;)) +
+              aes(year, fgco2_glob, col = &quot;annual&quot;)) +
     scale_color_brewer(palette = &quot;Set1&quot;, name = &quot;Average&quot;) +
     labs(title = paste(&quot;model_id:&quot;,i_model_ID),
          x = &quot;year&quot;)
   )
   
-  sec_to_yr &lt;- 60*60*24*365
-  micro &lt;- 1e6
-  mol_to_g &lt;- 12
-  P &lt;- 1e-15
-  m3_to_kg &lt;- 1030
-  
-  scaling_conversion &lt;- micro * sec_to_yr * mol_to_g * P / m3_to_kg
+  print(
+    ggplot() +
+      geom_path(
+        data = delta_pco2_annual,
+        aes(
+          year,
+          scaling_glob * unit_conversion_to_PgCyr
+        )
+      )
+  )
   
   print(
-  ggplot() +
-    geom_path(data = delta_pco2_monthly,
-              aes(decimal_date(time_mon), scaling_total*delta_pco2*scaling_conversion, col = &quot;monthly&quot;)) +
-    geom_path(data = delta_pco2_annual,
-              aes(year, scaling_total*delta_pco2*scaling_conversion, col = &quot;annual&quot;)) +
-    scale_color_brewer(palette = &quot;Set1&quot;, name = &quot;Average&quot;) +
-    labs(title = paste(&quot;model_id:&quot;,i_model_ID),
-         x = &quot;year&quot;)
+    ggplot() +
+      geom_path(
+        data = delta_pco2_annual,
+        aes(
+          year,
+          scaling_glob * delta_pco2_glob * unit_conversion_to_PgCyr,
+          col = &quot;scaled&quot;
+        )
+      ) +
+      geom_path(
+        data = delta_pco2_annual,
+        aes(year, fgco2_glob, col = &quot;integrated&quot;)
+      ) +
+      scale_color_brewer(palette = &quot;Set1&quot;, name = &quot;Estimate&quot;) +
+      scale_y_continuous(name = &quot;Air-sea flux [PgC yr-1]&quot;) +
+      labs(title = paste(&quot;model_id:&quot;, i_model_ID),
+           x = &quot;year&quot;)
   )
   
   # write raw data file for GLODAP-based subsetting model variables
   delta_pco2_annual %&gt;%
-    # select(-scaling_total) %&gt;% 
+    select(-c(scaling_glob, fgco2_glob)) %&gt;% 
     write_csv(
       file = paste(
         path_preprocessing,
@@ -1246,6 +1295,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-1.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/c424d181fbe4f3b8e33507c78a57bf7bd1092198/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-1.png" target="_blank">c424d18</a>
@@ -1308,6 +1368,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-2.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/c424d181fbe4f3b8e33507c78a57bf7bd1092198/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-2.png" target="_blank">c424d18</a>
 </td>
 <td>
@@ -1357,6 +1428,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-3.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/c424d181fbe4f3b8e33507c78a57bf7bd1092198/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-3.png" target="_blank">c424d18</a>
 </td>
 <td>
@@ -1381,11 +1463,6 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;spco2_CESM-ETHZ_B_1_gr_1980-2018_v20210607.nc&quot;
-[1] &quot;Kw_CESM-ETHZ_B_1_gr_1980-2018_v20210607.nc&quot;
-[1] &quot;pco2atm_CESM-ETHZ_B_1_gr_1980-2018_v20210607.nc&quot;
-[1] &quot;alpha_CESM-ETHZ_B_1_gr_1980-2018_v20210607.nc&quot;
-[1] &quot;fice_CESM-ETHZ_B_1_gr_1980-2018_v20210607.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-4.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-4">
@@ -1409,6 +1486,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-4.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/c424d181fbe4f3b8e33507c78a57bf7bd1092198/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-4.png" target="_blank">c424d18</a>
@@ -1435,6 +1523,11 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
+<pre><code>[1] &quot;spco2_CESM-ETHZ_B_1_gr_1980-2018_v20210607.nc&quot;
+[1] &quot;Kw_CESM-ETHZ_B_1_gr_1980-2018_v20210607.nc&quot;
+[1] &quot;pco2atm_CESM-ETHZ_B_1_gr_1980-2018_v20210607.nc&quot;
+[1] &quot;alpha_CESM-ETHZ_B_1_gr_1980-2018_v20210607.nc&quot;
+[1] &quot;fice_CESM-ETHZ_B_1_gr_1980-2018_v20210607.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-5.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-5">
@@ -1458,6 +1551,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-5.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/c424d181fbe4f3b8e33507c78a57bf7bd1092198/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-5.png" target="_blank">c424d18</a>
@@ -1498,6 +1602,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-6.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/c424d181fbe4f3b8e33507c78a57bf7bd1092198/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-6.png" target="_blank">c424d18</a>
 </td>
 <td>
@@ -1511,11 +1626,6 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;spco2_CESM-ETHZ_C_1_gr_1980-2018_v20210607.nc&quot;
-[1] &quot;Kw_CESM-ETHZ_C_1_gr_1980-2018_v20210607.nc&quot;
-[1] &quot;pco2atm_CESM-ETHZ_C_1_gr_1980-2018_v20210607.nc&quot;
-[1] &quot;alpha_CESM-ETHZ_C_1_gr_1980-2018_v20210607.nc&quot;
-[1] &quot;fice_CESM-ETHZ_C_1_gr_1980-2018_v20210607.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-7.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-7">
@@ -1539,6 +1649,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-7.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/c424d181fbe4f3b8e33507c78a57bf7bd1092198/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-7.png" target="_blank">c424d18</a>
@@ -1579,6 +1700,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-8.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/c424d181fbe4f3b8e33507c78a57bf7bd1092198/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-8.png" target="_blank">c424d18</a>
 </td>
 <td>
@@ -1592,13 +1724,169 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
+<pre><code>[1] &quot;spco2_CESM-ETHZ_C_1_gr_1980-2018_v20210607.nc&quot;
+[1] &quot;Kw_CESM-ETHZ_C_1_gr_1980-2018_v20210607.nc&quot;
+[1] &quot;pco2atm_CESM-ETHZ_C_1_gr_1980-2018_v20210607.nc&quot;
+[1] &quot;alpha_CESM-ETHZ_C_1_gr_1980-2018_v20210607.nc&quot;
+[1] &quot;fice_CESM-ETHZ_C_1_gr_1980-2018_v20210607.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-9.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-9">
+Past versions of air_sea_disequilibria-9.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-9" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-9.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-10.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-10">
+Past versions of air_sea_disequilibria-10.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-10" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-10.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-11.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-11">
+Past versions of air_sea_disequilibria-11.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-11" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-11.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-12.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-12">
+Past versions of air_sea_disequilibria-12.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-12" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-12.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre><code>[1] &quot;spco2_CESM-ETHZ_D_1_gr_1980-2018_v20210607.nc&quot;
 [1] &quot;Kw_CESM-ETHZ_D_1_gr_1980-2018_v20210607.nc&quot;
 [1] &quot;pco2atm_CESM-ETHZ_D_1_gr_1980-2018_v20210607.nc&quot;
 [1] &quot;alpha_CESM-ETHZ_D_1_gr_1980-2018_v20210607.nc&quot;
 [1] &quot;fice_CESM-ETHZ_D_1_gr_1980-2018_v20210607.nc&quot;</code></pre>
-<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-10.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-11.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-12.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-13.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-14.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-15.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-16.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1659,8 +1947,8 @@ loaded via a namespace (and not attached):
 [61] vctrs_0.3.5              httpuv_1.5.4             cellranger_1.1.0        
 [64] gtable_0.3.0             assertthat_0.2.1         xfun_0.18               
 [67] lwgeom_0.2-5             broom_0.7.5              RcppEigen_0.3.3.7.0     
-[70] e1071_1.7-4              later_1.1.0.1            viridisLite_0.3.0       
-[73] class_7.3-17             units_0.6-7              ellipsis_0.3.1          </code></pre>
+[70] e1071_1.7-4              later_1.1.0.1            class_7.3-17            
+[73] units_0.6-7              ellipsis_0.3.1          </code></pre>
 </div>
 </div>
 
