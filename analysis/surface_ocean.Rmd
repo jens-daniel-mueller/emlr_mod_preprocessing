@@ -211,7 +211,7 @@ for (i_model_ID in model_IDs) {
   # i_model_ID <- model_IDs[1]
   
   for (i_variable in variables) {
-    # i_variable <- variables[4]
+    # i_variable <- variables[5]
     
     # read list of all files
     file <- paste(i_variable,
@@ -220,8 +220,7 @@ for (i_model_ID in model_IDs) {
                   "_1_gr_1980-2018_v20210607.nc",
                   sep = "")
     print(file)
-    
-    
+
     # read in data
     variable_data <-
       read_ncdf(paste(path_cmorized,
@@ -264,40 +263,44 @@ for (i_model_ID in model_IDs) {
   all_variables <- inner_join(all_variables,
                               area_grid)
   
-  map +
-    geom_raster(data = all_variables %>%
-                  filter(time_mon %in% last(unique(
-                    all_variables$time_mon
-                  ))),
-                aes(lon, lat, fill = fice)) +
-    scale_fill_viridis_c()
+  mol_to_g <- 12
+  P <- 1e-15
+  m3_to_kg <- 1030
+  sec_to_yr <- 60*60*24*365
 
-  delta_pco2_monthly <- all_variables %>%
+  unit_conversion_to_PgCyr <- mol_to_g * P * sec_to_yr / m3_to_kg
+
+  all_variables <- all_variables %>%
     mutate(delta_pco2 = spco2 - pco2atm,
            scale = area * Kw * alpha * (1-fice),
-           delta_pco2_scale = delta_pco2 * scale) %>%
+           fgco2 = delta_pco2 * scale)
+  
+  delta_pco2_monthly <- all_variables %>%
     group_by(time_mon) %>%
     summarise(
-      scaling_total = sum(scale),
-      delta_pco2_scale_total = sum(delta_pco2_scale),
-      delta_pco2 = delta_pco2_scale_total / scaling_total
+      scaling_glob = sum(scale),
+      fgco2_glob = sum(fgco2),
+      delta_pco2_glob = fgco2_glob / scaling_glob
     ) %>%
-    ungroup() %>%
-    select(-c(delta_pco2_scale_total))
+    ungroup() %>% 
+    mutate(fgco2_glob = fgco2_glob * unit_conversion_to_PgCyr)
   
   delta_pco2_annual <- delta_pco2_monthly %>%
     mutate(year = year(time_mon)) %>%
     group_by(year) %>%
-    summarise(delta_pco2 = mean(delta_pco2),
-              scaling_total = mean(scaling_total)) %>%
+    summarise(
+      scaling_glob = mean(scaling_glob),
+      fgco2_glob = mean(fgco2_glob),
+      delta_pco2_glob = mean(delta_pco2_glob)
+    ) %>%
     ungroup()
   
   print(
   ggplot() +
     geom_path(data = delta_pco2_monthly,
-              aes(decimal_date(time_mon), delta_pco2, col = "monthly")) +
+              aes(decimal_date(time_mon), delta_pco2_glob, col = "monthly")) +
     geom_path(data = delta_pco2_annual,
-              aes(year, delta_pco2, col = "annual")) +
+              aes(year, delta_pco2_glob, col = "annual")) +
     scale_color_brewer(palette = "Set1", name = "Average") +
     labs(title = paste("model_id:",i_model_ID),
          x = "year")
@@ -306,36 +309,48 @@ for (i_model_ID in model_IDs) {
   print(
   ggplot() +
     geom_path(data = delta_pco2_monthly,
-              aes(decimal_date(time_mon), scaling_total, col = "monthly")) +
+              aes(decimal_date(time_mon), fgco2_glob, col = "monthly")) +
     geom_path(data = delta_pco2_annual,
-              aes(year, scaling_total, col = "annual")) +
+              aes(year, fgco2_glob, col = "annual")) +
     scale_color_brewer(palette = "Set1", name = "Average") +
     labs(title = paste("model_id:",i_model_ID),
          x = "year")
   )
   
-  sec_to_yr <- 60*60*24*365
-  micro <- 1e6
-  mol_to_g <- 12
-  P <- 1e-15
-  m3_to_kg <- 1030
-  
-  scaling_conversion <- micro * sec_to_yr * mol_to_g * P / m3_to_kg
+  print(
+    ggplot() +
+      geom_path(
+        data = delta_pco2_annual,
+        aes(
+          year,
+          scaling_glob * unit_conversion_to_PgCyr
+        )
+      )
+  )
   
   print(
-  ggplot() +
-    geom_path(data = delta_pco2_monthly,
-              aes(decimal_date(time_mon), scaling_total*delta_pco2*scaling_conversion, col = "monthly")) +
-    geom_path(data = delta_pco2_annual,
-              aes(year, scaling_total*delta_pco2*scaling_conversion, col = "annual")) +
-    scale_color_brewer(palette = "Set1", name = "Average") +
-    labs(title = paste("model_id:",i_model_ID),
-         x = "year")
+    ggplot() +
+      geom_path(
+        data = delta_pco2_annual,
+        aes(
+          year,
+          scaling_glob * delta_pco2_glob * unit_conversion_to_PgCyr,
+          col = "scaled"
+        )
+      ) +
+      geom_path(
+        data = delta_pco2_annual,
+        aes(year, fgco2_glob, col = "integrated")
+      ) +
+      scale_color_brewer(palette = "Set1", name = "Estimate") +
+      scale_y_continuous(name = "Air-sea flux [PgC yr-1]") +
+      labs(title = paste("model_id:", i_model_ID),
+           x = "year")
   )
   
   # write raw data file for GLODAP-based subsetting model variables
   delta_pco2_annual %>%
-    # select(-scaling_total) %>% 
+    select(-c(scaling_glob, fgco2_glob)) %>% 
     write_csv(
       file = paste(
         path_preprocessing,

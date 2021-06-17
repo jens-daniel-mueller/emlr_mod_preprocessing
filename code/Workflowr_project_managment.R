@@ -5,7 +5,7 @@
 
 # commit regular changes (locally) and rebuild site
 # this takes only changed files into account
-wflow_publish(all = TRUE, message = "export globally integrated scaling factor")
+wflow_publish(all = TRUE, message = "derive globally integrated scaling factor")
 
 # commit changes including _site.yml (locally) and rebuild site in the specified order
 # you can also run this code with only some of the files. In this case remove the rebuild=TRUE command
@@ -30,14 +30,6 @@ wflow_publish(here::here(
 ),
 message = "rerun all with surface ocean data",
 republish = TRUE)
-
-wflow_publish(here::here(
-  "analysis",
-  c(
-    "surface_ocean.Rmd"
-  )
-),
-message = "testrun surface ocean data")
 
 
 # Push latest version to GitHub
