@@ -101,7 +101,6 @@ variables <-
 # variables <-
 #   c("so", "thetao", "dissicos", "talk", "o2", "no3", "po4", "si")
 
-
 for (i_variable in variables) {
   #i_variable <- variables[1]
   

@@ -27,6 +27,8 @@ navbar:
       href: GLODAP_subset_C_2021.html
     - text: Random subset variable climate
       href: Random_subset_A.html
+    - text: NorESM-based Random subset variable climate
+      href: NorESM_Random_subset_A.html
     - text: Random subset constant climate
       href: Random_subset_C.html
   - text: Cant

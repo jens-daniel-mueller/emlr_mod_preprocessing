@@ -96,18 +96,22 @@ for (i_variable in variables) {
     variable_data_tibble %>%
     filter(!is.na(!!sym(i_variable)))
   
-  # # convert time variable to year (use when select one specific year as climatology)
-  # variable_data_tibble <- variable_data_tibble %>%
-  #   mutate(year = 1980 + floor(time / 365)) %>%
-  #   select(-time)
+  # convert time variable to year (use when select one specific year as climatology)
+  variable_data_tibble <- variable_data_tibble %>%
+    mutate(year = 1980 + floor(time / 365)) %>%
+    select(-time)
   
-  # calculate climatology
+  # select data of 2007 as the climatology
   climatology_temp <- variable_data_tibble %>%
-    select(-time) %>%
-    group_by(lon, lat, depth) %>%
-    mutate(!!sym(i_variable) := mean(!!sym(i_variable))) %>%
-    ungroup() %>%
-    unique()
+    filter(year == 2007)
+  
+  # # calculate climatology
+  # climatology_temp <- variable_data_tibble %>%
+  #   select(-time) %>%
+  #   group_by(lon, lat, depth) %>%
+  #   mutate(!!sym(i_variable) := mean(!!sym(i_variable))) %>%
+  #   ungroup() %>%
+  #   unique()
   
   if (exists("climatology")) {
     climatology <- left_join(climatology, climatology_temp)
