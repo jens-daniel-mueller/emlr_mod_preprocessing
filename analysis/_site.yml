@@ -7,6 +7,8 @@ navbar:
     menu:
     - text: Variable climatology
       href: Climatology_A.html
+    - text: NorESM-based Variable climatology
+      href: NorESM_Climatology_A.html
     - text: Constant climatology
       href: Climatology_C.html
   - text: Synthetic data
@@ -17,6 +19,8 @@ navbar:
       href: GLODAP_subset_A_2021.html
     - text: GLODAP beta_2021 subset variable climate annual
       href: GLODAP_subset_A_2021_annual.html
+    - text: NorESM-based GLODAP beta_2021 subset variable climate annual
+      href: NorESM_GLODAP_subset_A_2021_annual.html
     - text: GLODAP subset constant climate
       href: GLODAP_subset_C.html
     - text: GLODAP beta_2021 subset constant climate
@@ -29,6 +33,8 @@ navbar:
     menu:
     - text: Cant variable climate
       href: Cant_AD.html
+    - text: NorESM-based Cant variable climate
+      href: NorESM_Cant_AD.html
     - text: Cant constant climate
       href: Cant_CB.html
   - text: Surface data

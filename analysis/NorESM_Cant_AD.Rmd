@@ -1,0 +1,453 @@
+---
+title: "NorESM Cant variable climate AD"
+author: "Jens Daniel Müller"
+date:  "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  workflowr::wflow_html:
+    number_sections: true
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+editor_options:
+  chunk_output_type: console
+---
+
+```{r parent, child = "/nfs/kryo/work/jenmueller/emlr_cant/utilities/setup.Rmd"}
+# this chunk runs the code stored in setup.Rmd
+# if required, please refer to instructions given here:
+# https://jdblischak.github.io/workflowr/articles/wflow-07-common-code.html
+```
+
+```{r define_paths, include=FALSE}
+path_cmorized <-
+  "/nfs/kryo/work/updata/reccap2/Models/3D_ALL/NorESM-OC1.2_3D_ALL_v20210301/"
+path_preprocessing  <-
+  paste(path_root, "/model/preprocessing/NorESM/", sep = "")
+```
+
+```{r load_libraries_specific, include=FALSE}
+library(tidync)
+library(stars)
+library(gsw)
+```
+
+```{r select_basin_mask}
+
+# use only three basin to assign general basin mask
+# ie this is not specific to the MLR fitting
+basinmask <- basinmask %>%
+  filter(MLR_basins == "2") %>%
+  select(lat, lon, basin_AIP)
+
+```
+
+
+# Calculate annual Cant field
+
+## Read in Run A
+
+```{r read_cmorized_RunA}
+
+# set name of model to be subsetted
+model_ID <- "A"
+
+# for loop across variables
+# 3d variables
+variables <-
+  c("so", "thetao", "dissic")
+
+for (i_variable in variables) {
+  # i_variable <- variables[2]
+  
+  # read list of all files
+  file <-
+    list.files(
+      path = path_cmorized,
+      pattern = paste(
+        "^",
+        i_variable,
+        "_Oy_NorESM-OC1.2_",
+        model_ID,
+        "_r1i1p1f1_gr_1980-2018.nc",
+        sep = ""
+      )
+    )
+  print(file)
+
+  # read in data
+  variable_data <-
+    tidync(paste(path_cmorized,
+                    file,
+                    sep = ""),
+              make_units = FALSE)
+  
+  # convert to tibble
+  variable_data_tibble <- variable_data %>%
+    hyper_tibble()
+  
+  # remove open link to nc file
+  rm(variable_data)
+  
+  # remove na values
+  variable_data_tibble <-
+    variable_data_tibble %>%
+    filter(!is.na(!!sym(i_variable)))
+  
+  if (exists("A_annual")) {
+    A_annual <- left_join(A_annual, variable_data_tibble)
+  }
+  
+  if (!exists("A_annual")) {
+    A_annual <- variable_data_tibble
+  }
+  
+}
+
+# convert time variable to year
+A_annual <- A_annual %>%
+  mutate(year = 1980 + floor(time / 365)) %>%
+  select(-time)
+
+# harmonize column names and coordinates
+A_annual <- A_annual %>%
+  select(year,
+         lon,
+         lat,
+         depth, 
+    tco2_A = dissic,
+    sal = so,
+    theta = thetao
+  ) %>%
+  mutate(lon = if_else(lon < 20, lon + 360, lon))
+
+# calculate model temperature
+A_annual <- A_annual %>%
+  mutate(temp = gsw_pt_from_t(
+    SA = sal,
+    t = theta,
+    p = 10.1325,
+    p_ref = depth
+  ))
+
+# unit transfer from mol/m3 to µmol/kg
+A_annual <- A_annual %>%
+  mutate(
+    rho = gsw_pot_rho_t_exact(
+      SA = sal,
+      t = temp,
+      p = depth,
+      p_ref = 10.1325
+    ),
+    tco2_A = tco2_A * (1e+6 / rho)
+  ) %>%
+  select(year, lon, lat, depth, tco2_A)
+
+```
+
+## Read in Run D
+
+```{r read_cmorized_RunD}
+
+# set name of model to be subsetted
+model_ID <- "D"
+
+# for loop across variables
+# 3d variables
+variables <-
+  c("so", "thetao", "dissic")
+
+for (i_variable in variables) {
+  # i_variable <- variables[3]
+  
+  # read list of all files
+  file <-
+    list.files(
+      path = path_cmorized,
+      pattern = paste(
+        "^",
+        i_variable,
+        "_Oy_NorESM-OC1.2_",
+        model_ID,
+        "_r1i1p1f1_gr_1980-2018.nc",
+        sep = ""
+      )
+    )
+  print(file)
+
+  # read in data
+  variable_data <-
+    tidync(paste(path_cmorized,
+                    file,
+                    sep = ""),
+              make_units = FALSE)
+  
+  # convert to tibble
+  variable_data_tibble <- variable_data %>%
+    hyper_tibble()
+  
+  # remove open link to nc file
+  rm(variable_data)
+  
+  # remove na values
+  variable_data_tibble <-
+    variable_data_tibble %>%
+    filter(!is.na(!!sym(i_variable)))
+  
+  if (exists("D_annual")) {
+    D_annual <- left_join(D_annual, variable_data_tibble)
+  }
+  
+  if (!exists("D_annual")) {
+    D_annual <- variable_data_tibble
+  }
+  
+}
+
+# convert time variable to year
+D_annual <- D_annual %>%
+  mutate(year = 1980 + floor(time / 365)) %>%
+  select(-time)
+
+# harmonize column names and coordinates
+D_annual <- D_annual %>%
+  select(year,
+         lon,
+         lat,
+         depth, 
+    tco2_D = dissic,
+    sal = so,
+    theta = thetao
+  ) %>%
+  mutate(lon = if_else(lon < 20, lon + 360, lon))
+
+# calculate model temperature
+D_annual <- D_annual %>%
+  mutate(temp = gsw_pt_from_t(
+    SA = sal,
+    t = theta,
+    p = 10.1325,
+    p_ref = depth
+  ))
+
+# unit transfer from mol/m3 to µmol/kg
+D_annual <- D_annual %>%
+  mutate(
+    rho = gsw_pot_rho_t_exact(
+      SA = sal,
+      t = temp,
+      p = depth,
+      p_ref = 10.1325
+    ),
+    tco2_D = tco2_D * (1e+6 / rho)
+  ) %>%
+  select(year, lon, lat, depth, tco2_D)
+
+```
+
+## Join tco2 fields
+
+```{r join_tco2_fields}
+
+cant <- inner_join(A_annual, D_annual)
+rm(A_annual, D_annual)
+
+```
+
+## Round depth levels
+
+```{r round_depth_levels}
+
+cant <- cant %>%
+  mutate(depth = round(depth))
+
+```
+
+## Apply basin mask
+
+```{r apply_basin_mask}
+
+# restrict Cant field to basin mask grid
+cant <- inner_join(cant, basinmask)
+
+```
+
+## Calculate Cant total
+
+```{r calc_cant}
+
+cant <- cant %>%
+  mutate(cant_total = tco2_A - tco2_D) %>% 
+  select(-c(tco2_A, tco2_D))
+
+```
+
+## Write Cant files
+
+```{r write_annual_Cant_files}
+
+# write annual Cant files
+years <- c(1982:2018)
+
+for (i_year in years) {
+  
+ # i_year = years[1]
+  cant_year <- cant %>%
+    filter(year == i_year)
+  
+  cant_year %>%
+    write_csv(paste(path_preprocessing,
+                    "cant_annual_field_AD/cant_", i_year, ".csv",
+                    sep = ""))
+}
+
+```
+
+
+# Calculate change in Cant 1994 - 2007
+
+```{r calculate_cant_1994_2007}
+
+cant_1994 <- cant %>%
+  filter(year == 1994) %>%
+  select(-c(year)) %>%
+  rename(cant_1994 = cant_total)
+
+cant_2007 <- cant %>%
+  filter(year == 2007) %>%
+  select(-c(year)) %>%
+  rename(cant_2007 = cant_total)
+
+cant_gruber <- left_join(cant_1994, cant_2007) %>%
+  mutate(cant = cant_2007 - cant_1994)
+
+cant_gruber <- cant_gruber %>% 
+   mutate(cant_pos = if_else(cant <= 0, 0, cant))
+
+rm(cant_1994, cant_2007)
+
+```
+
+
+# Zonal mean sections
+
+```{r calc_zonal_mean_gruber}
+
+cant_gruber <- cant_gruber %>% 
+  mutate(eras = "JGOFS/WOCE")
+
+cant_gruber_zonal <- m_zonal_mean_section(cant_gruber)
+
+```
+
+## 1994 - 2007
+
+```{r zonal_mean_section_cant_gruber}
+
+for (i_basin_AIP in unique(cant_gruber_zonal$basin_AIP)) {
+  print(
+    p_section_zonal(
+      cant_gruber_zonal %>% filter(basin_AIP == i_basin_AIP),
+      var = "cant_pos_mean",
+      plot_slabs = "n",
+      subtitle_text = paste("Basin: ", i_basin_AIP)
+    )
+  )
+}
+
+```
+
+## Cant total 1994
+
+```{r zonal_mean_section_cant_total_1994}
+
+for (i_basin_AIP in unique(cant_gruber_zonal$basin_AIP)) {
+  print(
+    p_section_zonal(
+      cant_gruber_zonal %>% filter(basin_AIP == i_basin_AIP),
+      var = "cant_1994_mean",
+      plot_slabs = "n",
+      breaks = seq(0,100,10),
+      subtitle_text = paste("Basin: ", i_basin_AIP)
+    )
+  )
+}
+
+```
+
+## Cant total 2007
+
+```{r zonal_mean_section_cant_total_2007}
+
+for (i_basin_AIP in unique(cant_gruber_zonal$basin_AIP)) {
+  print(
+    p_section_zonal(
+      cant_gruber_zonal %>% filter(basin_AIP == i_basin_AIP),
+      var = "cant_2007_mean",
+      plot_slabs = "n",
+      breaks = seq(0,100,10),
+      subtitle_text = paste("Basin: ", i_basin_AIP)
+    )
+  )
+}
+
+```
+
+
+# Column inventory 
+
+## 1994 - 2007
+
+```{r calc_inventory_gruber}
+
+cant_gruber_inv <- m_cant_inv(cant_gruber)
+
+```
+
+```{r cant_inventory_gruber}
+
+p_map_cant_inv(cant_gruber_inv %>% filter(inv_depth == 3000))
+
+```
+
+## Cant total 1994
+
+```{r calc_total_inventory_1994}
+
+# this is just a work around, because the function is designed to calculate cant inventories, but not cant_total inventories
+
+cant_gruber_total_inv <- m_cant_inv(
+  cant_gruber %>% 
+    select(-cant_pos) %>% 
+    rename(cant_pos = cant_1994))
+
+```
+
+```{r cant_inventory_1994}
+
+p_map_cant_inv(cant_gruber_total_inv %>% filter(inv_depth == 3000),
+               breaks = seq(0,100,10),
+               subtitle_text = "Cant total in 1994")
+
+```
+
+## Cant total 2007
+
+```{r calc_total_inventory_2007}
+
+# this is just a work around, because the function is designed to calculate cant inventories, but not cant_total inventories
+
+cant_gruber_total_inv <- m_cant_inv(
+  cant_gruber %>% 
+    select(-cant_pos) %>% 
+    rename(cant_pos = cant_2007))
+
+```
+
+```{r cant_inventory_2007}
+
+p_map_cant_inv(cant_gruber_total_inv %>% filter(inv_depth == 3000),
+               breaks = seq(0,100,10),
+               subtitle_text = "Cant total in 2007")
+
+```
+
