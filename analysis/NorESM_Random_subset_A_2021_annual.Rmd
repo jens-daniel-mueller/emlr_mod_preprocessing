@@ -46,13 +46,13 @@ basinmask <- basinmask %>%
 
 ```
 
-# Read GLODAPv2_2020 preprocessed files
+# Read GLODAPv2_2021 preprocessed files
 
-```{r read_GLODAPv2_2020_preprocessed_file}
+```{r read_GLODAPv2_2021_preprocessed_file}
 
 GLODAP <-
   read_csv(paste(path_GLODAP_preprocessing,
-                 "GLODAPv2.2020_preprocessed.csv",
+                 "GLODAPv2.2021_preprocessed.csv",
                  sep = ""))
 
 GLODAP <- GLODAP %>%
@@ -303,7 +303,7 @@ model_resample <- inner_join(model_resample, basinmask)
 # write file for random model sampling
 model_resample %>%
   write_csv(paste(path_preprocessing,
-                  "GLODAPv2.2020_preprocessed_model_runA_random_subset_grid_ann.csv",
+                  "GLODAPv2.2021_preprocessed_model_runA_random_subset_grid_ann.csv",
                   sep = ""))
 
 ```
@@ -317,7 +317,7 @@ model_resample %>%
 # read in random model sampling file
 model_resample <-
   read_csv(paste(path_preprocessing,
-                 "GLODAPv2.2020_preprocessed_model_runA_random_subset_grid_ann.csv",
+                 "GLODAPv2.2021_preprocessed_model_runA_random_subset_grid_ann.csv",
                  sep = ""))
 
 # plot random sampling cmorized grids in each year
@@ -413,7 +413,7 @@ GLODAP_depth_average %>%
 # read in random model sampling file
 resample_grid <-
   read_csv(paste(path_preprocessing,
-                 "GLODAPv2.2020_preprocessed_model_runA_random_subset_grid_ann.csv",
+                 "GLODAPv2.2021_preprocessed_model_runA_random_subset_grid_ann.csv",
                  sep = ""))
 
 for (i in unique(resample_grid$lat)) {
@@ -441,7 +441,7 @@ for (i in unique(resample_grid$lat)) {
 # write resampling file
 resample_lat %>%
   write_csv(paste(path_preprocessing,
-                 "GLODAPv2.2020_preprocessed_model_runA_random_subset_lat_ann.csv",
+                 "GLODAPv2.2021_preprocessed_model_runA_random_subset_lat_ann.csv",
                  sep = ""))
 
 ```
@@ -453,7 +453,7 @@ resample_lat %>%
 # read in random model sampling file
 resample_lat <-
   read_csv(paste(path_preprocessing,
-                 "GLODAPv2.2020_preprocessed_model_runA_random_subset_lat_ann.csv",
+                 "GLODAPv2.2021_preprocessed_model_runA_random_subset_lat_ann.csv",
                  sep = ""))
 
 # plot random sampling cmorized grids in each year

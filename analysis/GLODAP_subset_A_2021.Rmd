@@ -51,9 +51,9 @@ basinmask <- basinmask %>%
 
 ```
 
-# Read GLODAPv2_2020 preprocessed files
+# Read GLODAPv2_2021 preprocessed files
 
-```{r read_GLODAPv2_2020_preprocessed_file}
+```{r read_GLODAPv2_2021_preprocessed_file}
 
 GLODAP <-
   read_csv(paste(path_GLODAP_preprocessing,
