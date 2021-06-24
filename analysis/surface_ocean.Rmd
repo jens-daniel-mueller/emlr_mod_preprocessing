@@ -178,9 +178,9 @@ for (i_model_ID in model_IDs) {
 # Air-sea disequilibrium
 
 ```{r air_sea_disequilibria}
+
 # set name of model to be subsetted
 model_IDs <- c("A", "B", "C", "D")
-
 
 file <- paste("area",
               "_CESM-ETHZ_",
@@ -205,7 +205,6 @@ variables <-
     "pco2atm",
     "alpha",
     "fice")
-
 
 for (i_model_ID in model_IDs) {
   # i_model_ID <- model_IDs[1]

@@ -265,7 +265,6 @@ Below, following subsets of the climatology are plotted for all relevant predict
 
 ```{r climatology_maps_and_sections, eval=FALSE}
 
-
 # define plotting variables
 vars <- c(
   "tco2",
