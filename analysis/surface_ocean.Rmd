@@ -177,14 +177,14 @@ for (i_model_ID in model_IDs) {
 
 # Air-sea disequilibrium
 
-```{r air_sea_disequilibria}
+```{r air_sea_disequilibria, eval=FALSE}
 
 # set name of model to be subsetted
 model_IDs <- c("A", "B", "C", "D")
 
 file <- paste("area",
               "_CESM-ETHZ_",
-              "1_gr.nc",
+              "1_gr_v20210607.nc",
               sep = "")
 
 area_grid <-

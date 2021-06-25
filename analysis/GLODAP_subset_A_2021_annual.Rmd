@@ -501,7 +501,7 @@ GLODAP %>%
 
 # Test for interpolation
 
-```{r test_for_interpolation, eval=FALSE}
+```{r test_for_interpolation}
 
 GLODAP <-
   read_csv(paste(path_GLODAP_preprocessing,
