@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Jens Daniel Müller" />
+
+
+<title>NorESM Cant variable climate AD</title>
+
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">eMLR mod preprocessing</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Climatology
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Climatology_A.html">Variable climatology</a>
+    </li>
+    <li>
+      <a href="NorESM_Climatology_A.html">NorESM-based Variable climatology</a>
+    </li>
+    <li>
+      <a href="Climatology_C.html">Constant climatology</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Synthetic data
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="GLODAP_subset_A.html">GLODAP subset variable climate</a>
+    </li>
+    <li>
+      <a href="GLODAP_subset_A_2021.html">GLODAP beta_2021 subset variable climate</a>
+    </li>
+    <li>
+      <a href="GLODAP_subset_A_2021_annual.html">GLODAP beta_2021 subset variable climate annual</a>
+    </li>
+    <li>
+      <a href="NorESM_GLODAP_subset_A_2021_annual.html">NorESM-based GLODAP beta_2021 subset variable climate annual</a>
+    </li>
+    <li>
+      <a href="GLODAP_subset_C.html">GLODAP subset constant climate</a>
+    </li>
+    <li>
+      <a href="GLODAP_subset_C_2021.html">GLODAP beta_2021 subset constant climate</a>
+    </li>
+    <li>
+      <a href="Random_subset_A.html">Random subset variable climate</a>
+    </li>
+    <li>
+      <a href="Random_subset_A_2021_annual.html">Random beta_2021 subset variable climate annual</a>
+    </li>
+    <li>
+      <a href="NorESM_Random_subset_A_2021_annual.html">NorESM-based Random beta_2021 subset variable climate annual</a>
+    </li>
+    <li>
+      <a href="Random_subset_C.html">Random subset constant climate</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Cant
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Cant_AD.html">Cant variable climate</a>
+    </li>
+    <li>
+      <a href="NorESM_Cant_AD.html">NorESM-based Cant variable climate</a>
+    </li>
+    <li>
+      <a href="Cant_CB.html">Cant constant climate</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Surface data
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="surface_ocean.html">Surface Ocean</a>
+    </li>
+    <li>
+      <a href="read_CO2_atm.html">Atmospheric CO2</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+<li>
+  <a href="https://jens-daniel-mueller.github.io/">
+    <span class="fa fa-home"></span>
+     
+    Jens' homepage
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">NorESM Cant variable climate AD</h1>
+<h4 class="author">Jens Daniel Müller</h4>
+<h4 class="date">25 June, 2021</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2021-06-25
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>emlr_mod_preprocessing/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20200707code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20200707)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20200707code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20200707)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree3be04616debba6f144dc819d43c4522c618bcb58targetblank3be0461a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/3be04616debba6f144dc819d43c4522c618bcb58" target="_blank">3be0461</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree3be04616debba6f144dc819d43c4522c618bcb58targetblank3be0461a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/3be04616debba6f144dc819d43c4522c618bcb58" target="_blank">3be0461</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+
+Unstaged changes:
+    Modified:   code/Workflowr_project_managment.R
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/NorESM_Cant_AD.Rmd</code>) and HTML (<code>docs/NorESM_Cant_AD.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0bac46136fd814e33123016800ce4bf49264e2b5/analysis/NorESM_Cant_AD.Rmd" target="_blank">0bac461</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-06-23
+</td>
+<td>
+Add NorESM subset
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<pre class="r"><code># use only three basin to assign general basin mask
+# ie this is not specific to the MLR fitting
+basinmask &lt;- basinmask %&gt;%
+  filter(MLR_basins == &quot;2&quot;) %&gt;%
+  select(lat, lon, basin_AIP)</code></pre>
+<div id="calculate-annual-cant-field" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Calculate annual Cant field</h1>
+<div id="read-in-run-a" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Read in Run A</h2>
+<pre class="r"><code># set name of model to be subsetted
+model_ID &lt;- &quot;A&quot;
+
+# for loop across variables
+# 3d variables
+variables &lt;-
+  c(&quot;so&quot;, &quot;thetao&quot;, &quot;dissic&quot;)
+
+for (i_variable in variables) {
+  # i_variable &lt;- variables[2]
+  
+  # read list of all files
+  file &lt;-
+    list.files(
+      path = path_cmorized,
+      pattern = paste(
+        &quot;^&quot;,
+        i_variable,
+        &quot;_Oy_NorESM-OC1.2_&quot;,
+        model_ID,
+        &quot;_r1i1p1f1_gr_1980-2018.nc&quot;,
+        sep = &quot;&quot;
+      )
+    )
+  print(file)
+
+  # read in data
+  variable_data &lt;-
+    tidync(paste(path_cmorized,
+                    file,
+                    sep = &quot;&quot;),
+              make_units = FALSE)
+  
+  # convert to tibble
+  variable_data_tibble &lt;- variable_data %&gt;%
+    hyper_tibble()
+  
+  # remove open link to nc file
+  rm(variable_data)
+  
+  # remove na values
+  variable_data_tibble &lt;-
+    variable_data_tibble %&gt;%
+    filter(!is.na(!!sym(i_variable)))
+  
+  if (exists(&quot;A_annual&quot;)) {
+    A_annual &lt;- left_join(A_annual, variable_data_tibble)
+  }
+  
+  if (!exists(&quot;A_annual&quot;)) {
+    A_annual &lt;- variable_data_tibble
+  }
+  
+}</code></pre>
+<pre><code>[1] &quot;so_Oy_NorESM-OC1.2_A_r1i1p1f1_gr_1980-2018.nc&quot;
+[1] &quot;thetao_Oy_NorESM-OC1.2_A_r1i1p1f1_gr_1980-2018.nc&quot;
+[1] &quot;dissic_Oy_NorESM-OC1.2_A_r1i1p1f1_gr_1980-2018.nc&quot;</code></pre>
+<pre class="r"><code># convert time variable to year
+A_annual &lt;- A_annual %&gt;%
+  mutate(year = 1980 + floor(time / 365)) %&gt;%
+  select(-time)
+
+# harmonize column names and coordinates
+A_annual &lt;- A_annual %&gt;%
+  select(year,
+         lon,
+         lat,
+         depth, 
+    tco2_A = dissic,
+    sal = so,
+    theta = thetao
+  ) %&gt;%
+  mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
+
+# calculate model temperature
+A_annual &lt;- A_annual %&gt;%
+  mutate(temp = gsw_pt_from_t(
+    SA = sal,
+    t = theta,
+    p = 10.1325,
+    p_ref = depth
+  ))
+
+# unit transfer from mol/m3 to µmol/kg
+A_annual &lt;- A_annual %&gt;%
+  mutate(
+    rho = gsw_pot_rho_t_exact(
+      SA = sal,
+      t = temp,
+      p = depth,
+      p_ref = 10.1325
+    ),
+    tco2_A = tco2_A * (1e+6 / rho)
+  ) %&gt;%
+  select(year, lon, lat, depth, tco2_A)</code></pre>
+</div>
+<div id="read-in-run-d" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Read in Run D</h2>
+<pre class="r"><code># set name of model to be subsetted
+model_ID &lt;- &quot;D&quot;
+
+# for loop across variables
+# 3d variables
+variables &lt;-
+  c(&quot;so&quot;, &quot;thetao&quot;, &quot;dissic&quot;)
+
+for (i_variable in variables) {
+  # i_variable &lt;- variables[3]
+  
+  # read list of all files
+  file &lt;-
+    list.files(
+      path = path_cmorized,
+      pattern = paste(
+        &quot;^&quot;,
+        i_variable,
+        &quot;_Oy_NorESM-OC1.2_&quot;,
+        model_ID,
+        &quot;_r1i1p1f1_gr_1980-2018.nc&quot;,
+        sep = &quot;&quot;
+      )
+    )
+  print(file)
+
+  # read in data
+  variable_data &lt;-
+    tidync(paste(path_cmorized,
+                    file,
+                    sep = &quot;&quot;),
+              make_units = FALSE)
+  
+  # convert to tibble
+  variable_data_tibble &lt;- variable_data %&gt;%
+    hyper_tibble()
+  
+  # remove open link to nc file
+  rm(variable_data)
+  
+  # remove na values
+  variable_data_tibble &lt;-
+    variable_data_tibble %&gt;%
+    filter(!is.na(!!sym(i_variable)))
+  
+  if (exists(&quot;D_annual&quot;)) {
+    D_annual &lt;- left_join(D_annual, variable_data_tibble)
+  }
+  
+  if (!exists(&quot;D_annual&quot;)) {
+    D_annual &lt;- variable_data_tibble
+  }
+  
+}</code></pre>
+<pre><code>[1] &quot;so_Oy_NorESM-OC1.2_D_r1i1p1f1_gr_1980-2018.nc&quot;
+[1] &quot;thetao_Oy_NorESM-OC1.2_D_r1i1p1f1_gr_1980-2018.nc&quot;
+[1] &quot;dissic_Oy_NorESM-OC1.2_D_r1i1p1f1_gr_1980-2018.nc&quot;</code></pre>
+<pre class="r"><code># convert time variable to year
+D_annual &lt;- D_annual %&gt;%
+  mutate(year = 1980 + floor(time / 365)) %&gt;%
+  select(-time)
+
+# harmonize column names and coordinates
+D_annual &lt;- D_annual %&gt;%
+  select(year,
+         lon,
+         lat,
+         depth, 
+    tco2_D = dissic,
+    sal = so,
+    theta = thetao
+  ) %&gt;%
+  mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
+
+# calculate model temperature
+D_annual &lt;- D_annual %&gt;%
+  mutate(temp = gsw_pt_from_t(
+    SA = sal,
+    t = theta,
+    p = 10.1325,
+    p_ref = depth
+  ))
+
+# unit transfer from mol/m3 to µmol/kg
+D_annual &lt;- D_annual %&gt;%
+  mutate(
+    rho = gsw_pot_rho_t_exact(
+      SA = sal,
+      t = temp,
+      p = depth,
+      p_ref = 10.1325
+    ),
+    tco2_D = tco2_D * (1e+6 / rho)
+  ) %&gt;%
+  select(year, lon, lat, depth, tco2_D)</code></pre>
+</div>
+<div id="join-tco2-fields" class="section level2" number="1.3">
+<h2 number="1.3"><span class="header-section-number">1.3</span> Join tco2 fields</h2>
+<pre class="r"><code>cant &lt;- inner_join(A_annual, D_annual)
+rm(A_annual, D_annual)</code></pre>
+</div>
+<div id="round-depth-levels" class="section level2" number="1.4">
+<h2 number="1.4"><span class="header-section-number">1.4</span> Round depth levels</h2>
+<pre class="r"><code>cant &lt;- cant %&gt;%
+  mutate(depth = round(depth))</code></pre>
+</div>
+<div id="apply-basin-mask" class="section level2" number="1.5">
+<h2 number="1.5"><span class="header-section-number">1.5</span> Apply basin mask</h2>
+<pre class="r"><code># restrict Cant field to basin mask grid
+cant &lt;- inner_join(cant, basinmask)</code></pre>
+</div>
+<div id="calculate-cant-total" class="section level2" number="1.6">
+<h2 number="1.6"><span class="header-section-number">1.6</span> Calculate Cant total</h2>
+<pre class="r"><code>cant &lt;- cant %&gt;%
+  mutate(cant_total = tco2_A - tco2_D) %&gt;% 
+  select(-c(tco2_A, tco2_D))</code></pre>
+</div>
+<div id="write-cant-files" class="section level2" number="1.7">
+<h2 number="1.7"><span class="header-section-number">1.7</span> Write Cant files</h2>
+<pre class="r"><code># write annual Cant files
+years &lt;- c(1982:2018)
+
+for (i_year in years) {
+  
+ # i_year = years[1]
+  cant_year &lt;- cant %&gt;%
+    filter(year == i_year)
+  
+  cant_year %&gt;%
+    write_csv(paste(path_preprocessing,
+                    &quot;cant_annual_field_AD/cant_&quot;, i_year, &quot;.csv&quot;,
+                    sep = &quot;&quot;))
+}</code></pre>
+</div>
+</div>
+<div id="calculate-change-in-cant-1994---2007" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Calculate change in Cant 1994 - 2007</h1>
+<pre class="r"><code>cant_1994 &lt;- cant %&gt;%
+  filter(year == 1994) %&gt;%
+  select(-c(year)) %&gt;%
+  rename(cant_1994 = cant_total)
+
+cant_2007 &lt;- cant %&gt;%
+  filter(year == 2007) %&gt;%
+  select(-c(year)) %&gt;%
+  rename(cant_2007 = cant_total)
+
+cant_gruber &lt;- left_join(cant_1994, cant_2007) %&gt;%
+  mutate(cant = cant_2007 - cant_1994)
+
+cant_gruber &lt;- cant_gruber %&gt;% 
+   mutate(cant_pos = if_else(cant &lt;= 0, 0, cant))
+
+rm(cant_1994, cant_2007)</code></pre>
+</div>
+<div id="zonal-mean-sections" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Zonal mean sections</h1>
+<pre class="r"><code>cant_gruber &lt;- cant_gruber %&gt;% 
+  mutate(eras = &quot;JGOFS/WOCE&quot;)
+
+cant_gruber_zonal &lt;- m_zonal_mean_section(cant_gruber)</code></pre>
+<div id="section" class="section level2" number="3.1">
+<h2 number="3.1"><span class="header-section-number">3.1</span> 1994 - 2007</h2>
+<pre class="r"><code>for (i_basin_AIP in unique(cant_gruber_zonal$basin_AIP)) {
+  print(
+    p_section_zonal(
+      cant_gruber_zonal %&gt;% filter(basin_AIP == i_basin_AIP),
+      var = &quot;cant_pos_mean&quot;,
+      plot_slabs = &quot;n&quot;,
+      subtitle_text = paste(&quot;Basin: &quot;, i_basin_AIP)
+    )
+  )
+}</code></pre>
+<p><img src="figure/NorESM_Cant_AD.Rmd/zonal_mean_section_cant_gruber-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/NorESM_Cant_AD.Rmd/zonal_mean_section_cant_gruber-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/NorESM_Cant_AD.Rmd/zonal_mean_section_cant_gruber-3.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cant-total-1994" class="section level2" number="3.2">
+<h2 number="3.2"><span class="header-section-number">3.2</span> Cant total 1994</h2>
+<pre class="r"><code>for (i_basin_AIP in unique(cant_gruber_zonal$basin_AIP)) {
+  print(
+    p_section_zonal(
+      cant_gruber_zonal %&gt;% filter(basin_AIP == i_basin_AIP),
+      var = &quot;cant_1994_mean&quot;,
+      plot_slabs = &quot;n&quot;,
+      breaks = seq(0,100,10),
+      subtitle_text = paste(&quot;Basin: &quot;, i_basin_AIP)
+    )
+  )
+}</code></pre>
+<p><img src="figure/NorESM_Cant_AD.Rmd/zonal_mean_section_cant_total_1994-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/NorESM_Cant_AD.Rmd/zonal_mean_section_cant_total_1994-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/NorESM_Cant_AD.Rmd/zonal_mean_section_cant_total_1994-3.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cant-total-2007" class="section level2" number="3.3">
+<h2 number="3.3"><span class="header-section-number">3.3</span> Cant total 2007</h2>
+<pre class="r"><code>for (i_basin_AIP in unique(cant_gruber_zonal$basin_AIP)) {
+  print(
+    p_section_zonal(
+      cant_gruber_zonal %&gt;% filter(basin_AIP == i_basin_AIP),
+      var = &quot;cant_2007_mean&quot;,
+      plot_slabs = &quot;n&quot;,
+      breaks = seq(0,100,10),
+      subtitle_text = paste(&quot;Basin: &quot;, i_basin_AIP)
+    )
+  )
+}</code></pre>
+<p><img src="figure/NorESM_Cant_AD.Rmd/zonal_mean_section_cant_total_2007-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/NorESM_Cant_AD.Rmd/zonal_mean_section_cant_total_2007-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/NorESM_Cant_AD.Rmd/zonal_mean_section_cant_total_2007-3.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="column-inventory" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Column inventory</h1>
+<div id="section-1" class="section level2" number="4.1">
+<h2 number="4.1"><span class="header-section-number">4.1</span> 1994 - 2007</h2>
+<pre class="r"><code>cant_gruber_inv &lt;- m_cant_inv(cant_gruber)</code></pre>
+<pre class="r"><code>p_map_cant_inv(cant_gruber_inv %&gt;% filter(inv_depth == 3000))</code></pre>
+<p><img src="figure/NorESM_Cant_AD.Rmd/cant_inventory_gruber-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cant-total-1994-1" class="section level2" number="4.2">
+<h2 number="4.2"><span class="header-section-number">4.2</span> Cant total 1994</h2>
+<pre class="r"><code># this is just a work around, because the function is designed to calculate cant inventories, but not cant_total inventories
+
+cant_gruber_total_inv &lt;- m_cant_inv(
+  cant_gruber %&gt;% 
+    select(-cant_pos) %&gt;% 
+    rename(cant_pos = cant_1994))</code></pre>
+<pre class="r"><code>p_map_cant_inv(cant_gruber_total_inv %&gt;% filter(inv_depth == 3000),
+               breaks = seq(0,100,10),
+               subtitle_text = &quot;Cant total in 1994&quot;)</code></pre>
+<p><img src="figure/NorESM_Cant_AD.Rmd/cant_inventory_1994-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cant-total-2007-1" class="section level2" number="4.3">
+<h2 number="4.3"><span class="header-section-number">4.3</span> Cant total 2007</h2>
+<pre class="r"><code># this is just a work around, because the function is designed to calculate cant inventories, but not cant_total inventories
+
+cant_gruber_total_inv &lt;- m_cant_inv(
+  cant_gruber %&gt;% 
+    select(-cant_pos) %&gt;% 
+    rename(cant_pos = cant_2007))</code></pre>
+<pre class="r"><code>p_map_cant_inv(cant_gruber_total_inv %&gt;% filter(inv_depth == 3000),
+               breaks = seq(0,100,10),
+               subtitle_text = &quot;Cant total in 2007&quot;)</code></pre>
+<p><img src="figure/NorESM_Cant_AD.Rmd/cant_inventory_2007-1.png" width="672" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.3 (2020-10-10)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: openSUSE Leap 15.2
+
+Matrix products: default
+BLAS:   /usr/local/R-4.0.3/lib64/R/lib/libRblas.so
+LAPACK: /usr/local/R-4.0.3/lib64/R/lib/libRlapack.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] gsw_1.0-5       testthat_3.0.1  stars_0.5-2     sf_0.9-8       
+ [5] abind_1.4-5     tidync_0.2.4    metR_0.9.0      scico_1.2.0    
+ [9] patchwork_1.1.1 collapse_1.5.0  forcats_0.5.0   stringr_1.4.0  
+[13] dplyr_1.0.5     purrr_0.3.4     readr_1.4.0     tidyr_1.1.2    
+[17] tibble_3.0.4    ggplot2_3.3.3   tidyverse_1.3.0 workflowr_1.6.2
+
+loaded via a namespace (and not attached):
+ [1] fs_1.5.0                 lubridate_1.7.9          httr_1.4.2              
+ [4] rprojroot_2.0.2          tools_4.0.3              backports_1.1.10        
+ [7] R6_2.5.0                 KernSmooth_2.23-18       DBI_1.1.0               
+[10] colorspace_2.0-0         withr_2.3.0              tidyselect_1.1.0        
+[13] compiler_4.0.3           git2r_0.27.1             cli_2.2.0               
+[16] rvest_0.3.6              RNetCDF_2.4-2            xml2_1.3.2              
+[19] isoband_0.2.3            labeling_0.4.2           scales_1.1.1            
+[22] checkmate_2.0.0          classInt_0.4-3           digest_0.6.27           
+[25] rmarkdown_2.5            pkgconfig_2.0.3          htmltools_0.5.0         
+[28] dbplyr_1.4.4             rlang_0.4.10             readxl_1.3.1            
+[31] rstudioapi_0.13          farver_2.0.3             generics_0.1.0          
+[34] jsonlite_1.7.2           magrittr_2.0.1           ncmeta_0.3.0            
+[37] Matrix_1.2-18            Rcpp_1.0.5               munsell_0.5.0           
+[40] fansi_0.4.1              lifecycle_1.0.0          stringi_1.5.3           
+[43] whisker_0.4              yaml_2.2.1               grid_4.0.3              
+[46] blob_1.2.1               parallel_4.0.3           promises_1.1.1          
+[49] crayon_1.3.4             lattice_0.20-41          haven_2.3.1             
+[52] hms_0.5.3                knitr_1.30               pillar_1.4.7            
+[55] reprex_0.3.0             glue_1.4.2               evaluate_0.14           
+[58] RcppArmadillo_0.10.1.2.2 data.table_1.13.6        modelr_0.1.8            
+[61] vctrs_0.3.6              httpuv_1.5.4             cellranger_1.1.0        
+[64] gtable_0.3.0             assertthat_0.2.1         xfun_0.20               
+[67] lwgeom_0.2-5             broom_0.7.5              RcppEigen_0.3.3.9.1     
+[70] e1071_1.7-4              later_1.1.0.1            class_7.3-17            
+[73] ncdf4_1.17               units_0.6-7              ellipsis_0.3.1          </code></pre>
+</div>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
