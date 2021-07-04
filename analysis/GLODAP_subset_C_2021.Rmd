@@ -634,7 +634,7 @@ map +
 ```{r read_GLODAP_with_cmorized_subset_file}
 
 GLODAP_cmorized <- read_csv(paste(path_preprocessing,
-                                  "GLODAPv2.2020_preprocessed_model_runC_both.csv",
+                                  "GLODAPv2.2021_preprocessed_model_runC_both.csv",
                                   sep = ""))
 
 ```

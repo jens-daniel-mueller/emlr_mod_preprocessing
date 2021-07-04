@@ -26,6 +26,7 @@ wflow_publish(here::here(
     "Random_subset_A_2021_annual.Rmd",
     "NorESM_Random_subset_A_2021_annual.Rmd",
     "Random_subset_C.Rmd",
+    "Random_subset_C_2021.Rmd",
     "Cant_AD.Rmd",
     "NorESM_Cant_AD.Rmd",
     "Cant_CB.Rmd",

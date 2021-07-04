@@ -33,6 +33,8 @@ navbar:
       href: NorESM_Random_subset_A_2021_annual.html
     - text: Random subset constant climate
       href: Random_subset_C.html
+    - text: Random beta_2021 subset constant climate
+      href: Random_subset_C_2021.html
   - text: Cant
     menu:
     - text: Cant variable climate
