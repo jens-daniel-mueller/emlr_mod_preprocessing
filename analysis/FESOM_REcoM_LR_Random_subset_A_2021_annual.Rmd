@@ -1,5 +1,5 @@
 ---
-title: "Random subset constant C 2021"
+title: "FESOM_REcoM_LR Random subset variable A"
 author: "Jens Daniel Müller"
 date:  "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
@@ -21,10 +21,12 @@ editor_options:
 ```{r define_paths}
 path_GLODAP_preprocessing <-
   paste(path_root, "/observations/preprocessing/", sep = "")
+
 path_cmorized <-
-  "/nfs/kryo/work/loher/CESM_output/RECCAP2/submit_June2021/"
-path_preprocessing  <-
-  paste(path_root, "/model/preprocessing/", sep = "")
+  "/nfs/kryo/work/updata/reccap2/Models/3D_ALL/FESOM_REcoM_LR_3D_all_v20210218/"
+
+path_preprocessing <-
+  paste(path_root, "/model/preprocessing/FESOM_REcoM_LR/", sep = "")
 ```
 
 ```{r load_libraries_specific, include=FALSE}
@@ -83,7 +85,7 @@ model <-
   tidync(
     paste(
       path_cmorized,
-      "dissic_CESM-ETHZ_C_1_gr_1980-2018_v20210607.nc",
+      "dissic_FESOM_REcoM_LR_A_1_gr_1980-2018_v20210218.nc",
       sep = ""
     )
   ) %>%
@@ -92,7 +94,13 @@ model <-
 
 # convert longitudes and mutate month
 model <- model %>%
-  filter(time_ann == min(time_ann)) %>%
+  rename(
+    time = Time,
+    lon = Lon,
+    lat = Lat,
+    depth = Depth
+  ) %>%
+filter(time == min(time)) %>%
   mutate(lon = if_else(lon < 20, lon + 360, lon))
 
 # only consider model grids within basinmask
@@ -132,14 +140,15 @@ for (i_year in years) {
 }
 
 # set name of model to be subsetted
-model_ID <- "C"
+model_ID <- "A"
 
 # for loop across variables
 variables <-
-  c("so", "thetao", "dissic", "talk", "o2", "no3", "po4", "si")
+  c("so", "thetao", "dissic", "talk", "o2", "no3", #"po4", 
+    "si")
 
 for (i_variable in variables) {
- # i_variable <- variables[2]
+  # i_variable <- variables[1]
   
   # read list of all files
   file <-
@@ -148,9 +157,9 @@ for (i_variable in variables) {
       pattern = paste(
         "^",
         i_variable,
-        "_CESM-ETHZ_",
+        "_FESOM_REcoM_LR_",
         model_ID,
-        "_1_gr_1980-2018_v20210607.nc",
+        "_1_gr_1980-2018_v20210218.nc",
         sep = ""
       )
     )
@@ -175,6 +184,15 @@ for (i_variable in variables) {
     variable_data_tibble %>%
     filter(!is.na(!!sym(i_variable)))
   
+  # convert variable name
+  variable_data_tibble <- variable_data_tibble %>%
+    rename(
+      year = Time,
+      lon = Lon,
+      lat = Lat,
+      depth = Depth
+    )
+  
   # convert longitudes
   variable_data_tibble <- variable_data_tibble %>%
     mutate(lon = if_else(lon < 20, lon + 360, lon))
@@ -183,11 +201,6 @@ for (i_variable in variables) {
   variable_data_tibble <-
     inner_join(variable_data_tibble, basinmask) %>%
     select(-basin_AIP)
-  
-  # convert time variable to year
-  variable_data_tibble <- variable_data_tibble %>%
-    mutate(year = 1980 + floor(time_ann / 365)) %>%
-    select(-time_ann)
   
   # add random sample model subset for each variable together
   if (exists("model_resample")) {
@@ -224,7 +237,7 @@ model_resample <- model_resample %>%
     talk = talk * (1e+6 / rho),
     o2 = o2 * (1e+6 / rho),
     no3 = no3 * (1e+6 / rho),
-    po4 = po4 * (1e+6 / rho),
+#    po4 = po4 * (1e+6 / rho),
     si = si * (1e+6 / rho)
   )
 
@@ -252,7 +265,7 @@ model_resample <- model_resample %>%
     talk = talk,
     oxygen = o2,
     nitrate = no3,
-    phosphate = po4,
+#    phosphate = po4,
     silicate = si,
     aou = aou
   )
@@ -303,7 +316,7 @@ model_resample <- inner_join(model_resample, basinmask)
 # write file for random model sampling
 model_resample %>%
   write_csv(paste(path_preprocessing,
-                  "GLODAPv2.2021_preprocessed_model_runC_random_subset_grid_ann.csv",
+                  "GLODAPv2.2021_preprocessed_model_runA_random_subset_grid_ann.csv",
                   sep = ""))
 
 ```
@@ -317,7 +330,7 @@ model_resample %>%
 # read in random model sampling file
 model_resample <-
   read_csv(paste(path_preprocessing,
-                 "GLODAPv2.2021_preprocessed_model_runC_random_subset_grid_ann.csv",
+                 "GLODAPv2.2021_preprocessed_model_runA_random_subset_grid_ann.csv",
                  sep = ""))
 
 # plot random sampling cmorized grids in each year
@@ -382,8 +395,8 @@ model_resample_depth_average %>%
 # Depths gridded to model depth levels for comparison
 GLODAP_depth <- GLODAP %>%
   mutate(depth = as.numeric(as.character(cut(depth,
-                     c(0, unique(model_resample_depth_average$depth)),
-                     labels = unique(model_resample_depth_average$depth))))) %>% 
+                     unique(model_resample_depth_average$depth),
+                     labels = unique(model_resample_depth_average$depth)[2:46])))) %>% 
   count(depth, year)
 
 GLODAP_depth_average <- GLODAP_depth %>%
@@ -412,7 +425,7 @@ GLODAP_depth_average %>%
 # read in random model sampling file
 resample_grid <-
   read_csv(paste(path_preprocessing,
-                 "GLODAPv2.2021_preprocessed_model_runC_random_subset_grid_ann.csv",
+                 "GLODAPv2.2021_preprocessed_model_runA_random_subset_grid_ann.csv",
                  sep = ""))
 
 for (i in unique(resample_grid$lat)) {
@@ -440,7 +453,7 @@ for (i in unique(resample_grid$lat)) {
 # write resampling file
 resample_lat %>%
   write_csv(paste(path_preprocessing,
-                 "GLODAPv2.2021_preprocessed_model_runC_random_subset_lat_ann.csv",
+                 "GLODAPv2.2021_preprocessed_model_runA_random_subset_lat_ann.csv",
                  sep = ""))
 
 ```
@@ -452,7 +465,7 @@ resample_lat %>%
 # read in random model sampling file
 resample_lat <-
   read_csv(paste(path_preprocessing,
-                 "GLODAPv2.2021_preprocessed_model_runC_random_subset_lat_ann.csv",
+                 "GLODAPv2.2021_preprocessed_model_runA_random_subset_lat_ann.csv",
                  sep = ""))
 
 # plot random sampling cmorized grids in each year

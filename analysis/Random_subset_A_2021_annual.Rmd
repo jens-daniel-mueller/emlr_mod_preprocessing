@@ -374,7 +374,6 @@ model_resample_depth_average %>%
                   ylim = c(6000,0)) +
   labs(title = "Depth distribution of random model subset")
 
-
 ```
 
 ```{r GLODAP_depth_distribution}

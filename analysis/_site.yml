@@ -9,6 +9,8 @@ navbar:
       href: Climatology_A.html
     - text: NorESM-based Variable climatology
       href: NorESM_Climatology_A.html
+    - text: FESOM_REcoM_LR-based Variable climatology
+      href: FESOM_REcoM_LR_Climatology_A.html
     - text: Constant climatology
       href: Climatology_C.html
   - text: Synthetic data
@@ -21,6 +23,8 @@ navbar:
       href: GLODAP_subset_A_2021_annual.html
     - text: NorESM-based GLODAP beta_2021 subset variable climate annual
       href: NorESM_GLODAP_subset_A_2021_annual.html
+    - text: FESOM_REcoM_LR-based GLODAP beta_2021 subset variable climate annual
+      href: FESOM_REcoM_LR_GLODAP_subset_A_2021_annual.html
     - text: GLODAP subset constant climate
       href: GLODAP_subset_C.html
     - text: GLODAP beta_2021 subset constant climate
@@ -31,6 +35,8 @@ navbar:
       href: Random_subset_A_2021_annual.html
     - text: NorESM-based Random beta_2021 subset variable climate annual
       href: NorESM_Random_subset_A_2021_annual.html
+    - text: FESOM_REcoM_LR-based Random beta_2021 subset variable climate annual
+      href: FESOM_REcoM_LR_Random_subset_A_2021_annual.html
     - text: Random subset constant climate
       href: Random_subset_C.html
     - text: Random beta_2021 subset constant climate
@@ -41,6 +47,8 @@ navbar:
       href: Cant_AD.html
     - text: NorESM-based Cant variable climate
       href: NorESM_Cant_AD.html
+    - text: FESOM_REcoM_LR-based Cant variable climate
+      href: FESOM_REcoM_LR_Cant_AD.html
     - text: Cant constant climate
       href: Cant_CB.html
   - text: Surface data
