@@ -563,6 +563,22 @@ variable_data_tibble <-
   inner_join(variable_data_tibble, basinmask) %>%
   select(-basin_AIP)
 
+
+############################ check for model values with box plot
+# variable_data_tibble_plot <- variable_data_tibble %>%
+#   mutate(depth = factor(depth),
+#          depth = factor(depth, levels = rev(levels(depth))))
+# 
+# print(
+#   ggplot(variable_data_tibble_plot, aes(x = dissic,
+#                                         y = depth)) +
+#     geom_bin2d(binwidth = 0.1) +
+#     labs(title = "Check plot for simulated DIC",
+#          subtitle = "All years") +
+#     scale_fill_viridis_c(trans = "log10")
+# )
+
+
 # select year
 variable_data_tibble <- variable_data_tibble %>%
   filter(year == 2018)
