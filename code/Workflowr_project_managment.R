@@ -44,10 +44,10 @@ republish = TRUE)
 wflow_publish(here::here(
   "analysis",
   c(
-    "surface_ocean.Rmd"
+    "GLODAP_subset_A_2021.Rmd"
   )
 ),
-message = "testrun surface ocean data")
+message = "rerun with new preprocessed GLODAP file")
 
 
 # Push latest version to GitHub
