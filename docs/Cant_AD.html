@@ -522,7 +522,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Cant variable climate AD</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">07 July, 2021</h4>
+<h4 class="date">09 August, 2021</h4>
 
 </div>
 
@@ -547,7 +547,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-07-07
+<strong>Last updated:</strong> 2021-08-09
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -638,16 +638,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree6d4bf8ac4cb337a90f478db8ff0ef84354089e02targetblank6d4bf8aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/6d4bf8ac4cb337a90f478db8ff0ef84354089e02" target="_blank">6d4bf8a</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtreec1c788d4108ed2a39c1fd486bd92cfb271528c85targetblankc1c788da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/c1c788d4108ed2a39c1fd486bd92cfb271528c85" target="_blank">c1c788d</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree6d4bf8ac4cb337a90f478db8ff0ef84354089e02targetblank6d4bf8aa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtreec1c788d4108ed2a39c1fd486bd92cfb271528c85targetblankc1c788da" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/6d4bf8ac4cb337a90f478db8ff0ef84354089e02" target="_blank">6d4bf8a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/c1c788d4108ed2a39c1fd486bd92cfb271528c85" target="_blank">c1c788d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -694,6 +694,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/c1c788d4108ed2a39c1fd486bd92cfb271528c85/analysis/Cant_AD.Rmd" target="_blank">c1c788d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-08-09
+</td>
+<td>
+added cstar field extraction from CESM output
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/2fb60d010e898ac99329683bf76bbf0d38100bcc/docs/Cant_AD.html" target="_blank">2fb60d0</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-07-07
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1040,42 +1074,52 @@ A_annual &lt;- tidync(paste(path_cmorized,
 
 A_annual &lt;- A_annual %&gt;% hyper_tibble()
 
+# calculate model temperature
+A_annual &lt;- A_annual %&gt;%
+  mutate(temp = gsw_pt_from_t(
+    SA = so,
+    t = thetao,
+    p = 10.1325,
+    p_ref = depth
+  ))
+
+# calculate model density
+A_annual &lt;- A_annual %&gt;%
+  mutate(
+    rho = gsw_pot_rho_t_exact(
+      SA = so,
+      t = temp,
+      p = depth,
+      p_ref = 10.1325
+    ))
+
+# unit transfer from mol/m3 to µmol/kg
+A_annual &lt;- A_annual %&gt;%
+  mutate(
+    dissic = dissic * (1e+6 / rho),
+    talk = talk * (1e+6 / rho),
+    no3 = no3 * (1e+6 / rho),
+    po4 = po4 * (1e+6 / rho)
+  )
+
 # harmonize column names and coordinates
 A_annual &lt;- A_annual %&gt;%
-  select(
-    year = time_ann,
-    lon,
-    lat,
-    depth,
-    tco2_A = dissic,
-    sal = so,
-    theta = thetao
+  rename(
+    year = time_ann
   ) %&gt;%
   # compute year from days since Jan 1, 1980
   mutate(year = (year - 181) / 365 + 1980) %&gt;%
   mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
 
-# calculate model temperature
-A_annual &lt;- A_annual %&gt;%
-  mutate(temp = gsw_pt_from_t(
-    SA = sal,
-    t = theta,
-    p = 10.1325,
-    p_ref = depth
-  ))
+# create backup for cstar calculation
+cstar_A &lt;- A_annual %&gt;% 
+  select(year, depth,
+         lon, lat,
+         dissic, talk, no3, po4)
 
-# unit transfer from mol/m3 to µmol/kg
+# harmonize column names and coordinates
 A_annual &lt;- A_annual %&gt;%
-  mutate(
-    rho = gsw_pot_rho_t_exact(
-      SA = sal,
-      t = temp,
-      p = depth,
-      p_ref = 10.1325
-    ),
-    tco2_A = tco2_A * (1e+6 / rho)
-  ) %&gt;%
-  select(year, lon, lat, depth, tco2_A)</code></pre>
+  select(year, lon, lat, depth, tco2_A = dissic)</code></pre>
 </div>
 <div id="read-in-run-d" class="section level2" number="1.2">
 <h2 number="1.2"><span class="header-section-number">1.2</span> Read in Run D</h2>
@@ -1162,8 +1206,66 @@ for (i_year in years) {
 }</code></pre>
 </div>
 </div>
-<div id="calculate-change-in-cant-1994---2007" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> Calculate change in Cant 1994 - 2007</h1>
+<div id="cstar-fields" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Cstar fields</h1>
+<div id="round-depth-levels-1" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Round depth levels</h2>
+<pre class="r"><code>cstar_A &lt;- cstar_A %&gt;%
+  mutate(depth = round(depth))</code></pre>
+</div>
+<div id="apply-basin-mask-1" class="section level2" number="2.2">
+<h2 number="2.2"><span class="header-section-number">2.2</span> Apply basin mask</h2>
+<pre class="r"><code># restrict cstar_A field to basin mask grid
+cstar_A &lt;- inner_join(cstar_A, basinmask)</code></pre>
+</div>
+<div id="calculate-cstar" class="section level2" number="2.3">
+<h2 number="2.3"><span class="header-section-number">2.3</span> Calculate cstar</h2>
+<pre class="r"><code>params_local &lt;- lst(# Stoichiometric ratio of C to P
+  rCP = 117,
+  # Stoichiometric ratio of N to P
+  rNP = 16,)
+
+
+cstar_A &lt;- cstar_A %&gt;%
+  mutate(
+    cstar_no3 = b_cstar_nitrate(
+      tco2 = dissic,
+      nitrate = no3,
+      talk = talk
+    ),
+    cstar_po4 = b_cstar_phosphate(
+      tco2 = dissic,
+      phosphate = po4,
+      talk = talk
+    )
+  )
+
+rm(params_local)
+
+# cstar_A %&gt;%
+#   ggplot(aes(cstar_no3, cstar_po4)) +
+#   geom_bin2d()</code></pre>
+</div>
+<div id="write-cstar_a-files" class="section level2" number="2.4">
+<h2 number="2.4"><span class="header-section-number">2.4</span> Write cstar_A files</h2>
+<pre class="r"><code># write annual cstar_A files
+years &lt;- c(1982:2019)
+
+for (i_year in years) {
+  
+ # i_year = years[1]
+  cstar_A_year &lt;- cstar_A %&gt;%
+    filter(year == i_year)
+  
+  cstar_A_year %&gt;%
+    write_csv(paste(path_preprocessing,
+                    &quot;cstar_annual_field_A/cstar_A_&quot;, i_year, &quot;.csv&quot;,
+                    sep = &quot;&quot;))
+}</code></pre>
+</div>
+</div>
+<div id="calculate-change-in-cant-1994---2007" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Calculate change in Cant 1994 - 2007</h1>
 <pre class="r"><code>cant_1994 &lt;- cant %&gt;%
   filter(year == 1994) %&gt;%
   select(-c(year)) %&gt;%
@@ -1182,14 +1284,14 @@ cant_gruber &lt;- cant_gruber %&gt;%
 
 rm(cant_1994, cant_2007)</code></pre>
 </div>
-<div id="zonal-mean-sections" class="section level1" number="3">
-<h1 number="3"><span class="header-section-number">3</span> Zonal mean sections</h1>
+<div id="zonal-mean-sections" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Zonal mean sections</h1>
 <pre class="r"><code>cant_gruber &lt;- cant_gruber %&gt;% 
   mutate(eras = &quot;JGOFS/WOCE&quot;)
 
 cant_gruber_zonal &lt;- m_zonal_mean_section(cant_gruber)</code></pre>
-<div id="section" class="section level2" number="3.1">
-<h2 number="3.1"><span class="header-section-number">3.1</span> 1994 - 2007</h2>
+<div id="section" class="section level2" number="4.1">
+<h2 number="4.1"><span class="header-section-number">4.1</span> 1994 - 2007</h2>
 <pre class="r"><code>for (i_basin_AIP in unique(cant_gruber_zonal$basin_AIP)) {
   print(
     p_section_zonal(
@@ -1223,6 +1325,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2fb60d010e898ac99329683bf76bbf0d38100bcc/docs/figure/Cant_AD.Rmd/zonal_mean_section_cant_gruber-1.png" target="_blank">2fb60d0</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-07-07
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/279e0e04d247577e5682243231127f547896c468/docs/figure/Cant_AD.Rmd/zonal_mean_section_cant_gruber-1.png" target="_blank">279e0e0</a>
@@ -1272,6 +1385,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2fb60d010e898ac99329683bf76bbf0d38100bcc/docs/figure/Cant_AD.Rmd/zonal_mean_section_cant_gruber-2.png" target="_blank">2fb60d0</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-07-07
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/59fce523bcf62bd81a936e98e331216099ff5f4d/docs/figure/Cant_AD.Rmd/zonal_mean_section_cant_gruber-2.png" target="_blank">59fce52</a>
@@ -1334,6 +1458,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2fb60d010e898ac99329683bf76bbf0d38100bcc/docs/figure/Cant_AD.Rmd/zonal_mean_section_cant_gruber-3.png" target="_blank">2fb60d0</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-07-07
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/279e0e04d247577e5682243231127f547896c468/docs/figure/Cant_AD.Rmd/zonal_mean_section_cant_gruber-3.png" target="_blank">279e0e0</a>
 </td>
 <td>
@@ -1359,8 +1494,8 @@ Donghe-Zhu
 </div>
 </div>
 </div>
-<div id="cant-total-1994" class="section level2" number="3.2">
-<h2 number="3.2"><span class="header-section-number">3.2</span> Cant total 1994</h2>
+<div id="cant-total-1994" class="section level2" number="4.2">
+<h2 number="4.2"><span class="header-section-number">4.2</span> Cant total 1994</h2>
 <pre class="r"><code>for (i_basin_AIP in unique(cant_gruber_zonal$basin_AIP)) {
   print(
     p_section_zonal(
@@ -1395,6 +1530,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2fb60d010e898ac99329683bf76bbf0d38100bcc/docs/figure/Cant_AD.Rmd/zonal_mean_section_cant_total_1994-1.png" target="_blank">2fb60d0</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-07-07
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2eb66526b4e3428eb019b4e5206a581a670eb94f/docs/figure/Cant_AD.Rmd/zonal_mean_section_cant_total_1994-1.png" target="_blank">2eb6652</a>
@@ -1433,6 +1579,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2fb60d010e898ac99329683bf76bbf0d38100bcc/docs/figure/Cant_AD.Rmd/zonal_mean_section_cant_total_1994-2.png" target="_blank">2fb60d0</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-07-07
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/59fce523bcf62bd81a936e98e331216099ff5f4d/docs/figure/Cant_AD.Rmd/zonal_mean_section_cant_total_1994-2.png" target="_blank">59fce52</a>
@@ -1484,6 +1641,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2fb60d010e898ac99329683bf76bbf0d38100bcc/docs/figure/Cant_AD.Rmd/zonal_mean_section_cant_total_1994-3.png" target="_blank">2fb60d0</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-07-07
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2eb66526b4e3428eb019b4e5206a581a670eb94f/docs/figure/Cant_AD.Rmd/zonal_mean_section_cant_total_1994-3.png" target="_blank">2eb6652</a>
 </td>
 <td>
@@ -1498,8 +1666,8 @@ Donghe-Zhu
 </div>
 </div>
 </div>
-<div id="cant-total-2007" class="section level2" number="3.3">
-<h2 number="3.3"><span class="header-section-number">3.3</span> Cant total 2007</h2>
+<div id="cant-total-2007" class="section level2" number="4.3">
+<h2 number="4.3"><span class="header-section-number">4.3</span> Cant total 2007</h2>
 <pre class="r"><code>for (i_basin_AIP in unique(cant_gruber_zonal$basin_AIP)) {
   print(
     p_section_zonal(
@@ -1534,6 +1702,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2fb60d010e898ac99329683bf76bbf0d38100bcc/docs/figure/Cant_AD.Rmd/zonal_mean_section_cant_total_2007-1.png" target="_blank">2fb60d0</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-07-07
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/279e0e04d247577e5682243231127f547896c468/docs/figure/Cant_AD.Rmd/zonal_mean_section_cant_total_2007-1.png" target="_blank">279e0e0</a>
@@ -1583,6 +1762,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2fb60d010e898ac99329683bf76bbf0d38100bcc/docs/figure/Cant_AD.Rmd/zonal_mean_section_cant_total_2007-2.png" target="_blank">2fb60d0</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-07-07
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/59fce523bcf62bd81a936e98e331216099ff5f4d/docs/figure/Cant_AD.Rmd/zonal_mean_section_cant_total_2007-2.png" target="_blank">59fce52</a>
@@ -1645,6 +1835,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/2fb60d010e898ac99329683bf76bbf0d38100bcc/docs/figure/Cant_AD.Rmd/zonal_mean_section_cant_total_2007-3.png" target="_blank">2fb60d0</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-07-07
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/279e0e04d247577e5682243231127f547896c468/docs/figure/Cant_AD.Rmd/zonal_mean_section_cant_total_2007-3.png" target="_blank">279e0e0</a>
 </td>
 <td>
@@ -1671,10 +1872,10 @@ Donghe-Zhu
 </div>
 </div>
 </div>
-<div id="column-inventory" class="section level1" number="4">
-<h1 number="4"><span class="header-section-number">4</span> Column inventory</h1>
-<div id="section-1" class="section level2" number="4.1">
-<h2 number="4.1"><span class="header-section-number">4.1</span> 1994 - 2007</h2>
+<div id="column-inventory" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> Column inventory</h1>
+<div id="section-1" class="section level2" number="5.1">
+<h2 number="5.1"><span class="header-section-number">5.1</span> 1994 - 2007</h2>
 <pre class="r"><code>cant_gruber_inv &lt;- m_cant_inv(cant_gruber)</code></pre>
 <pre class="r"><code>p_map_cant_inv(cant_gruber_inv %&gt;% filter(inv_depth == 3000))</code></pre>
 <p><img src="figure/Cant_AD.Rmd/cant_inventory_gruber-1.png" width="672" style="display: block; margin: auto;" /></p>
@@ -1760,8 +1961,8 @@ Donghe-Zhu
 </div>
 </div>
 </div>
-<div id="cant-total-1994-1" class="section level2" number="4.2">
-<h2 number="4.2"><span class="header-section-number">4.2</span> Cant total 1994</h2>
+<div id="cant-total-1994-1" class="section level2" number="5.2">
+<h2 number="5.2"><span class="header-section-number">5.2</span> Cant total 1994</h2>
 <pre class="r"><code># this is just a work around, because the function is designed to calculate cant inventories, but not cant_total inventories
 
 cant_gruber_total_inv &lt;- m_cant_inv(
@@ -1843,8 +2044,8 @@ Donghe-Zhu
 </div>
 </div>
 </div>
-<div id="cant-total-2007-1" class="section level2" number="4.3">
-<h2 number="4.3"><span class="header-section-number">4.3</span> Cant total 2007</h2>
+<div id="cant-total-2007-1" class="section level2" number="5.3">
+<h2 number="5.3"><span class="header-section-number">5.3</span> Cant total 2007</h2>
 <pre class="r"><code># this is just a work around, because the function is designed to calculate cant inventories, but not cant_total inventories
 
 cant_gruber_total_inv &lt;- m_cant_inv(
@@ -1964,7 +2165,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] gsw_1.0-5       testthat_3.0.1  stars_0.5-2     sf_0.9-8       
+ [1] gsw_1.0-5       testthat_2.3.2  stars_0.5-2     sf_0.9-8       
  [5] abind_1.4-5     tidync_0.2.4    ggforce_0.3.3   metR_0.9.0     
  [9] scico_1.2.0     patchwork_1.1.1 collapse_1.5.0  forcats_0.5.0  
 [13] stringr_1.4.0   dplyr_1.0.5     purrr_0.3.4     readr_1.4.0    
@@ -1974,16 +2175,16 @@ other attached packages:
 loaded via a namespace (and not attached):
  [1] fs_1.5.0                 lubridate_1.7.9          httr_1.4.2              
  [4] rprojroot_2.0.2          tools_4.0.3              backports_1.1.10        
- [7] R6_2.5.0                 KernSmooth_2.23-18       DBI_1.1.0               
-[10] colorspace_2.0-0         withr_2.3.0              tidyselect_1.1.0        
-[13] compiler_4.0.3           git2r_0.27.1             cli_2.2.0               
+ [7] R6_2.5.0                 KernSmooth_2.23-17       DBI_1.1.0               
+[10] colorspace_1.4-1         withr_2.3.0              tidyselect_1.1.0        
+[13] compiler_4.0.3           git2r_0.27.1             cli_2.1.0               
 [16] rvest_0.3.6              RNetCDF_2.4-2            xml2_1.3.2              
-[19] isoband_0.2.3            labeling_0.4.2           scales_1.1.1            
+[19] isoband_0.2.2            labeling_0.4.2           scales_1.1.1            
 [22] checkmate_2.0.0          classInt_0.4-3           digest_0.6.27           
 [25] rmarkdown_2.5            pkgconfig_2.0.3          htmltools_0.5.0         
 [28] dbplyr_1.4.4             rlang_0.4.10             readxl_1.3.1            
-[31] rstudioapi_0.13          farver_2.0.3             generics_0.1.0          
-[34] jsonlite_1.7.2           magrittr_2.0.1           ncmeta_0.3.0            
+[31] rstudioapi_0.11          farver_2.0.3             generics_0.0.2          
+[34] jsonlite_1.7.1           magrittr_1.5             ncmeta_0.3.0            
 [37] Matrix_1.2-18            Rcpp_1.0.5               munsell_0.5.0           
 [40] fansi_0.4.1              lifecycle_1.0.0          stringi_1.5.3           
 [43] whisker_0.4              yaml_2.2.1               MASS_7.3-53             
@@ -1991,11 +2192,11 @@ loaded via a namespace (and not attached):
 [49] promises_1.1.1           crayon_1.3.4             lattice_0.20-41         
 [52] haven_2.3.1              hms_0.5.3                knitr_1.30              
 [55] pillar_1.4.7             reprex_0.3.0             glue_1.4.2              
-[58] evaluate_0.14            RcppArmadillo_0.10.1.2.2 data.table_1.13.6       
-[61] modelr_0.1.8             vctrs_0.3.6              tweenr_1.0.2            
+[58] evaluate_0.14            RcppArmadillo_0.10.1.2.0 data.table_1.13.2       
+[61] modelr_0.1.8             vctrs_0.3.5              tweenr_1.0.2            
 [64] httpuv_1.5.4             cellranger_1.1.0         gtable_0.3.0            
-[67] polyclip_1.10-0          assertthat_0.2.1         xfun_0.20               
-[70] lwgeom_0.2-5             broom_0.7.5              RcppEigen_0.3.3.9.1     
+[67] polyclip_1.10-0          assertthat_0.2.1         xfun_0.18               
+[70] lwgeom_0.2-5             broom_0.7.5              RcppEigen_0.3.3.7.0     
 [73] e1071_1.7-4              later_1.1.0.1            class_7.3-17            
 [76] ncdf4_1.17               units_0.6-7              ellipsis_0.3.1          </code></pre>
 </div>
