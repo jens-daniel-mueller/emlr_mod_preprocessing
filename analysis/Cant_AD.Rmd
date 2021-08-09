@@ -55,42 +55,55 @@ A_annual <- tidync(paste(path_cmorized,
 
 A_annual <- A_annual %>% hyper_tibble()
 
+# calculate model temperature
+A_annual <- A_annual %>%
+  mutate(temp = gsw_pt_from_t(
+    SA = so,
+    t = thetao,
+    p = 10.1325,
+    p_ref = depth
+  ))
+
+# calculate model density
+A_annual <- A_annual %>%
+  mutate(
+    rho = gsw_pot_rho_t_exact(
+      SA = so,
+      t = temp,
+      p = depth,
+      p_ref = 10.1325
+    ))
+
+# unit transfer from mol/m3 to µmol/kg
+A_annual <- A_annual %>%
+  mutate(
+    dissic = dissic * (1e+6 / rho),
+    talk = talk * (1e+6 / rho),
+    no3 = no3 * (1e+6 / rho),
+    po4 = po4 * (1e+6 / rho)
+  )
+
 # harmonize column names and coordinates
 A_annual <- A_annual %>%
-  select(
-    year = time_ann,
-    lon,
-    lat,
-    depth,
-    tco2_A = dissic,
-    sal = so,
-    theta = thetao
+  rename(
+    year = time_ann
   ) %>%
   # compute year from days since Jan 1, 1980
   mutate(year = (year - 181) / 365 + 1980) %>%
   mutate(lon = if_else(lon < 20, lon + 360, lon))
 
-# calculate model temperature
-A_annual <- A_annual %>%
-  mutate(temp = gsw_pt_from_t(
-    SA = sal,
-    t = theta,
-    p = 10.1325,
-    p_ref = depth
-  ))
+# create backup for cstar calculation
+cstar_A <- A_annual %>% 
+  select(year, depth,
+         lon, lat,
+         dissic, talk, no3, po4)
 
-# unit transfer from mol/m3 to µmol/kg
+# harmonize column names and coordinates
 A_annual <- A_annual %>%
-  mutate(
-    rho = gsw_pot_rho_t_exact(
-      SA = sal,
-      t = temp,
-      p = depth,
-      p_ref = 10.1325
-    ),
-    tco2_A = tco2_A * (1e+6 / rho)
-  ) %>%
-  select(year, lon, lat, depth, tco2_A)
+  select(year, lon, lat, depth, tco2_A = dissic)
+
+
+
 
 ```
 
@@ -198,6 +211,79 @@ for (i_year in years) {
   cant_year %>%
     write_csv(paste(path_preprocessing,
                     "cant_annual_field_AD/cant_", i_year, ".csv",
+                    sep = ""))
+}
+
+```
+
+# Cstar fields
+
+## Round depth levels
+
+```{r round_depth_levels_cstar}
+
+cstar_A <- cstar_A %>%
+  mutate(depth = round(depth))
+
+```
+
+## Apply basin mask
+
+```{r apply_basin_mask_cstar}
+
+# restrict cstar_A field to basin mask grid
+cstar_A <- inner_join(cstar_A, basinmask)
+
+```
+
+## Calculate cstar
+
+```{r calc_cstar_A}
+
+params_local <- lst(# Stoichiometric ratio of C to P
+  rCP = 117,
+  # Stoichiometric ratio of N to P
+  rNP = 16,)
+
+
+cstar_A <- cstar_A %>%
+  mutate(
+    cstar_no3 = b_cstar_nitrate(
+      tco2 = dissic,
+      nitrate = no3,
+      talk = talk
+    ),
+    cstar_po4 = b_cstar_phosphate(
+      tco2 = dissic,
+      phosphate = po4,
+      talk = talk
+    )
+  )
+
+rm(params_local)
+
+# cstar_A %>%
+#   ggplot(aes(cstar_no3, cstar_po4)) +
+#   geom_bin2d()
+
+```
+
+## Write cstar_A files
+
+```{r write_annual_cstar_A_files}
+
+# write annual cstar_A files
+years <- c(1982:2019)
+
+for (i_year in years) {
+  
+ # i_year = years[1]
+  cstar_A_year <- cstar_A %>%
+    filter(year == i_year)
+  
+  cstar_A_year %>%
+    write_csv(paste(path_preprocessing,
+                    "cstar_annual_field_A/cstar_A_", i_year, ".csv",
                     sep = ""))
 }
 
