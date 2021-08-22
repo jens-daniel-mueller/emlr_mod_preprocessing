@@ -447,6 +447,8 @@ GLODAP_gamma <- calculate_gamma(GLODAP_gamma)
 GLODAP <- GLODAP %>%
   mutate(gamma_model = GLODAP_gamma$GAMMA)
 
+GLODAP_NA_filled <- GLODAP
+
 rm(GLODAP_gamma)
 
 # Replace model value with NA, if observations are NA
@@ -490,6 +492,15 @@ GLODAP %>%
     )
   )
 
+GLODAP_NA_filled %>%
+  write_csv(
+    paste(
+      path_preprocessing,
+      "GLODAPv2.2021_preprocessed_model_runA_both_NA_filled.csv",
+      sep = ""
+    )
+  )
+
 # remove GLODAP observations and rename model subset
 GLODAP <- GLODAP %>%
   select(-c(
@@ -519,6 +530,34 @@ GLODAP <- GLODAP %>%
     gamma = gamma_model
   )
 
+GLODAP_NA_filled <- GLODAP_NA_filled %>%
+  select(-c(
+    sal,
+    theta,
+    temp,
+    tco2,
+    talk,
+    oxygen,
+    nitrate,
+    phosphate,
+    silicate,
+    aou,
+    gamma
+  )) %>%
+  rename(
+    sal = so_model,
+    theta = thetao_model,
+    temp = temp_model,
+    tco2 = dissic_model,
+    talk = talk_model,
+    oxygen = o2_model,
+    nitrate = no3_model,
+    phosphate = po4_model,
+  #  silicate = si_model,
+    aou = aou_model,
+    gamma = gamma_model
+  )
+
 ```
 
 # Write files
@@ -530,6 +569,12 @@ GLODAP %>%
   select(-row_number) %>% 
   write_csv(paste(path_preprocessing,
                   "GLODAPv2.2021_preprocessed_model_runA_final.csv",
+                  sep = ""))
+
+GLODAP_NA_filled %>%
+  select(-row_number) %>% 
+  write_csv(paste(path_preprocessing,
+                  "GLODAPv2.2021_preprocessed_model_runA_final_NA_filled.csv",
                   sep = ""))
 
 ```
