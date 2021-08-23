@@ -20,9 +20,12 @@ editor_options:
 
 ```{r define_paths, include=FALSE}
 path_cmorized <-
-  "/nfs/kryo/work/updata/reccap2/Models/3D_ALL/ORCA025-GEOMAR_3D_ALL_v20210204/"
+  "/nfs/kryo/work/updata/reccap2/Models/3D_ALL/ORCA025-GEOMAR_3D_ALL_v20210804/"
 path_preprocessing  <-
   paste(path_root, "/model/preprocessing/ORCA025/", sep = "")
+
+model_base <-"ann"
+
 ```
 
 ```{r load_libraries_specific, include=FALSE}
@@ -54,17 +57,27 @@ basinmask <- basinmask %>%
 model_ID <- "A"
 
 # for loop across 4 periods
-periods <-
-  c(
-    "19800101_19891231",
-    "19900101_19991231",
-    "20000101_20091231",
-    "20100101_20181231"
-  )
+if (model_base == "mon") {
+  periods <-
+    c(
+      "19800101_19891231",
+      "19900101_19991231",
+      "20000101_20091231",
+      "20100101_20181231"
+    )
+}
+
+if (model_base == "ann") {
+  periods <-
+    c("1980-1989",
+      "1990-1999",
+      "2000-2009",
+      "2010-2018")
+}
 
 for (i_period in periods) {
   # read in data
- # i_period <- periods[1]
+  # i_period <- periods[1]
   
   # for loop across variables
   # 3d variables
@@ -85,7 +98,7 @@ for (i_period in periods) {
           model_ID,
           "_1_gr_",
           i_period,
-          "-v20210204.nc",
+          "_v20210804.nc",
           sep = ""
         )
       )
@@ -93,13 +106,16 @@ for (i_period in periods) {
     
     # read in data
     variable_data <-
-      read_ncdf(paste(path_cmorized, file,
-                      sep = ""),
-                make_units = FALSE)
+      tidync(paste(path_cmorized,
+                   file,
+                   sep = ""),
+             make_units = FALSE)
     
     # convert to tibble
     variable_data_tibble <- variable_data %>%
-      as_tibble()
+      hyper_tibble()
+    
+    # remove open link to nc file
     rm(variable_data)
     
     # remove na values
@@ -107,19 +123,31 @@ for (i_period in periods) {
       variable_data_tibble %>%
       filter(!is.na(!!sym(i_variable)))
     
-    # mutate year
-    variable_data_tibble <- variable_data_tibble %>%
-      mutate(year = year(time)) %>%
-      select(-time)
-    
-    # calculate annual mean values
-    variable_data_tibble <- variable_data_tibble %>%
-      fgroup_by(lon, lat, depth, year) %>% {
-        add_vars(fgroup_vars(., "unique"),
-                 fmean(., keep.group_vars = FALSE) %>% add_stub(pre = FALSE, "_mean")
-      )
+    if (model_base == "mon") {
+      # mutate year
+      variable_data_tibble <- variable_data_tibble %>%
+        mutate(year = year(time)) %>%
+        select(-time)
+      
+      # calculate annual mean values
+      variable_data_tibble <- variable_data_tibble %>%
+        fgroup_by(lon, lat, depth, year) %>% {
+          add_vars(
+            fgroup_vars(., "unique"),
+            fmean(., keep.group_vars = FALSE) %>% add_stub(pre = FALSE, "_mean")
+          )
+        }
     }
-
+    
+    if (model_base == "ann") {
+      # mutate year
+      variable_data_tibble <- variable_data_tibble %>%
+        mutate(
+          year = 1980 + round((time - 182.25) / 365)
+        ) %>%
+        select(-time)
+    }
+    
     # add variable per period together
     if (exists("A_annual_temp")) {
       A_annual_temp <- left_join(A_annual_temp, variable_data_tibble)
@@ -148,16 +176,14 @@ for (i_period in periods) {
 
 # harmonize column names and coordinates
 A_annual <- A_annual %>%
-  select(
-    year,
-    lon,
-    lat,
-    depth,
-    tco2_A = dissic_mean,
-    sal = so_mean,
-    theta = thetao_mean
-  ) %>% 
-  mutate(lon = if_else(lon > 180, lon - 180, lon + 180)) %>%
+  select(year,
+         lon,
+         lat,
+         depth,
+         tco2_A = dissic,
+         sal = so,
+         theta = thetao) %>%
+#  mutate(lon = if_else(lon > 180, lon - 180, lon + 180)) %>%
   mutate(lon = if_else(lon < 20, lon + 360, lon))
 
 # calculate model temperature
@@ -186,14 +212,14 @@ A_annual <- A_annual %>%
 #   write_csv(paste(path_preprocessing,
 #                     "A_cant_annual_modified.csv",
 #                     sep = ""))
-# 
+#
 # A_annual1 <- A_annual %>%
 #   mutate(lon = if_else(lon > 360, lon - 360, lon))
-# 
+#
 # A_annual2 <- A_annual1 %>%
 #   mutate(lon = if_else(lon > 180, lon - 180, lon + 180)) %>%
 #   mutate(lon = if_else(lon < 20, lon + 360, lon))
-# 
+#
 # ggplot() + geom_raster(data = A_annual2 %>%
 #               filter(year == 1994, depth == min(depth)),
 #             aes(lon,
@@ -209,17 +235,29 @@ A_annual <- A_annual %>%
 model_ID <- "D"
 
 # for loop across 4 periods
-periods <-
-  c(
-    "19800101_19891231",
-    "19900101_19991231",
-    "20000101_20091231",
-    "20100101_20181231"
-  )
+if (model_base == "mon") {
+  periods <-
+    c(
+      "19800101_19891231",
+      "19900101_19991231",
+      "20000101_20091231",
+      "20100101_20181231"
+    )
+}
+
+if (model_base == "ann") {
+  periods <-
+    c(
+      "1980-1989",
+      "1990-1999",
+      "2000-2009",
+      "2010-2018"
+    )
+}
 
 for (i_period in periods) {
   # read in data
- # i_period <- periods[1]
+  # i_period <- periods[1]
   
   # for loop across variables
   # 3d variables
@@ -240,21 +278,25 @@ for (i_period in periods) {
           model_ID,
           "_1_gr_",
           i_period,
-          "-v20210204.nc",
+          "_v20210804.nc",
           sep = ""
         )
       )
     print(file)
     
+    
     # read in data
     variable_data <-
-      read_ncdf(paste(path_cmorized, file,
-                      sep = ""),
-                make_units = FALSE)
+      tidync(paste(path_cmorized,
+                   file,
+                   sep = ""),
+             make_units = FALSE)
     
     # convert to tibble
     variable_data_tibble <- variable_data %>%
-      as_tibble()
+      hyper_tibble()
+    
+    # remove open link to nc file
     rm(variable_data)
     
     # remove na values
@@ -262,19 +304,30 @@ for (i_period in periods) {
       variable_data_tibble %>%
       filter(!is.na(!!sym(i_variable)))
     
-    # mutate year
-    variable_data_tibble <- variable_data_tibble %>%
-      mutate(year = year(time)) %>%
-      select(-time)
-    
-    # calculate annual mean values
-    variable_data_tibble <- variable_data_tibble %>%
-      fgroup_by(lon, lat, depth, year) %>% {
-        add_vars(fgroup_vars(., "unique"),
-                 fmean(., keep.group_vars = FALSE) %>% add_stub(pre = FALSE, "_mean")
-      )
+    if (model_base == "mon") {
+      # mutate year
+      variable_data_tibble <- variable_data_tibble %>%
+        mutate(year = year(time)) %>%
+        select(-time)
+      
+      # calculate annual mean values
+      variable_data_tibble <- variable_data_tibble %>%
+        fgroup_by(lon, lat, depth, year) %>% {
+          add_vars(
+            fgroup_vars(., "unique"),
+            fmean(., keep.group_vars = FALSE) %>% add_stub(pre = FALSE, "_mean")
+          )
+        }
     }
-
+    
+    if (model_base == "ann") {
+      # mutate year
+      variable_data_tibble <- variable_data_tibble %>%
+        mutate(year = 1980 + round((time - 182.25) / 365),) %>%
+        select(-time)
+    }
+    
+    
     # add variable per period together
     if (exists("D_annual_temp")) {
       D_annual_temp <- left_join(D_annual_temp, variable_data_tibble)
@@ -303,16 +356,14 @@ for (i_period in periods) {
 
 # harmonize column names and coordinates
 D_annual <- D_annual %>%
-  select(
-    year,
-    lon,
-    lat,
-    depth,
-    tco2_D = dissic_mean,
-    sal = so_mean,
-    theta = thetao_mean
-  ) %>% 
-  mutate(lon = if_else(lon > 180, lon - 180, lon + 180)) %>%
+  select(year,
+         lon,
+         lat,
+         depth,
+         tco2_D = dissic,
+         sal = so,
+         theta = thetao) %>%
+#  mutate(lon = if_else(lon > 180, lon - 180, lon + 180)) %>%
   mutate(lon = if_else(lon < 20, lon + 360, lon))
 
 # calculate model temperature
@@ -407,13 +458,21 @@ for (i_year in years) {
 
 ```{r calculate_cant_1994_2007}
 
-cant_1994 <- cant %>%
-  filter(year == 1994) %>%
+cant_1994 <-
+  read_csv(paste(
+    path_preprocessing,
+    "cant_annual_field_AD/cant_1994.csv",
+    sep = ""
+  )) %>%
   select(-c(year)) %>%
   rename(cant_1994 = cant_total)
 
-cant_2007 <- cant %>%
-  filter(year == 2007) %>%
+cant_2007 <-
+  read_csv(paste(
+    path_preprocessing,
+    "cant_annual_field_AD/cant_2007.csv",
+    sep = ""
+  )) %>%
   select(-c(year)) %>%
   rename(cant_2007 = cant_total)
 

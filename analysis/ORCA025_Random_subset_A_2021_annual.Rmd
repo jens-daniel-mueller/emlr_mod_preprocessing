@@ -23,10 +23,13 @@ path_GLODAP_preprocessing <-
   paste(path_root, "/observations/preprocessing/", sep = "")
 
 path_cmorized <-
-  "/nfs/kryo/work/updata/reccap2/Models/3D_ALL/ORCA025-GEOMAR_3D_ALL_v20210204/"
+  "/nfs/kryo/work/updata/reccap2/Models/3D_ALL/ORCA025-GEOMAR_3D_ALL_v20210804/"
 
 path_preprocessing <-
   paste(path_root, "/model/preprocessing/ORCA025/", sep = "")
+
+model_base <-"ann"
+
 ```
 
 ```{r load_libraries_specific, include=FALSE}
@@ -82,19 +85,21 @@ For comparison, model results were converted from [mol m^-3^] to [µmol kg^-1^]
 
 # read in a random model
 model <-
-  read_ncdf(paste(path_cmorized, 
-    "dissic_ORCA025-GEOMAR_A_1_gr_19800101_19891231-v20210204.nc",
+  tidync(paste(path_cmorized, 
+    "dissic_ORCA025-GEOMAR_A_1_gr_1980-1989_v20210804.nc",
     sep = ""
   )) %>%
-  as_tibble() %>%
+  hyper_tibble() %>%
   filter(!is.na(dissic))
 
 # convert longitudes and mutate month
 model <- model %>%
-  mutate(year = year(time), month = month(time)) %>%
+  mutate(year = 1980 + round((time - 182.25) / 365)
+         #, month = month(time)
+         ) %>%
   filter(year == min(year)) %>%
   select(-time, -year) %>%
-  mutate(lon = if_else(lon > 180, lon - 180, lon + 180)) %>%
+#  mutate(lon = if_else(lon > 180, lon - 180, lon + 180)) %>%
   mutate(lon = if_else(lon < 20, lon + 360, lon))
 
 # only consider model grids within basinmask
@@ -102,7 +107,9 @@ model <- inner_join(model, basinmask)
 
 # model grid with depth
 model_grid_depth <- model %>%
-  select(lon, lat, depth, month)
+  select(lon, lat, depth
+         #, month
+         )
 
 rm(model)
 
@@ -118,7 +125,9 @@ for (i_year in years) {
   # random sample n = GLODAP / years from model grid depth
   model_resample_grid_depth_temp <-
     sample_n(model_grid_depth, n) %>%
-    arrange(lon, lat, depth, month) %>%
+    arrange(lon, lat, depth
+            #, month
+            ) %>%
     mutate(year = i_year)
   
   # add random sample model grid depth for each year together
@@ -145,13 +154,25 @@ for (i_variable in variables) {
   # i_variable <- variables[1]
   
   # for loop across 4 periods
-  periods <-
-    c(
-      "19800101_19891231",
-      "19900101_19991231",
-      "20000101_20091231",
-      "20100101_20181231"
-    )
+  if (model_base == "mon") {
+    periods <-
+      c(
+        "19800101_19891231",
+        "19900101_19991231",
+        "20000101_20091231",
+        "20100101_20181231"
+      )
+  }
+  
+  if (model_base == "ann") {
+    periods <-
+      c(
+        "1980-1989",
+        "1990-1999",
+        "2000-2009",
+        "2010-2018"
+        )
+  }
   
   for (i_period in periods) {
     # i_period <- periods[3]
@@ -168,7 +189,7 @@ for (i_variable in variables) {
           model_ID,
           "_1_gr_",
           i_period,
-          "-v20210204.nc",
+          "_v20210804.nc",
           sep = ""
         )
       )
@@ -176,13 +197,14 @@ for (i_variable in variables) {
     
     # read in data
     variable_data <-
-      read_ncdf(paste(path_cmorized, file,
-                      sep = ""),
-                make_units = FALSE)
+      tidync(paste(path_cmorized,
+                   file,
+                   sep = ""),
+             make_units = FALSE)
     
     # convert to tibble
     variable_data_tibble <- variable_data %>%
-      as_tibble()
+      hyper_tibble()
     
     # remove open link to nc file
     rm(variable_data)
@@ -192,15 +214,23 @@ for (i_variable in variables) {
       variable_data_tibble %>%
       filter(!is.na(!!sym(i_variable)))
     
-    # convert variable name
-    variable_data_tibble <- variable_data_tibble %>%
-      mutate(year = year(time),
-             month = month(time)) %>%
-      select(-time)
+    if (model_base == "mon") {
+      # mutate variables
+      variable_data_tibble <- variable_data_tibble %>%
+        mutate(year = year(time), month = month(time)) %>%
+        select(-time)
+    }
+    
+    if (model_base == "ann") {
+      variable_data_tibble <- variable_data_tibble %>%
+        mutate(year = 1980 + round((time - 182.25) / 365)) %>%
+        select(-time)
+      
+    }
     
     # convert longitudes
     variable_data_tibble <- variable_data_tibble %>%
-      mutate(lon = if_else(lon > 180, lon - 180, lon + 180)) %>%
+    #  mutate(lon = if_else(lon > 180, lon - 180, lon + 180)) %>%
       mutate(lon = if_else(lon < 20, lon + 360, lon))
     
     # only consider model grids within basinmask
@@ -214,7 +244,8 @@ for (i_variable in variables) {
         natural_join(
           model_resample,
           variable_data_tibble,
-          by = c("year", "month", "lon", "lat", "depth"),
+          by = c("year", #"month", 
+                 "lon", "lat", "depth"),
           jointype = "LEFT"
         )
     }
@@ -224,7 +255,8 @@ for (i_variable in variables) {
         natural_join(
           model_resample_grid_depth,
           variable_data_tibble,
-          by = c("year", "month", "lon", "lat", "depth"),
+          by = c("year", #"month", 
+                 "lon", "lat", "depth"),
           jointype = "LEFT"
         )
     }
@@ -333,7 +365,7 @@ model_resample <- inner_join(model_resample, basinmask)
 # write file for random model sampling
 model_resample %>%
   write_csv(paste(path_preprocessing,
-                  "GLODAPv2.2021_preprocessed_model_runA_random_subset_grid.csv",
+                  "GLODAPv2.2021_preprocessed_model_runA_random_subset_grid_ann.csv",
                   sep = ""))
 
 ```
@@ -347,7 +379,7 @@ model_resample %>%
 # read in random model sampling file
 model_resample <-
   read_csv(paste(path_preprocessing,
-                 "GLODAPv2.2021_preprocessed_model_runA_random_subset_grid.csv",
+                 "GLODAPv2.2021_preprocessed_model_runA_random_subset_grid_ann.csv",
                  sep = ""))
 
 # plot random sampling cmorized grids in each year
@@ -442,7 +474,7 @@ GLODAP_depth_average %>%
 # read in random model sampling file
 resample_grid <-
   read_csv(paste(path_preprocessing,
-                 "GLODAPv2.2021_preprocessed_model_runA_random_subset_grid.csv",
+                 "GLODAPv2.2021_preprocessed_model_runA_random_subset_grid_ann.csv",
                  sep = ""))
 
 for (i in unique(resample_grid$lat)) {
@@ -470,7 +502,7 @@ for (i in unique(resample_grid$lat)) {
 # write resampling file
 resample_lat %>%
   write_csv(paste(path_preprocessing,
-                 "GLODAPv2.2021_preprocessed_model_runA_random_subset_lat.csv",
+                 "GLODAPv2.2021_preprocessed_model_runA_random_subset_lat_ann.csv",
                  sep = ""))
 
 ```
@@ -482,7 +514,7 @@ resample_lat %>%
 # read in random model sampling file
 resample_lat <-
   read_csv(paste(path_preprocessing,
-                 "GLODAPv2.2021_preprocessed_model_runA_random_subset_lat.csv",
+                 "GLODAPv2.2021_preprocessed_model_runA_random_subset_lat_ann.csv",
                  sep = ""))
 
 # plot random sampling cmorized grids in each year
