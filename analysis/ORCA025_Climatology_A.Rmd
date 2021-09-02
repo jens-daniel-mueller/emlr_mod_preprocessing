@@ -352,7 +352,13 @@ Below, following subsets of the climatology are plotted for all relevant predict
 - Horizontal planes at 4 depth levels
 - Global section along track indicated by white lines in maps.
 
-```{r climatology_maps_and_sections, eval=FALSE}
+```{r climatology_maps_and_sections}
+
+# read csv file
+climatology <-
+  read_csv(paste(path_preprocessing,
+                  "climatology_runA_2007.csv",
+                  sep = ""))
 
 # define plotting variables
 vars <- c(

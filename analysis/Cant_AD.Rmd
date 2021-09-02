@@ -102,9 +102,6 @@ cstar_A <- A_annual %>%
 A_annual <- A_annual %>%
   select(year, lon, lat, depth, tco2_A = dissic)
 
-
-
-
 ```
 
 ## Read in Run D
