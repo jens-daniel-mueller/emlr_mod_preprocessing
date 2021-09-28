@@ -235,7 +235,7 @@ cstar_A <- inner_join(cstar_A, basinmask)
 
 ## Calculate cstar
 
-```{r calc_cstar_A}
+```{r calc_cstar_A, eval=FALSE}
 
 params_local <- lst(# Stoichiometric ratio of C to P
   rCP = 117,
@@ -267,7 +267,7 @@ rm(params_local)
 
 ## Write cstar_A files
 
-```{r write_annual_cstar_A_files}
+```{r write_annual_cstar_A_files, eval=FALSE}
 
 # write annual cstar_A files
 years <- c(1982:2019)
