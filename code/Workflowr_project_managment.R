@@ -42,13 +42,16 @@ wflow_publish(here::here(
     "surface_ocean.Rmd"
   )
 ),
-message = "rerun all with surface ocean data",
+message = "rerun all with latest version of GLODAP2021",
 republish = TRUE)
 
 wflow_publish(here::here(
   "analysis",
   c(
-    "GLODAP_subset_A_2021.Rmd"
+    "GLODAP_subset_A_2021_annual.Rmd",
+    "NorESM_GLODAP_subset_A_2021_annual.Rmd",
+    "FESOM_REcoM_LR_GLODAP_subset_A_2021_annual.Rmd",
+    "ORCA025_GLODAP_subset_A_2021_annual.Rmd"
   )
 ),
 message = "rerun with new preprocessed GLODAP file")
