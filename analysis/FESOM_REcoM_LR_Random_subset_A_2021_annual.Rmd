@@ -23,7 +23,7 @@ path_GLODAP_preprocessing <-
   paste(path_root, "/observations/preprocessing/", sep = "")
 
 path_cmorized <-
-  "/nfs/kryo/work/updata/reccap2/Models/3D_ALL/FESOM_REcoM_LR_3D_all_v20210218/"
+  "/nfs/kryo/work/updata/reccap2/Models/3D_ALL/FESOM_REcoM_LR_3D_all_v20210712/"
 
 path_preprocessing <-
   paste(path_root, "/model/preprocessing/FESOM_REcoM_LR/", sep = "")
@@ -85,7 +85,7 @@ model <-
   tidync(
     paste(
       path_cmorized,
-      "dissic_FESOM_REcoM_LR_A_1_gr_1980-2018_v20210218.nc",
+      "dissic_FESOM_REcoM_LR_A_1_gr_1980-2018_v20210712.nc",
       sep = ""
     )
   ) %>%
@@ -159,7 +159,7 @@ for (i_variable in variables) {
         i_variable,
         "_FESOM_REcoM_LR_",
         model_ID,
-        "_1_gr_1980-2018_v20210218.nc",
+        "_1_gr_1980-2018_v20210712.nc",
         sep = ""
       )
     )

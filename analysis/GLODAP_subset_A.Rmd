@@ -316,7 +316,6 @@ stats_summary %>%
 
 ```{r prepare_model_subset, eval=FALSE}
 
-
 # read file for GLODAP-based subsetting model variables
 GLODAP <-
   read_csv(

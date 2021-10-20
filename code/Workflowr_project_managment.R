@@ -16,35 +16,42 @@ wflow_publish(here::here(
     "Climatology_A.Rmd",
     "NorESM_Climatology_A.Rmd",
     "FESOM_REcoM_LR_Climatology_A.Rmd",
+    "ORCA025_Climatology_A.Rmd",
     "Climatology_C.Rmd",
     "GLODAP_subset_A.Rmd",
     "GLODAP_subset_A_2021.Rmd",
     "GLODAP_subset_A_2021_annual.Rmd",
     "NorESM_GLODAP_subset_A_2021_annual.Rmd",
     "FESOM_REcoM_LR_GLODAP_subset_A_2021_annual.Rmd",
+    "ORCA025_GLODAP_subset_A_2021_annual.Rmd",
     "GLODAP_subset_C.Rmd",
     "GLODAP_subset_C_2021.Rmd",
     "Random_subset_A.Rmd",
     "Random_subset_A_2021_annual.Rmd",
     "NorESM_Random_subset_A_2021_annual.Rmd",
     "FESOM_REcoM_LR_Random_subset_A_2021_annual.Rmd",
+    "ORCA025_Random_subset_A_2021_annual.Rmd",
     "Random_subset_C.Rmd",
     "Random_subset_C_2021.Rmd",
     "Cant_AD.Rmd",
     "NorESM_Cant_AD.Rmd",
     "FESOM_REcoM_LR_Cant_AD.Rmd",
+    "ORCA025_Cant_AD.Rmd",
     "Cant_CB.Rmd",
     "read_CO2_atm.Rmd",
     "surface_ocean.Rmd"
   )
 ),
-message = "rerun all with surface ocean data",
+message = "rerun all with latest version of GLODAP2021",
 republish = TRUE)
 
 wflow_publish(here::here(
   "analysis",
   c(
-    "GLODAP_subset_A_2021.Rmd"
+    "GLODAP_subset_A_2021_annual.Rmd",
+    "NorESM_GLODAP_subset_A_2021_annual.Rmd",
+    "FESOM_REcoM_LR_GLODAP_subset_A_2021_annual.Rmd",
+    "ORCA025_GLODAP_subset_A_2021_annual.Rmd"
   )
 ),
 message = "rerun with corrected GLODAP qc flags")

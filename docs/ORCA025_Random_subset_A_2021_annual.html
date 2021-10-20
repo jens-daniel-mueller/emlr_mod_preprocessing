@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Jens Daniel Müller" />
+
+
+<title>ORCA025 Random subset variable A</title>
+
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">eMLR mod preprocessing</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Climatology
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Climatology_A.html">Variable climatology</a>
+    </li>
+    <li>
+      <a href="NorESM_Climatology_A.html">NorESM-based Variable climatology</a>
+    </li>
+    <li>
+      <a href="FESOM_REcoM_LR_Climatology_A.html">FESOM_REcoM_LR-based Variable climatology</a>
+    </li>
+    <li>
+      <a href="ORCA025_Climatology_A.html">ORCA025-based Variable climatology</a>
+    </li>
+    <li>
+      <a href="Climatology_C.html">Constant climatology</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Synthetic data
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="GLODAP_subset_A.html">GLODAP subset variable climate</a>
+    </li>
+    <li>
+      <a href="GLODAP_subset_A_2021.html">GLODAP beta_2021 subset variable climate</a>
+    </li>
+    <li>
+      <a href="GLODAP_subset_A_2021_annual.html">GLODAP beta_2021 subset variable climate annual</a>
+    </li>
+    <li>
+      <a href="NorESM_GLODAP_subset_A_2021_annual.html">NorESM-based GLODAP beta_2021 subset variable climate annual</a>
+    </li>
+    <li>
+      <a href="FESOM_REcoM_LR_GLODAP_subset_A_2021_annual.html">FESOM_REcoM_LR-based GLODAP beta_2021 subset variable climate annual</a>
+    </li>
+    <li>
+      <a href="ORCA025_GLODAP_subset_A_2021_annual.html">ORCA025-based GLODAP beta_2021 subset variable climate annual</a>
+    </li>
+    <li>
+      <a href="GLODAP_subset_C.html">GLODAP subset constant climate</a>
+    </li>
+    <li>
+      <a href="GLODAP_subset_C_2021.html">GLODAP beta_2021 subset constant climate</a>
+    </li>
+    <li>
+      <a href="Random_subset_A.html">Random subset variable climate</a>
+    </li>
+    <li>
+      <a href="Random_subset_A_2021_annual.html">Random beta_2021 subset variable climate annual</a>
+    </li>
+    <li>
+      <a href="NorESM_Random_subset_A_2021_annual.html">NorESM-based Random beta_2021 subset variable climate annual</a>
+    </li>
+    <li>
+      <a href="FESOM_REcoM_LR_Random_subset_A_2021_annual.html">FESOM_REcoM_LR-based Random beta_2021 subset variable climate annual</a>
+    </li>
+    <li>
+      <a href="ORCA025_Random_subset_A_2021_annual.html">ORCA025-based Random beta_2021 subset variable climate annual</a>
+    </li>
+    <li>
+      <a href="Random_subset_C.html">Random subset constant climate</a>
+    </li>
+    <li>
+      <a href="Random_subset_C_2021.html">Random beta_2021 subset constant climate</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Cant
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Cant_AD.html">Cant variable climate</a>
+    </li>
+    <li>
+      <a href="NorESM_Cant_AD.html">NorESM-based Cant variable climate</a>
+    </li>
+    <li>
+      <a href="FESOM_REcoM_LR_Cant_AD.html">FESOM_REcoM_LR-based Cant variable climate</a>
+    </li>
+    <li>
+      <a href="ORCA025_Cant_AD.html">ORCA025-based Cant variable climate</a>
+    </li>
+    <li>
+      <a href="Cant_CB.html">Cant constant climate</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Surface data
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="surface_ocean.html">Surface Ocean</a>
+    </li>
+    <li>
+      <a href="read_CO2_atm.html">Atmospheric CO2</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+<li>
+  <a href="https://jens-daniel-mueller.github.io/">
+    <span class="fa fa-home"></span>
+     
+    Jens' homepage
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">ORCA025 Random subset variable A</h1>
+<h4 class="author">Jens Daniel Müller</h4>
+<h4 class="date">28 September, 2021</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2021-09-28
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>emlr_mod_preprocessing/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20200707code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20200707)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20200707code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20200707)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree41dc03ce2e9f991ea1863ab1934b6bcebb6f34actargetblank41dc03ca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/41dc03ce2e9f991ea1863ab1934b6bcebb6f34ac" target="_blank">41dc03c</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree41dc03ce2e9f991ea1863ab1934b6bcebb6f34actargetblank41dc03ca" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/41dc03ce2e9f991ea1863ab1934b6bcebb6f34ac" target="_blank">41dc03c</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+
+Unstaged changes:
+    Modified:   code/Workflowr_project_managment.R
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/ORCA025_Random_subset_A_2021_annual.Rmd</code>) and HTML (<code>docs/ORCA025_Random_subset_A_2021_annual.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/41dc03ce2e9f991ea1863ab1934b6bcebb6f34ac/analysis/ORCA025_Random_subset_A_2021_annual.Rmd" target="_blank">41dc03c</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-09-28
+</td>
+<td>
+rerun all with latest version of GLODAP2021
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/37b0e370e5ede2766c59c816cc4f2e8e4dbeaaad/analysis/ORCA025_Random_subset_A_2021_annual.Rmd" target="_blank">37b0e37</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-08-24
+</td>
+<td>
+Adding REcoM and annual ORCA
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/b5cd9746e93a9634dd0d27bfc860138a2020daa3/analysis/ORCA025_Random_subset_A_2021_annual.Rmd" target="_blank">b5cd974</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-07-15
+</td>
+<td>
+ORCA preprocessing
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<pre class="r"><code>path_GLODAP_preprocessing &lt;-
+  paste(path_root, &quot;/observations/preprocessing/&quot;, sep = &quot;&quot;)
+
+path_cmorized &lt;-
+  &quot;/nfs/kryo/work/updata/reccap2/Models/3D_ALL/ORCA025-GEOMAR_3D_ALL_v20210804/&quot;
+
+path_preprocessing &lt;-
+  paste(path_root, &quot;/model/preprocessing/ORCA025/&quot;, sep = &quot;&quot;)
+
+model_base &lt;-&quot;ann&quot;</code></pre>
+<pre class="r"><code># use only three basin to assign general basin mask
+# ie this is not specific to the MLR fitting
+basinmask &lt;- basinmask %&gt;%
+  filter(MLR_basins == &quot;2&quot;) %&gt;%
+  select(lat, lon, basin_AIP)</code></pre>
+<div id="read-glodapv2_2021-preprocessed-files" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Read GLODAPv2_2021 preprocessed files</h1>
+<pre class="r"><code>GLODAP &lt;-
+  read_csv(paste(path_GLODAP_preprocessing,
+                 &quot;GLODAPv2.2021_preprocessed.csv&quot;,
+                 sep = &quot;&quot;))
+
+GLODAP &lt;- GLODAP %&gt;%
+  mutate(month = month(date))</code></pre>
+</div>
+<div id="randomly-subset-model-data" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Randomly subset model data</h1>
+<p>Here we randomly subset cmorized (1x1) model with variable forcing, according to the total number of GLODAP observations for the whole period from a previously cleaned file. The number for the annual subset remains the same for each year, which could be expressed by the total number of observations divided by number of years.</p>
+<p>Besides, Model results are given in [mol m<sup>-3</sup>], whereas GLODAP data are in [µmol kg<sup>-1</sup>]. This refers to the variables:</p>
+<ul>
+<li>DIC<br />
+</li>
+<li>ALK<br />
+</li>
+<li>O2<br />
+</li>
+<li>NO3<br />
+</li>
+<li>PO4<br />
+</li>
+<li>SiO3<br />
+</li>
+<li>AOU (calculated)</li>
+</ul>
+<p>For comparison, model results were converted from [mol m<sup>-3</sup>] to [µmol kg<sup>-1</sup>]</p>
+<pre class="r"><code># read in a random model
+model &lt;-
+  tidync(paste(path_cmorized, 
+    &quot;dissic_ORCA025-GEOMAR_A_1_gr_1980-1989_v20210804.nc&quot;,
+    sep = &quot;&quot;
+  )) %&gt;%
+  hyper_tibble() %&gt;%
+  filter(!is.na(dissic))
+
+# convert longitudes and mutate month
+model &lt;- model %&gt;%
+  mutate(year = 1980 + round((time - 182.25) / 365)
+         #, month = month(time)
+         ) %&gt;%
+  filter(year == min(year)) %&gt;%
+  select(-time, -year) %&gt;%
+#  mutate(lon = if_else(lon &gt; 180, lon - 180, lon + 180)) %&gt;%
+  mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
+
+# only consider model grids within basinmask
+model &lt;- inner_join(model, basinmask)
+
+# model grid with depth
+model_grid_depth &lt;- model %&gt;%
+  select(lon, lat, depth
+         #, month
+         )
+
+rm(model)
+
+# years span
+years &lt;- c(&quot;1982&quot;:&quot;2018&quot;)
+
+# set equal number of random model sampling will be made for each year
+n = floor(nrow(GLODAP) / length(years))
+
+for (i_year in years) {
+  # i_year &lt;- years[1]
+  
+  # random sample n = GLODAP / years from model grid depth
+  model_resample_grid_depth_temp &lt;-
+    sample_n(model_grid_depth, n) %&gt;%
+    arrange(lon, lat, depth
+            #, month
+            ) %&gt;%
+    mutate(year = i_year)
+  
+  # add random sample model grid depth for each year together
+  if (exists(&quot;model_resample_grid_depth&quot;)) {
+    model_resample_grid_depth &lt;-
+      bind_rows(model_resample_grid_depth, model_resample_grid_depth_temp)
+  }
+  
+  if (!exists(&quot;model_resample_grid_depth&quot;)) {
+    model_resample_grid_depth &lt;- model_resample_grid_depth_temp
+  }
+  
+}
+
+# set name of model to be subsetted
+model_ID &lt;- &quot;A&quot;
+
+# for loop across variables
+variables &lt;-
+  c(&quot;so&quot;, &quot;thetao&quot;, &quot;dissic&quot;, &quot;talk&quot;, &quot;o2&quot;, &quot;no3&quot;, &quot;po4&quot;#, &quot;si&quot;
+    )
+
+for (i_variable in variables) {
+  # i_variable &lt;- variables[1]
+  
+  # for loop across 4 periods
+  if (model_base == &quot;mon&quot;) {
+    periods &lt;-
+      c(
+        &quot;19800101_19891231&quot;,
+        &quot;19900101_19991231&quot;,
+        &quot;20000101_20091231&quot;,
+        &quot;20100101_20181231&quot;
+      )
+  }
+  
+  if (model_base == &quot;ann&quot;) {
+    periods &lt;-
+      c(
+        &quot;1980-1989&quot;,
+        &quot;1990-1999&quot;,
+        &quot;2000-2009&quot;,
+        &quot;2010-2018&quot;
+        )
+  }
+  
+  for (i_period in periods) {
+    # i_period &lt;- periods[3]
+    print(i_period)
+    
+    # read list of all files
+    file &lt;-
+      list.files(
+        path = path_cmorized,
+        pattern = paste(
+          &quot;^&quot;,
+          i_variable,
+          &quot;_ORCA025-GEOMAR_&quot;,
+          model_ID,
+          &quot;_1_gr_&quot;,
+          i_period,
+          &quot;_v20210804.nc&quot;,
+          sep = &quot;&quot;
+        )
+      )
+    print(file)
+    
+    # read in data
+    variable_data &lt;-
+      tidync(paste(path_cmorized,
+                   file,
+                   sep = &quot;&quot;),
+             make_units = FALSE)
+    
+    # convert to tibble
+    variable_data_tibble &lt;- variable_data %&gt;%
+      hyper_tibble()
+    
+    # remove open link to nc file
+    rm(variable_data)
+    
+    # remove na values
+    variable_data_tibble &lt;-
+      variable_data_tibble %&gt;%
+      filter(!is.na(!!sym(i_variable)))
+    
+    if (model_base == &quot;mon&quot;) {
+      # mutate variables
+      variable_data_tibble &lt;- variable_data_tibble %&gt;%
+        mutate(year = year(time), month = month(time)) %&gt;%
+        select(-time)
+    }
+    
+    if (model_base == &quot;ann&quot;) {
+      variable_data_tibble &lt;- variable_data_tibble %&gt;%
+        mutate(year = 1980 + round((time - 182.25) / 365)) %&gt;%
+        select(-time)
+      
+    }
+    
+    # convert longitudes
+    variable_data_tibble &lt;- variable_data_tibble %&gt;%
+    #  mutate(lon = if_else(lon &gt; 180, lon - 180, lon + 180)) %&gt;%
+      mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
+    
+    # only consider model grids within basinmask
+    variable_data_tibble &lt;-
+      inner_join(variable_data_tibble, basinmask) %&gt;%
+      select(-basin_AIP)
+    
+    # add random sample model subset for each variable together
+    if (exists(&quot;model_resample&quot;)) {
+      model_resample &lt;-
+        natural_join(
+          model_resample,
+          variable_data_tibble,
+          by = c(&quot;year&quot;, #&quot;month&quot;, 
+                 &quot;lon&quot;, &quot;lat&quot;, &quot;depth&quot;),
+          jointype = &quot;LEFT&quot;
+        )
+    }
+    
+    if (!exists(&quot;model_resample&quot;)) {
+      model_resample &lt;-
+        natural_join(
+          model_resample_grid_depth,
+          variable_data_tibble,
+          by = c(&quot;year&quot;, #&quot;month&quot;, 
+                 &quot;lon&quot;, &quot;lat&quot;, &quot;depth&quot;),
+          jointype = &quot;LEFT&quot;
+        )
+    }
+    
+  }
+}  
+
+# calculate model temperature
+model_resample &lt;- model_resample %&gt;%
+  mutate(temp = gsw_pt_from_t(
+    SA = so,
+    t = thetao,
+    p = 10.1325,
+    p_ref = depth
+  ))
+
+# unit transfer from mol/m3 to µmol/kg
+model_resample &lt;- model_resample %&gt;%
+  mutate(
+    rho = gsw_pot_rho_t_exact(
+      SA = so,
+      t = temp,
+      p = depth,
+      p_ref = 10.1325
+    ),
+    dissic = dissic * (1e+6 / rho),
+    talk = talk * (1e+6 / rho),
+    o2 = o2 * (1e+6 / rho),
+    no3 = no3 * (1e+6 / rho),
+    po4 = po4 * (1e+6 / rho)
+ #   si = si * (1e+6 / rho)
+  )
+
+# calculate AOU
+model_resample &lt;- model_resample %&gt;%
+  mutate(
+    oxygen_sat_m3 = gas_satconc(
+      S = so,
+      t = temp,
+      P = 1.013253,
+      species = &quot;O2&quot;
+    ),
+    oxygen_sat_kg = oxygen_sat_m3 * (1e+3 / rho),
+    aou = oxygen_sat_kg - o2
+  ) %&gt;%
+  select(-oxygen_sat_kg,-oxygen_sat_m3)
+
+# rename as variable
+model_resample &lt;- model_resample %&gt;%
+  rename(
+    sal = so,
+    theta = thetao,
+    temp = temp,
+    tco2 = dissic,
+    talk = talk,
+    oxygen = o2,
+    nitrate = no3,
+    phosphate = po4,
+#    silicate = si,
+    aou = aou
+  )
+
+# calculate gamma
+library(oce)
+library(gsw)
+
+model_resample &lt;- model_resample %&gt;% 
+  mutate(CTDPRS = gsw_p_from_z(-depth,
+                               lat))
+
+model_resample &lt;- model_resample %&gt;% 
+  mutate(THETA = swTheta(salinity = sal,
+                         temperature = temp,
+                         pressure = CTDPRS,
+                         referencePressure = 0,
+                         longitude = lon-180,
+                         latitude = lat))
+
+model_resample &lt;- model_resample %&gt;% 
+  rename(LATITUDE = lat,
+         LONGITUDE = lon,
+         SALNTY = sal)
+
+library(reticulate)
+source_python(
+  paste(
+    path_root,
+    &quot;/utilities/functions/python_scripts/&quot;,
+    &quot;Gamma_GLODAP_python.py&quot;,
+    sep = &quot;&quot;
+  )
+)
+
+model_resample &lt;- calculate_gamma(model_resample)
+
+model_resample &lt;- model_resample %&gt;%
+  rename(lat = LATITUDE,
+         lon = LONGITUDE,
+         sal = SALNTY,
+         gamma = GAMMA) %&gt;%
+  select(-CTDPRS, -THETA)
+
+# add basin mask
+model_resample &lt;- inner_join(model_resample, basinmask)
+
+# write file for random model sampling
+model_resample %&gt;%
+  write_csv(paste(path_preprocessing,
+                  &quot;GLODAPv2.2021_preprocessed_model_runA_random_subset_grid_ann.csv&quot;,
+                  sep = &quot;&quot;))</code></pre>
+</div>
+<div id="control-plots" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Control plots</h1>
+<div id="spatial-distribution" class="section level2" number="3.1">
+<h2 number="3.1"><span class="header-section-number">3.1</span> Spatial distribution</h2>
+<pre class="r"><code># read in random model sampling file
+model_resample &lt;-
+  read_csv(paste(path_preprocessing,
+                 &quot;GLODAPv2.2021_preprocessed_model_runA_random_subset_grid_ann.csv&quot;,
+                 sep = &quot;&quot;))
+
+# plot random sampling cmorized grids in each year
+years &lt;- c(&quot;1982&quot;, &quot;1990&quot;, &quot;2000&quot;, &quot;2010&quot;, &quot;2018&quot;)
+for (i_year in years) {
+  # i_year &lt;- years[1]
+  
+  model_resample_year &lt;- model_resample %&gt;%
+    filter(year == i_year)
+  
+  print(
+    map +
+      geom_bin2d(data = model_resample_year,
+                 aes(lon, lat),
+                 binwidth = 1) +
+      scale_fill_viridis_c(direction = -1) +
+      coord_quickmap(expand = 0) +
+      labs(
+        title = paste(&quot;Random Model Sampling of year&quot;, i_year),
+        subtitle = paste(&quot;Nr of observations&quot;, nrow(model_resample_year)),
+        x = &quot;Longitude&quot;,
+        y = &quot;Latitude&quot;
+      )
+  )
+
+}</code></pre>
+<p><img src="figure/ORCA025_Random_subset_A_2021_annual.Rmd/random_sample_distribution_maps-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/ORCA025_Random_subset_A_2021_annual.Rmd/random_sample_distribution_maps-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/ORCA025_Random_subset_A_2021_annual.Rmd/random_sample_distribution_maps-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/ORCA025_Random_subset_A_2021_annual.Rmd/random_sample_distribution_maps-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/ORCA025_Random_subset_A_2021_annual.Rmd/random_sample_distribution_maps-5.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="depth-distribution" class="section level2" number="3.2">
+<h2 number="3.2"><span class="header-section-number">3.2</span> Depth distribution</h2>
+<pre class="r"><code># Calculate and plot depth distribution of model subset
+model_resample_depth &lt;- model_resample %&gt;%
+  count(depth, year)
+
+model_resample_depth_average &lt;- model_resample_depth %&gt;%
+  group_by(depth) %&gt;%
+  summarise(n = mean(n))
+
+model_resample_depth_average %&gt;%
+  arrange(depth) %&gt;%
+  ggplot(aes(n, depth)) +
+  geom_point(data = model_resample_depth,
+             aes(n, depth, col = &quot;All years&quot;)) +
+  geom_point(aes(n, depth, col = &quot;Average&quot;)) +
+  geom_path(aes(n, depth, col = &quot;Average&quot;)) +
+  scale_color_brewer(palette = &quot;Set1&quot;,
+                     name = &quot;&quot;,
+                     direction = -1) +
+  scale_y_reverse() +
+  coord_cartesian(xlim = c(0,500),
+                  ylim = c(6000,0)) +
+  labs(title = &quot;Depth distribution of random model subset&quot;)</code></pre>
+<p><img src="figure/ORCA025_Random_subset_A_2021_annual.Rmd/random_sample_depth_distribution-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Calculate and plot depth distribution of GLODAP data
+# Depths gridded to model depth levels for comparison
+GLODAP_depth &lt;- GLODAP %&gt;%
+  mutate(depth = as.numeric(as.character(cut(depth,
+                     c(0, unique(model_resample_depth_average$depth)),
+                     labels = unique(model_resample_depth_average$depth)[1:45])))) %&gt;% 
+  count(depth, year)
+
+GLODAP_depth_average &lt;- GLODAP_depth %&gt;%
+  group_by(depth) %&gt;%
+  summarise(n = mean(n))
+
+GLODAP_depth_average %&gt;%
+  arrange(depth) %&gt;%
+  ggplot(aes(n, depth)) +
+  geom_point(data = GLODAP_depth,
+             aes(n, depth, col = &quot;All years&quot;)) +
+  geom_point(aes(n, depth, col = &quot;Average&quot;)) +
+  geom_path(aes(n, depth, col = &quot;Average&quot;)) +
+  scale_color_brewer(palette = &quot;Set1&quot;,
+                     name = &quot;&quot;,
+                     direction = -1) +
+  scale_y_reverse() +
+  coord_cartesian(xlim = c(0,500),
+                  ylim = c(6000,0)) +
+  labs(title = &quot;Depth distribution of GLODAP observations&quot;)</code></pre>
+<p><img src="figure/ORCA025_Random_subset_A_2021_annual.Rmd/GLODAP_depth_distribution-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># read in random model sampling file
+resample_grid &lt;-
+  read_csv(paste(path_preprocessing,
+                 &quot;GLODAPv2.2021_preprocessed_model_runA_random_subset_grid_ann.csv&quot;,
+                 sep = &quot;&quot;))
+
+for (i in unique(resample_grid$lat)) {
+  # i &lt;- unique(model_resample$lat)[1]
+  
+  resample_grid_lat &lt;- resample_grid %&gt;%
+    filter(lat == i)
+  
+  n &lt;- nrow(resample_grid_lat)
+  
+  resample_grid_lat &lt;- sample_n(resample_grid_lat, floor(n*cospi(i/180)))
+  
+  # resample the random subset according to the latitude
+  if (exists(&quot;resample_lat&quot;)) {
+    resample_lat &lt;-
+      bind_rows(resample_lat, resample_grid_lat)
+  }
+  
+  if (!exists(&quot;resample_lat&quot;)) {
+    resample_lat &lt;- resample_grid_lat
+  }
+  
+}
+
+# write resampling file
+resample_lat %&gt;%
+  write_csv(paste(path_preprocessing,
+                 &quot;GLODAPv2.2021_preprocessed_model_runA_random_subset_lat_ann.csv&quot;,
+                 sep = &quot;&quot;))</code></pre>
+</div>
+</div>
+<div id="spatial-distribution-1" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Spatial distribution</h1>
+<pre class="r"><code># read in random model sampling file
+resample_lat &lt;-
+  read_csv(paste(path_preprocessing,
+                 &quot;GLODAPv2.2021_preprocessed_model_runA_random_subset_lat_ann.csv&quot;,
+                 sep = &quot;&quot;))
+
+# plot random sampling cmorized grids in each year
+years &lt;- c(&quot;1982&quot;, &quot;1990&quot;, &quot;2000&quot;, &quot;2010&quot;, &quot;2018&quot;)
+for (i_year in years) {
+  # i_year &lt;- years[1]
+  
+  resample_lat_year &lt;- resample_lat %&gt;%
+    filter(year == i_year)
+  
+  print(
+    map +
+      geom_bin2d(data = resample_lat_year,
+                 aes(lon, lat),
+                 binwidth = 1) +
+      scale_fill_viridis_c(direction = -1) +
+      coord_quickmap(expand = 0) +
+      labs(
+        title = paste(&quot;Random model resampling with lat of year&quot;, i_year),
+        subtitle = paste(&quot;Nr of observations&quot;, nrow(resample_lat_year)),
+        x = &quot;Longitude&quot;,
+        y = &quot;Latitude&quot;
+      )
+  )
+
+}</code></pre>
+<p><img src="figure/ORCA025_Random_subset_A_2021_annual.Rmd/random_resample_distribution_maps-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/ORCA025_Random_subset_A_2021_annual.Rmd/random_resample_distribution_maps-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/ORCA025_Random_subset_A_2021_annual.Rmd/random_resample_distribution_maps-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/ORCA025_Random_subset_A_2021_annual.Rmd/random_resample_distribution_maps-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/ORCA025_Random_subset_A_2021_annual.Rmd/random_resample_distribution_maps-5.png" width="672" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.3 (2020-10-10)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: openSUSE Leap 15.2
+
+Matrix products: default
+BLAS:   /usr/local/R-4.0.3/lib64/R/lib/libRblas.so
+LAPACK: /usr/local/R-4.0.3/lib64/R/lib/libRlapack.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] tidync_0.2.4      marelac_2.1.10    shape_1.4.5       gsw_1.0-5        
+ [5] testthat_3.0.1    rqdatatable_1.2.9 rquery_1.4.6      wrapr_2.0.6      
+ [9] lubridate_1.7.9   stars_0.5-2       sf_0.9-8          abind_1.4-5      
+[13] ggforce_0.3.3     metR_0.9.0        scico_1.2.0       patchwork_1.1.1  
+[17] collapse_1.5.0    forcats_0.5.0     stringr_1.4.0     dplyr_1.0.5      
+[21] purrr_0.3.4       readr_1.4.0       tidyr_1.1.3       tibble_3.1.3     
+[25] ggplot2_3.3.3     tidyverse_1.3.0   workflowr_1.6.2  
+
+loaded via a namespace (and not attached):
+ [1] fs_1.5.0                 RColorBrewer_1.1-2       httr_1.4.2              
+ [4] rprojroot_2.0.2          tools_4.0.3              backports_1.1.10        
+ [7] utf8_1.1.4               R6_2.5.0                 KernSmooth_2.23-18      
+[10] DBI_1.1.0                colorspace_2.0-0         withr_2.3.0             
+[13] tidyselect_1.1.0         compiler_4.0.3           git2r_0.27.1            
+[16] cli_2.2.0                rvest_0.3.6              RNetCDF_2.4-2           
+[19] xml2_1.3.2               labeling_0.4.2           scales_1.1.1            
+[22] checkmate_2.0.0          classInt_0.4-3           digest_0.6.27           
+[25] oce_1.3-0                rmarkdown_2.10           pkgconfig_2.0.3         
+[28] htmltools_0.5.0          highr_0.8                dbplyr_1.4.4            
+[31] rlang_0.4.10             readxl_1.3.1             rstudioapi_0.13         
+[34] farver_2.0.3             generics_0.1.0           jsonlite_1.7.2          
+[37] magrittr_2.0.1           ncmeta_0.3.0             Matrix_1.2-18           
+[40] Rcpp_1.0.5               munsell_0.5.0            fansi_0.4.1             
+[43] lifecycle_1.0.0          stringi_1.5.3            whisker_0.4             
+[46] yaml_2.2.1               MASS_7.3-53              grid_4.0.3              
+[49] blob_1.2.1               parallel_4.0.3           promises_1.1.1          
+[52] crayon_1.3.4             lattice_0.20-41          haven_2.3.1             
+[55] seacarb_3.2.15           hms_0.5.3                knitr_1.33              
+[58] pillar_1.6.2             reprex_0.3.0             glue_1.4.2              
+[61] evaluate_0.14            RcppArmadillo_0.10.1.2.2 data.table_1.13.6       
+[64] modelr_0.1.8             vctrs_0.3.8              tweenr_1.0.2            
+[67] httpuv_1.5.4             cellranger_1.1.0         gtable_0.3.0            
+[70] polyclip_1.10-0          assertthat_0.2.1         xfun_0.25               
+[73] lwgeom_0.2-5             broom_0.7.5              RcppEigen_0.3.3.9.1     
+[76] e1071_1.7-4              later_1.2.0              viridisLite_0.3.0       
+[79] ncdf4_1.17               class_7.3-17             units_0.6-7             
+[82] ellipsis_0.3.2          </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
