@@ -47,7 +47,7 @@ wflow_publish(here::here(
     "GLODAP_subset_A_2021.Rmd"
   )
 ),
-message = "rerun with new preprocessed GLODAP file")
+message = "rerun with corrected GLODAP qc flags")
 
 
 # Push latest version to GitHub
