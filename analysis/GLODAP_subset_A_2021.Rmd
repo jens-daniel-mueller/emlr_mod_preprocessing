@@ -533,7 +533,7 @@ GLODAP_NA_filled <- GLODAP_NA_filled %>%
 
 # Write files
 
-```{r write_files, eval=FALSE}
+```{r write_files}
 
 # write final file for GLODAP-based subsetting model variables
 GLODAP %>%
