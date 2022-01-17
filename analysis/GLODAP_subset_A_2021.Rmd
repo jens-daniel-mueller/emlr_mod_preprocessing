@@ -63,8 +63,8 @@ GLODAP <-
 GLODAP <- GLODAP %>%
   mutate(month = month(date))
 
-GLODAP <- GLODAP %>%
-  filter(year <= 2019)
+# GLODAP <- GLODAP %>%
+#   filter(year <= 2019)
 
 ```
 
@@ -90,10 +90,10 @@ For comparison, model results were converted from [mol m^-3^] to [µmol kg^-1^]
 model_ID <- "A"
 
 # for loop across years
-years <- c("1982":"2019")
+years <- c("1982":"2020")
 
 for (i_year in years) {
-  # i_year <- years[30]
+  # i_year <- years[39]
   
   # select GLODAP data for that year
   GLODAP_year <- GLODAP %>%
@@ -112,23 +112,42 @@ for (i_year in years) {
     c("so", "thetao", "dissic", "talk", "o2", "no3", "po4", "si")
   
   for (i_variable in variables) {
-    # i_variable <- variables[1]
+    # i_variable <- variables[3]
     
     # read list of all files
-    file <-
-      list.files(
-        path = path_cmorized,
-        pattern = paste(
-          "^",
-          i_variable,
-          "_CESM-ETHZ_",
-          model_ID,
-          "_1_gr_",
-          i_year,
-          ".nc",
-          sep = ""
+    
+    if (i_year <= 2019) {
+      file <-
+        list.files(
+          path = path_cmorized,
+          pattern = paste(
+            "^",
+            i_variable,
+            "_CESM-ETHZ_",
+            model_ID,
+            "_1_gr_",
+            i_year,
+            ".nc",
+            sep = ""
+          )
         )
-      )
+    } else {
+      file <-
+        list.files(
+          path = path_cmorized,
+          pattern = paste(
+            "^",
+            i_variable,
+            "_CESM-ETHZ_",
+            model_ID,
+            "_1_gr_",
+            i_year-1,
+            ".nc",
+            sep = ""
+          )
+        )
+    }
+    
     print(file)
     
     # read in data
