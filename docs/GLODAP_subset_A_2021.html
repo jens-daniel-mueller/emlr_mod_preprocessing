@@ -492,7 +492,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">GLODAP subset variable climate A 2021</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">20 November, 2021</h4>
+<h4 class="date">17 January, 2022</h4>
 
 </div>
 
@@ -517,7 +517,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-11-20
+<strong>Last updated:</strong> 2022-01-17
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -608,16 +608,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree53f2c2443551cb536417236aa560a281fa80027btargetblank53f2c24a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/53f2c2443551cb536417236aa560a281fa80027b" target="_blank">53f2c24</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtreec31574d47c5d9014f8c1bfbf3313869781ed1345targetblankc31574da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/c31574d47c5d9014f8c1bfbf3313869781ed1345" target="_blank">c31574d</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree53f2c2443551cb536417236aa560a281fa80027btargetblank53f2c24a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtreec31574d47c5d9014f8c1bfbf3313869781ed1345targetblankc31574da" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/53f2c2443551cb536417236aa560a281fa80027b" target="_blank">53f2c24</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/c31574d47c5d9014f8c1bfbf3313869781ed1345" target="_blank">c31574d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -627,7 +627,11 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
 
+Untracked files:
+    Untracked:  code/reprex_read_nc_file.R
+
 Unstaged changes:
+    Modified:   analysis/surface_ocean.Rmd
     Modified:   code/Workflowr_project_managment.R
 
 </code></pre>
@@ -667,6 +671,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/c31574d47c5d9014f8c1bfbf3313869781ed1345/analysis/GLODAP_subset_A_2021.Rmd" target="_blank">c31574d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-01-17
+</td>
+<td>
+subset 2020 data from 2019 model run
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/19aa07ef2c4965276e3d7326579ba06afcebe95c/docs/GLODAP_subset_A_2021.html" target="_blank">19aa07e</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-11-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1108,7 +1146,7 @@ path_cmorized &lt;-
 path_preprocessing &lt;-
   paste(path_root, &quot;/model/preprocessing/&quot;, sep = &quot;&quot;)</code></pre>
 <div id="select-basin-mask" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Select basin mask</h1>
+<h1><span class="header-section-number">1</span> Select basin mask</h1>
 <pre class="r"><code># use only three basin to assign general basin mask
 # ie this is not specific to the MLR fitting
 basinmask &lt;- basinmask %&gt;%
@@ -1116,7 +1154,7 @@ basinmask &lt;- basinmask %&gt;%
   select(lat, lon, basin_AIP)</code></pre>
 </div>
 <div id="read-glodapv2_2021-preprocessed-files" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> Read GLODAPv2_2021 preprocessed files</h1>
+<h1><span class="header-section-number">2</span> Read GLODAPv2_2021 preprocessed files</h1>
 <pre class="r"><code>GLODAP &lt;-
   read_csv(paste(path_GLODAP_preprocessing,
                  &quot;GLODAPv2.2021_preprocessed.csv&quot;,
@@ -1125,11 +1163,11 @@ basinmask &lt;- basinmask %&gt;%
 GLODAP &lt;- GLODAP %&gt;%
   mutate(month = month(date))
 
-GLODAP &lt;- GLODAP %&gt;%
-  filter(year &lt;= 2019)</code></pre>
+# GLODAP &lt;- GLODAP %&gt;%
+#   filter(year &lt;= 2019)</code></pre>
 </div>
 <div id="subset-cmorized-data-according-to-glodap-observation" class="section level1" number="3">
-<h1 number="3"><span class="header-section-number">3</span> Subset cmorized data according to GLODAP observation</h1>
+<h1><span class="header-section-number">3</span> Subset cmorized data according to GLODAP observation</h1>
 <p>Here we subset cmorized (1x1) data from the model with variable forcing, according to the presence of GLODAP observations in a previously cleaned file.</p>
 <p>Besides, Model results are given in [mol m<sup>-3</sup>], whereas GLODAP data are in [µmol kg<sup>-1</sup>]. This refers to the variables:</p>
 <ul>
@@ -1151,10 +1189,10 @@ GLODAP &lt;- GLODAP %&gt;%
 model_ID &lt;- &quot;A&quot;
 
 # for loop across years
-years &lt;- c(&quot;1982&quot;:&quot;2019&quot;)
+years &lt;- c(&quot;1982&quot;:&quot;2020&quot;)
 
 for (i_year in years) {
-  # i_year &lt;- years[30]
+  # i_year &lt;- years[39]
   
   # select GLODAP data for that year
   GLODAP_year &lt;- GLODAP %&gt;%
@@ -1173,23 +1211,42 @@ for (i_year in years) {
     c(&quot;so&quot;, &quot;thetao&quot;, &quot;dissic&quot;, &quot;talk&quot;, &quot;o2&quot;, &quot;no3&quot;, &quot;po4&quot;, &quot;si&quot;)
   
   for (i_variable in variables) {
-    # i_variable &lt;- variables[1]
+    # i_variable &lt;- variables[3]
     
     # read list of all files
-    file &lt;-
-      list.files(
-        path = path_cmorized,
-        pattern = paste(
-          &quot;^&quot;,
-          i_variable,
-          &quot;_CESM-ETHZ_&quot;,
-          model_ID,
-          &quot;_1_gr_&quot;,
-          i_year,
-          &quot;.nc&quot;,
-          sep = &quot;&quot;
+    
+    if (i_year &lt;= 2019) {
+      file &lt;-
+        list.files(
+          path = path_cmorized,
+          pattern = paste(
+            &quot;^&quot;,
+            i_variable,
+            &quot;_CESM-ETHZ_&quot;,
+            model_ID,
+            &quot;_1_gr_&quot;,
+            i_year,
+            &quot;.nc&quot;,
+            sep = &quot;&quot;
+          )
         )
-      )
+    } else {
+      file &lt;-
+        list.files(
+          path = path_cmorized,
+          pattern = paste(
+            &quot;^&quot;,
+            i_variable,
+            &quot;_CESM-ETHZ_&quot;,
+            model_ID,
+            &quot;_1_gr_&quot;,
+            i_year-1,
+            &quot;.nc&quot;,
+            sep = &quot;&quot;
+          )
+        )
+    }
+    
     print(file)
     
     # read in data
@@ -1654,6 +1711,14 @@ for (i_year in years) {
 <pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
 <pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
 <pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
 <pre class="r"><code># write raw data file for GLODAP-based subsetting model variables
 GLODAP %&gt;%
   write_csv(
@@ -1889,7 +1954,7 @@ GLODAP_NA_filled &lt;- GLODAP_NA_filled %&gt;%
   )</code></pre>
 </div>
 <div id="write-files" class="section level1" number="4">
-<h1 number="4"><span class="header-section-number">4</span> Write files</h1>
+<h1><span class="header-section-number">4</span> Write files</h1>
 <pre class="r"><code># write final file for GLODAP-based subsetting model variables
 GLODAP %&gt;%
   select(-row_number) %&gt;% 
@@ -1904,7 +1969,7 @@ GLODAP_NA_filled %&gt;%
                   sep = &quot;&quot;))</code></pre>
 </div>
 <div id="test-for-interpolation" class="section level1" number="5">
-<h1 number="5"><span class="header-section-number">5</span> Test for interpolation</h1>
+<h1><span class="header-section-number">5</span> Test for interpolation</h1>
 <pre class="r"><code>GLODAP &lt;-
   read_csv(paste(path_GLODAP_preprocessing,
                  &quot;GLODAPv2.2021_preprocessed.csv&quot;,
@@ -2092,7 +2157,7 @@ jens-daniel-mueller
 </div>
 </div>
 <div id="test-for-obs-model-depth-offset" class="section level1" number="6">
-<h1 number="6"><span class="header-section-number">6</span> Test for obs-model depth offset</h1>
+<h1><span class="header-section-number">6</span> Test for obs-model depth offset</h1>
 <pre class="r"><code>GLODAP_max_depth &lt;- GLODAP %&gt;%
   select(lon, lat, depth) %&gt;%
   group_by(lon, lat) %&gt;%
@@ -2215,7 +2280,7 @@ jens-daniel-mueller
 </div>
 </div>
 <div id="glodap-observations-vs-cmorized-subset-comparison" class="section level1" number="7">
-<h1 number="7"><span class="header-section-number">7</span> GLODAP observations vs cmorized subset comparison</h1>
+<h1><span class="header-section-number">7</span> GLODAP observations vs cmorized subset comparison</h1>
 <pre class="r"><code>GLODAP_cmorized &lt;- read_csv(paste(path_preprocessing,
                                   &quot;GLODAPv2.2021_preprocessed_model_runA_both.csv&quot;,
                                   sep = &quot;&quot;))</code></pre>
@@ -19406,7 +19471,7 @@ jens-daniel-mueller
 <pre class="r"><code>sessionInfo()</code></pre>
 <pre><code>R version 4.0.3 (2020-10-10)
 Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: openSUSE Leap 15.2
+Running under: openSUSE Leap 15.3
 
 Matrix products: default
 BLAS:   /usr/local/R-4.0.3/lib64/R/lib/libRblas.so
@@ -19433,34 +19498,33 @@ other attached packages:
 [25] tibble_3.1.3      ggplot2_3.3.5     tidyverse_1.3.0   workflowr_1.6.2  
 
 loaded via a namespace (and not attached):
- [1] colorspace_2.0-2         RcppEigen_0.3.3.7.0      ellipsis_0.3.2          
- [4] class_7.3-17             rprojroot_2.0.2          RcppArmadillo_0.10.1.2.0
- [7] fs_1.5.0                 rstudioapi_0.13          farver_2.0.3            
-[10] fansi_0.4.1              xml2_1.3.2               knitr_1.33              
-[13] polyclip_1.10-0          jsonlite_1.7.1           broom_0.7.9             
-[16] dbplyr_1.4.4             compiler_4.0.3           httr_1.4.2              
-[19] backports_1.1.10         assertthat_0.2.1         Matrix_1.2-18           
-[22] cli_3.0.1                later_1.2.0              tweenr_1.0.2            
-[25] htmltools_0.5.1.1        tools_4.0.3              gtable_0.3.0            
-[28] glue_1.4.2               rappdirs_0.3.1           Rcpp_1.0.5              
-[31] cellranger_1.1.0         jquerylib_0.1.4          RNetCDF_2.4-2           
-[34] vctrs_0.3.8              lwgeom_0.2-5             xfun_0.25               
-[37] rvest_0.3.6              lifecycle_1.0.0          ncmeta_0.3.0            
-[40] MASS_7.3-53              scales_1.1.1             hms_0.5.3               
-[43] promises_1.1.1           parallel_4.0.3           RColorBrewer_1.1-2      
-[46] yaml_2.2.1               sass_0.4.0               stringi_1.5.3           
-[49] highr_0.8                e1071_1.7-4              checkmate_2.0.0         
-[52] rlang_0.4.11             pkgconfig_2.0.3          evaluate_0.14           
-[55] lattice_0.20-41          labeling_0.4.2           tidyselect_1.1.0        
-[58] seacarb_3.2.14           magrittr_1.5             R6_2.5.0                
-[61] generics_0.1.0           DBI_1.1.0                pillar_1.6.2            
-[64] haven_2.3.1              whisker_0.4              withr_2.3.0             
-[67] units_0.6-7              modelr_0.1.8             crayon_1.3.4            
-[70] KernSmooth_2.23-17       utf8_1.1.4               rmarkdown_2.10          
-[73] grid_4.0.3               readxl_1.3.1             data.table_1.14.0       
-[76] blob_1.2.1               git2r_0.27.1             reprex_0.3.0            
-[79] digest_0.6.27            classInt_0.4-3           httpuv_1.5.4            
-[82] munsell_0.5.0            viridisLite_0.3.0        bslib_0.2.5.1           </code></pre>
+ [1] fs_1.5.0                 RColorBrewer_1.1-2       httr_1.4.2              
+ [4] rprojroot_2.0.2          tools_4.0.3              backports_1.1.10        
+ [7] utf8_1.1.4               R6_2.5.0                 KernSmooth_2.23-17      
+[10] DBI_1.1.0                colorspace_2.0-2         withr_2.3.0             
+[13] tidyselect_1.1.0         compiler_4.0.3           git2r_0.27.1            
+[16] cli_3.0.1                rvest_0.3.6              RNetCDF_2.4-2           
+[19] xml2_1.3.2               labeling_0.4.2           scales_1.1.1            
+[22] checkmate_2.0.0          classInt_0.4-3           rappdirs_0.3.1          
+[25] digest_0.6.27            rmarkdown_2.10           pkgconfig_2.0.3         
+[28] htmltools_0.5.0          highr_0.8                dbplyr_1.4.4            
+[31] rlang_0.4.10             readxl_1.3.1             rstudioapi_0.13         
+[34] farver_2.0.3             generics_0.1.0           jsonlite_1.7.1          
+[37] magrittr_1.5             ncmeta_0.3.0             Matrix_1.2-18           
+[40] Rcpp_1.0.5               munsell_0.5.0            fansi_0.4.1             
+[43] lifecycle_1.0.0          stringi_1.5.3            whisker_0.4             
+[46] yaml_2.2.1               MASS_7.3-53              grid_4.0.3              
+[49] blob_1.2.1               parallel_4.0.3           promises_1.1.1          
+[52] crayon_1.3.4             lattice_0.20-41          haven_2.3.1             
+[55] seacarb_3.2.14           hms_0.5.3                knitr_1.33              
+[58] pillar_1.6.2             reprex_0.3.0             glue_1.4.2              
+[61] evaluate_0.14            RcppArmadillo_0.10.1.0.0 data.table_1.14.0       
+[64] modelr_0.1.8             vctrs_0.3.8              tweenr_1.0.2            
+[67] httpuv_1.5.4             cellranger_1.1.0         gtable_0.3.0            
+[70] polyclip_1.10-0          assertthat_0.2.1         xfun_0.25               
+[73] lwgeom_0.2-5             broom_0.7.9              RcppEigen_0.3.3.7.0     
+[76] e1071_1.7-4              later_1.2.0              viridisLite_0.3.0       
+[79] class_7.3-17             units_0.6-7              ellipsis_0.3.2          </code></pre>
 </div>
 </div>
 
