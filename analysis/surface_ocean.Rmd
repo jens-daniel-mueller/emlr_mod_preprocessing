@@ -21,7 +21,7 @@ editor_options:
 ```{r define_paths}
 
 path_cmorized <-
-  "/nfs/kryo/work/loher/CESM_output/RECCAP2/submit_June2021/"
+  "/nfs/kryo/work/loher/CESM_output/RECCAP2/submit_Nov2021/"
 
 path_preprocessing <-
   paste(path_root, "/model/preprocessing/", sep = "")
@@ -86,13 +86,13 @@ for (i_model_ID in model_IDs) {
   # i_model_ID <- model_IDs[1]
   
   for (i_variable in variables) {
-    # i_variable <- variables[1]
+    # i_variable <- variables[2]
     
     # read list of all files
     file <- paste(i_variable,
                   "_CESM-ETHZ_",
                   i_model_ID,
-                  "_1_gr_1980-2018_v20210607.nc",
+                  "_1_gr_1980-2018_v20211122.nc",
                   sep = "")
     print(file)
     

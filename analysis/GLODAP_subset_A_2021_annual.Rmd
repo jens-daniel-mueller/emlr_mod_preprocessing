@@ -19,11 +19,12 @@ editor_options:
 ```
 
 ```{r define_paths}
+
 path_GLODAP_preprocessing <-
   paste(path_root, "/observations/preprocessing/", sep = "")
 
 path_cmorized <-
-  "/nfs/kryo/work/loher/CESM_output/RECCAP2/submit_June2021/"
+  "/nfs/kryo/work/updata/reccap2/Models/3D_ALL/"
 
 path_preprocessing <-
   paste(path_root, "/model/preprocessing/", sep = "")
@@ -84,7 +85,9 @@ Besides, Model results are given in [mol m^-3^], whereas GLODAP data are in [µm
 
 For comparison, model results were converted from [mol m^-3^] to [µmol kg^-1^]
 
-```{r subset_cmorized_variable_forcing_data, eval=FALSE}
+```{r create_list_of_models}
+
+
 
 # set name of model to be subsetted
 model_ID <- "A"
@@ -93,246 +96,350 @@ model_ID <- "A"
 variables <-
   c("so", "thetao", "dissic", "talk", "o2", "no3", "po4", "si")
 
-for (i_variable in variables) {
- # i_variable <- variables[1]
-  
-  # read list of all files
-  file <-
-    list.files(
-      path = path_cmorized,
-      pattern = paste(
-        "^",
-        i_variable,
-        "_CESM-ETHZ_",
-        model_ID,
-        "_1_gr_1980-2018_v20210607.nc",
-        sep = ""
-      )
-    )
-  print(file)
-  
-  # read in data
-  variable_data <-
-    read_ncdf(paste(path_cmorized,
-                    file,
-                    sep = ""),
-              make_units = FALSE)
-  
-  # convert to tibble
-  variable_data_tibble <- variable_data %>%
-    as_tibble()
-  
-  # remove open link to nc file
-  rm(variable_data)
-  
-  # remove na values
-  variable_data_tibble <-
-    variable_data_tibble %>%
-    filter(!is.na(!!sym(i_variable)))
-  
-  # harmonize longitudes
-  variable_data_tibble <- variable_data_tibble %>%
-    mutate(lon = if_else(lon < 20, lon + 360, lon))
-  
-  # only consider model grids within basinmask
-  variable_data_tibble <-
-    inner_join(variable_data_tibble, basinmask) %>%
-    select(-basin_AIP)
-  
-  # mutate variables
-  variable_data_tibble <- variable_data_tibble %>%
-    mutate(year = year(time_ann)) %>%
-    select(-time_ann)
-  
-  # for loop across years
-  years <- c("1982":"2018")
-  
-  for (i_year in years) {
-   # i_year <- years[30]
-    print(i_year)
-    
-    # select GLODAP data for that year
-    GLODAP_year <- GLODAP %>%
-      filter(year == i_year)
-    
-    # create lat x lon grid of observations
-    Glodap_year_grid_horizontal <- GLODAP_year %>%
-      distinct(lat, lon)
-    
-    # create lat x lon x depth grid of observations
-    Glodap_year_grid_depth <- GLODAP_year %>%
-      distinct(lat, lon, depth)
-    
-        # select GLODAP data for that year
-    variable_data_tibble_year <- variable_data_tibble %>%
-      filter(year == i_year)
-    
-    # calculate model summary stats
-    stats <- variable_data_tibble_year %>%
-      pull(!!sym(i_variable)) %>%
-      summary()
-    
-    stats <- c(year = i_year, variable = i_variable, stats)
-    
-    if (exists("stats_summary")) {
-      stats_summary <- bind_rows(stats_summary, stats)
-    }
-    
-    if (!exists("stats_summary")) {
-      stats_summary <- stats
-    }
-    
-    rm(stats)
-    
-    # subset model at lat x lon grid of observations
-    model_grid_horizontal <-
-      inner_join(Glodap_year_grid_horizontal, variable_data_tibble_year)
 
-    # join model and lat x lon x depth grid of observations
-    model_obs <-
-      full_join(model_grid_horizontal, Glodap_year_grid_depth)
+models <- list.files(path_cmorized)
+
+models <-
+  models[!str_detect(models, pattern = "\\.")]
+
+models <-
+  models[str_detect(
+    models,
+    pattern = c(
+      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|ORCA025-GEOMAR|ORCA1-LIM3-PISCES"
+    )
+  )]
+
+# depth named lev, contains only depth levels not actual depth in m
+# time ranges from 0-1154 (i.e only years 1980-83), yet length is 39
+models <-
+  models[!str_detect(models, pattern = "CNRM")]
+
+# time with offset 2110-01-01, yet length is 39
+models <-
+  models[!str_detect(models, pattern = "EC-Earth3")]
+
+# files chunked into decades
+models <-
+  models[!str_detect(models, pattern = "ORCA025-GEOMAR")]
+
+```
+
+
+
+
+```{r subset_cmorized_variable_forcing_data, eval=FALSE}
+
+for (i_model in models) {
+  # i_model <- models[4]
+  print(i_model)
+  
+  variables_available <-
+    list.files(path = paste0(path_cmorized, i_model),
+               pattern = paste0("_", model_ID, "_"))
+  
+  variables_available <- str_split(variables_available, pattern = "_", simplify = TRUE)[,1]
+  variables_available <- variables_available[variables_available %in% variables]
+  variables_available <- unique(variables_available)
+  
+  for (i_variable in variables_available) {
+    # i_variable <- variables_available[1]
     
-    # calculate nr of observations per lat x lon grid
-    model_obs <- model_obs %>%
-      group_by(lat, lon) %>%
-      mutate(n = sum(!is.na(!!sym(i_variable)))) %>%
-      ungroup()
+    # read list of all files
+    file <-
+      list.files(path = paste0(path_cmorized, i_model),
+                 pattern = paste0(i_variable, "_"))
     
-    # set variable value from model for observation depth, if only one model depth available
-    model_obs_set <- model_obs %>%
-      filter(n == 1) %>%
-      group_by(lon, lat) %>%
-      mutate(!!sym(i_variable) := mean(!!sym(i_variable), na.rm = TRUE)) %>%
-      ungroup()
+    file <- file[str_detect(file, pattern = paste0("_", model_ID, "_"))]
     
-    # interpolate variable value from model to observation depth
-    model_obs_interpo <- model_obs %>%
-      filter(n > 1) %>%
-      group_by(lon, lat) %>%
-      arrange(depth) %>%
-      mutate(!!sym(i_variable) := approxfun(depth,!!sym(i_variable), rule = 2)(depth)) %>%
-      ungroup()
+    print(file)
     
-    # join interpolated and set model values
-    model_obs_interpo <- full_join(model_obs_interpo, model_obs_set)
-    rm(model_obs_set)
+    # read in data
+    variable_data <-
+      read_ncdf(paste(paste0(path_cmorized, i_model),
+                      file,
+                      sep = "/"),
+                make_units = FALSE)
+
+    # convert to tibble
+    variable_data_tibble <- variable_data %>%
+      as_tibble()
     
-    # subsetted interpolated values at observation depth
-    model_obs_interpo <-
-      inner_join(Glodap_year_grid_depth, model_obs_interpo) %>%
-      select(-n) %>%
-      mutate(year = as.numeric(i_year))
+    # remove open link to nc file
+    rm(variable_data)
     
-    # select observation grids without corresponding model subset
-    na_model <-
-      full_join(Glodap_year_grid_depth, model_obs_interpo) %>%
-      filter(is.na(!!sym(i_variable))) %>%
-      select(year, lat, lon) %>%
-      unique()
+    # remove na values
+    variable_data_tibble <-
+      variable_data_tibble %>%
+      filter(!is.na(!!sym(i_variable)))
     
-    # rename interpolated model variable to indicate as model output
-    model_obs_interpo <- model_obs_interpo %>%
-      rename(!!sym(paste(i_variable, "model", sep = "_")) := !!sym(i_variable))
+    if (i_model == "CESM-ETHZ_3D_ALL_v20211122") {
+      variable_data_tibble <- variable_data_tibble %>%
+        rename(time = time_ann)
+    }
     
-    # add model subset to GLODAP
-    GLODAP <-
-      natural_join(
-        GLODAP,
-        model_obs_interpo,
-        by = c("year", "lat", "lon", "depth"),
-        jointype = "FULL"
-      )
+    if (i_model == "CNRM-ESM2-1_3D_ALL_v20211208") {
+      variable_data_tibble <- variable_data_tibble %>%
+        rename(depth = lev)
+    }
+
+    if (i_model == "FESOM_REcoM_LR_3D_all_v20211119") {
+      variable_data_tibble <- variable_data_tibble %>%
+        rename(lat = Lat,
+               lon = Lon,
+               depth = Depth,
+               time = Time) %>% 
+        mutate(time = as.Date(time, origin = '1980-01-01'))
+    }
+
+    if (i_model == "MOM6-Princeton_3D_ALL_v20220125") {
+      variable_data_tibble <- variable_data_tibble %>%
+        rename(depth = z_l)
+    }
+
+    if (i_model == "MRI-ESM2-0_3D_ALL_v20210830") {
+      variable_data_tibble <- variable_data_tibble %>%
+        rename(depth = lev)
+    }
+
     
-    # select surface annual average variable
-    variable_data_tibble_year_surface <- variable_data_tibble_year %>%
-      filter(depth == min(depth))
+    # harmonize longitudes
+    variable_data_tibble <- variable_data_tibble %>%
+      mutate(lon = if_else(lon < 20, lon + 360, lon))
     
-    # surface map of variable
-    map +
-      geom_raster(data = variable_data_tibble_year_surface,
-                  aes(lon, lat, fill = !!sym(i_variable))) +
-      scale_fill_viridis_c(name = i_variable) +
-      geom_raster(data = model_obs_interpo,
-                  aes(lon, lat), fill = "black") +
-      geom_raster(data = na_model,
-                  aes(lon, lat), fill = "red") +
-      labs(
-        title = "GLODAP-based cmorized subset distribution",
-        subtitle = paste(
-          "Model depth: 5m | Annual average of year",
+    # only consider model grids within basinmask
+    variable_data_tibble <-
+      inner_join(variable_data_tibble, basinmask) %>%
+      select(-basin_AIP)
+    
+    # mutate variables
+    variable_data_tibble <- variable_data_tibble %>%
+      mutate(year = year(time)) %>%
+      select(-time)
+    # unique(variable_data_tibble$year)
+    
+    # for loop across years
+    years <- unique(variable_data_tibble$year)
+    years <- years[years %in% (unique(GLODAP$year))]
+    
+    for (i_year in years) {
+      # i_year <- years[1]
+      print(i_year)
+      
+      # select GLODAP data for that year
+      GLODAP_year <- GLODAP %>%
+        filter(year == i_year)
+      
+      # create lat x lon grid of observations
+      Glodap_year_grid_horizontal <- GLODAP_year %>%
+        distinct(lat, lon)
+      
+      # create lat x lon x depth grid of observations
+      Glodap_year_grid_depth <- GLODAP_year %>%
+        distinct(lat, lon, depth)
+      
+      # select GLODAP data for that year
+      variable_data_tibble_year <- variable_data_tibble %>%
+        filter(year == i_year)
+      
+      # calculate model summary stats
+      stats <- variable_data_tibble_year %>%
+        pull(!!sym(i_variable)) %>%
+        summary()
+      
+      stats <- c(year = i_year, variable = i_variable, stats)
+      
+      if (exists("stats_summary")) {
+        stats_summary <- bind_rows(stats_summary, stats)
+      }
+      
+      if (!exists("stats_summary")) {
+        stats_summary <- stats
+      }
+      
+      rm(stats)
+      
+      # subset model at lat x lon grid of observations
+      model_grid_horizontal <-
+        inner_join(Glodap_year_grid_horizontal,
+                   variable_data_tibble_year)
+      
+      # join model and lat x lon x depth grid of observations
+      model_obs <-
+        full_join(model_grid_horizontal, Glodap_year_grid_depth)
+      
+      # calculate nr of observations per lat x lon grid
+      model_obs <- model_obs %>%
+        group_by(lat, lon) %>%
+        mutate(n = sum(!is.na(!!sym(i_variable)))) %>%
+        ungroup()
+      
+      # set variable value from model for observation depth, if only one model depth available
+      model_obs_set <- model_obs %>%
+        filter(n == 1) %>%
+        group_by(lon, lat) %>%
+        mutate(!!sym(i_variable) := mean(!!sym(i_variable), na.rm = TRUE)) %>%
+        ungroup()
+      
+      # interpolate variable value from model to observation depth
+      model_obs_interpo <- model_obs %>%
+        filter(n > 1) %>%
+        group_by(lon, lat) %>%
+        arrange(depth) %>%
+        mutate(!!sym(i_variable) := approxfun(depth, !!sym(i_variable), rule = 2)(depth)) %>%
+        ungroup()
+      
+      # join interpolated and set model values
+      model_obs_interpo <- full_join(model_obs_interpo, model_obs_set)
+      rm(model_obs_set)
+      
+      # subsetted interpolated values at observation depth
+      model_obs_interpo <-
+        inner_join(Glodap_year_grid_depth, model_obs_interpo) %>%
+        select(-n) %>%
+        mutate(year = as.numeric(i_year))
+      
+      # select observation grids without corresponding model subset
+      na_model <-
+        full_join(Glodap_year_grid_depth, model_obs_interpo) %>%
+        filter(is.na(!!sym(i_variable))) %>%
+        select(year, lat, lon) %>%
+        unique()
+      
+      # rename interpolated model variable to indicate as model output
+      model_obs_interpo <- model_obs_interpo %>%
+        rename(!!sym(paste(i_variable, "model", sep = "_")) := !!sym(i_variable))
+      
+      # add model subset to GLODAP
+      GLODAP <-
+        natural_join(
+          GLODAP,
+          model_obs_interpo,
+          by = c("year", "lat", "lon", "depth"),
+          jointype = "FULL"
+        )
+      
+      # select surface annual average variable
+      variable_data_tibble_year_surface <-
+        variable_data_tibble_year %>%
+        filter(depth == min(depth))
+      
+      # surface map of variable
+      map +
+        geom_raster(data = variable_data_tibble_year_surface,
+                    aes(lon, lat, fill = !!sym(i_variable))) +
+        scale_fill_viridis_c(name = i_variable) +
+        geom_raster(data = model_obs_interpo,
+                    aes(lon, lat), fill = "black") +
+        geom_raster(data = na_model,
+                    aes(lon, lat), fill = "red") +
+        labs(
+          title = "GLODAP-based cmorized subset distribution",
+          subtitle = paste(
+            "Model depth: 5m | Annual average of year",
+            i_year,
+            "| red = subsetting failed"
+          ),
+          x = "Longitude",
+          y = "Latitude"
+        )
+      
+      ggsave(
+        paste(
+          path_preprocessing,
+          "regular_subset_distribution_runA_2021_ann/",
+          i_model,
+          i_variable,
+          "_",
           i_year,
-          "| red = subsetting failed"
+          ".png",
+          sep = ""
         ),
-        x = "Longitude",
-        y = "Latitude"
+        width = 5,
+        height = 3
       )
+    }
     
-    ggsave(
+  }
+  
+  # write raw data file for GLODAP-based subsetting model variables
+  GLODAP %>%
+    write_csv(paste(
+      path_preprocessing,
+      paste(
+        i_model,
+        "GLODAPv2.2021_preprocessed_model_runA_raw_subset_ann.csv",
+        sep = "_"
+      ),
+      sep = ""
+    ))
+  
+  # write file for model summary statistics (original cmorized unit)
+  stats_summary %>%
+    write_csv(
       paste(
         path_preprocessing,
         "regular_subset_distribution_runA_2021_ann/",
-        i_variable,
-        "_",
-        i_year,
-        ".png",
+        i_model,
+        model_ID,
+        "_summary_stats.csv",
         sep = ""
-      ),
-      width = 5,
-      height = 3
+      )
     )
+  
+  
+}
+
+```
+
+```{r prepare_model_subset}
+
+rm(GLODAP)
+
+for (i_model in models) {
+  # i_model <- models[1]
+  
+  
+  # read file for GLODAP-based subsetting model variables
+  GLODAP_single <-
+    read_csv(
+      paste0(
+        path_preprocessing,
+        i_model,
+        "_GLODAPv2.2021_preprocessed_model_runA_raw_subset_ann.csv"
+      ),
+      col_types = cols(
+        .default = col_double(),
+        basin_AIP = col_character(),
+        date = col_date(format = ""),
+        dissic_model = col_double(),
+        no3_model = col_double(),
+        o2_model = col_double(),
+        po4_model = col_double(),
+        si_model = col_double(),
+        so_model = col_double(),
+        talk_model = col_double(),
+        thetao_model = col_double()
+      )
+    )
+  
+  GLODAP_single <- GLODAP_single %>% 
+    mutate(model = str_replace(i_model, "_3D_ALL_", "|"))
+  
+  if (exists("GLODAP")) {
+    GLODAP <- bind_rows(GLODAP, GLODAP_single)
+  }
+  
+  if (!exists("GLODAP")) {
+    GLODAP <- GLODAP_single
   }
   
 }
 
-# write raw data file for GLODAP-based subsetting model variables
-GLODAP %>%
-  write_csv(
-    paste(
-      path_preprocessing,
-      "GLODAPv2.2021_preprocessed_model_runA_raw_subset_ann.csv",
-      sep = ""
-    )
-  )
+rm(GLODAP_single)
 
-# write file for model summary statistics (original cmorized unit)
-stats_summary %>%
-  write_csv(
-    paste(
-      path_preprocessing,
-      "regular_subset_distribution_runA_2021_ann/",
-      model_ID,
-      "_summary_stats.csv",
-      sep = ""
-    )
-  )
-
-```
-
-```{r prepare_model_subset, eval=FALSE}
-
-# read file for GLODAP-based subsetting model variables
-GLODAP <-
-  read_csv(
-    paste(
-      path_preprocessing,
-      "GLODAPv2.2021_preprocessed_model_runA_raw_subset_ann.csv",
-      sep = ""
-    ),
-    col_types = cols(
-      .default = col_double(),
-      basin_AIP = col_character(),
-      date = col_date(format = ""),
-      dissic_model = col_double(),
-      no3_model = col_double(),
-      o2_model = col_double(),
-      po4_model = col_double(),
-      si_model = col_double(),
-      so_model = col_double(),
-      talk_model = col_double(),
-      thetao_model = col_double()
-    )
-  )
-
+# GLODAP <- GLODAP %>% 
+#   sample_n(1000)
 
 # filter out GLODAP grids without model subset
 GLODAP <- GLODAP %>%
@@ -451,7 +558,7 @@ GLODAP %>%
   write_csv(
     paste(
       path_preprocessing,
-      "GLODAPv2.2021_preprocessed_model_runA_both_ann.csv",
+      "all_models_GLODAPv2.2021_preprocessed_model_runA_both_ann.csv",
       sep = ""
     )
   )
@@ -460,7 +567,7 @@ GLODAP_NA_filled %>%
   write_csv(
     paste(
       path_preprocessing,
-      "GLODAPv2.2021_preprocessed_model_runA_both_NA_filled_ann.csv",
+      "all_models_GLODAPv2.2021_preprocessed_model_runA_both_NA_filled_ann.csv",
       sep = ""
     )
   )
@@ -526,19 +633,19 @@ GLODAP_NA_filled <- GLODAP_NA_filled %>%
 
 # Write files
 
-```{r write_files, eval=FALSE}
+```{r write_files}
 
 # write final file for GLODAP-based subsetting model variables
 GLODAP %>%
   select(-row_number) %>% 
   write_csv(paste(path_preprocessing,
-                  "GLODAPv2.2021_preprocessed_model_runA_final_ann.csv",
+                  "all_models_GLODAPv2.2021_preprocessed_model_runA_final_ann.csv",
                   sep = ""))
 
 GLODAP_NA_filled %>%
   select(-row_number) %>% 
   write_csv(paste(path_preprocessing,
-                  "GLODAPv2.2021_preprocessed_model_runA_final_NA_filled_ann.csv",
+                  "all_models_GLODAPv2.2021_preprocessed_model_runA_final_NA_filled_ann.csv",
                   sep = ""))
 
 ```
@@ -546,7 +653,7 @@ GLODAP_NA_filled %>%
 
 # Test for interpolation
 
-```{r test_for_interpolation}
+```{r test_for_interpolation, eval=FALSE}
 
 GLODAP <-
   read_csv(paste(path_GLODAP_preprocessing,
@@ -573,7 +680,7 @@ Glodap_year_grid_depth <- GLODAP_2019 %>%
 # read in cmorized tco2 output in year 2019
 variable_data_tibble <-
   read_ncdf(paste(path_cmorized, 
-    "dissic_CESM-ETHZ_A_1_gr_1980-2018_v20210607.nc",
+    "dissic_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc",
     sep = ""
   )) %>%
   as_tibble()
@@ -646,7 +753,7 @@ ggplot() +
 
 # Test for obs-model depth offset
 
-```{r test_for_depth_offset}
+```{r test_for_depth_offset, eval=FALSE}
 
 GLODAP_max_depth <- GLODAP %>%
   select(lon, lat, depth) %>%
@@ -684,7 +791,7 @@ map +
 ```{r read_GLODAP_with_cmorized_subset_file}
 
 GLODAP_cmorized <- read_csv(paste(path_preprocessing,
-                                  "GLODAPv2.2021_preprocessed_model_runA_both_ann.csv",
+                                  "all_models_GLODAPv2.2021_preprocessed_model_runA_both_ann.csv",
                                   sep = ""))
 
 ```
@@ -727,7 +834,8 @@ for (i in 1:11) {
   
   # select correlated observation and model variable
   GLODAP_cmorized_var <- GLODAP_cmorized %>%
-    select(year,
+    select(model,
+           year,
            month,
            lat,
            lon,
@@ -777,7 +885,7 @@ for (i in 1:11) {
                   col = 'red') +
       coord_equal(xlim = axis_lims,
                   ylim = axis_lims) +
-      facet_wrap( ~ season)
+      facet_grid(model ~ season)
   )
   
   # obs-model plot (year)
@@ -792,7 +900,8 @@ for (i in 1:11) {
       scale_fill_viridis_c(trans = "log10") +
       geom_abline(slope = 1, col = 'red') +
       coord_equal(xlim = axis_lims,
-                  ylim = axis_lims)
+                  ylim = axis_lims) +
+      facet_wrap(~model)
   )
   
   
@@ -802,18 +911,20 @@ for (i in 1:11) {
   
   # Calculate annual mean offset
   GLODAP_cmorized_var_year <- GLODAP_cmorized_var %>%
-    group_by(year) %>%
+    group_by(year, model) %>%
     summarise(offset = mean(offset)) %>%
     ungroup()
   
   # plot annual mean offset
   print(
     GLODAP_cmorized_var_year %>%
-      ggplot(aes(year, offset)) +
+      ggplot(aes(year, offset, col=model)) +
       geom_point() +
       geom_line() +
       labs(title = "Annual mean offset",
-           subtitle = paste(sym(model_var[i]), "-", sym(obs_var[i])))
+           subtitle = paste(sym(model_var[i]), "-", sym(obs_var[i]))) +
+      theme(legend.position = "bottom",
+            legend.direction = "vertical")
   )
   
   # spatial distribution of the model-observations offset for 4 depth intervals
@@ -823,7 +934,7 @@ for (i in 1:11) {
     GLODAP_cmorized_var_grid <- GLODAP_cmorized_var %>%
       filter(depth >= intervals[j],
              depth < intervals[j + 1]) %>%
-      group_by(lat, lon) %>%
+      group_by(lat, lon, model) %>%
       summarise(offset = mean(offset)) %>%
       ungroup()
     
@@ -854,7 +965,8 @@ for (i in 1:11) {
           ),
           x = "Longitude",
           y = "Latitude"
-        )
+        ) +
+        facet_wrap(~ model)
     )
     
     print(

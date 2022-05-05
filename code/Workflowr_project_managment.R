@@ -5,7 +5,7 @@
 
 # commit regular changes (locally) and rebuild site
 # this takes only changed files into account
-wflow_publish(all = TRUE, message = "rerun with corrected GLODAP qc flags")
+wflow_publish(all = TRUE, message = "rerun across multiple RECCAP models")
 
 # commit changes including _site.yml (locally) and rebuild site in the specified order
 # you can also run this code with only some of the files. In this case remove the rebuild=TRUE command
@@ -48,13 +48,10 @@ republish = TRUE)
 wflow_publish(here::here(
   "analysis",
   c(
-    "GLODAP_subset_A_2021_annual.Rmd",
-    "NorESM_GLODAP_subset_A_2021_annual.Rmd",
-    "FESOM_REcoM_LR_GLODAP_subset_A_2021_annual.Rmd",
-    "ORCA025_GLODAP_subset_A_2021_annual.Rmd"
+    "GLODAP_subset_A_2021.Rmd"
   )
 ),
-message = "rerun with corrected GLODAP qc flags")
+message = "subset excl arctic")
 
 
 # Push latest version to GitHub
