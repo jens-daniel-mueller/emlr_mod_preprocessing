@@ -128,7 +128,7 @@ models <-
 
 
 
-```{r subset_cmorized_variable_forcing_data}
+```{r subset_cmorized_variable_forcing_data, eval=FALSE}
 
 for (i_model in models) {
   # i_model <- models[4]
@@ -655,8 +655,6 @@ GLODAP_NA_filled %>%
 ```
 
 
-# Test for interpolation
-
 ```{r test_for_interpolation, eval=FALSE}
 
 GLODAP <-
@@ -754,8 +752,6 @@ ggplot() +
   labs(title = "Interpolation to sampling depth - tco2 of year 2019")
 
 ```
-
-# Test for obs-model depth offset
 
 ```{r test_for_depth_offset, eval=FALSE}
 
@@ -970,7 +966,7 @@ for (i in 1:11) {
           x = "Longitude",
           y = "Latitude"
         ) +
-        facet_wrap(~ model)
+        facet_wrap(~ model, ncol = 2)
     )
     
     print(
@@ -988,7 +984,8 @@ for (i in 1:11) {
           subtitle = paste("Depth interval:",
                            intervals[j], "-", intervals[j + 1], "m")
         ) +
-        coord_cartesian(expand = FALSE)
+        coord_cartesian(expand = FALSE) +
+        facet_wrap( ~ model)
     )
   }
   
@@ -997,7 +994,7 @@ for (i in 1:11) {
    # i_basin_AIP = "Atlantic"
     GLODAP_cmorized_var_zonal <- GLODAP_cmorized_var %>%
       filter(basin_AIP == i_basin_AIP) %>%
-      group_by(lat, depth) %>%
+      group_by(lat, depth, model) %>%
       summarise(offset = mean(offset, na.rm=TRUE)) %>%
       ungroup()
     
@@ -1029,7 +1026,8 @@ for (i in 1:11) {
                            i_basin_AIP),
           x = "Latitude",
           y = "Depth"
-        )
+        ) +
+        facet_wrap( ~ model, ncol = 2)
     )
   }
 }
