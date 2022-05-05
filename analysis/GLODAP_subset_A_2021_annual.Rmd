@@ -128,7 +128,7 @@ models <-
 
 
 
-```{r subset_cmorized_variable_forcing_data, eval=FALSE}
+```{r subset_cmorized_variable_forcing_data}
 
 for (i_model in models) {
   # i_model <- models[4]
@@ -141,6 +141,8 @@ for (i_model in models) {
   variables_available <- str_split(variables_available, pattern = "_", simplify = TRUE)[,1]
   variables_available <- variables_available[variables_available %in% variables]
   variables_available <- unique(variables_available)
+  
+  GLODAP_joined <- GLODAP
   
   for (i_variable in variables_available) {
     # i_variable <- variables_available[1]
@@ -311,9 +313,9 @@ for (i_model in models) {
         rename(!!sym(paste(i_variable, "model", sep = "_")) := !!sym(i_variable))
       
       # add model subset to GLODAP
-      GLODAP <-
+      GLODAP_joined <-
         natural_join(
-          GLODAP,
+          GLODAP_joined,
           model_obs_interpo,
           by = c("year", "lat", "lon", "depth"),
           jointype = "FULL"
@@ -363,7 +365,7 @@ for (i_model in models) {
   }
   
   # write raw data file for GLODAP-based subsetting model variables
-  GLODAP %>%
+  GLODAP_joined %>%
     write_csv(paste(
       path_preprocessing,
       paste(
@@ -373,6 +375,8 @@ for (i_model in models) {
       ),
       sep = ""
     ))
+  
+  rm(GLODAP_joined)
   
   # write file for model summary statistics (original cmorized unit)
   stats_summary %>%
@@ -394,7 +398,7 @@ for (i_model in models) {
 
 ```{r prepare_model_subset}
 
-rm(GLODAP)
+rm(GLODAP, GLODAP_joined)
 
 for (i_model in models) {
   # i_model <- models[1]
@@ -438,8 +442,8 @@ for (i_model in models) {
 
 rm(GLODAP_single)
 
-# GLODAP <- GLODAP %>% 
-#   sample_n(1000)
+# GLODAP <- GLODAP %>%
+#   sample_n(10000)
 
 # filter out GLODAP grids without model subset
 GLODAP <- GLODAP %>%
