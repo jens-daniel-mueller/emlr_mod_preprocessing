@@ -608,16 +608,16 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree2430d50549e346e49b067305fdeb865dd39923e3targetblank2430d50a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/2430d50549e346e49b067305fdeb865dd39923e3" target="_blank">2430d50</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree9e85651c3c5589d9a12ce363f99b91f516b33b0atargetblank9e85651a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/9e85651c3c5589d9a12ce363f99b91f516b33b0a" target="_blank">9e85651</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree2430d50549e346e49b067305fdeb865dd39923e3targetblank2430d50a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree9e85651c3c5589d9a12ce363f99b91f516b33b0atargetblank9e85651a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/2430d50549e346e49b067305fdeb865dd39923e3" target="_blank">2430d50</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/9e85651c3c5589d9a12ce363f99b91f516b33b0a" target="_blank">9e85651</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -668,6 +668,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/9e85651c3c5589d9a12ce363f99b91f516b33b0a/analysis/GLODAP_subset_A_2021_annual.Rmd" target="_blank">9e85651</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-06
+</td>
+<td>
+plot to pdf with filename extensions
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/99b85e64856f02037a986502f9ee4aed1751852f/docs/GLODAP_subset_A_2021_annual.html" target="_blank">99b85e6</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-06
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1819,7 +1853,10 @@ model_var &lt;-
 for (i in 1:11) {
 #  i &lt;- 1
   
-  pdf(file = paste0(path_preprocessing, &quot;models_vs_GLODAP/&quot;, obs_var[i]),&quot;_RECCAP2_models_vs_GLODAPv2-2021.pdf&quot;)
+  pdf(
+    file = paste0(path_preprocessing, &quot;models_vs_GLODAP/&quot;, obs_var[i],
+    &quot;_RECCAP2_models_vs_GLODAPv2-2021.pdf&quot;)
+  )
   
   # select correlated observation and model variable
   GLODAP_cmorized_var &lt;- GLODAP_cmorized %&gt;%
