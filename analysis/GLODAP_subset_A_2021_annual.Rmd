@@ -38,6 +38,8 @@ library(gsw)
 library(marelac)
 library(oce)
 library(reticulate)
+library(seacarb)
+
 ```
 
 # Select basin mask
@@ -796,6 +798,50 @@ GLODAP_cmorized <- read_csv(paste(path_preprocessing,
 
 ```
 
+```{r calc_revelle_factors}
+
+
+GLODAP_cmorized_beta <- GLODAP_cmorized %>% 
+  filter(!is.na(talk),
+         !is.na(tco2),
+         !is.na(temp),
+         !is.na(sal),
+         !is.na(pressure),
+         !is.na(talk_model),
+         !is.na(dissic_model),
+         !is.na(temp_model),
+         !is.na(so_model)) %>% 
+  mutate(
+    BetaD = buffer(
+      flag = 15,
+      var1 = talk* 1e-6,
+      var2 = tco2* 1e-6,
+      S = sal,
+      T = temp,
+      k1k2 = "l",
+      P = pressure/10,
+      Pt = phosphate* 1e-6,
+      Sit = silicate* 1e-6,
+      warn = "n"
+    )$BetaD,
+    BetaD_model = buffer(
+      flag = 15,
+      var1 = talk_model* 1e-6,
+      var2 = dissic_model* 1e-6,
+      S = so_model,
+      T = temp_model,
+      k1k2 = "l",
+      P = pressure/10,
+      Pt = po4_model* 1e-6,
+      Sit = si_model* 1e-6,
+      warn = "n"
+    )$BetaD
+  )
+
+```
+
+
+
 ```{r GLODAP_vs_cmorized_subset_comparison}
 
 # for loop across variables
@@ -811,7 +857,8 @@ obs_var <-
     "sal",
     "temp",
     "theta",
-    "gamma"
+    "gamma",
+    "BetaD"
   )
 
 model_var <-
@@ -826,11 +873,12 @@ model_var <-
     "so_model",
     "temp_model",
     "thetao_model",
-    "gamma_model"
+    "gamma_model",
+    "BetaD_model"
   )
 
-for (i in 1:11) {
-#  i <- 1
+for (i in 1:12) {
+#  i <- 12
   
   pdf(
     file = paste0(path_preprocessing, "models_vs_GLODAP/", obs_var[i],
@@ -838,7 +886,28 @@ for (i in 1:11) {
   )
   
   # select correlated observation and model variable
-  GLODAP_cmorized_var <- GLODAP_cmorized %>%
+    if (obs_var[i] == "BetaD") {
+    GLODAP_cmorized_var <- GLODAP_cmorized_beta %>%
+      select(model,
+             year,
+             month,
+             lat,
+             lon,
+             depth,
+             basin_AIP,
+             !!sym(obs_var[i]),
+             !!sym(model_var[i])) %>%
+      drop_na() %>%
+      mutate(
+        season = case_when(
+          month %in% c(3, 4, 5) ~ "Spring",
+          month %in% c(6, 7, 8) ~ "Summer",
+          month %in% c(9, 10, 11) ~ "Autumn",
+          month %in% c(12, 1, 2) ~ "Winter"
+        )
+      )
+    } else{
+    GLODAP_cmorized_var <- GLODAP_cmorized %>%
     select(model,
            year,
            month,
@@ -857,6 +926,7 @@ for (i in 1:11) {
         month %in% c(12, 1, 2) ~ "Winter"
       )
     )
+  }
   
   # calculate equal axis limits and binwidth
   axis_lims <- GLODAP_cmorized_var %>%
