@@ -608,16 +608,16 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree9e85651c3c5589d9a12ce363f99b91f516b33b0atargetblank9e85651a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/9e85651c3c5589d9a12ce363f99b91f516b33b0a" target="_blank">9e85651</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree72cbeadd37a92584b5b78cd02b2092133cc4e848targetblank72cbeada"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/72cbeadd37a92584b5b78cd02b2092133cc4e848" target="_blank">72cbead</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree9e85651c3c5589d9a12ce363f99b91f516b33b0atargetblank9e85651a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree72cbeadd37a92584b5b78cd02b2092133cc4e848targetblank72cbeada" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/9e85651c3c5589d9a12ce363f99b91f516b33b0a" target="_blank">9e85651</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/72cbeadd37a92584b5b78cd02b2092133cc4e848" target="_blank">72cbead</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -668,6 +668,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/72cbeadd37a92584b5b78cd02b2092133cc4e848/analysis/GLODAP_subset_A_2021_annual.Rmd" target="_blank">72cbead</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-06
+</td>
+<td>
+revelle factor calculation
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/d4920c753ee0ed0873c4abcd8b8651293b89048c/docs/GLODAP_subset_A_2021_annual.html" target="_blank">d4920c7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-06
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1819,6 +1853,42 @@ map +
 <pre class="r"><code>GLODAP_cmorized &lt;- read_csv(paste(path_preprocessing,
                                   &quot;all_models_GLODAPv2.2021_preprocessed_model_runA_both_ann.csv&quot;,
                                   sep = &quot;&quot;))</code></pre>
+<pre class="r"><code>GLODAP_cmorized_beta &lt;- GLODAP_cmorized %&gt;% 
+  filter(!is.na(talk),
+         !is.na(tco2),
+         !is.na(temp),
+         !is.na(sal),
+         !is.na(pressure),
+         !is.na(talk_model),
+         !is.na(dissic_model),
+         !is.na(temp_model),
+         !is.na(so_model)) %&gt;% 
+  mutate(
+    BetaD = buffer(
+      flag = 15,
+      var1 = talk* 1e-6,
+      var2 = tco2* 1e-6,
+      S = sal,
+      T = temp,
+      k1k2 = &quot;l&quot;,
+      P = pressure/10,
+      Pt = phosphate* 1e-6,
+      Sit = silicate* 1e-6,
+      warn = &quot;n&quot;
+    )$BetaD,
+    BetaD_model = buffer(
+      flag = 15,
+      var1 = talk_model* 1e-6,
+      var2 = dissic_model* 1e-6,
+      S = so_model,
+      T = temp_model,
+      k1k2 = &quot;l&quot;,
+      P = pressure/10,
+      Pt = po4_model* 1e-6,
+      Sit = si_model* 1e-6,
+      warn = &quot;n&quot;
+    )$BetaD
+  )</code></pre>
 <pre class="r"><code># for loop across variables
 obs_var &lt;-
   c(
@@ -1832,7 +1902,8 @@ obs_var &lt;-
     &quot;sal&quot;,
     &quot;temp&quot;,
     &quot;theta&quot;,
-    &quot;gamma&quot;
+    &quot;gamma&quot;,
+    &quot;BetaD&quot;
   )
 
 model_var &lt;-
@@ -1847,11 +1918,12 @@ model_var &lt;-
     &quot;so_model&quot;,
     &quot;temp_model&quot;,
     &quot;thetao_model&quot;,
-    &quot;gamma_model&quot;
+    &quot;gamma_model&quot;,
+    &quot;BetaD_model&quot;
   )
 
-for (i in 1:11) {
-#  i &lt;- 1
+for (i in 1:12) {
+#  i &lt;- 12
   
   pdf(
     file = paste0(path_preprocessing, &quot;models_vs_GLODAP/&quot;, obs_var[i],
@@ -1859,7 +1931,28 @@ for (i in 1:11) {
   )
   
   # select correlated observation and model variable
-  GLODAP_cmorized_var &lt;- GLODAP_cmorized %&gt;%
+    if (obs_var[i] == &quot;BetaD&quot;) {
+    GLODAP_cmorized_var &lt;- GLODAP_cmorized_beta %&gt;%
+      select(model,
+             year,
+             month,
+             lat,
+             lon,
+             depth,
+             basin_AIP,
+             !!sym(obs_var[i]),
+             !!sym(model_var[i])) %&gt;%
+      drop_na() %&gt;%
+      mutate(
+        season = case_when(
+          month %in% c(3, 4, 5) ~ &quot;Spring&quot;,
+          month %in% c(6, 7, 8) ~ &quot;Summer&quot;,
+          month %in% c(9, 10, 11) ~ &quot;Autumn&quot;,
+          month %in% c(12, 1, 2) ~ &quot;Winter&quot;
+        )
+      )
+    } else{
+    GLODAP_cmorized_var &lt;- GLODAP_cmorized %&gt;%
     select(model,
            year,
            month,
@@ -1878,6 +1971,7 @@ for (i in 1:11) {
         month %in% c(12, 1, 2) ~ &quot;Winter&quot;
       )
     )
+  }
   
   # calculate equal axis limits and binwidth
   axis_lims &lt;- GLODAP_cmorized_var %&gt;%
@@ -2087,13 +2181,14 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] reticulate_1.23   oce_1.5-0         marelac_2.1.10    shape_1.4.6      
- [5] gsw_1.0-6         rqdatatable_1.3.0 rquery_1.4.7      wrapr_2.0.8      
- [9] lubridate_1.8.0   stars_0.5-5       sf_1.0-5          abind_1.4-5      
-[13] ggforce_0.3.3     metR_0.11.0       scico_1.3.0       patchwork_1.1.1  
-[17] collapse_1.7.0    forcats_0.5.1     stringr_1.4.0     dplyr_1.0.7      
-[21] purrr_0.3.4       readr_2.1.1       tidyr_1.1.4       tibble_3.1.6     
-[25] ggplot2_3.3.5     tidyverse_1.3.1   workflowr_1.7.0  
+ [1] seacarb_3.3.0     SolveSAPHE_2.1.0  reticulate_1.23   oce_1.5-0        
+ [5] marelac_2.1.10    shape_1.4.6       gsw_1.0-6         rqdatatable_1.3.0
+ [9] rquery_1.4.7      wrapr_2.0.8       lubridate_1.8.0   stars_0.5-5      
+[13] sf_1.0-5          abind_1.4-5       ggforce_0.3.3     metR_0.11.0      
+[17] scico_1.3.0       patchwork_1.1.1   collapse_1.7.0    forcats_0.5.1    
+[21] stringr_1.4.0     dplyr_1.0.7       purrr_0.3.4       readr_2.1.1      
+[25] tidyr_1.1.4       tibble_3.1.6      ggplot2_3.3.5     tidyverse_1.3.1  
+[29] workflowr_1.7.0  
 
 loaded via a namespace (and not attached):
  [1] colorspace_2.0-2   ellipsis_0.3.2     class_7.3-20       rprojroot_2.0.2   
@@ -2110,15 +2205,14 @@ loaded via a namespace (and not attached):
 [45] hms_1.1.1          promises_1.2.0.1   parallel_4.1.2     yaml_2.2.1        
 [49] sass_0.4.0         stringi_1.7.6      e1071_1.7-9        checkmate_2.0.0   
 [53] rlang_1.0.2        pkgconfig_2.0.3    evaluate_0.14      lattice_0.20-45   
-[57] SolveSAPHE_2.1.0   labeling_0.4.2     bit_4.0.4          processx_3.5.2    
-[61] tidyselect_1.1.1   here_1.0.1         seacarb_3.3.0      magrittr_2.0.1    
-[65] R6_2.5.1           generics_0.1.1     DBI_1.1.2          pillar_1.6.4      
-[69] haven_2.4.3        whisker_0.4        withr_2.4.3        units_0.7-2       
-[73] modelr_0.1.8       crayon_1.4.2       KernSmooth_2.23-20 utf8_1.2.2        
-[77] tzdb_0.2.0         rmarkdown_2.11     grid_4.1.2         readxl_1.3.1      
-[81] data.table_1.14.2  callr_3.7.0        git2r_0.29.0       reprex_2.0.1      
-[85] digest_0.6.29      classInt_0.4-3     httpuv_1.6.5       munsell_0.5.0     
-[89] viridisLite_0.4.0  bslib_0.3.1       </code></pre>
+[57] labeling_0.4.2     bit_4.0.4          processx_3.5.2     tidyselect_1.1.1  
+[61] here_1.0.1         magrittr_2.0.1     R6_2.5.1           generics_0.1.1    
+[65] DBI_1.1.2          pillar_1.6.4       haven_2.4.3        whisker_0.4       
+[69] withr_2.4.3        units_0.7-2        modelr_0.1.8       crayon_1.4.2      
+[73] KernSmooth_2.23-20 utf8_1.2.2         tzdb_0.2.0         rmarkdown_2.11    
+[77] grid_4.1.2         readxl_1.3.1       data.table_1.14.2  callr_3.7.0       
+[81] git2r_0.29.0       reprex_2.0.1       digest_0.6.29      classInt_0.4-3    
+[85] httpuv_1.6.5       munsell_0.5.0      viridisLite_0.4.0  bslib_0.3.1       </code></pre>
 </div>
 </div>
 
