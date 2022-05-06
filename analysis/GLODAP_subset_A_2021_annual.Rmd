@@ -832,7 +832,10 @@ model_var <-
 for (i in 1:11) {
 #  i <- 1
   
-  pdf(file = paste0(path_preprocessing, "models_vs_GLODAP/", obs_var[i]),"_RECCAP2_models_vs_GLODAPv2-2021.pdf")
+  pdf(
+    file = paste0(path_preprocessing, "models_vs_GLODAP/", obs_var[i],
+    "_RECCAP2_models_vs_GLODAPv2-2021.pdf")
+  )
   
   # select correlated observation and model variable
   GLODAP_cmorized_var <- GLODAP_cmorized %>%
