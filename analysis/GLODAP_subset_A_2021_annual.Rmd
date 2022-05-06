@@ -428,7 +428,7 @@ for (i_model in models) {
     )
   
   GLODAP_single <- GLODAP_single %>% 
-    mutate(model = str_replace(i_model, "_3D_ALL_", "|"))
+    mutate(model = str_replace(i_model, "_3D_ALL_|_3D_all_", "|"))
   
   if (exists("GLODAP")) {
     GLODAP <- bind_rows(GLODAP, GLODAP_single)
@@ -832,6 +832,8 @@ model_var <-
 for (i in 1:11) {
 #  i <- 1
   
+  pdf(file = paste0(path_preprocessing, "models_vs_GLODAP/", obs_var[i]),"_RECCAP2_models_vs_GLODAPv2-2021.pdf")
+  
   # select correlated observation and model variable
   GLODAP_cmorized_var <- GLODAP_cmorized %>%
     select(model,
@@ -1030,6 +1032,8 @@ for (i in 1:11) {
         facet_wrap( ~ model, ncol = 2)
     )
   }
+  
+  dev.off()
 }
 
 ```
