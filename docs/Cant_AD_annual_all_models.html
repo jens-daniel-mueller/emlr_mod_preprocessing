@@ -12,7 +12,7 @@
 <meta name="author" content="Jens Daniel Müller" />
 
 
-<title>Home</title>
+<title>Cant variable climate AD</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -30,6 +30,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
@@ -235,6 +238,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -242,6 +314,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -327,7 +409,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Home</h1>
+<h1 class="title toc-ignore">Cant variable climate AD</h1>
 <h4 class="author">Jens Daniel Müller</h4>
 <h4 class="date">10 May, 2022</h4>
 
@@ -512,7 +594,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/index.Rmd</code>) and HTML (<code>docs/index.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/Cant_AD_annual_all_models.Rmd</code>) and HTML (<code>docs/Cant_AD_annual_all_models.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -538,461 +620,19 @@ Message
 <tbody>
 <tr>
 <td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/93729600cf1c6ae19c2742e6681ea3f46910b8b5/docs/index.html" target="_blank">9372960</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2021-09-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/2fb60d010e898ac99329683bf76bbf0d38100bcc/docs/index.html" target="_blank">2fb60d0</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2021-07-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/85b0624e33a96dc82f20dd4176dda09310b17c37/docs/index.html" target="_blank">85b0624</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2021-06-25
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/b256c658f614c35aaa8278dbb641e55aad4377f6/docs/index.html" target="_blank">b256c65</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-09
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/1daa3e58f1b25794a6a5774558744285c6dcd234/docs/index.html" target="_blank">1daa3e5</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2021-06-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/9b3014a5d1fdc4a223f1df3e021ee6ba07e08e18/docs/index.html" target="_blank">9b3014a</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-01
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/5eacde3e8965c7750e8b27d2fe2cb00f3b38482e/docs/index.html" target="_blank">5eacde3</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-01
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/45a1c9e83eb2aab26e27f0e986fd434610ebcbb8/docs/index.html" target="_blank">45a1c9e</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-05-20
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/59fce523bcf62bd81a936e98e331216099ff5f4d/docs/index.html" target="_blank">59fce52</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-05-13
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/6aa4f34c63477784d70be8ce101e844306d9f33f/docs/index.html" target="_blank">6aa4f34</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2021-02-06
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/2eb66526b4e3428eb019b4e5206a581a670eb94f/docs/index.html" target="_blank">2eb6652</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2021-01-27
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/index.html" target="_blank">843587f</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2021-01-11
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/2c85fafc9189af28ef74052d6870afd18a812103/docs/index.html" target="_blank">2c85faf</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2021-01-05
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/051c55a857d41aa46768a284a2e8937362087744/docs/index.html" target="_blank">051c55a</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-23
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/e73a8c490a1f4bf95ed1faf41b82e7c21aa2f796/docs/index.html" target="_blank">e73a8c4</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2020-12-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/f66d4bcaee2e5cd72a9eb86c675909d6c09f265d/docs/index.html" target="_blank">f66d4bc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2020-12-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/index.html" target="_blank">f6c7b00</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2020-12-21
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/53b63ba39e53e16fe1a9bc3fe68ed8506d99975a/docs/index.html" target="_blank">53b63ba</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
 Rmd
 </td>
 <td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f5e55005832b926a45e0c36aabbb36a2787e7ff3/analysis/index.Rmd" target="_blank">f5e5500</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-<td>
-1
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/f5e55005832b926a45e0c36aabbb36a2787e7ff3/docs/index.html" target="_blank">f5e5500</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-<td>
-1
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/07af163d1edfe981349be313a80f41794363b050/analysis/index.Rmd" target="_blank">07af163</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-<td>
-1
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/07af163d1edfe981349be313a80f41794363b050/docs/index.html" target="_blank">07af163</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-<td>
-1
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/9614d927d03a9ab1e64a41a6810d1875bd592df2/docs/index.html" target="_blank">9614d92</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-19
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/c3590c689a9bb498429938db8be90bb9a70a60c6/docs/index.html" target="_blank">c3590c6</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-18
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/7c12d28e06f8b9b3f5f8586f5209c8fd255f1a98/docs/index.html" target="_blank">7c12d28</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-18
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/92a8b4239fa98c9c52d47397c780f0ea89a35022/docs/index.html" target="_blank">92a8b42</a>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/d43e8c0717fb36155492e94d0c8550d8fea7e2ea/analysis/Cant_AD_annual_all_models.Rmd" target="_blank">d43e8c0</a>
 </td>
 <td>
 jens-daniel-mueller
 </td>
 <td>
-2020-12-16
+2022-05-10
 </td>
 <td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/076c8aa462cb67bf5cb17b0f0b611291206d3050/analysis/index.Rmd" target="_blank">076c8aa</a>
-</td>
-<td>
-Jens Müller
-</td>
-<td>
-2020-12-15
-</td>
-<td>
-Initial commit
+rerun all with multi model subsetting
 </td>
 </tr>
 </tbody>
@@ -1002,10 +642,407 @@ Initial commit
 </div>
 </div>
 </div>
-<div id="welcome" class="section level1">
-<h1>WELCOME!</h1>
-<p>On this website we present our ongoing ambition to quantify anthropogenic CO<sub>2</sub> in the ocean based on observations.</p>
-<p>Navigate trough the navbar on top to take a look at the various chapters of this project. The links in the upper right corner bring you to the source code of this project and to Jens’ homepage.</p>
+<pre class="r"><code># use only three basin to assign general basin mask
+# ie this is not specific to the MLR fitting
+basinmask &lt;- basinmask %&gt;%
+  filter(MLR_basins == &quot;2&quot;) %&gt;%
+  select(lat, lon, basin_AIP)</code></pre>
+<pre class="r"><code>models &lt;- list.files(path_cmorized)
+
+models &lt;-
+  models[!str_detect(models, pattern = &quot;\\.&quot;)]
+
+models &lt;-
+  models[str_detect(
+    models,
+    pattern = c(
+      &quot;CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|ORCA025-GEOMAR|ORCA1-LIM3-PISCES&quot;
+    )
+  )]
+
+# depth named lev, contains only depth levels not actual depth in m
+# time ranges from 0-1154 (i.e only years 1980-83), yet length is 39
+models &lt;-
+  models[!str_detect(models, pattern = &quot;CNRM&quot;)]
+
+# time with offset 2110-01-01, yet length is 39
+models &lt;-
+  models[!str_detect(models, pattern = &quot;EC-Earth3&quot;)]
+
+# files chunked into decades
+models &lt;-
+  models[!str_detect(models, pattern = &quot;ORCA025-GEOMAR&quot;)]
+
+# no run D
+models &lt;-
+  models[!str_detect(models, pattern = &quot;MOM6-Princeton&quot;)]</code></pre>
+<div id="calculate-annual-cant-field" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Calculate annual Cant field</h1>
+<pre class="r"><code># for loop across variables
+# 3d variables
+variables &lt;-
+  c(&quot;so&quot;, &quot;thetao&quot;, &quot;dissic&quot;)
+
+for (i_model in models) {
+  # i_model &lt;- models[3]
+  print(i_model)
+  
+  for (i_model_ID in c(&quot;A&quot;, &quot;D&quot;)) {
+    # i_model_ID &lt;- c(&quot;A&quot;, &quot;D&quot;)[1]
+
+    print(i_model_ID)
+    
+    for (i_variable in variables) {
+      #  i_variable &lt;- variables[3]
+      
+      # read list of all files
+      file &lt;-
+        list.files(
+          path = paste0(path_cmorized, i_model),
+          pattern = paste0(i_variable, &quot;_&quot;)
+        )
+      
+      if (i_model == &quot;MRI-ESM2-0_3D_ALL_v20210830&quot; &amp;
+          i_model_ID == &quot;D&quot; &amp;
+          i_variable %in% c(&quot;so&quot;, &quot;thetao&quot;)) {
+        file &lt;-
+          file[str_detect(file, pattern = paste0(&quot;_&quot;, &quot;A&quot;, &quot;_&quot;))]
+      } else {
+        file &lt;-
+          file[str_detect(file, pattern = paste0(&quot;_&quot;, i_model_ID, &quot;_&quot;))]
+      }
+      
+      print(file)
+      
+      # read in data
+      variable_data &lt;-
+        read_ncdf(paste(paste0(path_cmorized, i_model),
+                        file,
+                        sep = &quot;/&quot;),
+                  make_units = FALSE)
+      
+      # convert to tibble
+      variable_data_tibble &lt;- variable_data %&gt;%
+        as_tibble()
+      
+      # remove open link to nc file
+      rm(variable_data)
+      
+      # remove na values
+      variable_data_tibble &lt;-
+        variable_data_tibble %&gt;%
+        filter(!is.na(!!sym(i_variable)))
+      
+      
+      if (i_model == &quot;CESM-ETHZ_3D_ALL_v20211122&quot;) {
+        variable_data_tibble &lt;- variable_data_tibble %&gt;%
+          rename(time = time_ann) %&gt;% 
+          mutate(depth = as.numeric(depth))
+      }
+      
+      if (i_model == &quot;CNRM-ESM2-1_3D_ALL_v20211208&quot;) {
+        variable_data_tibble &lt;- variable_data_tibble %&gt;%
+          rename(depth = lev)
+      }
+      
+      if (i_model == &quot;FESOM_REcoM_LR_3D_all_v20211119&quot;) {
+        variable_data_tibble &lt;- variable_data_tibble %&gt;%
+          rename(
+            lat = Lat,
+            lon = Lon,
+            depth = Depth,
+            time = Time
+          ) %&gt;%
+          mutate(time = as.Date(time, origin = &#39;1980-01-01&#39;),
+                 depth = as.numeric(depth))
+      }
+      
+      if (i_model == &quot;MOM6-Princeton_3D_ALL_v20220125&quot;) {
+        variable_data_tibble &lt;- variable_data_tibble %&gt;%
+          rename(depth = z_l)
+      }
+      
+      if (i_model == &quot;MRI-ESM2-0_3D_ALL_v20210830&quot;) {
+        variable_data_tibble &lt;- variable_data_tibble %&gt;%
+          rename(depth = lev)
+      }
+      
+      variable_data_tibble &lt;- variable_data_tibble %&gt;%
+        mutate(time = year(time))
+      
+      if (exists(&quot;annual&quot;)) {
+        annual &lt;- left_join(annual, variable_data_tibble)
+      }
+      
+      if (!exists(&quot;annual&quot;)) {
+        annual &lt;- variable_data_tibble
+      }
+      
+      rm(variable_data_tibble)
+      
+    }
+    
+    # harmonize column names and coordinates
+    annual &lt;- annual %&gt;%
+      select(
+        year = time,
+        lon,
+        lat,
+        depth,
+        dissic,
+        sal = so,
+        theta = thetao
+      ) %&gt;%
+      mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
+    
+    # calculate model temperature
+    annual &lt;- annual %&gt;%
+      mutate(temp = gsw_pt_from_t(
+        SA = sal,
+        t = theta,
+        p = 10.1325,
+        p_ref = depth
+      ))
+    
+    # unit transfer from mol/m3 to µmol/kg
+    annual &lt;- annual %&gt;%
+      mutate(
+        rho = gsw_pot_rho_t_exact(
+          SA = sal,
+          t = temp,
+          p = depth,
+          p_ref = 10.1325
+        ),
+        dissic = dissic * (1e+6 / rho)
+      ) %&gt;%
+      select(year, lon, lat, depth, dissic)
+    
+    annual &lt;- annual %&gt;%
+      mutate(model_ID = i_model_ID)
+    
+    if (exists(&quot;AD_annual&quot;)) {
+      AD_annual &lt;- bind_rows(AD_annual, annual)
+    }
+    
+    if (!exists(&quot;AD_annual&quot;)) {
+      AD_annual &lt;- annual
+    }
+    
+    rm(annual)
+    
+  }
+  
+  AD_annual &lt;- AD_annual %&gt;% pivot_wider(
+    names_from = model_ID,
+    values_from = dissic
+  )
+  
+  
+  AD_annual &lt;- AD_annual %&gt;%
+    mutate(depth = round(depth))
+  
+  ## Apply basin mask
+  AD_annual &lt;- inner_join(AD_annual, basinmask)
+  
+  ## Calculate Cant total
+  AD_annual &lt;- AD_annual %&gt;%
+    mutate(tcant = A - D) %&gt;%
+    select(-c(A, D))
+
+
+  # write annual Cant files
+  for (i_year in unique(AD_annual$year)) {
+    # i_year = unique(AD_annual$year)[1]
+    cant_year &lt;- AD_annual %&gt;%
+      filter(year == i_year)
+    
+    cant_year %&gt;%
+      write_csv(paste0(path_preprocessing,
+                      i_year,
+                      &quot;_&quot;,
+                      i_model,
+                      &quot;.csv&quot;))
+  }
+  
+  rm(AD_annual)
+
+}</code></pre>
+<pre><code>[1] &quot;CESM-ETHZ_3D_ALL_v20211122&quot;
+[1] &quot;A&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;D&quot;
+[1] &quot;so_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;FESOM_REcoM_LR_3D_all_v20211119&quot;
+[1] &quot;A&quot;
+[1] &quot;so_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;thetao_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;dissic_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;D&quot;
+[1] &quot;so_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;thetao_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;dissic_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;MRI-ESM2-0_3D_ALL_v20210830&quot;
+[1] &quot;A&quot;
+[1] &quot;so_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;thetao_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;dissic_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;D&quot;
+[1] &quot;so_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;thetao_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;dissic_MRI-ESM2-0_D_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;ORCA1-LIM3-PISCES_3D_ALL_v20211215&quot;
+[1] &quot;A&quot;
+[1] &quot;so_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;thetao_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;dissic_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;D&quot;
+[1] &quot;so_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;thetao_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;dissic_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;</code></pre>
+</div>
+<div id="calculate-change-in-cant-1994---2004---2014" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Calculate change in Cant 1994 - 2004 - 2014</h1>
+<pre class="r"><code>for (i_model in models) {
+  # i_model &lt;- models[1]
+  print(i_model)
+  
+  for (i_year in c(&quot;1994&quot;, &quot;2004&quot;, &quot;2014&quot;)) {
+    # i_year = &quot;1994&quot;
+    
+    cant_year &lt;-
+      read_csv(paste0(path_preprocessing,
+                      i_year,
+                      &quot;_&quot;,
+                      i_model,
+                      &quot;.csv&quot;))
+    
+    cant_year &lt;- cant_year %&gt;% 
+      mutate(model = i_model)
+    
+    if (exists(&quot;tcant&quot;)) {
+      tcant &lt;- bind_rows(tcant, cant_year)
+    }
+    
+    if (!exists(&quot;tcant&quot;)) {
+      tcant &lt;- cant_year
+    }
+    
+  }
+  
+}</code></pre>
+<pre><code>[1] &quot;CESM-ETHZ_3D_ALL_v20211122&quot;
+[1] &quot;FESOM_REcoM_LR_3D_all_v20211119&quot;
+[1] &quot;MRI-ESM2-0_3D_ALL_v20210830&quot;
+[1] &quot;ORCA1-LIM3-PISCES_3D_ALL_v20211215&quot;</code></pre>
+<pre class="r"><code>tcant &lt;- tcant %&gt;%
+  # head(10) %&gt;%
+  arrange(year) %&gt;%
+  group_by(model, lon, lat, depth, basin_AIP) %&gt;%
+  mutate(dcant = tcant - lag(tcant),
+         eras = paste(year, &quot;-&quot; , lag(year))) %&gt;%
+  ungroup()</code></pre>
+</div>
+<div id="zonal-mean-sections" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Zonal mean sections</h1>
+<pre class="r"><code>tcant &lt;- tcant %&gt;% 
+  rename(data_source = model)
+
+tcant_zonal &lt;- tcant %&gt;%
+  select(-year) %&gt;% 
+  filter(!is.na(dcant)) %&gt;% 
+  group_by(data_source, eras) %&gt;%
+  nest() %&gt;%
+  mutate(zonal = map(.x = data, ~m_zonal_mean_sd(.x))) %&gt;%
+  select(-data) %&gt;%
+  unnest(zonal)</code></pre>
+<div id="delta-cant" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> delta Cant</h2>
+<pre class="r"><code>tcant_zonal %&gt;%
+  filter(depth &lt;= params_global$inventory_depth_standard) %&gt;%
+  group_by(basin_AIP) %&gt;%
+  group_split() %&gt;%
+  # head(1) %&gt;% 
+  map(
+    ~ p_section_zonal_continous_depth(
+      df = .x,
+      var = &quot;dcant_mean&quot;,
+      plot_slabs = &quot;n&quot;,
+      subtitle_text = .x$basin_AIP
+    ) +
+      facet_grid(data_source ~ eras)
+  )</code></pre>
+<pre><code>[[1]]</code></pre>
+<p><img src="figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_dcant-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[2]]</code></pre>
+<p><img src="figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_dcant-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[3]]</code></pre>
+<p><img src="figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_dcant-3.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="total-cant" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> total Cant</h2>
+<pre class="r"><code>tcant_zonal %&gt;%
+  filter(depth &lt;= params_global$inventory_depth_standard) %&gt;%
+  group_by(basin_AIP) %&gt;%
+  group_split() %&gt;%
+  # head(1) %&gt;%
+  map(
+    ~ p_section_zonal_continous_depth(
+      df = .x,
+      var = &quot;tcant_mean&quot;,
+      plot_slabs = &quot;n&quot;,
+      subtitle_text = .x$basin_AIP,
+      breaks = c(-Inf,seq(0,80,10), Inf)
+    ) +
+      facet_grid(data_source ~ eras)
+  )</code></pre>
+<pre><code>[[1]]</code></pre>
+<p><img src="figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_tcant-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[2]]</code></pre>
+<p><img src="figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_tcant-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[3]]</code></pre>
+<p><img src="figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_tcant-3.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="column-inventory" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Column inventory</h1>
+<div id="delta-cant-1" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> delta Cant</h2>
+<pre class="r"><code>dcant_inv &lt;- tcant %&gt;%
+  select(-year) %&gt;%
+  filter(!is.na(dcant)) %&gt;%
+  mutate(dcant_pos = 0) %&gt;%
+  group_by(data_source, eras) %&gt;%
+  nest() %&gt;%
+  mutate(inv = map(.x = data, ~ m_dcant_inv(.x))) %&gt;%
+  select(-data) %&gt;%
+  unnest(inv)
+
+dcant_inv %&gt;%
+  filter(inv_depth == params_global$inventory_depth_standard) %&gt;%
+  p_map_cant_inv(var = &quot;dcant&quot;,
+                 subtitle_text = &quot;for predefined integration depths&quot;) +
+  facet_grid(data_source ~ eras)</code></pre>
+<p><img src="figure/Cant_AD_annual_all_models.Rmd/dcant_column_inventory-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cant-total" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Cant total</h2>
+<pre class="r"><code># this is just a work around, because the function is designed to calculate cant inventories, but not cant_total inventories
+
+tcant_total_inv &lt;- m_cant_inv(
+  tcant %&gt;% 
+    select(-cant_pos) %&gt;% 
+    rename(cant_pos = cant_1994))</code></pre>
+<pre class="r"><code>p_map_cant_inv(tcant_total_inv %&gt;% filter(inv_depth == 3000),
+               breaks = seq(0,100,10),
+               subtitle_text = &quot;Cant total in 1994&quot;)</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1034,20 +1071,38 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] workflowr_1.7.0
+ [1] lubridate_1.8.0  gsw_1.0-6        stars_0.5-5      sf_1.0-5        
+ [5] abind_1.4-5      tidync_0.2.4     colorspace_2.0-2 marelac_2.1.10  
+ [9] shape_1.4.6      ggforce_0.3.3    metR_0.11.0      scico_1.3.0     
+[13] patchwork_1.1.1  collapse_1.7.0   forcats_0.5.1    stringr_1.4.0   
+[17] dplyr_1.0.7      purrr_0.3.4      readr_2.1.1      tidyr_1.1.4     
+[21] tibble_3.1.6     ggplot2_3.3.5    tidyverse_1.3.1  workflowr_1.7.0 
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.8       bslib_0.3.1      compiler_4.1.2   pillar_1.6.4    
- [5] later_1.3.0      git2r_0.29.0     jquerylib_0.1.4  tools_4.1.2     
- [9] getPass_0.2-2    digest_0.6.29    jsonlite_1.7.3   evaluate_0.14   
-[13] tibble_3.1.6     lifecycle_1.0.1  pkgconfig_2.0.3  rlang_1.0.2     
-[17] cli_3.1.1        rstudioapi_0.13  yaml_2.2.1       xfun_0.29       
-[21] fastmap_1.1.0    httr_1.4.2       stringr_1.4.0    knitr_1.37      
-[25] sass_0.4.0       fs_1.5.2         vctrs_0.3.8      rprojroot_2.0.2 
-[29] glue_1.6.0       R6_2.5.1         processx_3.5.2   fansi_1.0.2     
-[33] rmarkdown_2.11   callr_3.7.0      magrittr_2.0.1   whisker_0.4     
-[37] ps_1.6.0         promises_1.2.0.1 htmltools_0.5.2  ellipsis_0.3.2  
-[41] httpuv_1.6.5     utf8_1.2.2       stringi_1.7.6    crayon_1.4.2    </code></pre>
+ [1] fs_1.5.2           bit64_4.0.5        httr_1.4.2         rprojroot_2.0.2   
+ [5] tools_4.1.2        backports_1.4.1    bslib_0.3.1        utf8_1.2.2        
+ [9] R6_2.5.1           KernSmooth_2.23-20 DBI_1.1.2          withr_2.4.3       
+[13] tidyselect_1.1.1   processx_3.5.2     bit_4.0.4          compiler_4.1.2    
+[17] git2r_0.29.0       cli_3.1.1          rvest_1.0.2        RNetCDF_2.5-2     
+[21] xml2_1.3.3         isoband_0.2.5      labeling_0.4.2     sass_0.4.0        
+[25] scales_1.1.1       checkmate_2.0.0    classInt_0.4-3     proxy_0.4-26      
+[29] SolveSAPHE_2.1.0   callr_3.7.0        digest_0.6.29      rmarkdown_2.11    
+[33] oce_1.5-0          pkgconfig_2.0.3    htmltools_0.5.2    highr_0.9         
+[37] dbplyr_2.1.1       fastmap_1.1.0      rlang_1.0.2        readxl_1.3.1      
+[41] rstudioapi_0.13    jquerylib_0.1.4    generics_0.1.1     farver_2.1.0      
+[45] jsonlite_1.7.3     vroom_1.5.7        magrittr_2.0.1     ncmeta_0.3.0      
+[49] Rcpp_1.0.8         munsell_0.5.0      fansi_1.0.2        lifecycle_1.0.1   
+[53] stringi_1.7.6      whisker_0.4        yaml_2.2.1         MASS_7.3-55       
+[57] grid_4.1.2         parallel_4.1.2     promises_1.2.0.1   crayon_1.4.2      
+[61] haven_2.4.3        hms_1.1.1          seacarb_3.3.0      knitr_1.37        
+[65] ps_1.6.0           pillar_1.6.4       reprex_2.0.1       glue_1.6.0        
+[69] evaluate_0.14      getPass_0.2-2      data.table_1.14.2  modelr_0.1.8      
+[73] vctrs_0.3.8        tzdb_0.2.0         tweenr_1.0.2       httpuv_1.6.5      
+[77] cellranger_1.1.0   gtable_0.3.0       polyclip_1.10-0    assertthat_0.2.1  
+[81] xfun_0.29          lwgeom_0.2-8       broom_0.7.11       e1071_1.7-9       
+[85] later_1.3.0        class_7.3-20       ncdf4_1.19         units_0.7-2       
+[89] ellipsis_0.3.2    </code></pre>
+</div>
 </div>
 </div>
 
@@ -1067,6 +1122,8 @@ footer is added to webpages before the MathJax javascript. -->
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -1104,6 +1161,35 @@ $(document).ready(function () {
 });
 </script>
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

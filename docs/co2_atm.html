@@ -12,7 +12,7 @@
 <meta name="author" content="Jens Daniel Müller" />
 
 
-<title>Home</title>
+<title>Atmospheric pCO2</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -30,6 +30,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
@@ -235,6 +238,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -242,6 +314,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -327,7 +409,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Home</h1>
+<h1 class="title toc-ignore">Atmospheric pCO2</h1>
 <h4 class="author">Jens Daniel Müller</h4>
 <h4 class="date">10 May, 2022</h4>
 
@@ -512,7 +594,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/index.Rmd</code>) and HTML (<code>docs/index.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/co2_atm.Rmd</code>) and HTML (<code>docs/co2_atm.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -538,461 +620,19 @@ Message
 <tbody>
 <tr>
 <td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/93729600cf1c6ae19c2742e6681ea3f46910b8b5/docs/index.html" target="_blank">9372960</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2021-09-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/2fb60d010e898ac99329683bf76bbf0d38100bcc/docs/index.html" target="_blank">2fb60d0</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2021-07-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/85b0624e33a96dc82f20dd4176dda09310b17c37/docs/index.html" target="_blank">85b0624</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2021-06-25
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/b256c658f614c35aaa8278dbb641e55aad4377f6/docs/index.html" target="_blank">b256c65</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-09
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/1daa3e58f1b25794a6a5774558744285c6dcd234/docs/index.html" target="_blank">1daa3e5</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2021-06-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/9b3014a5d1fdc4a223f1df3e021ee6ba07e08e18/docs/index.html" target="_blank">9b3014a</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-01
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/5eacde3e8965c7750e8b27d2fe2cb00f3b38482e/docs/index.html" target="_blank">5eacde3</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-06-01
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/45a1c9e83eb2aab26e27f0e986fd434610ebcbb8/docs/index.html" target="_blank">45a1c9e</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-05-20
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/59fce523bcf62bd81a936e98e331216099ff5f4d/docs/index.html" target="_blank">59fce52</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2021-05-13
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/6aa4f34c63477784d70be8ce101e844306d9f33f/docs/index.html" target="_blank">6aa4f34</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2021-02-06
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/2eb66526b4e3428eb019b4e5206a581a670eb94f/docs/index.html" target="_blank">2eb6652</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2021-01-27
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/843587f844377ac34b9f8e43eb8be3131d1323e8/docs/index.html" target="_blank">843587f</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2021-01-11
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/2c85fafc9189af28ef74052d6870afd18a812103/docs/index.html" target="_blank">2c85faf</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2021-01-05
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/051c55a857d41aa46768a284a2e8937362087744/docs/index.html" target="_blank">051c55a</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-23
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/e73a8c490a1f4bf95ed1faf41b82e7c21aa2f796/docs/index.html" target="_blank">e73a8c4</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2020-12-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/f66d4bcaee2e5cd72a9eb86c675909d6c09f265d/docs/index.html" target="_blank">f66d4bc</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2020-12-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/f6c7b00fec6ce4c204cd19bdeba09bf51ea18da1/docs/index.html" target="_blank">f6c7b00</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2020-12-21
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/53b63ba39e53e16fe1a9bc3fe68ed8506d99975a/docs/index.html" target="_blank">53b63ba</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
 Rmd
 </td>
 <td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f5e55005832b926a45e0c36aabbb36a2787e7ff3/analysis/index.Rmd" target="_blank">f5e5500</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-<td>
-1
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/f5e55005832b926a45e0c36aabbb36a2787e7ff3/docs/index.html" target="_blank">f5e5500</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-<td>
-1
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/07af163d1edfe981349be313a80f41794363b050/analysis/index.Rmd" target="_blank">07af163</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-<td>
-1
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/07af163d1edfe981349be313a80f41794363b050/docs/index.html" target="_blank">07af163</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-20
-</td>
-<td>
-1
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/9614d927d03a9ab1e64a41a6810d1875bd592df2/docs/index.html" target="_blank">9614d92</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-19
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/c3590c689a9bb498429938db8be90bb9a70a60c6/docs/index.html" target="_blank">c3590c6</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-18
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/7c12d28e06f8b9b3f5f8586f5209c8fd255f1a98/docs/index.html" target="_blank">7c12d28</a>
-</td>
-<td>
-Donghe-Zhu
-</td>
-<td>
-2020-12-18
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/92a8b4239fa98c9c52d47397c780f0ea89a35022/docs/index.html" target="_blank">92a8b42</a>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/d43e8c0717fb36155492e94d0c8550d8fea7e2ea/analysis/co2_atm.Rmd" target="_blank">d43e8c0</a>
 </td>
 <td>
 jens-daniel-mueller
 </td>
 <td>
-2020-12-16
+2022-05-10
 </td>
 <td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/076c8aa462cb67bf5cb17b0f0b611291206d3050/analysis/index.Rmd" target="_blank">076c8aa</a>
-</td>
-<td>
-Jens Müller
-</td>
-<td>
-2020-12-15
-</td>
-<td>
-Initial commit
+rerun all with multi model subsetting
 </td>
 </tr>
 </tbody>
@@ -1002,10 +642,37 @@ Initial commit
 </div>
 </div>
 </div>
-<div id="welcome" class="section level1">
-<h1>WELCOME!</h1>
-<p>On this website we present our ongoing ambition to quantify anthropogenic CO<sub>2</sub> in the ocean based on observations.</p>
-<p>Navigate trough the navbar on top to take a look at the various chapters of this project. The links in the upper right corner bring you to the source code of this project and to Jens’ homepage.</p>
+<div id="read-data" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Read data</h1>
+<ul>
+<li>Data source: <code>Globally averaged marine surface annual mean data</code> from <a href="https://www.esrl.noaa.gov/gmd/ccgg/trends/gl_data.html">ESRL-NOAA</a></li>
+</ul>
+<pre class="r"><code>co2_atm &lt;- tidync(
+  paste0(path_atm_pCO2,
+        &quot;Atm_CO2_CESM-ETHZ_1_gr_1980-2018_v20211122.nc&quot;)
+)
+
+co2_atm &lt;- co2_atm %&gt;% 
+  hyper_tibble()
+
+co2_atm &lt;- co2_atm %&gt;%
+  mutate(pCO2 = as.numeric(Atm_CO2),
+         year = year(as.Date(time_ann, origin = &quot;1980-01-01&quot;))) %&gt;%
+  select(year, pCO2)</code></pre>
+</div>
+<div id="time-series" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Time series</h1>
+<pre class="r"><code>co2_atm %&gt;% 
+  ggplot(aes(year, pCO2)) +
+  geom_path() +
+  geom_point()</code></pre>
+<p><img src="figure/co2_atm.Rmd/co2_atm_time_series-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="write-clean-file" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Write clean file</h1>
+<pre class="r"><code>co2_atm %&gt;%
+  write_csv(paste0(path_preprocessing,
+                   &quot;co2_atm.csv&quot;))</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1034,20 +701,34 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] workflowr_1.7.0
+ [1] tidync_0.2.4     lubridate_1.8.0  colorspace_2.0-2 marelac_2.1.10  
+ [5] shape_1.4.6      ggforce_0.3.3    metR_0.11.0      scico_1.3.0     
+ [9] patchwork_1.1.1  collapse_1.7.0   forcats_0.5.1    stringr_1.4.0   
+[13] dplyr_1.0.7      purrr_0.3.4      readr_2.1.1      tidyr_1.1.4     
+[17] tibble_3.1.6     ggplot2_3.3.5    tidyverse_1.3.1  workflowr_1.7.0 
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.8       bslib_0.3.1      compiler_4.1.2   pillar_1.6.4    
- [5] later_1.3.0      git2r_0.29.0     jquerylib_0.1.4  tools_4.1.2     
- [9] getPass_0.2-2    digest_0.6.29    jsonlite_1.7.3   evaluate_0.14   
-[13] tibble_3.1.6     lifecycle_1.0.1  pkgconfig_2.0.3  rlang_1.0.2     
-[17] cli_3.1.1        rstudioapi_0.13  yaml_2.2.1       xfun_0.29       
-[21] fastmap_1.1.0    httr_1.4.2       stringr_1.4.0    knitr_1.37      
-[25] sass_0.4.0       fs_1.5.2         vctrs_0.3.8      rprojroot_2.0.2 
-[29] glue_1.6.0       R6_2.5.1         processx_3.5.2   fansi_1.0.2     
-[33] rmarkdown_2.11   callr_3.7.0      magrittr_2.0.1   whisker_0.4     
-[37] ps_1.6.0         promises_1.2.0.1 htmltools_0.5.2  ellipsis_0.3.2  
-[41] httpuv_1.6.5     utf8_1.2.2       stringi_1.7.6    crayon_1.4.2    </code></pre>
+ [1] fs_1.5.2          bit64_4.0.5       gsw_1.0-6         httr_1.4.2       
+ [5] rprojroot_2.0.2   tools_4.1.2       backports_1.4.1   bslib_0.3.1      
+ [9] utf8_1.2.2        R6_2.5.1          DBI_1.1.2         withr_2.4.3      
+[13] tidyselect_1.1.1  processx_3.5.2    bit_4.0.4         compiler_4.1.2   
+[17] git2r_0.29.0      cli_3.1.1         rvest_1.0.2       RNetCDF_2.5-2    
+[21] xml2_1.3.3        labeling_0.4.2    sass_0.4.0        scales_1.1.1     
+[25] checkmate_2.0.0   SolveSAPHE_2.1.0  callr_3.7.0       digest_0.6.29    
+[29] rmarkdown_2.11    oce_1.5-0         pkgconfig_2.0.3   htmltools_0.5.2  
+[33] highr_0.9         dbplyr_2.1.1      fastmap_1.1.0     rlang_1.0.2      
+[37] readxl_1.3.1      rstudioapi_0.13   jquerylib_0.1.4   generics_0.1.1   
+[41] farver_2.1.0      jsonlite_1.7.3    vroom_1.5.7       magrittr_2.0.1   
+[45] ncmeta_0.3.0      Rcpp_1.0.8        munsell_0.5.0     fansi_1.0.2      
+[49] lifecycle_1.0.1   stringi_1.7.6     whisker_0.4       yaml_2.2.1       
+[53] MASS_7.3-55       grid_4.1.2        parallel_4.1.2    promises_1.2.0.1 
+[57] crayon_1.4.2      haven_2.4.3       hms_1.1.1         seacarb_3.3.0    
+[61] knitr_1.37        ps_1.6.0          pillar_1.6.4      reprex_2.0.1     
+[65] glue_1.6.0        evaluate_0.14     getPass_0.2-2     data.table_1.14.2
+[69] modelr_0.1.8      vctrs_0.3.8       tzdb_0.2.0        tweenr_1.0.2     
+[73] httpuv_1.6.5      cellranger_1.1.0  gtable_0.3.0      polyclip_1.10-0  
+[77] assertthat_0.2.1  xfun_0.29         broom_0.7.11      later_1.3.0      
+[81] ncdf4_1.19        ellipsis_0.3.2   </code></pre>
 </div>
 </div>
 
@@ -1067,6 +748,8 @@ footer is added to webpages before the MathJax javascript. -->
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -1104,6 +787,35 @@ $(document).ready(function () {
 });
 </script>
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Jens Daniel Müller" />
+
+
+<title>GLODAP subset variable climate A 2021</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">eMLR mod preprocessing</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Climatology_A_2007_all_models.html">Climatology</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Synthetic data
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="GLODAP_subset_A_monthly_CESM.html">GLODAP A monthly CESM</a>
+    </li>
+    <li>
+      <a href="GLODAP_subset_A_annual_all_models.html">GLODAP A annual</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="Cant_AD_annual_all_models.html">Cant AD</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Surface data
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="surface_ocean.html">Surface Ocean</a>
+    </li>
+    <li>
+      <a href="co2_atm.html">Atmospheric CO2</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+<li>
+  <a href="https://jens-daniel-mueller.github.io/">
+    <span class="fa fa-home"></span>
+     
+    Jens' homepage
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">GLODAP subset variable climate A 2021</h1>
+<h4 class="author">Jens Daniel Müller</h4>
+<h4 class="date">10 May, 2022</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2022-05-10
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>emlr_mod_preprocessing/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version 1.7.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20200707code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20200707)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20200707code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20200707)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtreed43e8c0717fb36155492e94d0c8550d8fea7e2eatargetblankd43e8c0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/d43e8c0717fb36155492e94d0c8550d8fea7e2ea" target="_blank">d43e8c0</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtreed43e8c0717fb36155492e94d0c8550d8fea7e2eatargetblankd43e8c0a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/d43e8c0717fb36155492e94d0c8550d8fea7e2ea" target="_blank">d43e8c0</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+
+Untracked files:
+    Untracked:  analysis/RECCAP2_flux_products.Rmd
+    Untracked:  code/backup_analysis_scripts/
+    Untracked:  code/reprex_read_nc_file.R
+
+Unstaged changes:
+    Deleted:    analysis/Cant_AD.Rmd
+    Deleted:    analysis/Cant_CB.Rmd
+    Deleted:    analysis/Climatology_A.Rmd
+    Deleted:    analysis/Climatology_C.Rmd
+    Deleted:    analysis/FESOM_REcoM_LR_Cant_AD.Rmd
+    Deleted:    analysis/FESOM_REcoM_LR_Climatology_A.Rmd
+    Deleted:    analysis/FESOM_REcoM_LR_GLODAP_subset_A_2021_annual.Rmd
+    Deleted:    analysis/FESOM_REcoM_LR_Random_subset_A_2021_annual.Rmd
+    Deleted:    analysis/GLODAP_subset_A.Rmd
+    Deleted:    analysis/GLODAP_subset_A_2021.Rmd
+    Deleted:    analysis/GLODAP_subset_A_2021_annual.Rmd
+    Deleted:    analysis/GLODAP_subset_C.Rmd
+    Deleted:    analysis/GLODAP_subset_C_2021.Rmd
+    Deleted:    analysis/NorESM_Cant_AD.Rmd
+    Deleted:    analysis/NorESM_Climatology_A.Rmd
+    Deleted:    analysis/NorESM_GLODAP_subset_A_2021_annual.Rmd
+    Deleted:    analysis/NorESM_Random_subset_A_2021_annual.Rmd
+    Deleted:    analysis/ORCA025_Cant_AD.Rmd
+    Deleted:    analysis/ORCA025_Climatology_A.Rmd
+    Deleted:    analysis/ORCA025_GLODAP_subset_A_2021_annual.Rmd
+    Deleted:    analysis/ORCA025_Random_subset_A_2021_annual.Rmd
+    Deleted:    analysis/Random_subset_A.Rmd
+    Deleted:    analysis/Random_subset_A_2021_annual.Rmd
+    Deleted:    analysis/Random_subset_C.Rmd
+    Deleted:    analysis/Random_subset_C_2021.Rmd
+    Modified:   analysis/_site.yml
+    Deleted:    analysis/read_CO2_atm.Rmd
+    Modified:   code/Workflowr_project_managment.R
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/GLODAP_subset_A_monthly_CESM.Rmd</code>) and HTML (<code>docs/GLODAP_subset_A_monthly_CESM.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/d43e8c0717fb36155492e94d0c8550d8fea7e2ea/analysis/GLODAP_subset_A_monthly_CESM.Rmd" target="_blank">d43e8c0</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-10
+</td>
+<td>
+rerun all with multi model subsetting
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<pre class="r"><code>path_GLODAP_preprocessing &lt;-
+  paste(path_root, &quot;/observations/preprocessing/&quot;, sep = &quot;&quot;)
+
+path_cmorized &lt;-
+  &quot;/nfs/kryo/work/loher/CESM_output/RECCAP2/cmorized_March2021/split_monthly/&quot;
+
+path_preprocessing &lt;-
+  paste(path_root, &quot;/model/preprocessing/GLODAP_subset_A_monthly_CESM/&quot;, sep = &quot;&quot;)</code></pre>
+<div id="select-basin-mask" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Select basin mask</h1>
+<pre class="r"><code># use only three basin to assign general basin mask
+# ie this is not specific to the MLR fitting
+basinmask &lt;- basinmask %&gt;%
+  filter(MLR_basins == &quot;2&quot;) %&gt;%
+  select(lat, lon, basin_AIP)</code></pre>
+</div>
+<div id="read-glodapv2_2021-preprocessed-files" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Read GLODAPv2_2021 preprocessed files</h1>
+<pre class="r"><code>GLODAP &lt;-
+  read_csv(paste(path_GLODAP_preprocessing,
+                 &quot;GLODAPv2.2021_preprocessed.csv&quot;,
+                 sep = &quot;&quot;))
+
+GLODAP &lt;- GLODAP %&gt;%
+  mutate(month = month(date))
+
+# GLODAP &lt;- GLODAP %&gt;%
+#   filter(year &lt;= 2019)</code></pre>
+</div>
+<div id="subset-cmorized-data-according-to-glodap-observation" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Subset cmorized data according to GLODAP observation</h1>
+<p>Here we subset cmorized (1x1) data from the model with variable forcing, according to the presence of GLODAP observations in a previously cleaned file.</p>
+<p>Besides, Model results are given in [mol m<sup>-3</sup>], whereas GLODAP data are in [µmol kg<sup>-1</sup>]. This refers to the variables:</p>
+<ul>
+<li>DIC<br />
+</li>
+<li>ALK<br />
+</li>
+<li>O2<br />
+</li>
+<li>NO3<br />
+</li>
+<li>PO4<br />
+</li>
+<li>SiO3</li>
+<li>AOU (calculated)</li>
+</ul>
+<p>For comparison, model results were converted from [mol m<sup>-3</sup>] to [µmol kg<sup>-1</sup>]</p>
+<pre class="r"><code># set name of model to be subsetted
+model_ID &lt;- &quot;A&quot;
+
+# for loop across years
+years &lt;- c(&quot;1982&quot;:&quot;2020&quot;)
+
+for (i_year in years) {
+  # i_year &lt;- years[39]
+  
+  # select GLODAP data for that year
+  GLODAP_year &lt;- GLODAP %&gt;%
+    filter(year == i_year)
+  
+  # create month x lat x lon grid of observations
+  Glodap_year_grid_horizontal &lt;- GLODAP_year %&gt;%
+    distinct(month, lat, lon)
+  
+  # create month x lat x lon x depth grid of observations
+  Glodap_year_grid_depth &lt;- GLODAP_year %&gt;%
+    distinct(month, lat, lon, depth)
+  
+  # for loop across variables
+  variables &lt;-
+    c(&quot;so&quot;, &quot;thetao&quot;, &quot;dissic&quot;, &quot;talk&quot;, &quot;o2&quot;, &quot;no3&quot;, &quot;po4&quot;, &quot;si&quot;)
+  
+  for (i_variable in variables) {
+    # i_variable &lt;- variables[3]
+    
+    # read list of all files
+    
+    if (i_year &lt;= 2019) {
+      file &lt;-
+        list.files(
+          path = path_cmorized,
+          pattern = paste(
+            &quot;^&quot;,
+            i_variable,
+            &quot;_CESM-ETHZ_&quot;,
+            model_ID,
+            &quot;_1_gr_&quot;,
+            i_year,
+            &quot;.nc&quot;,
+            sep = &quot;&quot;
+          )
+        )
+    } else {
+      file &lt;-
+        list.files(
+          path = path_cmorized,
+          pattern = paste(
+            &quot;^&quot;,
+            i_variable,
+            &quot;_CESM-ETHZ_&quot;,
+            model_ID,
+            &quot;_1_gr_&quot;,
+            i_year-1,
+            &quot;.nc&quot;,
+            sep = &quot;&quot;
+          )
+        )
+    }
+    
+    print(file)
+    
+    # read in data
+    variable_data &lt;-
+      read_ncdf(paste(path_cmorized,
+                      file,
+                      sep = &quot;&quot;),
+                make_units = FALSE)
+    
+    # convert to tibble
+    variable_data_tibble &lt;- variable_data %&gt;%
+      as_tibble()
+    
+    # remove open link to nc file
+    rm(variable_data)
+    
+    # remove na values
+    variable_data_tibble &lt;-
+      variable_data_tibble %&gt;%
+      filter(!is.na(!!sym(i_variable)))
+    
+    # harmonize longitudes
+    variable_data_tibble &lt;- variable_data_tibble %&gt;%
+      mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
+    
+    # only consider model grids within basinmask
+    variable_data_tibble &lt;-
+      inner_join(variable_data_tibble, basinmask) %&gt;%
+      select(-basin_AIP)
+    
+    # mutate variables
+    variable_data_tibble &lt;- variable_data_tibble %&gt;%
+      mutate(month = month(time_mon)) %&gt;%
+      select(-time_mon)
+    
+    # calculate model summary stats
+    stats &lt;- variable_data_tibble %&gt;%
+      pull(!!sym(i_variable)) %&gt;%
+      summary()
+    
+    stats &lt;- c(year = i_year, variable = i_variable, stats)
+    
+    if (exists(&quot;stats_summary&quot;)) {
+      stats_summary &lt;- bind_rows(stats_summary, stats)
+    }
+    
+    if (!exists(&quot;stats_summary&quot;)) {
+      stats_summary &lt;- stats
+    }
+    
+    rm(stats)
+    
+    # subset model at month x lat x lon grid of observations
+    model_grid_horizontal &lt;-
+      inner_join(Glodap_year_grid_horizontal, variable_data_tibble)
+    
+    # join model and month x lat x lon x depth grid of observations
+    model_obs &lt;-
+      full_join(model_grid_horizontal, Glodap_year_grid_depth)
+    
+    # calculate nr of observations per month x lat x lon grid
+    model_obs &lt;- model_obs %&gt;%
+      group_by(month, lat, lon) %&gt;%
+      mutate(n = sum(!is.na(!!sym(i_variable)))) %&gt;%
+      ungroup()
+    
+    # set variable value from model for observation depth, if only one model depth available
+    model_obs_set &lt;- model_obs %&gt;%
+      filter(n == 1) %&gt;%
+      group_by(lon, lat, month) %&gt;%
+      mutate(!!sym(i_variable) := mean(!!sym(i_variable), na.rm = TRUE)) %&gt;%
+      ungroup()
+    
+    # interpolate variable value from model to observation depth
+    model_obs_interpo &lt;- model_obs %&gt;%
+      filter(n &gt; 1) %&gt;%
+      group_by(lon, lat, month) %&gt;%
+      arrange(depth) %&gt;%
+      mutate(!!sym(i_variable) := approxfun(depth, !!sym(i_variable), rule = 2)(depth)) %&gt;%
+      ungroup()
+    
+    # join interpolated and set model values
+    model_obs_interpo &lt;- full_join(model_obs_interpo, model_obs_set)
+    rm(model_obs_set)
+    
+    # subsetted interpolated values at observation depth
+    model_obs_interpo &lt;-
+      inner_join(Glodap_year_grid_depth, model_obs_interpo) %&gt;%
+      select(-n) %&gt;%
+      mutate(year = as.numeric(i_year))
+    
+    # select observation grids without corresponding model subset
+    na_model &lt;-
+      full_join(Glodap_year_grid_depth, model_obs_interpo) %&gt;%
+      filter(is.na(!!sym(i_variable))) %&gt;%
+      select(month, lat, lon) %&gt;%
+      unique()
+    
+    # rename interpolated model variable to indicate as model output
+    model_obs_interpo &lt;- model_obs_interpo %&gt;%
+      rename(!!sym(paste(i_variable, &quot;model&quot;, sep = &quot;_&quot;)) := !!sym(i_variable))
+    
+    # add model subset to GLODAP
+    GLODAP &lt;-
+      natural_join(
+        GLODAP,
+        model_obs_interpo,
+        by = c(&quot;year&quot;, &quot;month&quot;, &quot;lat&quot;, &quot;lon&quot;, &quot;depth&quot;),
+        jointype = &quot;FULL&quot;
+      )
+    
+    # calculate annual average variable
+    variable_data_tibble_annual_average &lt;- variable_data_tibble %&gt;%
+      fselect(-month) %&gt;%
+      fgroup_by(lat, lon, depth) %&gt;% {
+        add_vars(fgroup_vars(., &quot;unique&quot;),
+                 fmean(., keep.group_vars = FALSE))
+      }
+    
+    # select surface annual average variable
+    variable_data_tibble_annual_average_surface &lt;-
+      variable_data_tibble_annual_average %&gt;%
+      filter(depth == min(depth))
+    
+    # surface map of variable
+    map +
+      geom_raster(data = variable_data_tibble_annual_average_surface,
+                  aes(lon, lat, fill = !!sym(i_variable))) +
+      scale_fill_viridis_c(name = i_variable) +
+      geom_raster(data = model_obs_interpo,
+                  aes(lon, lat), fill = &quot;black&quot;) +
+      geom_raster(data = na_model,
+                  aes(lon, lat), fill = &quot;red&quot;) +
+      labs(
+        title = &quot;GLODAP-based cmorized subset distribution&quot;,
+        subtitle = paste(
+          &quot;Model depth: 5m | Annual average of year&quot;,
+          i_year,
+          &quot;| red = subsetting failed&quot;
+        ),
+        x = &quot;Longitude&quot;,
+        y = &quot;Latitude&quot;
+      )
+    
+    ggsave(
+      paste(
+        path_preprocessing,
+        &quot;regular_subset_distribution_runA_2021/&quot;,
+        i_variable,
+        &quot;_&quot;,
+        i_year,
+        &quot;.png&quot;,
+        sep = &quot;&quot;
+      ),
+      width = 5,
+      height = 3
+    )
+  }
+  
+}</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1982.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1982.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_1982.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1982.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1982.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1982.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1982.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1982.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1983.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1983.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_1983.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1983.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1983.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1983.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1983.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1983.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1984.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1984.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_1984.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1984.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1984.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1984.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1984.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1984.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1985.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1985.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_1985.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1985.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1985.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1985.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1985.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1985.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1986.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1986.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_1986.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1986.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1986.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1986.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1986.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1986.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1987.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1987.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_1987.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1987.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1987.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1987.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1987.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1987.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1988.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1988.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_1988.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1988.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1988.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1988.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1988.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1988.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1989.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1989.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_1989.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1989.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1989.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1989.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1989.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1989.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1990.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1990.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_1990.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1990.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1990.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1990.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1990.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1990.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1991.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1991.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_1991.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1991.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1991.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1991.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1991.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1991.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1992.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1992.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_1992.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1992.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1992.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1992.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1992.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1992.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1993.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1993.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_1993.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1993.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1993.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1993.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1993.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1993.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1994.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1994.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_1994.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1994.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1994.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1994.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1994.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1994.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1995.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1995.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_1995.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1995.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1995.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1995.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1995.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1995.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1996.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1996.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_1996.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1996.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1996.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1996.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1996.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1996.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1997.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1997.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_1997.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1997.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1997.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1997.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1997.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1997.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1998.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1998.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_1998.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1998.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1998.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1998.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1998.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1998.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1999.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1999.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_1999.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1999.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1999.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1999.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1999.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1999.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2000.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2000.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2000.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2000.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2000.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2000.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2000.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2000.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2001.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2001.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2001.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2001.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2001.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2001.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2001.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2001.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2002.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2002.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2002.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2002.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2002.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2002.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2002.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2002.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2003.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2003.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2003.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2003.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2003.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2003.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2003.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2003.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2004.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2004.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2004.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2004.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2004.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2004.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2004.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2004.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2005.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2005.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2005.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2005.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2005.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2005.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2005.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2005.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2006.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2006.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2006.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2006.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2006.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2006.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2006.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2006.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2007.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2007.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2007.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2007.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2007.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2007.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2007.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2007.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2008.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2008.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2008.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2008.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2008.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2008.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2008.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2008.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2009.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2009.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2009.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2009.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2009.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2009.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2009.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2009.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2010.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2010.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2010.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2010.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2010.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2010.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2010.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2010.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2011.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2011.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2011.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2011.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2011.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2011.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2011.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2011.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2012.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2012.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2012.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2012.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2012.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2012.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2012.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2012.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2013.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2013.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2013.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2013.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2013.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2013.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2013.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2013.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2014.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2014.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2014.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2014.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2014.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2014.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2014.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2014.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2015.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2015.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2015.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2015.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2015.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2015.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2015.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2015.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2016.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2016.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2016.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2016.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2016.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2016.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2016.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2016.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2017.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2017.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2017.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2017.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2017.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2017.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2017.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2017.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2018.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2018.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2018.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2018.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2018.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2018.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2018.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2018.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;dissic_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_2019.nc&quot;</code></pre>
+<pre class="r"><code># write raw data file for GLODAP-based subsetting model variables
+GLODAP %&gt;%
+  write_csv(
+    paste(
+      path_preprocessing,
+      &quot;GLODAPv2.2021_preprocessed_model_runA_raw_subset.csv&quot;,
+      sep = &quot;&quot;
+    )
+  )
+
+# write file for model summary statistics (original cmorized unit)
+stats_summary %&gt;%
+  write_csv(
+    paste(
+      path_preprocessing,
+      &quot;regular_subset_distribution_runA_2021/&quot;,
+      model_ID,
+      &quot;_summary_stats.csv&quot;,
+      sep = &quot;&quot;
+    )
+  )</code></pre>
+<pre class="r"><code># read file for GLODAP-based subsetting model variables
+GLODAP &lt;-
+  read_csv(
+    paste(
+      path_preprocessing,
+      &quot;GLODAPv2.2021_preprocessed_model_runA_raw_subset.csv&quot;,
+      sep = &quot;&quot;
+    ),
+    col_types = cols(
+      .default = col_double(),
+      basin_AIP = col_character(),
+      date = col_date(format = &quot;&quot;),
+      dissic_model = col_double(),
+      no3_model = col_double(),
+      o2_model = col_double(),
+      po4_model = col_double(),
+      si_model = col_double(),
+      so_model = col_double(),
+      talk_model = col_double(),
+      thetao_model = col_double()
+    )
+  )
+
+
+# filter out GLODAP grids without model subset
+GLODAP &lt;- GLODAP %&gt;%
+  filter(!is.na(so_model))
+
+# calculate model temperature
+GLODAP &lt;- GLODAP %&gt;%
+  mutate(temp_model = gsw_pt_from_t(
+    SA = so_model,
+    t = thetao_model,
+    p = 10.1325,
+    p_ref = depth
+  ))
+
+# unit conversion from mol/m3 to µmol/kg
+GLODAP &lt;- GLODAP %&gt;%
+  mutate(
+    rho = gsw_pot_rho_t_exact(
+      SA = so_model,
+      t = temp_model,
+      p = depth,
+      p_ref = 10.1325
+    ),
+    dissic_model = dissic_model * (1e+6 / rho),
+    talk_model = talk_model * (1e+6 / rho),
+    o2_model = o2_model * (1e+6 / rho),
+    no3_model = no3_model * (1e+6 / rho),
+    po4_model = po4_model * (1e+6 / rho),
+    si_model = si_model * (1e+6 / rho)
+  )
+
+# calculate AOU
+GLODAP &lt;- GLODAP %&gt;%
+  mutate(
+    oxygen_sat_m3 = gas_satconc(
+      S = so_model,
+      t = temp_model,
+      P = 1.013253,
+      species = &quot;O2&quot;
+    ),
+    oxygen_sat_kg = oxygen_sat_m3 * (1e+3 / rho),
+    aou_model = oxygen_sat_kg - o2_model
+  ) %&gt;%
+  select(-oxygen_sat_kg, -oxygen_sat_m3)
+
+# calculate gamma model in temporary data frame
+GLODAP_gamma &lt;- GLODAP %&gt;%
+  select(depth, lat,
+         so_model, thetao_model, lon)
+
+GLODAP_gamma &lt;- GLODAP_gamma %&gt;%
+  mutate(CTDPRS = gsw_p_from_z(-depth,
+                               lat))
+
+GLODAP_gamma &lt;- GLODAP_gamma %&gt;%
+  rename(
+    LATITUDE = lat,
+    LONGITUDE = lon,
+    SALNTY = so_model,
+    THETA = thetao_model
+  )
+
+source_python(
+  paste(
+    path_root,
+    &quot;/utilities/functions/python_scripts/&quot;,
+    &quot;Gamma_GLODAP_python.py&quot;,
+    sep = &quot;&quot;
+  )
+)
+
+GLODAP_gamma &lt;- calculate_gamma(GLODAP_gamma)
+
+# join gamma column with original data frame
+GLODAP &lt;- GLODAP %&gt;%
+  mutate(gamma_model = GLODAP_gamma$GAMMA)
+
+GLODAP_NA_filled &lt;- GLODAP
+
+rm(GLODAP_gamma)
+
+# Replace model value with NA, if observations are NA
+GLODAP$so_model &lt;-
+  ifelse(is.na(GLODAP$sal), NA, GLODAP$so_model)
+
+GLODAP$thetao_model &lt;-
+  ifelse(is.na(GLODAP$theta), NA, GLODAP$thetao_model)
+
+GLODAP$temp_model &lt;-
+  ifelse(is.na(GLODAP$temp), NA, GLODAP$temp_model)
+
+GLODAP$dissic_model &lt;-
+  ifelse(is.na(GLODAP$tco2), NA, GLODAP$dissic_model)
+
+GLODAP$talk_model &lt;-
+  ifelse(is.na(GLODAP$talk), NA, GLODAP$talk_model)
+
+GLODAP$o2_model &lt;-
+  ifelse(is.na(GLODAP$oxygen), NA, GLODAP$o2_model)
+
+GLODAP$no3_model &lt;-
+  ifelse(is.na(GLODAP$nitrate), NA, GLODAP$no3_model)
+
+GLODAP$po4_model &lt;-
+  ifelse(is.na(GLODAP$phosphate), NA, GLODAP$po4_model)
+
+GLODAP$si_model &lt;-
+  ifelse(is.na(GLODAP$silicate), NA, GLODAP$si_model)
+
+GLODAP$aou_model &lt;-
+  ifelse(is.na(GLODAP$aou), NA, GLODAP$aou_model)
+
+
+# write file for GLODAP observations + subsetted model variables
+GLODAP %&gt;%
+  write_csv(
+    paste(
+      path_preprocessing,
+      &quot;GLODAPv2.2021_preprocessed_model_runA_both.csv&quot;,
+      sep = &quot;&quot;
+    )
+  )
+
+GLODAP_NA_filled %&gt;%
+  write_csv(
+    paste(
+      path_preprocessing,
+      &quot;GLODAPv2.2021_preprocessed_model_runA_both_NA_filled.csv&quot;,
+      sep = &quot;&quot;
+    )
+  )
+
+# remove GLODAP observations and rename model subset
+GLODAP &lt;- GLODAP %&gt;%
+  select(-c(
+    sal,
+    theta,
+    temp,
+    tco2,
+    talk,
+    oxygen,
+    nitrate,
+    phosphate,
+    silicate,
+    aou,
+    gamma
+  )) %&gt;%
+  rename(
+    sal = so_model,
+    theta = thetao_model,
+    temp = temp_model,
+    tco2 = dissic_model,
+    talk = talk_model,
+    oxygen = o2_model,
+    nitrate = no3_model,
+    phosphate = po4_model,
+    silicate = si_model,
+    aou = aou_model,
+    gamma = gamma_model
+  )
+
+
+GLODAP_NA_filled &lt;- GLODAP_NA_filled %&gt;%
+  select(-c(
+    sal,
+    theta,
+    temp,
+    tco2,
+    talk,
+    oxygen,
+    nitrate,
+    phosphate,
+    silicate,
+    aou,
+    gamma
+  )) %&gt;%
+  rename(
+    sal = so_model,
+    theta = thetao_model,
+    temp = temp_model,
+    tco2 = dissic_model,
+    talk = talk_model,
+    oxygen = o2_model,
+    nitrate = no3_model,
+    phosphate = po4_model,
+    silicate = si_model,
+    aou = aou_model,
+    gamma = gamma_model
+  )</code></pre>
+</div>
+<div id="write-files" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Write files</h1>
+<pre class="r"><code># write final file for GLODAP-based subsetting model variables
+GLODAP %&gt;%
+  select(-row_number) %&gt;% 
+  write_csv(paste(path_preprocessing,
+                  &quot;GLODAPv2.2021_preprocessed_model_runA_final.csv&quot;,
+                  sep = &quot;&quot;))
+
+GLODAP_NA_filled %&gt;%
+  select(-row_number) %&gt;% 
+  write_csv(paste(path_preprocessing,
+                  &quot;GLODAPv2.2021_preprocessed_model_runA_final_NA_filled.csv&quot;,
+                  sep = &quot;&quot;))</code></pre>
+</div>
+<div id="test-for-interpolation" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Test for interpolation</h1>
+<pre class="r"><code>GLODAP &lt;-
+  read_csv(paste(path_GLODAP_preprocessing,
+                 &quot;GLODAPv2.2021_preprocessed.csv&quot;,
+                 sep = &quot;&quot;))
+
+GLODAP &lt;- GLODAP %&gt;%
+  mutate(month = month(date))
+
+# select GLODAP data for 2019
+GLODAP_2019 &lt;- GLODAP %&gt;%
+  filter(year == 2019)
+
+# create month x lat x lon grid of observations
+Glodap_year_grid_horizontal &lt;- GLODAP_2019 %&gt;%
+  select(month, lat, lon) %&gt;%
+  unique()
+
+# create month x lat x lon x depth grid of observations
+Glodap_year_grid_depth &lt;- GLODAP_2019 %&gt;%
+  select(month, lat, lon, depth) %&gt;%
+  unique()
+
+# read in cmorized tco2 output in year 2019
+variable_data_tibble &lt;-
+  read_ncdf(paste(path_cmorized, 
+    &quot;dissic_CESM-ETHZ_A_1_gr_2019.nc&quot;,
+    sep = &quot;&quot;
+  )) %&gt;%
+  as_tibble()
+
+# remove na values
+variable_data_tibble &lt;-
+  variable_data_tibble %&gt;%
+  filter(!is.na(dissic))
+
+# harmonize longitudes
+variable_data_tibble &lt;- variable_data_tibble %&gt;%
+  mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
+
+# only consider model grids within basinmask
+variable_data_tibble &lt;-
+  inner_join(variable_data_tibble, basinmask) %&gt;%
+  select(-basin_AIP)
+
+# mutate variables
+variable_data_tibble &lt;- variable_data_tibble %&gt;%
+  mutate(month = month(time_mon), dissic = as.numeric(dissic)) %&gt;%
+  select(-time_mon)
+
+# subset model at month x lat x lon grid of observations
+model_grid_horizontal &lt;-
+  inner_join(Glodap_year_grid_horizontal, variable_data_tibble)
+
+# join model and month x lat x lon x depth grid of observations
+model_obs &lt;-
+  full_join(model_grid_horizontal, Glodap_year_grid_depth)
+
+# calculate nr of observations per month x lat x lon grid
+model_obs &lt;- model_obs %&gt;%
+  group_by(month, lat, lon) %&gt;%
+  mutate(n = sum(!is.na(dissic))) %&gt;%
+  ungroup()
+
+# interpolate variable value from model to observation depth
+model_obs_interpo &lt;- model_obs %&gt;%
+  filter(n &gt; 1) %&gt;%
+  group_by(lon, lat, month) %&gt;%
+  arrange(month, lat, lon, depth) %&gt;%
+  mutate(dissic_interpolate = approxfun(depth, dissic, rule = 2)(depth)) %&gt;%
+  ungroup()
+
+ggplot() +
+  geom_path(
+    data = model_obs_interpo %&gt;%
+      filter(lat == -47.5, lon == 306.5, !is.na(dissic), month == 4) %&gt;%
+      arrange(depth),
+    aes(dissic, depth, col = &quot;model&quot;)
+  ) +
+  geom_point(
+    data = model_obs_interpo %&gt;%
+      filter(lat == -47.5, lon == 306.5, !is.na(dissic), month == 4) %&gt;%
+      arrange(depth),
+    aes(dissic, depth, col = &quot;model&quot;)
+  ) +
+  geom_point(
+    data = model_obs_interpo %&gt;%
+      filter(lat == -47.5, lon == 306.5, is.na(dissic), month == 4),
+    aes(dissic_interpolate, depth, col = &quot;interpolated&quot;)
+  ) +
+  scale_y_reverse() +
+  scale_color_brewer(palette = &quot;Dark2&quot;, name = &quot;&quot;) +
+  labs(title = &quot;Interpolation to sampling depth - tco2 of year 2019&quot;)</code></pre>
+<p><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/test_for_interpolation-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="test-for-obs-model-depth-offset" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Test for obs-model depth offset</h1>
+<pre class="r"><code>GLODAP_max_depth &lt;- GLODAP %&gt;%
+  select(lon, lat, depth) %&gt;%
+  group_by(lon, lat) %&gt;%
+  summarise(max_depth_GLODAP = max(depth))
+
+model_max_depth &lt;- variable_data_tibble %&gt;%
+  select(lon, lat, depth) %&gt;%
+  group_by(lon, lat) %&gt;%
+  summarise(max_depth_model = max(depth))
+
+GLODAP_model_depth_offset &lt;-
+  left_join(GLODAP_max_depth, model_max_depth) %&gt;%
+  mutate(offset = max_depth_GLODAP - max_depth_model)
+
+map +
+  geom_raster(
+    data = GLODAP_model_depth_offset %&gt;% 
+      filter(offset &gt; 500),
+    aes(lon, lat, fill = offset)
+  ) +
+  scale_fill_viridis_c(direction =  -1) +
+  labs(
+    title = &quot;GLODAP-model max sampling depth offset&quot;,
+    subtitle = &quot;Year 1971 - 2019&quot;,
+    x = &quot;Longitude&quot;,
+    y = &quot;Latitude&quot;
+  )</code></pre>
+<p><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/test_for_depth_offset-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="glodap-observations-vs-cmorized-subset-comparison" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> GLODAP observations vs cmorized subset comparison</h1>
+<pre class="r"><code>GLODAP_cmorized &lt;- read_csv(paste(path_preprocessing,
+                                  &quot;GLODAPv2.2021_preprocessed_model_runA_both.csv&quot;,
+                                  sep = &quot;&quot;))</code></pre>
+<pre class="r"><code># for loop across variables
+obs_var &lt;-
+  c(
+    &quot;tco2&quot;,
+    &quot;talk&quot;,
+    &quot;oxygen&quot;,
+    &quot;aou&quot;,
+    &quot;nitrate&quot;,
+    &quot;phosphate&quot;,
+    &quot;silicate&quot;,
+    &quot;sal&quot;,
+    &quot;temp&quot;,
+    &quot;theta&quot;,
+    &quot;gamma&quot;
+  )
+
+model_var &lt;-
+  c(
+    &quot;dissic_model&quot;,
+    &quot;talk_model&quot;,
+    &quot;o2_model&quot;,
+    &quot;aou_model&quot;,
+    &quot;no3_model&quot;,
+    &quot;po4_model&quot;,
+    &quot;si_model&quot;,
+    &quot;so_model&quot;,
+    &quot;temp_model&quot;,
+    &quot;thetao_model&quot;,
+    &quot;gamma_model&quot;
+  )
+
+for (i in 1:11) {
+#  i &lt;- 1
+  
+  # select correlated observation and model variable
+  GLODAP_cmorized_var &lt;- GLODAP_cmorized %&gt;%
+    select(year,
+           month,
+           lat,
+           lon,
+           depth,
+           basin_AIP,
+           !!sym(obs_var[i]),
+           !!sym(model_var[i])) %&gt;%
+    drop_na() %&gt;%
+    mutate(
+      season = case_when(
+        month %in% c(3, 4, 5) ~ &quot;Spring&quot;,
+        month %in% c(6, 7, 8) ~ &quot;Summer&quot;,
+        month %in% c(9, 10, 11) ~ &quot;Autumn&quot;,
+        month %in% c(12, 1, 2) ~ &quot;Winter&quot;
+      )
+    )
+  
+  # calculate equal axis limits and binwidth
+  axis_lims &lt;- GLODAP_cmorized_var %&gt;%
+    summarise(max_value = max(c(max(!!sym(
+      obs_var[i]
+    )),
+    max(
+      !!sym(model_var[i])
+    ))),
+    min_value = min(c(min(!!sym(
+      obs_var[i]
+    )),
+    min(
+      !!sym(model_var[i])
+    ))))
+  
+  binwidth_value &lt;- (axis_lims$max_value - axis_lims$min_value) / 40
+  axis_lims &lt;- c(axis_lims$min_value, axis_lims$max_value)
+  
+  # obs-model plot (season)
+  print(
+    ggplot(GLODAP_cmorized_var, aes(
+      x = !!sym(obs_var[i]),
+      y = !!sym(model_var[i])
+    )) +
+      geom_bin2d(binwidth = binwidth_value) +
+      labs(title = &quot;Observation (x) vs Model (y)&quot;,
+           subtitle = &quot;Seasonal comparison&quot;) +
+      scale_fill_viridis_c(trans = &quot;log10&quot;) +
+      geom_abline(slope = 1,
+                  col = &#39;red&#39;) +
+      coord_equal(xlim = axis_lims,
+                  ylim = axis_lims) +
+      facet_wrap( ~ season)
+  )
+  
+  # obs-model plot (year)
+  print(
+    ggplot(GLODAP_cmorized_var, aes(
+      x = !!sym(obs_var[i]),
+      y = !!sym(model_var[i])
+    )) +
+      geom_bin2d(binwidth = binwidth_value) +
+      labs(title = &quot;Observation (x) vs Model (y)&quot;,
+           subtitle = &quot;All years&quot;) +
+      scale_fill_viridis_c(trans = &quot;log10&quot;) +
+      geom_abline(slope = 1, col = &#39;red&#39;) +
+      coord_equal(xlim = axis_lims,
+                  ylim = axis_lims)
+  )
+  
+  
+  # Calculate variable offset
+  GLODAP_cmorized_var &lt;- GLODAP_cmorized_var %&gt;%
+    mutate(offset = !!sym(model_var[i]) -!!sym(obs_var[i]))
+  
+  # Calculate annual mean offset
+  GLODAP_cmorized_var_year &lt;- GLODAP_cmorized_var %&gt;%
+    group_by(year) %&gt;%
+    summarise(offset = mean(offset)) %&gt;%
+    ungroup()
+  
+  # plot annual mean offset
+  print(
+    GLODAP_cmorized_var_year %&gt;%
+      ggplot(aes(year, offset)) +
+      geom_point() +
+      geom_line() +
+      labs(title = &quot;Annual mean offset&quot;,
+           subtitle = paste(sym(model_var[i]), &quot;-&quot;, sym(obs_var[i])))
+  )
+  
+  # spatial distribution of the model-observations offset for 4 depth intervals
+  intervals &lt;- c(0, 150, 500, 2000, 8000)
+  for (j in 1:4) {
+    # j &lt;- 1
+    GLODAP_cmorized_var_grid &lt;- GLODAP_cmorized_var %&gt;%
+      filter(depth &gt;= intervals[j],
+             depth &lt; intervals[j + 1]) %&gt;%
+      group_by(lat, lon) %&gt;%
+      summarise(offset = mean(offset)) %&gt;%
+      ungroup()
+    
+    # plot mean spatial distribution (model - obs)
+    limit &lt;-
+      quantile(abs(GLODAP_cmorized_var_grid$offset), 0.98) * c(-1, 1)
+    print(
+      map +
+        geom_raster(data = GLODAP_cmorized_var_grid, aes(lon, lat, fill = offset)) +
+        scale_fill_scico(
+          palette = &quot;vik&quot;,
+          name = &quot;offset&quot;,
+          limit = limit,
+          na.value = &quot;red&quot;
+        ) +
+        coord_quickmap(expand = 0) +
+        labs(
+          title = paste(model_var[i],
+                        &quot;-&quot;,
+                        obs_var[i],
+                        &quot; | mean offset per grid cell&quot;),
+          subtitle = paste(
+            &quot;Depth interval:&quot;,
+            intervals[j],
+            &quot;-&quot;,
+            intervals[j + 1],
+            &quot;m | red: outside 98th percentile&quot;
+          ),
+          x = &quot;Longitude&quot;,
+          y = &quot;Latitude&quot;
+        )
+    )
+    
+    print(
+      GLODAP_cmorized_var_grid %&gt;%
+        ggplot(aes(offset)) +
+        geom_vline(xintercept = limit) +
+        geom_histogram() +
+        labs(
+          title = paste(
+            model_var[i],
+            &quot; - &quot;,
+            obs_var[i],
+            &quot;mean offset per grid cell | histogram + abs. 98th Percentile&quot;
+          ),
+          subtitle = paste(&quot;Depth interval:&quot;,
+                           intervals[j], &quot;-&quot;, intervals[j + 1], &quot;m&quot;)
+        ) +
+        coord_cartesian(expand = FALSE)
+    )
+  }
+  
+  # zonal mean section of the model-observations offset for each basin
+  for (i_basin_AIP in unique(GLODAP_cmorized_var$basin_AIP)) {
+   # i_basin_AIP = &quot;Atlantic&quot;
+    GLODAP_cmorized_var_zonal &lt;- GLODAP_cmorized_var %&gt;%
+      filter(basin_AIP == i_basin_AIP) %&gt;%
+      group_by(lat, depth) %&gt;%
+      summarise(offset = mean(offset, na.rm=TRUE)) %&gt;%
+      ungroup()
+    
+    # plot zonal mean section (model - obs)
+    lat_max &lt;- params_global$lat_max
+    lat_min &lt;- params_global$lat_min
+    limit &lt;-
+      quantile(abs(GLODAP_cmorized_var_zonal$offset), 0.98) * c(-1, 1)
+    
+    print(
+      GLODAP_cmorized_var_zonal %&gt;%
+        ggplot(aes(lat, depth, z = offset)) +
+        stat_summary_2d(binwidth = c(1,100)) +
+        scale_fill_scico(
+          palette = &quot;vik&quot;,
+          name = &quot;offset&quot;,
+          limit = limit,
+          na.value = &quot;red&quot;
+        ) +
+        coord_cartesian(expand = 0,
+                        xlim = c(lat_min, lat_max)) +
+        scale_y_reverse() +
+        labs(
+          title = paste(model_var[i],
+                        &quot;-&quot;,
+                        obs_var[i],
+                        &quot; | zonal mean offset&quot;),
+          subtitle = paste(&quot;Basin:&quot;,
+                           i_basin_AIP),
+          x = &quot;Latitude&quot;,
+          y = &quot;Depth&quot;
+        )
+    )
+  }
+}</code></pre>
+<p><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-6.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-7.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-8.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-9.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-10.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-11.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-12.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-13.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-14.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-15.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-16.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-17.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-18.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-19.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-20.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-21.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-22.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-23.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-24.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-25.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-26.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-27.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-28.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-29.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-30.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-31.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-32.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-33.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-34.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-35.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-36.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-37.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-38.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-39.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-40.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-41.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-42.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-43.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-44.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-45.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-46.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-47.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-48.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-49.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-50.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-51.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-52.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-53.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-54.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-55.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-56.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-57.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-58.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-59.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-60.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-61.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-62.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-63.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-64.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-65.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-66.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-67.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-68.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-69.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-70.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-71.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-72.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-73.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-74.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-75.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-76.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-77.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-78.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-79.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-80.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-81.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-82.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-83.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-84.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-85.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-86.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-87.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-88.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-89.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-90.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-91.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-92.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-93.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-94.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-95.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-96.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-97.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-98.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-99.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-100.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-101.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-102.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-103.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-104.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-105.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-106.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-107.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-108.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-109.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-110.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-111.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-112.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-113.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-114.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-115.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-116.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-117.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-118.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-119.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-120.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-121.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-122.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-123.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-124.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-125.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-126.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-127.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-128.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-129.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-130.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-131.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-132.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-133.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-134.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-135.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-136.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-137.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-138.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-139.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-140.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-141.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-142.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-143.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-144.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-145.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-146.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-147.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-148.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-149.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-150.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-151.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-152.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-153.png" width="672" style="display: block; margin: auto;" /><img src="figure/GLODAP_subset_A_monthly_CESM.Rmd/GLODAP_vs_cmorized_subset_comparison-154.png" width="672" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.1.2 (2021-11-01)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: openSUSE Leap 15.3
+
+Matrix products: default
+BLAS:   /usr/local/R-4.1.2/lib64/R/lib/libRblas.so
+LAPACK: /usr/local/R-4.1.2/lib64/R/lib/libRlapack.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] reticulate_1.23   oce_1.5-0         gsw_1.0-6         rqdatatable_1.3.0
+ [5] rquery_1.4.7      wrapr_2.0.8       lubridate_1.8.0   stars_0.5-5      
+ [9] sf_1.0-5          abind_1.4-5       colorspace_2.0-2  marelac_2.1.10   
+[13] shape_1.4.6       ggforce_0.3.3     metR_0.11.0       scico_1.3.0      
+[17] patchwork_1.1.1   collapse_1.7.0    forcats_0.5.1     stringr_1.4.0    
+[21] dplyr_1.0.7       purrr_0.3.4       readr_2.1.1       tidyr_1.1.4      
+[25] tibble_3.1.6      ggplot2_3.3.5     tidyverse_1.3.1   workflowr_1.7.0  
+
+loaded via a namespace (and not attached):
+ [1] ellipsis_0.3.2     class_7.3-20       rprojroot_2.0.2    fs_1.5.2          
+ [5] rstudioapi_0.13    proxy_0.4-26       farver_2.1.0       bit64_4.0.5       
+ [9] fansi_1.0.2        xml2_1.3.3         knitr_1.37         polyclip_1.10-0   
+[13] jsonlite_1.7.3     broom_0.7.11       dbplyr_2.1.1       png_0.1-7         
+[17] compiler_4.1.2     httr_1.4.2         backports_1.4.1    assertthat_0.2.1  
+[21] Matrix_1.4-0       fastmap_1.1.0      cli_3.1.1          later_1.3.0       
+[25] tweenr_1.0.2       htmltools_0.5.2    tools_4.1.2        gtable_0.3.0      
+[29] glue_1.6.0         rappdirs_0.3.3     Rcpp_1.0.8         cellranger_1.1.0  
+[33] jquerylib_0.1.4    RNetCDF_2.5-2      vctrs_0.3.8        lwgeom_0.2-8      
+[37] xfun_0.29          ps_1.6.0           rvest_1.0.2        lifecycle_1.0.1   
+[41] ncmeta_0.3.0       getPass_0.2-2      MASS_7.3-55        scales_1.1.1      
+[45] vroom_1.5.7        hms_1.1.1          promises_1.2.0.1   parallel_4.1.2    
+[49] RColorBrewer_1.1-2 yaml_2.2.1         sass_0.4.0         stringi_1.7.6     
+[53] highr_0.9          e1071_1.7-9        checkmate_2.0.0    rlang_1.0.2       
+[57] pkgconfig_2.0.3    evaluate_0.14      lattice_0.20-45    SolveSAPHE_2.1.0  
+[61] labeling_0.4.2     bit_4.0.4          processx_3.5.2     tidyselect_1.1.1  
+[65] here_1.0.1         seacarb_3.3.0      magrittr_2.0.1     R6_2.5.1          
+[69] generics_0.1.1     DBI_1.1.2          pillar_1.6.4       haven_2.4.3       
+[73] whisker_0.4        withr_2.4.3        units_0.7-2        modelr_0.1.8      
+[77] crayon_1.4.2       KernSmooth_2.23-20 utf8_1.2.2         tzdb_0.2.0        
+[81] rmarkdown_2.11     grid_4.1.2         readxl_1.3.1       data.table_1.14.2 
+[85] callr_3.7.0        git2r_0.29.0       reprex_2.0.1       digest_0.6.29     
+[89] classInt_0.4-3     httpuv_1.6.5       munsell_0.5.0      viridisLite_0.4.0 
+[93] bslib_0.3.1       </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
