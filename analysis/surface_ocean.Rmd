@@ -21,10 +21,13 @@ editor_options:
 ```{r define_paths}
 
 path_cmorized <-
-  "/nfs/kryo/work/loher/CESM_output/RECCAP2/submit_Nov2021/"
+  "/nfs/kryo/work/updata/reccap2/Models/2D_CO2/CESM-ETHZ_2D_CO2_v20211122/"
+
+path_cmorized_ancillary <-
+  "/nfs/kryo/work/updata/reccap2/Models/Ancillary_data/CESM-ETHZ_Ancillary_data_v20211122/"
 
 path_preprocessing <-
-  paste(path_root, "/model/preprocessing/", sep = "")
+  paste(path_root, "/model/preprocessing/surface_ocean/", sep = "")
 ```
 
 ```{r load_libraries_specific, include=FALSE}
@@ -49,24 +52,9 @@ basinmask <- basinmask %>%
 
 ```
 
+# Extract surface data
 
-# Subset cmorized data according to GLODAP observation
-
-Here we subset cmorized (1x1) surface ocean data from the model with variable forcing.
-
-Besides, Model results are given in [mol m^-3^], whereas GLODAP data are in [µmol kg^-1^]. This refers to the variables:
-
-- DIC  
-- ALK  
-- O2  
-- NO3  
-- PO4  
-- SiO3
-- AOU (calculated)
-
-For comparison, model results were converted from [mol m^-3^] to [µmol kg^-1^]
-
-```{r subset_cmorized_variable_forcing_data, eval=FALSE}
+```{r subset_cmorized_variable_forcing_data}
 # set name of model to be subsetted
 model_IDs <- c("A", "D")
 
@@ -99,9 +87,8 @@ for (i_model_ID in model_IDs) {
     
     # read in data
     variable_data <-
-      read_ncdf(paste(path_cmorized,
-                      file,
-                      sep = ""),
+      read_ncdf(paste0(path_cmorized,
+                      file),
                 make_units = FALSE)
     
     # convert to tibble
@@ -177,19 +164,19 @@ for (i_model_ID in model_IDs) {
 
 # Air-sea disequilibrium
 
-```{r air_sea_disequilibria, eval=FALSE}
+```{r air_sea_disequilibria}
 
 # set name of model to be subsetted
 model_IDs <- c("A", "B", "C", "D")
 
 file <- paste("area",
               "_CESM-ETHZ_",
-              "1_gr_v20210607.nc",
+              "1_gr_v20211122.nc",
               sep = "")
 
 area_grid <-
   variable_data <-
-  read_ncdf(paste(path_cmorized,
+  read_ncdf(paste(path_cmorized_ancillary,
                   file,
                   sep = ""),
             make_units = FALSE) %>% 
@@ -216,7 +203,7 @@ for (i_model_ID in model_IDs) {
     file <- paste(i_variable,
                   "_CESM-ETHZ_",
                   i_model_ID,
-                  "_1_gr_1980-2018_v20210607.nc",
+                  "_1_gr_1980-2018_v20211122.nc",
                   sep = "")
     print(file)
 

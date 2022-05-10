@@ -1,0 +1,442 @@
+---
+title: "Climatology variable A"
+author: "Jens Daniel Müller"
+date:  "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  workflowr::wflow_html:
+    number_sections: true
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+editor_options:
+  chunk_output_type: console
+---
+
+```{r parent, child = "/nfs/kryo/work/jenmueller/emlr_cant/utilities/setup.Rmd"}
+# this chunk runs the code stored in setup.Rmd
+# if required, please refer to instructions given here:
+# https://jdblischak.github.io/workflowr/articles/wflow-07-common-code.html
+```
+
+```{r define_paths, include=FALSE}
+path_cmorized <-
+  "/nfs/kryo/work/updata/reccap2/Models/3D_ALL/"
+
+path_preprocessing <-
+  paste0(path_root, "/model/preprocessing/Climatology_A_2007_all_models/")
+
+```
+
+```{r library, include=FALSE}
+library(stars)
+library(lubridate)
+library(reticulate)
+library(oce)
+library(gsw)
+library(geosphere)
+library(marelac)
+```
+
+# Select basin mask
+
+```{r select_basin_mask}
+
+# use only three basin to assign general basin mask
+# ie this is not specific to the MLR fitting
+basinmask <- basinmask %>%
+  filter(MLR_basins == "2") %>%
+  select(lat, lon, basin_AIP)
+
+```
+
+
+# Read nc file
+
+Here we used annual output of cmorized (1x1) model with variable forcing (RECCAP2 RunA) in year 2007 as the predictor climatology. Predictors include:
+
+- Salinity (sal)
+- Potential temperature (theta, not predictor, used for temperature calculation)
+- In-situ temperature (temp, calculated)
+- DIC (tco2)
+- ALK (talk)
+- oxygen
+- AOU (calculated)
+- nitrate
+- phosphate
+- silicate
+
+
+```{r create_list_of_models}
+
+# set name of model to be subsetted
+model_ID <- "A"
+
+# for loop across variables
+variables <-
+  c("so", "thetao", "dissic", "talk", "o2", "no3", "po4", "si")
+
+
+models <- list.files(path_cmorized)
+
+models <-
+  models[!str_detect(models, pattern = "\\.")]
+
+models <-
+  models[str_detect(
+    models,
+    pattern = c(
+      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|ORCA025-GEOMAR|ORCA1-LIM3-PISCES"
+    )
+  )]
+
+# depth named lev, contains only depth levels not actual depth in m
+# time ranges from 0-1154 (i.e only years 1980-83), yet length is 39
+models <-
+  models[!str_detect(models, pattern = "CNRM")]
+
+# time with offset 2110-01-01, yet length is 39
+models <-
+  models[!str_detect(models, pattern = "EC-Earth3")]
+
+# files chunked into decades
+models <-
+  models[!str_detect(models, pattern = "ORCA025-GEOMAR")]
+
+# "so" variable only NA's
+models <-
+  models[!str_detect(models, pattern = "MOM6-Princeton")]
+
+```
+
+```{r load_gamma_calculation_scripts}
+
+# load python scripts
+source_python(paste0(
+  path_functions,
+  "python_scripts/Gamma_GLODAP_python.py"
+))
+
+```
+
+
+
+```{r read_climatology_fields_2007}
+
+# models <- models[2:5]
+
+for (i_model in models) {
+  # i_model <- models[3]
+  print(i_model)
+  
+  variables_available <-
+    list.files(path = paste0(path_cmorized, i_model),
+               pattern = paste0("_", model_ID, "_"))
+  
+  variables_available <-
+    str_split(variables_available,
+              pattern = "_",
+              simplify = TRUE)[, 1]
+  variables_available <-
+    variables_available[variables_available %in% variables]
+  variables_available <- unique(variables_available)
+  
+  for (i_variable in variables_available) {
+    # i_variable <- variables_available[1]
+    
+    # read list of all files
+    file <-
+      list.files(path = paste0(path_cmorized, i_model),
+                 pattern = paste0(i_variable, "_"))
+    
+    file <-
+      file[str_detect(file, pattern = paste0("_", model_ID, "_"))]
+    
+    print(file)
+    
+    # read in data
+    variable_data <-
+      read_ncdf(
+        paste(paste0(path_cmorized, i_model),
+              file,
+              sep = "/"),
+        make_units = FALSE
+        # make_time = FALSE,
+        # ncsub = cbind(
+        #   start = c(1, 1, 1, 28),
+        #   count = c(NA, NA, NA, NA))
+      )
+    
+    if (i_model == "CESM-ETHZ_3D_ALL_v20211122") {
+      variable_data <-
+        variable_data %>% slice(index = 28, along = "time_ann")
+    } else if (i_model == "FESOM_REcoM_LR_3D_all_v20211119") {
+      variable_data <-
+        variable_data %>% slice(index = 28, along = "Time")
+    } else if (i_model == "MRI-ESM2-0_3D_ALL_v20210830" &
+               i_variable == "si") {
+      variable_data <-
+        variable_data %>% slice(index = 1, along = "time")
+    } else {
+      variable_data <- variable_data %>% slice(index = 28, along = "time")
+    }
+    
+    print(variable_data)
+    
+    # convert to tibble
+    variable_data_tibble <- variable_data %>%
+      as_tibble()
+    
+    # remove open link to nc file
+    rm(variable_data)
+    
+    # remove na values
+    variable_data_tibble <-
+      variable_data_tibble %>%
+      filter(!is.na(!!sym(i_variable)))
+    
+    # if (i_model == "CESM-ETHZ_3D_ALL_v20211122") {
+    #   variable_data_tibble <- variable_data_tibble %>%
+    #     rename(time = time_ann)
+    # }
+    
+    if (i_model == "CNRM-ESM2-1_3D_ALL_v20211208") {
+      variable_data_tibble <- variable_data_tibble %>%
+        rename(depth = lev)
+    }
+    
+    if (i_model == "FESOM_REcoM_LR_3D_all_v20211119") {
+      variable_data_tibble <- variable_data_tibble %>%
+        rename(
+          lat = Lat,
+          lon = Lon,
+          depth = Depth
+          # time = Time
+        )
+        # mutate(time = as.Date(time, origin = '1980-01-01'))
+    }
+    
+    if (i_model == "MOM6-Princeton_3D_ALL_v20220125") {
+      variable_data_tibble <- variable_data_tibble %>%
+        rename(depth = z_l)
+    }
+    
+    if (i_model == "MRI-ESM2-0_3D_ALL_v20210830") {
+      variable_data_tibble <- variable_data_tibble %>%
+        rename(depth = lev)
+    }
+    
+    
+    # harmonize longitudes
+    variable_data_tibble <- variable_data_tibble %>%
+      mutate(lon = if_else(lon < 20, lon + 360, lon))
+    
+    # only consider model grids within basinmask
+    variable_data_tibble <-
+      inner_join(variable_data_tibble, basinmask) %>%
+      select(-basin_AIP)
+    
+    # mutate variables
+    # variable_data_tibble <- variable_data_tibble %>%
+    #   mutate(year = year(time)) %>%
+    #   select(-time)
+    
+    # print(unique(variable_data_tibble$year))
+    
+    
+    if (exists("climatology")) {
+      climatology <- full_join(climatology, variable_data_tibble)
+    }
+    
+    if (!exists("climatology")) {
+      climatology <- variable_data_tibble
+    }
+    
+    
+  }
+  
+  if (i_model == "FESOM_REcoM_LR_3D_all_v20211119") {
+    climatology <- climatology %>%
+      mutate(po4 = NA)
+  }
+  
+  climatology <- climatology %>%
+    rename(
+      sal = so,
+      THETA = thetao,
+      tco2 = dissic,
+      talk = talk,
+      oxygen = o2,
+      nitrate = no3,
+      phosphate = po4,
+      silicate = si
+    )
+  
+  climatology <- climatology %>%
+    mutate(depth = round(depth))
+  
+  
+  
+  # In-situ temperature
+  climatology <- climatology %>%
+    mutate(temp = gsw_pt_from_t(
+      SA = sal,
+      t = THETA,
+      p = 10.1325,
+      p_ref = depth
+    ))
+  
+  # Example profile from North Atlantic Ocean
+  print(
+  climatology %>%
+    filter(lat == params_global$lat_Atl_profile,
+           lon == params_global$lon_Atl_section) %>%
+    ggplot() +
+    geom_line(aes(temp, depth, col = "insitu")) +
+    geom_point(aes(temp, depth, col = "insitu")) +
+    geom_line(aes(THETA, depth, col = "theta")) +
+    geom_point(aes(THETA, depth, col = "theta")) +
+    scale_y_reverse() +
+    labs(title = i_model) *
+    scale_color_brewer(palette = "Dark2", name = "Scale"))
+  
+  # Unit conversion
+  # Model results are given in [mol m^-3^], whereas GLODAP data are in [µmol kg^-1^].
+  # For comparison, model results were converted from [mol m^-3^] to [µmol kg^-1^]
+  climatology <- climatology %>%
+    mutate(
+      rho = gsw_pot_rho_t_exact(
+        SA = sal,
+        t = temp,
+        p = depth,
+        p_ref = 10.1325
+      ),
+      tco2 = tco2 * (1e+06 / rho),
+      talk = talk * (1e+06 / rho),
+      oxygen = oxygen * (1e+06 / rho),
+      nitrate = nitrate * (1e+06 / rho),
+      phosphate = phosphate * (1e+06 / rho),
+      silicate = silicate * (1e+06 / rho)
+    )
+  
+  
+  
+  # AOU calculation
+  climatology <- climatology %>%
+    mutate(
+      oxygen_sat_m3 = gas_satconc(
+        S = sal,
+        t = temp,
+        P = 1.013253,
+        species = "O2"
+      ),
+      oxygen_sat_kg = oxygen_sat_m3 * (1e+3 / rho),
+      AOU = oxygen_sat_kg - oxygen
+    ) %>%
+    select(-oxygen_sat_kg, -oxygen_sat_m3)
+  
+  
+  
+  # Neutral density calculation
+  # Neutral density gamma was calculated with a Python script provided by Serazin et al (2011)
+  # which performs a polynomial approximation of the original gamma calculation.
+  
+  #calculate pressure from depth
+  climatology <- climatology %>%
+    mutate(CTDPRS = gsw_p_from_z(-depth,
+                                 lat))
+  
+  # rename variables according to python script
+  climatology_gamma_prep <- climatology %>%
+    rename(LATITUDE = lat,
+           LONGITUDE = lon,
+           SALNTY = sal)
+  
+  # calculate gamma
+  climatology_gamma_calc <-
+    calculate_gamma(climatology_gamma_prep)
+  
+  # reverse variable naming
+  climatology <- climatology_gamma_calc %>%
+    select(-c(CTDPRS, THETA)) %>%
+    rename(
+      lat = LATITUDE,
+      lon = LONGITUDE,
+      sal = SALNTY,
+      gamma  = GAMMA
+    )
+  
+  climatology <- as_tibble(climatology)
+  
+  rm(climatology_gamma_calc, climatology_gamma_prep)
+  
+  # write_climatology_predictor_file
+  # select relevant columns
+  climatology <- climatology %>%
+    select(-c(rho))
+  
+  # write csv file
+  climatology %>%
+    write_csv(paste0(path_preprocessing,
+                     i_model,
+                     "_climatology_runA_2007.csv"))
+  
+  rm(climatology)
+  
+}
+
+```
+
+# Plots
+
+Below, following subsets of the climatology are plotted for all relevant predictors:  
+
+- Horizontal planes at 4 depth levels
+- Global section along track indicated by white lines in maps.
+
+```{r read_climatologies}
+
+
+climatology_files <- fs::dir_ls(path_preprocessing)
+
+climatology <- climatology_files %>% 
+  map_dfr(read_csv, .id = "model")
+
+climatology <- climatology %>% 
+  mutate(model = str_remove(model, path_preprocessing),
+         model = str_remove(model, "_climatology_runA_2007.csv"))
+
+
+```
+
+
+
+```{r climatology_maps_and_sections, eval=FALSE}
+
+# define plotting variables
+vars <- c(
+  "tco2",
+  "talk",
+  "sal",
+  "nitrate",
+  "phosphate",
+  "silicate",
+  "oxygen",
+  "temp",
+  "AOU",
+  "gamma"
+)
+
+# i_var <- vars[1]
+
+for (i_var in vars) {
+  # i_var <- vars[1]
+  
+  
+  # plot sections
+  print(p_section_global(df = climatology %>%
+                     filter(model == models[1]),
+                   var = i_var))
+  
+}
+
+```
