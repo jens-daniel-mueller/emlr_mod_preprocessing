@@ -4,67 +4,21 @@ navbar:
   title: eMLR mod preprocessing
   left:
   - text: Climatology
-    menu:
-    - text: Variable climatology
-      href: Climatology_A.html
-    - text: NorESM-based Variable climatology
-      href: NorESM_Climatology_A.html
-    - text: FESOM_REcoM_LR-based Variable climatology
-      href: FESOM_REcoM_LR_Climatology_A.html
-    - text: ORCA025-based Variable climatology
-      href: ORCA025_Climatology_A.html
-    - text: Constant climatology
-      href: Climatology_C.html
+    href: Climatology_A_2007_all_models.html
   - text: Synthetic data
     menu:
-    - text: GLODAP subset variable climate
-      href: GLODAP_subset_A.html
-    - text: GLODAP beta_2021 subset variable climate
-      href: GLODAP_subset_A_2021.html
-    - text: GLODAP beta_2021 subset variable climate annual
-      href: GLODAP_subset_A_2021_annual.html
-    - text: NorESM-based GLODAP beta_2021 subset variable climate annual
-      href: NorESM_GLODAP_subset_A_2021_annual.html
-    - text: FESOM_REcoM_LR-based GLODAP beta_2021 subset variable climate annual
-      href: FESOM_REcoM_LR_GLODAP_subset_A_2021_annual.html
-    - text: ORCA025-based GLODAP beta_2021 subset variable climate annual
-      href: ORCA025_GLODAP_subset_A_2021_annual.html
-    - text: GLODAP subset constant climate
-      href: GLODAP_subset_C.html
-    - text: GLODAP beta_2021 subset constant climate
-      href: GLODAP_subset_C_2021.html
-    - text: Random subset variable climate
-      href: Random_subset_A.html
-    - text: Random beta_2021 subset variable climate annual
-      href: Random_subset_A_2021_annual.html
-    - text: NorESM-based Random beta_2021 subset variable climate annual
-      href: NorESM_Random_subset_A_2021_annual.html
-    - text: FESOM_REcoM_LR-based Random beta_2021 subset variable climate annual
-      href: FESOM_REcoM_LR_Random_subset_A_2021_annual.html
-    - text: ORCA025-based Random beta_2021 subset variable climate annual
-      href: ORCA025_Random_subset_A_2021_annual.html
-    - text: Random subset constant climate
-      href: Random_subset_C.html
-    - text: Random beta_2021 subset constant climate
-      href: Random_subset_C_2021.html
-  - text: Cant
-    menu:
-    - text: Cant variable climate
-      href: Cant_AD.html
-    - text: NorESM-based Cant variable climate
-      href: NorESM_Cant_AD.html
-    - text: FESOM_REcoM_LR-based Cant variable climate
-      href: FESOM_REcoM_LR_Cant_AD.html
-    - text: ORCA025-based Cant variable climate
-      href: ORCA025_Cant_AD.html
-    - text: Cant constant climate
-      href: Cant_CB.html
+    - text: GLODAP A monthly CESM
+      href: GLODAP_subset_A_monthly_CESM.html
+    - text: GLODAP A annual
+      href: GLODAP_subset_A_annual_all_models.html
+  - text: Cant AD
+    href: Cant_AD_annual_all_models.html
   - text: Surface data
     menu:
     - text: Surface Ocean
       href: surface_ocean.html
     - text: Atmospheric CO2
-      href: read_CO2_atm.html
+      href: co2_atm.html
   right:
   - icon: fa-github
     text: Source code
