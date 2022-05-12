@@ -63,7 +63,7 @@ models <-
 
 
 for (i_model in models) {
-  # i_model <- models[8]
+  # i_model <- models[6]
   print(i_model)
   
   # read list of all files

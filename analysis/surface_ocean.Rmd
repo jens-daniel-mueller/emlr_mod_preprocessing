@@ -21,10 +21,10 @@ editor_options:
 ```{r define_paths}
 
 path_cmorized <-
-  "/nfs/kryo/work/updata/reccap2/Models/2D_CO2/CESM-ETHZ_2D_CO2_v20211122/"
+  "/nfs/kryo/work/updata/reccap2/Models/2D_CO2/"
 
 path_cmorized_ancillary <-
-  "/nfs/kryo/work/updata/reccap2/Models/Ancillary_data/CESM-ETHZ_Ancillary_data_v20211122/"
+  "/nfs/kryo/work/updata/reccap2/Models/Ancillary_data/"
 
 path_preprocessing <-
   paste(path_root, "/model/preprocessing/surface_ocean/", sep = "")
@@ -52,9 +52,37 @@ basinmask <- basinmask %>%
 
 ```
 
+```{r list_models}
+
+
+models <- list.files(path_cmorized)
+
+models <-
+  models[!str_detect(models, pattern = "\\.")]
+
+models <-
+  models[str_detect(
+    models,
+    pattern = c(
+      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|ORCA025-GEOMAR|ORCA1-LIM3-PISCES"
+    )
+  )]
+
+# depth named lev, contains only depth levels not actual depth in m
+# time not in days since 1980
+models <-
+  models[!str_detect(models, pattern = "EC-Earth3")]
+
+models <- models[1]
+
+```
+
+
 # Extract surface data
 
 ```{r subset_cmorized_variable_forcing_data}
+
+
 # set name of model to be subsetted
 model_IDs <- c("A", "D")
 
@@ -69,93 +97,172 @@ variables <-
     "sos",
     "tos")
 
-
-for (i_model_ID in model_IDs) {
-  # i_model_ID <- model_IDs[1]
+for (i_model in models) {
+  # i_model <- models[1]
+  print(i_model)
   
-  for (i_variable in variables) {
-    # i_variable <- variables[2]
+  for (i_model_ID in model_IDs) {
+    # i_model_ID <- model_IDs[1]
     
-    # read list of all files
-    file <- paste(i_variable,
-                  "_CESM-ETHZ_",
-                  i_model_ID,
-                  "_1_gr_1980-2018_v20211122.nc",
-                  sep = "")
-    print(file)
+    variables_available <-
+      list.files(
+        path = paste0(path_cmorized, i_model),
+        pattern = paste0("_", i_model_ID, "_")
+      )
     
+    variables_available <-
+      str_split(variables_available,
+                pattern = "_",
+                simplify = TRUE)[, 1]
+    variables_available <-
+      variables_available[variables_available %in% variables]
+    variables_available <- unique(variables_available)
     
-    # read in data
-    variable_data <-
-      read_ncdf(paste0(path_cmorized,
-                      file),
-                make_units = FALSE)
-    
-    # convert to tibble
-    variable_data_tibble <- variable_data %>%
-      as_tibble()
-    
-    # remove open link to nc file
-    rm(variable_data)
-    
-    # remove na values
-    variable_data_tibble <-
-      variable_data_tibble %>%
-      drop_na()
-    
-    # harmonize longitudes
-    variable_data_tibble <- variable_data_tibble %>%
-      mutate(lon = if_else(lon < 20, lon + 360, lon))
-    
-    # only consider model grids within basinmask
-    variable_data_tibble <-
-      inner_join(variable_data_tibble, basinmask) %>%
-      select(-basin_AIP)
-    
-    # mutate variables
-    variable_data_tibble <- variable_data_tibble %>%
-      mutate(year = year(time_mon)) %>%
-      select(-time_mon)
-    
-    
-    # calculate annual average variable
-    variable_data_tibble_annual_average <- variable_data_tibble %>%
-      fgroup_by(lat, lon, year) %>% {
-        add_vars(fgroup_vars(., "unique"),
-                 fmean(., keep.group_vars = FALSE))
+    for (i_variable in variables_available) {
+      # i_variable <- variables_available[1]
+      
+      # read list of all files
+      file <-
+        list.files(
+          path = paste0(path_cmorized, i_model),
+          pattern = paste0(i_variable, "_")
+        )
+      
+      file <-
+        file[str_detect(file, pattern = paste0("_", i_model_ID, "_"))]
+      file <- file[!str_detect(file, pattern = "_reg")]
+      file <- file[!str_detect(file, pattern = "_glob")]
+      
+      print(file)
+      
+      # read in data
+      if (i_model %in% c("EC-Earth3_2D_CO2_v20220323")) {
+        variable_data <-
+          read_ncdf(paste(paste0(path_cmorized, i_model),
+                          file,
+                          sep = "/"),
+                    make_units = FALSE,
+                    make_time = FALSE) %>% 
+          as_tibble()
+        
+        variable_data <- variable_data %>% 
+          mutate(time = as.Date(time, origin = "1980-01-01"))
+          
+      } else {
+        variable_data <-
+          read_ncdf(paste(paste0(path_cmorized, i_model),
+                          file,
+                          sep = "/"),
+                    make_units = FALSE)
+        
       }
-    
-    # calculate climatology
-    variable_data_tibble_climatology <-
+      
+      
+      # convert to tibble
+      variable_data_tibble <- variable_data %>%
+        as_tibble()
+      
+      # remove open link to nc file
+      rm(variable_data)
+      
+      
+      if (i_model == "CESM-ETHZ_2D_CO2_v20211122") {
+        variable_data_tibble <- variable_data_tibble %>%
+          rename(time = time_mon)
+      }
+      
+      # if (i_model == "CNRM-ESM2-1_3D_ALL_v20211208") {
+      #   variable_data_tibble <- variable_data_tibble %>%
+      #     rename(depth = lev)
+      # }
+      #
+      # if (i_model == "FESOM_REcoM_LR_3D_all_v20211119") {
+      #   variable_data_tibble <- variable_data_tibble %>%
+      #     rename(lat = Lat,
+      #            lon = Lon,
+      #            depth = Depth,
+      #            time = Time) %>%
+      #     mutate(time = as.Date(time, origin = '1980-01-01'))
+      # }
+      #
+      # if (i_model == "MOM6-Princeton_3D_ALL_v20220125") {
+      #   variable_data_tibble <- variable_data_tibble %>%
+      #     rename(depth = z_l)
+      # }
+      #
+      # if (i_model == "MRI-ESM2-0_3D_ALL_v20210830") {
+      #   variable_data_tibble <- variable_data_tibble %>%
+      #     rename(depth = lev)
+      # }
+      
+      # remove na values
+      variable_data_tibble <-
+        variable_data_tibble %>%
+        drop_na()
+      
+      # harmonize longitudes
+      variable_data_tibble <- variable_data_tibble %>%
+        mutate(lon = if_else(lon < 20, lon + 360, lon))
+      
+      # only consider model grids within basinmask
+      variable_data_tibble <-
+        inner_join(variable_data_tibble, basinmask) %>%
+        select(-basin_AIP)
+      
+      # mutate variables
+      variable_data_tibble <- variable_data_tibble %>%
+        mutate(year = year(time)) %>%
+        select(-time)
+      
+      
+      # calculate annual average variable
+      variable_data_tibble_annual_average <-
+        variable_data_tibble %>%
+        fgroup_by(lat, lon, year) %>% {
+          add_vars(fgroup_vars(., "unique"),
+                   fmean(., keep.group_vars = FALSE))
+        }
+      
+      # calculate climatology
+      variable_data_tibble_climatology <-
+        variable_data_tibble_annual_average %>%
+        fselect(-year) %>%
+        fgroup_by(lat, lon) %>% {
+          add_vars(fgroup_vars(., "unique"),
+                   fmean(., keep.group_vars = FALSE))
+        }
+
+      
+      # surface map of variable
+      print(
+        map +
+          geom_raster(data = variable_data_tibble_climatology,
+                      aes(lon, lat, fill = !!sym(i_variable))) +
+          scale_fill_viridis_c(name = i_variable) +
+          labs(title = str_remove(i_model, "2D_CO2_"))
+      )
+      
+      
+      # write raw data file for GLODAP-based subsetting model variables
       variable_data_tibble_annual_average %>%
-      fselect(-year) %>%
-      fgroup_by(lat, lon) %>% {
-        add_vars(fgroup_vars(., "unique"),
-                 fmean(., keep.group_vars = FALSE))
-      }
-    
-    # surface map of variable
-    print(
-    map +
-      geom_raster(data = variable_data_tibble_climatology,
-                  aes(lon, lat, fill = !!sym(i_variable))) +
-      scale_fill_viridis_c(name = i_variable)
-    )
-    
-    
-    # write raw data file for GLODAP-based subsetting model variables
-    variable_data_tibble_annual_average %>%
-      write_csv(file = paste(path_preprocessing,
-                             "surface_ocean_",
-                             i_model_ID,
-                             "/",
-                             i_variable,
-                             ".csv",
-                             sep = ""))
-    
+        write_csv(
+          file = paste(
+            path_preprocessing,
+            "surface_ocean_",
+            i_model_ID,
+            "/",
+            str_remove(i_model, "2D_CO2_"),
+            "_",
+            i_variable,
+            ".csv",
+            sep = ""
+          )
+        )
+      
+      
+    }
     
   }
-  
 }
 
 
@@ -164,7 +271,7 @@ for (i_model_ID in model_IDs) {
 
 # Air-sea disequilibrium
 
-```{r air_sea_disequilibria}
+```{r air_sea_disequilibria, eval=FALSE}
 
 # set name of model to be subsetted
 model_IDs <- c("A", "B", "C", "D")

@@ -89,8 +89,6 @@ For comparison, model results were converted from [mol m^-3^] to [µmol kg^-1^]
 
 ```{r create_list_of_models}
 
-
-
 # set name of model to be subsetted
 model_ID <- "A"
 
@@ -132,29 +130,35 @@ models <-
 
 ```{r subset_cmorized_variable_forcing_data}
 
+
 for (i_model in models) {
-  # i_model <- models[4]
+  # i_model <- models[1]
   print(i_model)
   
   variables_available <-
     list.files(path = paste0(path_cmorized, i_model),
                pattern = paste0("_", model_ID, "_"))
   
-  variables_available <- str_split(variables_available, pattern = "_", simplify = TRUE)[,1]
-  variables_available <- variables_available[variables_available %in% variables]
+  variables_available <-
+    str_split(variables_available,
+              pattern = "_",
+              simplify = TRUE)[, 1]
+  variables_available <-
+    variables_available[variables_available %in% variables]
   variables_available <- unique(variables_available)
   
   GLODAP_joined <- GLODAP
   
   for (i_variable in variables_available) {
-    # i_variable <- variables_available[1]
+    # i_variable <- variables_available[2]
     
     # read list of all files
     file <-
       list.files(path = paste0(path_cmorized, i_model),
                  pattern = paste0(i_variable, "_"))
     
-    file <- file[str_detect(file, pattern = paste0("_", model_ID, "_"))]
+    file <-
+      file[str_detect(file, pattern = paste0("_", model_ID, "_"))]
     
     print(file)
     
@@ -164,7 +168,7 @@ for (i_model in models) {
                       file,
                       sep = "/"),
                 make_units = FALSE)
-
+    
     # convert to tibble
     variable_data_tibble <- variable_data %>%
       as_tibble()
@@ -186,26 +190,28 @@ for (i_model in models) {
       variable_data_tibble <- variable_data_tibble %>%
         rename(depth = lev)
     }
-
+    
     if (i_model == "FESOM_REcoM_LR_3D_all_v20211119") {
       variable_data_tibble <- variable_data_tibble %>%
-        rename(lat = Lat,
-               lon = Lon,
-               depth = Depth,
-               time = Time) %>% 
+        rename(
+          lat = Lat,
+          lon = Lon,
+          depth = Depth,
+          time = Time
+        ) %>%
         mutate(time = as.Date(time, origin = '1980-01-01'))
     }
-
+    
     if (i_model == "MOM6-Princeton_3D_ALL_v20220125") {
       variable_data_tibble <- variable_data_tibble %>%
         rename(depth = z_l)
     }
-
+    
     if (i_model == "MRI-ESM2-0_3D_ALL_v20210830") {
       variable_data_tibble <- variable_data_tibble %>%
         rename(depth = lev)
     }
-
+    
     
     # harmonize longitudes
     variable_data_tibble <- variable_data_tibble %>%
@@ -294,7 +300,8 @@ for (i_model in models) {
         ungroup()
       
       # join interpolated and set model values
-      model_obs_interpo <- full_join(model_obs_interpo, model_obs_set)
+      model_obs_interpo <-
+        full_join(model_obs_interpo, model_obs_set)
       rm(model_obs_set)
       
       # subsetted interpolated values at observation depth
@@ -352,7 +359,8 @@ for (i_model in models) {
         paste(
           path_preprocessing,
           "regular_subset_distribution_runA_2021_ann/",
-          i_model,
+          str_remove(i_model, "3D_ALL_|3D_all_"),
+          "_",
           i_variable,
           "_",
           i_year,
@@ -365,6 +373,9 @@ for (i_model in models) {
     }
     
   }
+  
+  # Remove 3D_all from model name
+  i_model <- str_remove(i_model, "3D_ALL_|3D_all_")
   
   # write raw data file for GLODAP-based subsetting model variables
   GLODAP_joined %>%
@@ -405,6 +416,9 @@ rm(GLODAP, GLODAP_joined)
 for (i_model in models) {
   # i_model <- models[1]
   
+  # Remove 3D_all from model name
+  i_model <- str_remove(i_model, "3D_ALL_")
+  i_model <- str_remove(i_model, "3D_all_")
   
   # read file for GLODAP-based subsetting model variables
   GLODAP_single <-
@@ -430,7 +444,7 @@ for (i_model in models) {
     )
   
   GLODAP_single <- GLODAP_single %>% 
-    mutate(model = str_replace(i_model, "_3D_ALL_|_3D_all_", "|"))
+    mutate(model = i_model)
   
   if (exists("GLODAP")) {
     GLODAP <- bind_rows(GLODAP, GLODAP_single)
@@ -561,22 +575,28 @@ GLODAP$aou_model <-
 
 # write file for GLODAP observations + subsetted model variables
 GLODAP %>%
-  write_csv(
+  group_by(model) %>%
+  group_walk(~ write_csv(
+    .x,
     paste(
       path_preprocessing,
-      "all_models_GLODAPv2.2021_preprocessed_model_runA_both_ann.csv",
+      .y$model,
+      "_GLODAPv2.2021_preprocessed_model_runA_both_ann.csv",
       sep = ""
     )
-  )
+  ))
 
 GLODAP_NA_filled %>%
-  write_csv(
+  group_by(model) %>%
+  group_walk(~ write_csv(
+    .x,
     paste(
       path_preprocessing,
-      "all_models_GLODAPv2.2021_preprocessed_model_runA_both_NA_filled_ann.csv",
+      .y$model,
+      "_GLODAPv2.2021_preprocessed_model_runA_both_NA_filled_ann.csv",
       sep = ""
     )
-  )
+  ))
 
 # remove GLODAP observations and rename model subset
 GLODAP <- GLODAP %>%
@@ -643,17 +663,31 @@ GLODAP_NA_filled <- GLODAP_NA_filled %>%
 
 # write final file for GLODAP-based subsetting model variables
 GLODAP %>%
-  select(-row_number) %>% 
-  write_csv(paste(path_preprocessing,
-                  "all_models_GLODAPv2.2021_preprocessed_model_runA_final_ann.csv",
-                  sep = ""))
+  select(-row_number) %>%
+  group_by(model) %>%
+  group_walk( ~ write_csv(
+    .x,
+    paste(
+      path_preprocessing,
+      .y$model,
+      "_GLODAPv2.2021_preprocessed_model_runA_final_ann.csv",
+      sep = ""
+    )
+  ))
 
 GLODAP_NA_filled %>%
-  select(-row_number) %>% 
-  write_csv(paste(path_preprocessing,
-                  "all_models_GLODAPv2.2021_preprocessed_model_runA_final_NA_filled_ann.csv",
-                  sep = ""))
-
+  select(-row_number) %>%
+  group_by(model) %>%
+  group_walk(~ write_csv(
+    .x,
+    paste(
+      path_preprocessing,
+      .y$model,
+      "_GLODAPv2.2021_preprocessed_model_runA_final_NA_filled_ann.csv",
+      sep = ""
+    )
+  ))
+  
 ```
 
 
@@ -790,15 +824,19 @@ map +
 
 # GLODAP observations vs cmorized subset comparison
 
-```{r read_GLODAP_with_cmorized_subset_file}
+```{r read_GLODAP_with_cmorized_subset_file, eval=FALSE}
 
-GLODAP_cmorized <- read_csv(paste(path_preprocessing,
-                                  "all_models_GLODAPv2.2021_preprocessed_model_runA_both_ann.csv",
-                                  sep = ""))
+GLODAP_cmorized <- read_csv(
+  paste(
+    path_preprocessing,
+    "all_models_GLODAPv2.2021_preprocessed_model_runA_both_ann.csv",
+    sep = ""
+  )
+)
 
 ```
 
-```{r calc_revelle_factors}
+```{r calc_revelle_factors, eval=FALSE}
 
 
 GLODAP_cmorized_beta <- GLODAP_cmorized %>% 
@@ -842,7 +880,7 @@ GLODAP_cmorized_beta <- GLODAP_cmorized %>%
 
 
 
-```{r GLODAP_vs_cmorized_subset_comparison}
+```{r GLODAP_vs_cmorized_subset_comparison, eval=FALSE}
 
 # for loop across variables
 obs_var <-
