@@ -73,7 +73,11 @@ models <-
 models <-
   models[!str_detect(models, pattern = "EC-Earth3")]
 
-models <- models[1]
+# no run D
+# models <-
+#   models[!str_detect(models, pattern = "MOM6-Princeton")]
+
+# models <- models[1]
 
 ```
 
@@ -97,18 +101,23 @@ variables <-
     "sos",
     "tos")
 
+# models <- models[7:length(models)]
+
 for (i_model in models) {
-  # i_model <- models[1]
+  # i_model <- models[4]
   print(i_model)
   
   for (i_model_ID in model_IDs) {
     # i_model_ID <- model_IDs[1]
+    print(i_model_ID)
     
     variables_available <-
       list.files(
         path = paste0(path_cmorized, i_model),
         pattern = paste0("_", i_model_ID, "_")
       )
+    
+    if (length(variables_available) > 0) {
     
     variables_available <-
       str_split(variables_available,
@@ -118,148 +127,147 @@ for (i_model in models) {
       variables_available[variables_available %in% variables]
     variables_available <- unique(variables_available)
     
-    for (i_variable in variables_available) {
-      # i_variable <- variables_available[1]
-      
-      # read list of all files
-      file <-
-        list.files(
-          path = paste0(path_cmorized, i_model),
-          pattern = paste0(i_variable, "_")
-        )
-      
-      file <-
-        file[str_detect(file, pattern = paste0("_", i_model_ID, "_"))]
-      file <- file[!str_detect(file, pattern = "_reg")]
-      file <- file[!str_detect(file, pattern = "_glob")]
-      
-      print(file)
-      
-      # read in data
-      if (i_model %in% c("EC-Earth3_2D_CO2_v20220323")) {
-        variable_data <-
-          read_ncdf(paste(paste0(path_cmorized, i_model),
-                          file,
-                          sep = "/"),
-                    make_units = FALSE,
-                    make_time = FALSE) %>% 
+    print(variables_available)
+    
+
+      for (i_variable in variables_available) {
+        # i_variable <- variables_available[4]
+        print(i_variable)
+        
+        # print("sleep")
+        Sys.sleep(1)
+        
+        # read list of all files
+        file <-
+          list.files(
+            path = paste0(path_cmorized, i_model),
+            pattern = paste0(i_variable, "_")
+          )
+        
+        print(file)
+   
+        file <-
+          file[str_detect(file, pattern = paste0("_", i_model_ID, "_"))]
+        
+        file <- file[!str_detect(file, pattern = "_reg")]
+        file <- file[!str_detect(file, pattern = "_glob")]
+        file <- file[!str_detect(file, pattern = "dissicnatos")]
+        
+        print(file)
+        
+        # read in data
+        if (i_model %in% c("EC-Earth3_2D_CO2_v20220323")) {
+          variable_data <-
+            read_ncdf(
+              paste(paste0(path_cmorized, i_model),
+                    file,
+                    sep = "/"),
+              make_units = FALSE,
+              make_time = FALSE
+            ) %>%
+            as_tibble()
+          
+          variable_data <- variable_data %>%
+            mutate(time = as.Date(time, origin = "1980-01-01"))
+          
+        } else {
+          variable_data <-
+            read_ncdf(paste(paste0(path_cmorized, i_model),
+                            file,
+                            sep = "/"),
+                      make_units = FALSE)
+          
+        }
+        
+        
+        # convert to tibble
+        variable_data_tibble <- variable_data %>%
           as_tibble()
         
-        variable_data <- variable_data %>% 
-          mutate(time = as.Date(time, origin = "1980-01-01"))
-          
-      } else {
-        variable_data <-
-          read_ncdf(paste(paste0(path_cmorized, i_model),
-                          file,
-                          sep = "/"),
-                    make_units = FALSE)
+        # remove open link to nc file
+        rm(variable_data)
         
-      }
-      
-      
-      # convert to tibble
-      variable_data_tibble <- variable_data %>%
-        as_tibble()
-      
-      # remove open link to nc file
-      rm(variable_data)
-      
-      
-      if (i_model == "CESM-ETHZ_2D_CO2_v20211122") {
+        
+        if (i_model == "CESM-ETHZ_2D_CO2_v20211122") {
+          variable_data_tibble <- variable_data_tibble %>%
+            rename(time = time_mon)
+        }
+        
+        if (i_model == "FESOM_REcoM_LR_2D_CO2_v20211119") {
+          variable_data_tibble <- variable_data_tibble %>%
+            rename(lat = Lat,
+                   lon = Lon,
+                   time = Time) %>%
+            mutate(time = as.Date(time, origin = '1980-01-01'))
+        }
+        
+        # remove na values
+        variable_data_tibble <-
+          variable_data_tibble %>%
+          drop_na()
+        
+        # harmonize longitudes
         variable_data_tibble <- variable_data_tibble %>%
-          rename(time = time_mon)
-      }
-      
-      # if (i_model == "CNRM-ESM2-1_3D_ALL_v20211208") {
-      #   variable_data_tibble <- variable_data_tibble %>%
-      #     rename(depth = lev)
-      # }
-      #
-      # if (i_model == "FESOM_REcoM_LR_3D_all_v20211119") {
-      #   variable_data_tibble <- variable_data_tibble %>%
-      #     rename(lat = Lat,
-      #            lon = Lon,
-      #            depth = Depth,
-      #            time = Time) %>%
-      #     mutate(time = as.Date(time, origin = '1980-01-01'))
-      # }
-      #
-      # if (i_model == "MOM6-Princeton_3D_ALL_v20220125") {
-      #   variable_data_tibble <- variable_data_tibble %>%
-      #     rename(depth = z_l)
-      # }
-      #
-      # if (i_model == "MRI-ESM2-0_3D_ALL_v20210830") {
-      #   variable_data_tibble <- variable_data_tibble %>%
-      #     rename(depth = lev)
-      # }
-      
-      # remove na values
-      variable_data_tibble <-
-        variable_data_tibble %>%
-        drop_na()
-      
-      # harmonize longitudes
-      variable_data_tibble <- variable_data_tibble %>%
-        mutate(lon = if_else(lon < 20, lon + 360, lon))
-      
-      # only consider model grids within basinmask
-      variable_data_tibble <-
-        inner_join(variable_data_tibble, basinmask) %>%
-        select(-basin_AIP)
-      
-      # mutate variables
-      variable_data_tibble <- variable_data_tibble %>%
-        mutate(year = year(time)) %>%
-        select(-time)
-      
-      
-      # calculate annual average variable
-      variable_data_tibble_annual_average <-
-        variable_data_tibble %>%
-        fgroup_by(lat, lon, year) %>% {
-          add_vars(fgroup_vars(., "unique"),
-                   fmean(., keep.group_vars = FALSE))
-        }
-      
-      # calculate climatology
-      variable_data_tibble_climatology <-
-        variable_data_tibble_annual_average %>%
-        fselect(-year) %>%
-        fgroup_by(lat, lon) %>% {
-          add_vars(fgroup_vars(., "unique"),
-                   fmean(., keep.group_vars = FALSE))
-        }
-
-      
-      # surface map of variable
-      print(
-        map +
-          geom_raster(data = variable_data_tibble_climatology,
-                      aes(lon, lat, fill = !!sym(i_variable))) +
-          scale_fill_viridis_c(name = i_variable) +
-          labs(title = str_remove(i_model, "2D_CO2_"))
-      )
-      
-      
-      # write raw data file for GLODAP-based subsetting model variables
-      variable_data_tibble_annual_average %>%
-        write_csv(
-          file = paste(
-            path_preprocessing,
-            "surface_ocean_",
-            i_model_ID,
-            "/",
-            str_remove(i_model, "2D_CO2_"),
-            "_",
-            i_variable,
-            ".csv",
-            sep = ""
-          )
+          mutate(lon = if_else(lon < 20, lon + 360, lon))
+        
+        # only consider model grids within basinmask
+        variable_data_tibble <-
+          inner_join(variable_data_tibble, basinmask) %>%
+          select(-basin_AIP)
+        
+        # mutate variables
+        variable_data_tibble <- variable_data_tibble %>%
+          mutate(year = year(time)) %>%
+          select(-time)
+        
+        
+        # calculate annual average variable
+        variable_data_tibble_annual_average <-
+          variable_data_tibble %>%
+          fgroup_by(lat, lon, year) %>% {
+            add_vars(fgroup_vars(., "unique"),
+                     fmean(., keep.group_vars = FALSE))
+          }
+        
+        # calculate climatology
+        variable_data_tibble_climatology <-
+          variable_data_tibble_annual_average %>%
+          fselect(-year) %>%
+          fgroup_by(lat, lon) %>% {
+            add_vars(fgroup_vars(., "unique"),
+                     fmean(., keep.group_vars = FALSE))
+          }
+        
+        
+        # surface map of variable
+        print(
+          map +
+            geom_raster(data = variable_data_tibble_climatology,
+                        aes(lon, lat, fill = !!sym(i_variable))) +
+            scale_fill_viridis_c(name = i_variable) +
+            labs(title = str_remove(i_model, "2D_CO2_"))
         )
-      
-      
+        
+        
+        # write raw data file for GLODAP-based subsetting model variables
+        variable_data_tibble_annual_average %>%
+          write_csv(
+            file = paste(
+              path_preprocessing,
+              "surface_ocean_",
+              i_model_ID,
+              "/",
+              str_remove(i_model, "2D_CO2_"),
+              "_",
+              i_variable,
+              ".csv",
+              sep = ""
+            )
+          )
+        
+        
+  
+      }
     }
     
   }
@@ -271,26 +279,11 @@ for (i_model in models) {
 
 # Air-sea disequilibrium
 
-```{r air_sea_disequilibria, eval=FALSE}
+```{r air_sea_disequilibria}
 
 # set name of model to be subsetted
+# model_IDs <- c("A")
 model_IDs <- c("A", "B", "C", "D")
-
-file <- paste("area",
-              "_CESM-ETHZ_",
-              "1_gr_v20211122.nc",
-              sep = "")
-
-area_grid <-
-  variable_data <-
-  read_ncdf(paste(path_cmorized_ancillary,
-                  file,
-                  sep = ""),
-            make_units = FALSE) %>% 
-  as_tibble()
-
-area_grid <- area_grid %>%
-  mutate(lon = if_else(lon < 20, lon + 360, lon))
 
 # for loop across variables
 variables <-
@@ -300,162 +293,279 @@ variables <-
     "alpha",
     "fice")
 
-for (i_model_ID in model_IDs) {
-  # i_model_ID <- model_IDs[1]
-  
-  for (i_variable in variables) {
-    # i_variable <- variables[5]
-    
-    # read list of all files
-    file <- paste(i_variable,
-                  "_CESM-ETHZ_",
-                  i_model_ID,
-                  "_1_gr_1980-2018_v20211122.nc",
-                  sep = "")
-    print(file)
 
-    # read in data
-    variable_data <-
-      read_ncdf(paste(path_cmorized,
-                      file,
-                      sep = ""),
-                make_units = FALSE)
-    
-    # convert to tibble
-    variable_data_tibble <- variable_data %>%
-      as_tibble()
-    
-    # remove open link to nc file
-    rm(variable_data)
-    
-    # remove na values
-    variable_data_tibble <-
-      variable_data_tibble %>%
-      drop_na()
-    
-    # harmonize longitudes
-    variable_data_tibble <- variable_data_tibble %>%
-      mutate(lon = if_else(lon < 20, lon + 360, lon))
-    
-    # only consider model grids within basinmask
-    variable_data_tibble <-
-      inner_join(variable_data_tibble, basinmask) %>%
-      select(-basin_AIP)
-    
-    if (exists("all_variables")) {
-      all_variables <- inner_join(all_variables, variable_data_tibble)
-    }
-    
-    if (!exists("all_variables")) {
-      all_variables <- variable_data_tibble
-    }
-    
-    
+mol_to_g <- 12
+P <- 1e-15
+m3_to_kg <- 1030
+sec_to_yr <- 60 * 60 * 24 * 365
+
+unit_conversion_to_PgCyr <-
+  mol_to_g * P * sec_to_yr / m3_to_kg
+
+# models <- models[7:length(models)]
+
+for (i_model in models) {
+  # i_model <- models[7]
+  print(i_model)
+  
+  file <-
+    list.files(path = paste0(
+      path_cmorized_ancillary,
+      str_replace(i_model, "2D_CO2", "Ancillary_data")
+    ),
+    pattern = "area")
+  
+  print(file)
+  
+  if (i_model == "CNRM-ESM2-1_2D_CO2_v20211208") {
+    file <-
+      file[str_detect(file, pattern = paste0("_A_"))]
   }
   
-  all_variables <- inner_join(all_variables,
-                              area_grid)
+  if (i_model %in% c("ORCA025-GEOMAR_2D_CO2_v20210804",
+                     "ORCA1-LIM3-PISCES_2D_CO2_v20211215")) {
+    file <-
+      file[str_detect(file, pattern = paste0("area_O"))]
+  }
   
-  mol_to_g <- 12
-  P <- 1e-15
-  m3_to_kg <- 1030
-  sec_to_yr <- 60*60*24*365
-
-  unit_conversion_to_PgCyr <- mol_to_g * P * sec_to_yr / m3_to_kg
-
-  all_variables <- all_variables %>%
-    mutate(delta_pco2 = spco2 - pco2atm,
-           scale = area * Kw * alpha * (1-fice),
-           fgco2 = delta_pco2 * scale)
+  area_grid <-
+    variable_data <-
+    read_ncdf(paste0(
+      path_cmorized_ancillary,
+      str_replace(i_model, "2D_CO2", "Ancillary_data"),
+      "/",
+      file
+    ),
+    make_units = FALSE) %>%
+    as_tibble()
   
-  delta_pco2_monthly <- all_variables %>%
-    group_by(time_mon) %>%
-    summarise(
-      scaling_glob = sum(scale),
-      fgco2_glob = sum(fgco2),
-      delta_pco2_glob = fgco2_glob / scaling_glob
-    ) %>%
-    ungroup() %>% 
-    mutate(fgco2_glob = fgco2_glob * unit_conversion_to_PgCyr)
-  
-  delta_pco2_annual <- delta_pco2_monthly %>%
-    mutate(year = year(time_mon)) %>%
-    group_by(year) %>%
-    summarise(
-      scaling_glob = mean(scaling_glob),
-      fgco2_glob = mean(fgco2_glob),
-      delta_pco2_glob = mean(delta_pco2_glob)
-    ) %>%
-    ungroup()
-  
-  print(
-  ggplot() +
-    geom_path(data = delta_pco2_monthly,
-              aes(decimal_date(time_mon), delta_pco2_glob, col = "monthly")) +
-    geom_path(data = delta_pco2_annual,
-              aes(year, delta_pco2_glob, col = "annual")) +
-    scale_color_brewer(palette = "Set1", name = "Average") +
-    labs(title = paste("model_id:",i_model_ID),
-         x = "year")
-  )
-  
-  print(
-  ggplot() +
-    geom_path(data = delta_pco2_monthly,
-              aes(decimal_date(time_mon), fgco2_glob, col = "monthly")) +
-    geom_path(data = delta_pco2_annual,
-              aes(year, fgco2_glob, col = "annual")) +
-    scale_color_brewer(palette = "Set1", name = "Average") +
-    labs(title = paste("model_id:",i_model_ID),
-         x = "year")
-  )
-  
-  print(
-    ggplot() +
-      geom_path(
-        data = delta_pco2_annual,
-        aes(
-          year,
-          scaling_glob * unit_conversion_to_PgCyr
-        )
+  for (i_model_ID in model_IDs) {
+    # i_model_ID <- model_IDs[1]
+    print(i_model_ID)
+    
+    variables_available <-
+      list.files(
+        path = paste0(path_cmorized, i_model),
+        pattern = paste0("_", i_model_ID, "_")
       )
-  )
-  
-  print(
-    ggplot() +
-      geom_path(
-        data = delta_pco2_annual,
-        aes(
-          year,
-          scaling_glob * delta_pco2_glob * unit_conversion_to_PgCyr,
-          col = "scaled"
+    
+    if (length(variables_available) > 0) {
+      variables_available <-
+        str_split(variables_available,
+                  pattern = "_",
+                  simplify = TRUE)[, 1]
+      variables_available <-
+        variables_available[variables_available %in% variables]
+      variables_available <- unique(variables_available)
+      
+      print(variables_available)
+      
+      if (length(variables_available) == 5) {
+        for (i_variable in variables_available) {
+          # i_variable <- variables_available[1]
+          
+          print(i_variable)
+          
+          # print("sleep")
+          Sys.sleep(1)
+          
+          # read list of all files
+          file <-
+            list.files(
+              path = paste0(path_cmorized, i_model),
+              pattern = paste0(i_variable, "_")
+            )
+          
+          print(file)
+          
+          file <-
+            file[str_detect(file, pattern = paste0("_", i_model_ID, "_"))]
+          
+          file <- file[!str_detect(file, pattern = "_reg")]
+          file <- file[!str_detect(file, pattern = "_glob")]
+          file <- file[!str_detect(file, pattern = "dissicnatos")]
+          
+          print(file)
+          
+          # read in data
+          variable_data <-
+            read_ncdf(paste0(path_cmorized,
+                             i_model,
+                             "/",
+                             file),
+                      make_units = FALSE)
+          
+          # convert to tibble
+          variable_data_tibble <- variable_data %>%
+            as_tibble()
+          
+          # remove open link to nc file
+          rm(variable_data)
+          
+          # remove na values
+          variable_data_tibble <-
+            variable_data_tibble %>%
+            drop_na()
+          
+
+          if (exists("all_variables")) {
+            all_variables <- inner_join(all_variables, variable_data_tibble)
+          }
+          
+          if (!exists("all_variables")) {
+            all_variables <- variable_data_tibble
+          }
+          
+          
+        }
+        
+        all_variables <- inner_join(all_variables,
+                                    area_grid)
+        
+        if (i_model == "CESM-ETHZ_2D_CO2_v20211122") {
+          all_variables <- all_variables %>%
+            rename(time = time_mon)
+        }
+        
+        if (i_model == "FESOM_REcoM_LR_2D_CO2_v20211119") {
+          all_variables <- all_variables %>%
+            rename(lat = Lat,
+                   lon = Lon,
+                   time = Time) %>%
+            mutate(time = as.Date(time, origin = '1980-01-01'))
+        }
+        
+        # harmonize longitudes
+        all_variables <- all_variables %>%
+          mutate(lon = if_else(lon < 20, lon + 360, lon))
+        
+        # only consider model grids within basinmask
+        all_variables <-
+          inner_join(all_variables, basinmask) %>%
+          select(-basin_AIP)
+        
+        
+        all_variables <- all_variables %>%
+          mutate(
+            delta_pco2 = spco2 - pco2atm,
+            scale = area * Kw * alpha * (1 - fice),
+            fgco2 = delta_pco2 * scale
+          )
+        
+        delta_pco2_monthly <- all_variables %>%
+          group_by(time) %>%
+          summarise(
+            scaling_glob = sum(scale),
+            fgco2_glob = sum(fgco2),
+            delta_pco2_glob = fgco2_glob / scaling_glob
+          ) %>%
+          ungroup() %>%
+          mutate(fgco2_glob = fgco2_glob * unit_conversion_to_PgCyr)
+        
+        delta_pco2_annual <- delta_pco2_monthly %>%
+          mutate(year = year(time)) %>%
+          group_by(year) %>%
+          summarise(
+            scaling_glob = mean(scaling_glob),
+            fgco2_glob = mean(fgco2_glob),
+            delta_pco2_glob = mean(delta_pco2_glob)
+          ) %>%
+          ungroup()
+        
+        print(
+          ggplot() +
+            geom_path(
+              data = delta_pco2_monthly,
+              aes(decimal_date(time), delta_pco2_glob, col = "monthly")
+            ) +
+            geom_path(data = delta_pco2_annual,
+                      aes(year, delta_pco2_glob, col = "annual")) +
+            scale_color_brewer(palette = "Set1", name = "Average") +
+            labs(
+              title = paste(
+                str_remove(i_model, "2D_CO2_"),
+                "| model_id:",
+                i_model_ID
+              ),
+              x = "year"
+            )
         )
-      ) +
-      geom_path(
-        data = delta_pco2_annual,
-        aes(year, fgco2_glob, col = "integrated")
-      ) +
-      scale_color_brewer(palette = "Set1", name = "Estimate") +
-      scale_y_continuous(name = "Air-sea flux [PgC yr-1]") +
-      labs(title = paste("model_id:", i_model_ID),
-           x = "year")
-  )
-  
-  # write raw data file for GLODAP-based subsetting model variables
-  delta_pco2_annual %>%
-    select(-c(scaling_glob, fgco2_glob)) %>% 
-    write_csv(
-      file = paste(
-        path_preprocessing,
-        "surface_ocean_disequilibrium/",
-        i_model_ID,
-        "_annual.csv",
-        sep = ""
-      )
-    )
-  
-  rm(i_variable, all_variables, delta_pco2_annual, delta_pco2_monthly)
-  
+        
+        print(
+          ggplot() +
+            geom_path(data = delta_pco2_monthly,
+                      aes(
+                        decimal_date(time), fgco2_glob, col = "monthly"
+                      )) +
+            geom_path(data = delta_pco2_annual,
+                      aes(year, fgco2_glob, col = "annual")) +
+            scale_color_brewer(palette = "Set1", name = "Average") +
+            labs(
+              title = paste(
+                str_remove(i_model, "2D_CO2_") ,
+                "| model_id:",
+                i_model_ID
+              ),
+              x = "year"
+            )
+        )
+        
+        print(ggplot() +
+                geom_path(
+                  data = delta_pco2_annual,
+                  aes(year,
+                      scaling_glob * unit_conversion_to_PgCyr)
+                ))
+        
+        print(
+          ggplot() +
+            geom_path(
+              data = delta_pco2_annual,
+              aes(
+                year,
+                scaling_glob * delta_pco2_glob * unit_conversion_to_PgCyr,
+                col = "scaled"
+              )
+            ) +
+            geom_path(data = delta_pco2_annual,
+                      aes(year, fgco2_glob, col = "integrated")) +
+            scale_color_brewer(palette = "Set1", name = "Estimate") +
+            scale_y_continuous(name = "Air-sea flux [PgC yr-1]") +
+            labs(
+              title = paste(
+                str_remove(i_model, "2D_CO2_"),
+                "| model_id:",
+                i_model_ID
+              ),
+              x = "year"
+            )
+        )
+        
+        # write raw data file for GLODAP-based subsetting model variables
+        delta_pco2_annual %>%
+          select(-c(scaling_glob, fgco2_glob)) %>%
+          write_csv(
+            file = paste0(
+              path_preprocessing,
+              "surface_ocean_disequilibrium/",
+              str_remove(i_model, "2D_CO2_"),
+              "_",
+              i_model_ID,
+              "_annual.csv"
+            )
+          )
+        
+        rm(i_variable,
+           all_variables,
+           delta_pco2_annual,
+           delta_pco2_monthly)
+        
+      }
+    }
+  }
 }
 
+
+  
+  
 ```
