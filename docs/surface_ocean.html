@@ -411,7 +411,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Surface Ocean data</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">12 May, 2022</h4>
+<h4 class="date">13 May, 2022</h4>
 
 </div>
 
@@ -436,7 +436,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-05-12
+<strong>Last updated:</strong> 2022-05-13
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -527,16 +527,16 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtreeb1c99208154edce5a311cf366f7939a388463acetargetblankb1c9920a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/b1c99208154edce5a311cf366f7939a388463ace" target="_blank">b1c9920</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree010eeb66a8f4ce264e0dd83ea724f469dbd180dftargetblank010eeb6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/010eeb66a8f4ce264e0dd83ea724f469dbd180df" target="_blank">010eeb6</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtreeb1c99208154edce5a311cf366f7939a388463acetargetblankb1c9920a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree010eeb66a8f4ce264e0dd83ea724f469dbd180dftargetblank010eeb6a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/b1c99208154edce5a311cf366f7939a388463ace" target="_blank">b1c9920</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/010eeb66a8f4ce264e0dd83ea724f469dbd180df" target="_blank">010eeb6</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -550,6 +550,9 @@ Untracked files:
     Untracked:  analysis/RECCAP2_flux_products.Rmd
     Untracked:  code/backup_analysis_scripts/
     Untracked:  code/reprex_read_nc_file.R
+
+Unstaged changes:
+    Modified:   code/Workflowr_project_managment.R
 
 </code></pre>
 <p>
@@ -588,6 +591,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/010eeb66a8f4ce264e0dd83ea724f469dbd180df/analysis/surface_ocean.Rmd" target="_blank">010eeb6</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-13
+</td>
+<td>
+read data from all models and write individual files
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/df15df5437bc8a496737a6c4da5340e4642be17c/docs/surface_ocean.html" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1087,7 +1124,11 @@ models &lt;-
 models &lt;-
   models[!str_detect(models, pattern = &quot;EC-Earth3&quot;)]
 
-models &lt;- models[1]</code></pre>
+# no run D
+# models &lt;-
+#   models[!str_detect(models, pattern = &quot;MOM6-Princeton&quot;)]
+
+# models &lt;- models[1]</code></pre>
 </div>
 <div id="extract-surface-data" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Extract surface data</h1>
@@ -1105,18 +1146,23 @@ variables &lt;-
     &quot;sos&quot;,
     &quot;tos&quot;)
 
+# models &lt;- models[7:length(models)]
+
 for (i_model in models) {
-  # i_model &lt;- models[1]
+  # i_model &lt;- models[4]
   print(i_model)
   
   for (i_model_ID in model_IDs) {
     # i_model_ID &lt;- model_IDs[1]
+    print(i_model_ID)
     
     variables_available &lt;-
       list.files(
         path = paste0(path_cmorized, i_model),
         pattern = paste0(&quot;_&quot;, i_model_ID, &quot;_&quot;)
       )
+    
+    if (length(variables_available) &gt; 0) {
     
     variables_available &lt;-
       str_split(variables_available,
@@ -1126,153 +1172,160 @@ for (i_model in models) {
       variables_available[variables_available %in% variables]
     variables_available &lt;- unique(variables_available)
     
-    for (i_variable in variables_available) {
-      # i_variable &lt;- variables_available[1]
-      
-      # read list of all files
-      file &lt;-
-        list.files(
-          path = paste0(path_cmorized, i_model),
-          pattern = paste0(i_variable, &quot;_&quot;)
-        )
-      
-      file &lt;-
-        file[str_detect(file, pattern = paste0(&quot;_&quot;, i_model_ID, &quot;_&quot;))]
-      file &lt;- file[!str_detect(file, pattern = &quot;_reg&quot;)]
-      file &lt;- file[!str_detect(file, pattern = &quot;_glob&quot;)]
-      
-      print(file)
-      
-      # read in data
-      if (i_model %in% c(&quot;EC-Earth3_2D_CO2_v20220323&quot;)) {
-        variable_data &lt;-
-          read_ncdf(paste(paste0(path_cmorized, i_model),
-                          file,
-                          sep = &quot;/&quot;),
-                    make_units = FALSE,
-                    make_time = FALSE) %&gt;% 
+    print(variables_available)
+    
+
+      for (i_variable in variables_available) {
+        # i_variable &lt;- variables_available[4]
+        print(i_variable)
+        
+        # print(&quot;sleep&quot;)
+        Sys.sleep(1)
+        
+        # read list of all files
+        file &lt;-
+          list.files(
+            path = paste0(path_cmorized, i_model),
+            pattern = paste0(i_variable, &quot;_&quot;)
+          )
+        
+        print(file)
+   
+        file &lt;-
+          file[str_detect(file, pattern = paste0(&quot;_&quot;, i_model_ID, &quot;_&quot;))]
+        
+        file &lt;- file[!str_detect(file, pattern = &quot;_reg&quot;)]
+        file &lt;- file[!str_detect(file, pattern = &quot;_glob&quot;)]
+        file &lt;- file[!str_detect(file, pattern = &quot;dissicnatos&quot;)]
+        
+        print(file)
+        
+        # read in data
+        if (i_model %in% c(&quot;EC-Earth3_2D_CO2_v20220323&quot;)) {
+          variable_data &lt;-
+            read_ncdf(
+              paste(paste0(path_cmorized, i_model),
+                    file,
+                    sep = &quot;/&quot;),
+              make_units = FALSE,
+              make_time = FALSE
+            ) %&gt;%
+            as_tibble()
+          
+          variable_data &lt;- variable_data %&gt;%
+            mutate(time = as.Date(time, origin = &quot;1980-01-01&quot;))
+          
+        } else {
+          variable_data &lt;-
+            read_ncdf(paste(paste0(path_cmorized, i_model),
+                            file,
+                            sep = &quot;/&quot;),
+                      make_units = FALSE)
+          
+        }
+        
+        
+        # convert to tibble
+        variable_data_tibble &lt;- variable_data %&gt;%
           as_tibble()
         
-        variable_data &lt;- variable_data %&gt;% 
-          mutate(time = as.Date(time, origin = &quot;1980-01-01&quot;))
-          
-      } else {
-        variable_data &lt;-
-          read_ncdf(paste(paste0(path_cmorized, i_model),
-                          file,
-                          sep = &quot;/&quot;),
-                    make_units = FALSE)
+        # remove open link to nc file
+        rm(variable_data)
         
-      }
-      
-      
-      # convert to tibble
-      variable_data_tibble &lt;- variable_data %&gt;%
-        as_tibble()
-      
-      # remove open link to nc file
-      rm(variable_data)
-      
-      
-      if (i_model == &quot;CESM-ETHZ_2D_CO2_v20211122&quot;) {
+        
+        if (i_model == &quot;CESM-ETHZ_2D_CO2_v20211122&quot;) {
+          variable_data_tibble &lt;- variable_data_tibble %&gt;%
+            rename(time = time_mon)
+        }
+        
+        if (i_model == &quot;FESOM_REcoM_LR_2D_CO2_v20211119&quot;) {
+          variable_data_tibble &lt;- variable_data_tibble %&gt;%
+            rename(lat = Lat,
+                   lon = Lon,
+                   time = Time) %&gt;%
+            mutate(time = as.Date(time, origin = &#39;1980-01-01&#39;))
+        }
+        
+        # remove na values
+        variable_data_tibble &lt;-
+          variable_data_tibble %&gt;%
+          drop_na()
+        
+        # harmonize longitudes
         variable_data_tibble &lt;- variable_data_tibble %&gt;%
-          rename(time = time_mon)
-      }
-      
-      # if (i_model == &quot;CNRM-ESM2-1_3D_ALL_v20211208&quot;) {
-      #   variable_data_tibble &lt;- variable_data_tibble %&gt;%
-      #     rename(depth = lev)
-      # }
-      #
-      # if (i_model == &quot;FESOM_REcoM_LR_3D_all_v20211119&quot;) {
-      #   variable_data_tibble &lt;- variable_data_tibble %&gt;%
-      #     rename(lat = Lat,
-      #            lon = Lon,
-      #            depth = Depth,
-      #            time = Time) %&gt;%
-      #     mutate(time = as.Date(time, origin = &#39;1980-01-01&#39;))
-      # }
-      #
-      # if (i_model == &quot;MOM6-Princeton_3D_ALL_v20220125&quot;) {
-      #   variable_data_tibble &lt;- variable_data_tibble %&gt;%
-      #     rename(depth = z_l)
-      # }
-      #
-      # if (i_model == &quot;MRI-ESM2-0_3D_ALL_v20210830&quot;) {
-      #   variable_data_tibble &lt;- variable_data_tibble %&gt;%
-      #     rename(depth = lev)
-      # }
-      
-      # remove na values
-      variable_data_tibble &lt;-
-        variable_data_tibble %&gt;%
-        drop_na()
-      
-      # harmonize longitudes
-      variable_data_tibble &lt;- variable_data_tibble %&gt;%
-        mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
-      
-      # only consider model grids within basinmask
-      variable_data_tibble &lt;-
-        inner_join(variable_data_tibble, basinmask) %&gt;%
-        select(-basin_AIP)
-      
-      # mutate variables
-      variable_data_tibble &lt;- variable_data_tibble %&gt;%
-        mutate(year = year(time)) %&gt;%
-        select(-time)
-      
-      
-      # calculate annual average variable
-      variable_data_tibble_annual_average &lt;-
-        variable_data_tibble %&gt;%
-        fgroup_by(lat, lon, year) %&gt;% {
-          add_vars(fgroup_vars(., &quot;unique&quot;),
-                   fmean(., keep.group_vars = FALSE))
-        }
-      
-      # calculate climatology
-      variable_data_tibble_climatology &lt;-
-        variable_data_tibble_annual_average %&gt;%
-        fselect(-year) %&gt;%
-        fgroup_by(lat, lon) %&gt;% {
-          add_vars(fgroup_vars(., &quot;unique&quot;),
-                   fmean(., keep.group_vars = FALSE))
-        }
-
-      
-      # surface map of variable
-      print(
-        map +
-          geom_raster(data = variable_data_tibble_climatology,
-                      aes(lon, lat, fill = !!sym(i_variable))) +
-          scale_fill_viridis_c(name = i_variable) +
-          labs(title = str_remove(i_model, &quot;2D_CO2_&quot;))
-      )
-      
-      
-      # write raw data file for GLODAP-based subsetting model variables
-      variable_data_tibble_annual_average %&gt;%
-        write_csv(
-          file = paste(
-            path_preprocessing,
-            &quot;surface_ocean_&quot;,
-            i_model_ID,
-            &quot;/&quot;,
-            str_remove(i_model, &quot;2D_CO2_&quot;),
-            &quot;_&quot;,
-            i_variable,
-            &quot;.csv&quot;,
-            sep = &quot;&quot;
-          )
+          mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
+        
+        # only consider model grids within basinmask
+        variable_data_tibble &lt;-
+          inner_join(variable_data_tibble, basinmask) %&gt;%
+          select(-basin_AIP)
+        
+        # mutate variables
+        variable_data_tibble &lt;- variable_data_tibble %&gt;%
+          mutate(year = year(time)) %&gt;%
+          select(-time)
+        
+        
+        # calculate annual average variable
+        variable_data_tibble_annual_average &lt;-
+          variable_data_tibble %&gt;%
+          fgroup_by(lat, lon, year) %&gt;% {
+            add_vars(fgroup_vars(., &quot;unique&quot;),
+                     fmean(., keep.group_vars = FALSE))
+          }
+        
+        # calculate climatology
+        variable_data_tibble_climatology &lt;-
+          variable_data_tibble_annual_average %&gt;%
+          fselect(-year) %&gt;%
+          fgroup_by(lat, lon) %&gt;% {
+            add_vars(fgroup_vars(., &quot;unique&quot;),
+                     fmean(., keep.group_vars = FALSE))
+          }
+        
+        
+        # surface map of variable
+        print(
+          map +
+            geom_raster(data = variable_data_tibble_climatology,
+                        aes(lon, lat, fill = !!sym(i_variable))) +
+            scale_fill_viridis_c(name = i_variable) +
+            labs(title = str_remove(i_model, &quot;2D_CO2_&quot;))
         )
-      
-      
+        
+        
+        # write raw data file for GLODAP-based subsetting model variables
+        variable_data_tibble_annual_average %&gt;%
+          write_csv(
+            file = paste(
+              path_preprocessing,
+              &quot;surface_ocean_&quot;,
+              i_model_ID,
+              &quot;/&quot;,
+              str_remove(i_model, &quot;2D_CO2_&quot;),
+              &quot;_&quot;,
+              i_variable,
+              &quot;.csv&quot;,
+              sep = &quot;&quot;
+            )
+          )
+        
+        
+  
+      }
     }
     
   }
 }</code></pre>
 <pre><code>[1] &quot;CESM-ETHZ_2D_CO2_v20211122&quot;
+[1] &quot;A&quot;
+[1] &quot;dissicos&quot; &quot;fgco2&quot;    &quot;po4os&quot;    &quot;sios&quot;     &quot;sos&quot;      &quot;spco2&quot;    &quot;talkos&quot;  
+[8] &quot;tos&quot;     
+[1] &quot;dissicos&quot;
+[1] &quot;dissicos_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;dissicos_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;dissicos_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;dissicos_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
 [1] &quot;dissicos_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -1297,6 +1350,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-1.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-1.png" target="_blank">06054b2</a>
@@ -1356,7 +1420,20 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;fgco2_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
+<pre><code>[1] &quot;fgco2&quot;
+ [1] &quot;fgco2_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;     
+ [2] &quot;fgco2_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;     
+ [3] &quot;fgco2_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;     
+ [4] &quot;fgco2_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;     
+ [5] &quot;fgco2_glob_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+ [6] &quot;fgco2_glob_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+ [7] &quot;fgco2_glob_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+ [8] &quot;fgco2_glob_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+ [9] &quot;fgco2_reg_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot; 
+[10] &quot;fgco2_reg_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot; 
+[11] &quot;fgco2_reg_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot; 
+[12] &quot;fgco2_reg_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot; 
+[1] &quot;fgco2_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-2.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-subset_cmorized_variable_forcing_data-2">
@@ -1380,6 +1457,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-2.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-2.png" target="_blank">06054b2</a>
@@ -1439,7 +1527,12 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;po4os_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4os&quot;
+[1] &quot;po4os_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;po4os_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;po4os_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;po4os_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;po4os_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-3.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-subset_cmorized_variable_forcing_data-3">
@@ -1463,6 +1556,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-3.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-3.png" target="_blank">06054b2</a>
@@ -1522,7 +1626,12 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;sios_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
+<pre><code>[1] &quot;sios&quot;
+[1] &quot;sios_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;sios_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;sios_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;sios_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;sios_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-4.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-subset_cmorized_variable_forcing_data-4">
@@ -1546,6 +1655,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-4.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-4.png" target="_blank">06054b2</a>
@@ -1605,7 +1725,12 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;sos_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
+<pre><code>[1] &quot;sos&quot;
+[1] &quot;sos_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;sos_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;sos_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;sos_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;sos_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-5.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-subset_cmorized_variable_forcing_data-5">
@@ -1629,6 +1754,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-5.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-5.png" target="_blank">06054b2</a>
@@ -1688,7 +1824,12 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;spco2_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
+<pre><code>[1] &quot;spco2&quot;
+[1] &quot;spco2_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;spco2_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;spco2_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;spco2_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;spco2_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-6.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-subset_cmorized_variable_forcing_data-6">
@@ -1712,6 +1853,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-6.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-6.png" target="_blank">06054b2</a>
@@ -1771,7 +1923,12 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;talkos_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
+<pre><code>[1] &quot;talkos&quot;
+[1] &quot;talkos_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;talkos_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;talkos_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;talkos_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;talkos_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-7.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-subset_cmorized_variable_forcing_data-7">
@@ -1795,6 +1952,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-7.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-7.png" target="_blank">06054b2</a>
@@ -1854,7 +2022,12 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;tos_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
+<pre><code>[1] &quot;tos&quot;
+[1] &quot;tos_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;tos_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;tos_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;tos_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;tos_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-8.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-subset_cmorized_variable_forcing_data-8">
@@ -1878,6 +2051,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-8.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-8.png" target="_blank">06054b2</a>
@@ -1937,7 +2121,15 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;dissicos_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
+<pre><code>[1] &quot;D&quot;
+[1] &quot;dissicos&quot; &quot;fgco2&quot;    &quot;po4os&quot;    &quot;sios&quot;     &quot;sos&quot;      &quot;spco2&quot;    &quot;talkos&quot;  
+[8] &quot;tos&quot;     
+[1] &quot;dissicos&quot;
+[1] &quot;dissicos_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;dissicos_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;dissicos_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;dissicos_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;dissicos_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-9.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-subset_cmorized_variable_forcing_data-9">
@@ -1961,6 +2153,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-9.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-9.png" target="_blank">06054b2</a>
@@ -2020,7 +2223,20 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;fgco2_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
+<pre><code>[1] &quot;fgco2&quot;
+ [1] &quot;fgco2_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;     
+ [2] &quot;fgco2_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;     
+ [3] &quot;fgco2_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;     
+ [4] &quot;fgco2_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;     
+ [5] &quot;fgco2_glob_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+ [6] &quot;fgco2_glob_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+ [7] &quot;fgco2_glob_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+ [8] &quot;fgco2_glob_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+ [9] &quot;fgco2_reg_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot; 
+[10] &quot;fgco2_reg_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot; 
+[11] &quot;fgco2_reg_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot; 
+[12] &quot;fgco2_reg_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot; 
+[1] &quot;fgco2_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-10.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-subset_cmorized_variable_forcing_data-10">
@@ -2044,6 +2260,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-10.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-10.png" target="_blank">06054b2</a>
@@ -2103,7 +2330,12 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;po4os_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
+<pre><code>[1] &quot;po4os&quot;
+[1] &quot;po4os_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;po4os_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;po4os_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;po4os_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;po4os_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-11.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-subset_cmorized_variable_forcing_data-11">
@@ -2127,6 +2359,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-11.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-11.png" target="_blank">06054b2</a>
@@ -2186,7 +2429,12 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;sios_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
+<pre><code>[1] &quot;sios&quot;
+[1] &quot;sios_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;sios_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;sios_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;sios_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;sios_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-12.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-subset_cmorized_variable_forcing_data-12">
@@ -2210,6 +2458,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-12.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-12.png" target="_blank">06054b2</a>
@@ -2269,7 +2528,12 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;sos_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
+<pre><code>[1] &quot;sos&quot;
+[1] &quot;sos_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;sos_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;sos_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;sos_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;sos_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-13.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-subset_cmorized_variable_forcing_data-13">
@@ -2293,6 +2557,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-13.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-13.png" target="_blank">06054b2</a>
@@ -2352,7 +2627,12 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;spco2_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
+<pre><code>[1] &quot;spco2&quot;
+[1] &quot;spco2_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;spco2_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;spco2_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;spco2_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;spco2_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-14.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-subset_cmorized_variable_forcing_data-14">
@@ -2376,6 +2656,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-14.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-14.png" target="_blank">06054b2</a>
@@ -2435,7 +2726,12 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;talkos_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
+<pre><code>[1] &quot;talkos&quot;
+[1] &quot;talkos_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;talkos_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;talkos_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;talkos_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;talkos_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-15.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-subset_cmorized_variable_forcing_data-15">
@@ -2459,6 +2755,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-15.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-15.png" target="_blank">06054b2</a>
@@ -2518,7 +2825,12 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;tos_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
+<pre><code>[1] &quot;tos&quot;
+[1] &quot;tos_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;tos_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;tos_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;tos_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;tos_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
 <p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-16.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-subset_cmorized_variable_forcing_data-16">
@@ -2542,6 +2854,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-16.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-16.png" target="_blank">06054b2</a>
@@ -2601,27 +2924,656 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
+<pre><code>[1] &quot;CNRM-ESM2-1_2D_CO2_v20211208&quot;
+[1] &quot;A&quot;
+[1] &quot;fgco2&quot; &quot;sios&quot;  &quot;sos&quot;   &quot;spco2&quot; &quot;tos&quot;  
+[1] &quot;fgco2&quot;
+ [1] &quot;fgco2_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;      
+ [2] &quot;fgco2_CNRM-ESM2-1_B_1_gr_1980-2018_v20211208.nc&quot;      
+ [3] &quot;fgco2_CNRM-ESM2-1_C_1_gr_1980-2018_v20211208.nc&quot;      
+ [4] &quot;fgco2_CNRM-ESM2-1_D_1_gr_1980-2018_v20211208.nc&quot;      
+ [5] &quot;fgco2_glob_CNRM-ESM2-1_A_1_gr_1980_2018_v20211208.txt&quot;
+ [6] &quot;fgco2_glob_CNRM-ESM2-1_B_1_gr_1980_2018_v20211208.txt&quot;
+ [7] &quot;fgco2_glob_CNRM-ESM2-1_C_1_gr_1980_2018_v20211208.txt&quot;
+ [8] &quot;fgco2_glob_CNRM-ESM2-1_D_1_gr_1980_2018_v20211208.txt&quot;
+ [9] &quot;fgco2_reg1_CNRM-ESM2-1_A_1_gr_1980_2018_v20211208.txt&quot;
+[10] &quot;fgco2_reg1_CNRM-ESM2-1_B_1_gr_1980_2018_v20211208.txt&quot;
+[11] &quot;fgco2_reg1_CNRM-ESM2-1_C_1_gr_1980_2018_v20211208.txt&quot;
+[12] &quot;fgco2_reg1_CNRM-ESM2-1_D_1_gr_1980_2018_v20211208.txt&quot;
+[13] &quot;fgco2_reg2_CNRM-ESM2-1_A_1_gr_1980_2018_v20211208.txt&quot;
+[14] &quot;fgco2_reg2_CNRM-ESM2-1_B_1_gr_1980_2018_v20211208.txt&quot;
+[15] &quot;fgco2_reg2_CNRM-ESM2-1_C_1_gr_1980_2018_v20211208.txt&quot;
+[16] &quot;fgco2_reg2_CNRM-ESM2-1_D_1_gr_1980_2018_v20211208.txt&quot;
+[17] &quot;fgco2_reg3_CNRM-ESM2-1_A_1_gr_1980_2018_v20211208.txt&quot;
+[18] &quot;fgco2_reg3_CNRM-ESM2-1_B_1_gr_1980_2018_v20211208.txt&quot;
+[19] &quot;fgco2_reg3_CNRM-ESM2-1_C_1_gr_1980_2018_v20211208.txt&quot;
+[20] &quot;fgco2_reg3_CNRM-ESM2-1_D_1_gr_1980_2018_v20211208.txt&quot;
+[21] &quot;fgco2_reg4_CNRM-ESM2-1_A_1_gr_1980_2018_v20211208.txt&quot;
+[22] &quot;fgco2_reg4_CNRM-ESM2-1_B_1_gr_1980_2018_v20211208.txt&quot;
+[23] &quot;fgco2_reg4_CNRM-ESM2-1_C_1_gr_1980_2018_v20211208.txt&quot;
+[24] &quot;fgco2_reg4_CNRM-ESM2-1_D_1_gr_1980_2018_v20211208.txt&quot;
+[25] &quot;fgco2_reg5_CNRM-ESM2-1_A_1_gr_1980_2018_v20211208.txt&quot;
+[26] &quot;fgco2_reg5_CNRM-ESM2-1_B_1_gr_1980_2018_v20211208.txt&quot;
+[27] &quot;fgco2_reg5_CNRM-ESM2-1_C_1_gr_1980_2018_v20211208.txt&quot;
+[28] &quot;fgco2_reg5_CNRM-ESM2-1_D_1_gr_1980_2018_v20211208.txt&quot;
+[29] &quot;fgco2_reg6_CNRM-ESM2-1_A_1_gr_1980_2018_v20211208.txt&quot;
+[30] &quot;fgco2_reg6_CNRM-ESM2-1_B_1_gr_1980_2018_v20211208.txt&quot;
+[31] &quot;fgco2_reg6_CNRM-ESM2-1_C_1_gr_1980_2018_v20211208.txt&quot;
+[32] &quot;fgco2_reg6_CNRM-ESM2-1_D_1_gr_1980_2018_v20211208.txt&quot;
+[1] &quot;fgco2_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-17.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;sios&quot;
+[1] &quot;sios_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
+[2] &quot;sios_CNRM-ESM2-1_B_1_gr_1980-2018_v20211208.nc&quot;
+[3] &quot;sios_CNRM-ESM2-1_C_1_gr_1980-2018_v20211208.nc&quot;
+[4] &quot;sios_CNRM-ESM2-1_D_1_gr_1980-2018_v20211208.nc&quot;
+[1] &quot;sios_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-18.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;sos&quot;
+[1] &quot;sos_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
+[2] &quot;sos_CNRM-ESM2-1_B_1_gr_1980-2018_v20211208.nc&quot;
+[3] &quot;sos_CNRM-ESM2-1_C_1_gr_1980-2018_v20211208.nc&quot;
+[4] &quot;sos_CNRM-ESM2-1_D_1_gr_1980-2018_v20211208.nc&quot;
+[1] &quot;sos_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-19.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;spco2&quot;
+[1] &quot;spco2_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
+[2] &quot;spco2_CNRM-ESM2-1_B_1_gr_1980-2018_v20211208.nc&quot;
+[3] &quot;spco2_CNRM-ESM2-1_C_1_gr_1980-2018_v20211208.nc&quot;
+[4] &quot;spco2_CNRM-ESM2-1_D_1_gr_1980-2018_v20211208.nc&quot;
+[1] &quot;spco2_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-20.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;tos&quot;
+[1] &quot;tos_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
+[2] &quot;tos_CNRM-ESM2-1_B_1_gr_1980-2018_v20211208.nc&quot;
+[3] &quot;tos_CNRM-ESM2-1_C_1_gr_1980-2018_v20211208.nc&quot;
+[4] &quot;tos_CNRM-ESM2-1_D_1_gr_1980-2018_v20211208.nc&quot;
+[1] &quot;tos_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-21.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;D&quot;
+[1] &quot;fgco2&quot; &quot;sios&quot;  &quot;sos&quot;   &quot;spco2&quot; &quot;tos&quot;  
+[1] &quot;fgco2&quot;
+ [1] &quot;fgco2_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;      
+ [2] &quot;fgco2_CNRM-ESM2-1_B_1_gr_1980-2018_v20211208.nc&quot;      
+ [3] &quot;fgco2_CNRM-ESM2-1_C_1_gr_1980-2018_v20211208.nc&quot;      
+ [4] &quot;fgco2_CNRM-ESM2-1_D_1_gr_1980-2018_v20211208.nc&quot;      
+ [5] &quot;fgco2_glob_CNRM-ESM2-1_A_1_gr_1980_2018_v20211208.txt&quot;
+ [6] &quot;fgco2_glob_CNRM-ESM2-1_B_1_gr_1980_2018_v20211208.txt&quot;
+ [7] &quot;fgco2_glob_CNRM-ESM2-1_C_1_gr_1980_2018_v20211208.txt&quot;
+ [8] &quot;fgco2_glob_CNRM-ESM2-1_D_1_gr_1980_2018_v20211208.txt&quot;
+ [9] &quot;fgco2_reg1_CNRM-ESM2-1_A_1_gr_1980_2018_v20211208.txt&quot;
+[10] &quot;fgco2_reg1_CNRM-ESM2-1_B_1_gr_1980_2018_v20211208.txt&quot;
+[11] &quot;fgco2_reg1_CNRM-ESM2-1_C_1_gr_1980_2018_v20211208.txt&quot;
+[12] &quot;fgco2_reg1_CNRM-ESM2-1_D_1_gr_1980_2018_v20211208.txt&quot;
+[13] &quot;fgco2_reg2_CNRM-ESM2-1_A_1_gr_1980_2018_v20211208.txt&quot;
+[14] &quot;fgco2_reg2_CNRM-ESM2-1_B_1_gr_1980_2018_v20211208.txt&quot;
+[15] &quot;fgco2_reg2_CNRM-ESM2-1_C_1_gr_1980_2018_v20211208.txt&quot;
+[16] &quot;fgco2_reg2_CNRM-ESM2-1_D_1_gr_1980_2018_v20211208.txt&quot;
+[17] &quot;fgco2_reg3_CNRM-ESM2-1_A_1_gr_1980_2018_v20211208.txt&quot;
+[18] &quot;fgco2_reg3_CNRM-ESM2-1_B_1_gr_1980_2018_v20211208.txt&quot;
+[19] &quot;fgco2_reg3_CNRM-ESM2-1_C_1_gr_1980_2018_v20211208.txt&quot;
+[20] &quot;fgco2_reg3_CNRM-ESM2-1_D_1_gr_1980_2018_v20211208.txt&quot;
+[21] &quot;fgco2_reg4_CNRM-ESM2-1_A_1_gr_1980_2018_v20211208.txt&quot;
+[22] &quot;fgco2_reg4_CNRM-ESM2-1_B_1_gr_1980_2018_v20211208.txt&quot;
+[23] &quot;fgco2_reg4_CNRM-ESM2-1_C_1_gr_1980_2018_v20211208.txt&quot;
+[24] &quot;fgco2_reg4_CNRM-ESM2-1_D_1_gr_1980_2018_v20211208.txt&quot;
+[25] &quot;fgco2_reg5_CNRM-ESM2-1_A_1_gr_1980_2018_v20211208.txt&quot;
+[26] &quot;fgco2_reg5_CNRM-ESM2-1_B_1_gr_1980_2018_v20211208.txt&quot;
+[27] &quot;fgco2_reg5_CNRM-ESM2-1_C_1_gr_1980_2018_v20211208.txt&quot;
+[28] &quot;fgco2_reg5_CNRM-ESM2-1_D_1_gr_1980_2018_v20211208.txt&quot;
+[29] &quot;fgco2_reg6_CNRM-ESM2-1_A_1_gr_1980_2018_v20211208.txt&quot;
+[30] &quot;fgco2_reg6_CNRM-ESM2-1_B_1_gr_1980_2018_v20211208.txt&quot;
+[31] &quot;fgco2_reg6_CNRM-ESM2-1_C_1_gr_1980_2018_v20211208.txt&quot;
+[32] &quot;fgco2_reg6_CNRM-ESM2-1_D_1_gr_1980_2018_v20211208.txt&quot;
+[1] &quot;fgco2_CNRM-ESM2-1_D_1_gr_1980-2018_v20211208.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-22.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;sios&quot;
+[1] &quot;sios_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
+[2] &quot;sios_CNRM-ESM2-1_B_1_gr_1980-2018_v20211208.nc&quot;
+[3] &quot;sios_CNRM-ESM2-1_C_1_gr_1980-2018_v20211208.nc&quot;
+[4] &quot;sios_CNRM-ESM2-1_D_1_gr_1980-2018_v20211208.nc&quot;
+[1] &quot;sios_CNRM-ESM2-1_D_1_gr_1980-2018_v20211208.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-23.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;sos&quot;
+[1] &quot;sos_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
+[2] &quot;sos_CNRM-ESM2-1_B_1_gr_1980-2018_v20211208.nc&quot;
+[3] &quot;sos_CNRM-ESM2-1_C_1_gr_1980-2018_v20211208.nc&quot;
+[4] &quot;sos_CNRM-ESM2-1_D_1_gr_1980-2018_v20211208.nc&quot;
+[1] &quot;sos_CNRM-ESM2-1_D_1_gr_1980-2018_v20211208.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-24.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;spco2&quot;
+[1] &quot;spco2_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
+[2] &quot;spco2_CNRM-ESM2-1_B_1_gr_1980-2018_v20211208.nc&quot;
+[3] &quot;spco2_CNRM-ESM2-1_C_1_gr_1980-2018_v20211208.nc&quot;
+[4] &quot;spco2_CNRM-ESM2-1_D_1_gr_1980-2018_v20211208.nc&quot;
+[1] &quot;spco2_CNRM-ESM2-1_D_1_gr_1980-2018_v20211208.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-25.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;tos&quot;
+[1] &quot;tos_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
+[2] &quot;tos_CNRM-ESM2-1_B_1_gr_1980-2018_v20211208.nc&quot;
+[3] &quot;tos_CNRM-ESM2-1_C_1_gr_1980-2018_v20211208.nc&quot;
+[4] &quot;tos_CNRM-ESM2-1_D_1_gr_1980-2018_v20211208.nc&quot;
+[1] &quot;tos_CNRM-ESM2-1_D_1_gr_1980-2018_v20211208.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-26.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;FESOM_REcoM_LR_2D_CO2_v20211119&quot;
+[1] &quot;A&quot;
+[1] &quot;dissicos&quot; &quot;fgco2&quot;    &quot;sios&quot;     &quot;sos&quot;      &quot;spco2&quot;    &quot;talkos&quot;   &quot;tos&quot;     
+[1] &quot;dissicos&quot;
+[1] &quot;dissicos_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;dissicos_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;dissicos_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;dissicos_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;dissicos_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-27.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;fgco2&quot;
+ [1] &quot;fgco2_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;     
+ [2] &quot;fgco2_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;     
+ [3] &quot;fgco2_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;     
+ [4] &quot;fgco2_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;     
+ [5] &quot;fgco2_glob_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+ [6] &quot;fgco2_glob_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+ [7] &quot;fgco2_glob_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+ [8] &quot;fgco2_glob_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+ [9] &quot;fgco2_reg_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot; 
+[10] &quot;fgco2_reg_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot; 
+[11] &quot;fgco2_reg_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot; 
+[12] &quot;fgco2_reg_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot; 
+[1] &quot;fgco2_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-28.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;sios&quot;
+[1] &quot;sios_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;sios_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;sios_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;sios_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;sios_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-29.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;sos&quot;
+[1] &quot;sos_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;sos_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;sos_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;sos_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;sos_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-30.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;spco2&quot;
+[1] &quot;spco2_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;spco2_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;spco2_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;spco2_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;spco2_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-31.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;talkos&quot;
+[1] &quot;talkos_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;talkos_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;talkos_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;talkos_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;talkos_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-32.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;tos&quot;
+[1] &quot;tos_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;tos_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;tos_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;tos_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;tos_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-33.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;D&quot;
+[1] &quot;dissicos&quot; &quot;fgco2&quot;    &quot;sios&quot;     &quot;sos&quot;      &quot;spco2&quot;    &quot;talkos&quot;   &quot;tos&quot;     
+[1] &quot;dissicos&quot;
+[1] &quot;dissicos_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;dissicos_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;dissicos_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;dissicos_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;dissicos_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-34.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;fgco2&quot;
+ [1] &quot;fgco2_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;     
+ [2] &quot;fgco2_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;     
+ [3] &quot;fgco2_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;     
+ [4] &quot;fgco2_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;     
+ [5] &quot;fgco2_glob_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+ [6] &quot;fgco2_glob_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+ [7] &quot;fgco2_glob_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+ [8] &quot;fgco2_glob_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+ [9] &quot;fgco2_reg_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot; 
+[10] &quot;fgco2_reg_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot; 
+[11] &quot;fgco2_reg_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot; 
+[12] &quot;fgco2_reg_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot; 
+[1] &quot;fgco2_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-35.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;sios&quot;
+[1] &quot;sios_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;sios_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;sios_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;sios_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;sios_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-36.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;sos&quot;
+[1] &quot;sos_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;sos_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;sos_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;sos_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;sos_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-37.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;spco2&quot;
+[1] &quot;spco2_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;spco2_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;spco2_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;spco2_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;spco2_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-38.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;talkos&quot;
+[1] &quot;talkos_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;talkos_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;talkos_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;talkos_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;talkos_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-39.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;tos&quot;
+[1] &quot;tos_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;tos_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;tos_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;tos_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;tos_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-40.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;MOM6-Princeton_2D_CO2_v20220125&quot;
+[1] &quot;A&quot;
+[1] &quot;dissicos&quot; &quot;fgco2&quot;    &quot;po4os&quot;    &quot;sios&quot;     &quot;sos&quot;      &quot;spco2&quot;    &quot;talkos&quot;  
+[8] &quot;tos&quot;     
+[1] &quot;dissicos&quot;
+[1] &quot;dissicos_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[2] &quot;dissicos_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;dissicos_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-41.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;fgco2&quot;
+[1] &quot;fgco2_glob_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[2] &quot;fgco2_glob_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[3] &quot;fgco2_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;     
+[4] &quot;fgco2_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;     
+[5] &quot;fgco2_reg_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot; 
+[6] &quot;fgco2_reg_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot; 
+[1] &quot;fgco2_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-42.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;po4os&quot;
+[1] &quot;po4os_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[2] &quot;po4os_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;po4os_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-43.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;sios&quot;
+[1] &quot;sios_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[2] &quot;sios_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;sios_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-44.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;sos&quot;
+[1] &quot;sos_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[2] &quot;sos_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;sos_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-45.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;spco2&quot;
+[1] &quot;spco2_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[2] &quot;spco2_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;spco2_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-46.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;talkos&quot;
+[1] &quot;talkos_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[2] &quot;talkos_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;talkos_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-47.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;tos&quot;
+[1] &quot;tos_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[2] &quot;tos_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;tos_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-48.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;D&quot;
+[1] &quot;MRI-ESM2-0_2D_CO2_v20210830&quot;
+[1] &quot;A&quot;
+[1] &quot;dissicos&quot; &quot;fgco2&quot;    &quot;po4os&quot;    &quot;sios&quot;     &quot;sos&quot;      &quot;spco2&quot;    &quot;talkos&quot;  
+[8] &quot;tos&quot;     
+[1] &quot;dissicos&quot;
+[1] &quot;dissicos_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[2] &quot;dissicos_MRI-ESM2-0_B_1_gr_1980-2018_v20210830.nc&quot;
+[3] &quot;dissicos_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[4] &quot;dissicos_MRI-ESM2-0_D_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;dissicos_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-49.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;fgco2&quot;
+ [1] &quot;fgco2_glob_MRI-ESM2-0_A_1_gm_1980-2018_v20210830.nc&quot;
+ [2] &quot;fgco2_glob_MRI-ESM2-0_B_1_gm_1980-2018_v20210830.nc&quot;
+ [3] &quot;fgco2_glob_MRI-ESM2-0_C_1_gm_1980-2018_v20210830.nc&quot;
+ [4] &quot;fgco2_glob_MRI-ESM2-0_D_1_gm_1980-2018_v20210830.nc&quot;
+ [5] &quot;fgco2_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;     
+ [6] &quot;fgco2_MRI-ESM2-0_B_1_gr_1980-2018_v20210830.nc&quot;     
+ [7] &quot;fgco2_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;     
+ [8] &quot;fgco2_MRI-ESM2-0_D_1_gr_1980-2018_v20210830.nc&quot;     
+ [9] &quot;fgco2_reg_MRI-ESM2-0_A_1_gmr_1980-2018_v20210830.nc&quot;
+[10] &quot;fgco2_reg_MRI-ESM2-0_B_1_gmr_1980-2018_v20210830.nc&quot;
+[11] &quot;fgco2_reg_MRI-ESM2-0_C_1_gmr_1980-2018_v20210830.nc&quot;
+[12] &quot;fgco2_reg_MRI-ESM2-0_D_1_gmr_1980-2018_v20210830.nc&quot;
+[1] &quot;fgco2_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-50.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;po4os&quot;
+[1] &quot;po4os_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[2] &quot;po4os_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;po4os_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-51.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;sios&quot;
+[1] &quot;sios_MRI-ESM2-0_A_1_gr_1980-1980_v20210830.nc&quot;
+[2] &quot;sios_MRI-ESM2-0_C_1_gr_1980-1980_v20210830.nc&quot;
+[1] &quot;sios_MRI-ESM2-0_A_1_gr_1980-1980_v20210830.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-52.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;sos&quot;
+[1] &quot;sos_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[2] &quot;sos_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;sos_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-53.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;spco2&quot;
+[1] &quot;spco2_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[2] &quot;spco2_MRI-ESM2-0_B_1_gr_1980-2018_v20210830.nc&quot;
+[3] &quot;spco2_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[4] &quot;spco2_MRI-ESM2-0_D_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;spco2_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-54.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;talkos&quot;
+[1] &quot;talkos_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[2] &quot;talkos_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;talkos_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-55.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;tos&quot;
+[1] &quot;dissicnatos_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[2] &quot;dissicnatos_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[3] &quot;tos_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;        
+[4] &quot;tos_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;        
+[1] &quot;tos_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-56.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;D&quot;
+[1] &quot;dissicos&quot; &quot;fgco2&quot;    &quot;spco2&quot;   
+[1] &quot;dissicos&quot;
+[1] &quot;dissicos_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[2] &quot;dissicos_MRI-ESM2-0_B_1_gr_1980-2018_v20210830.nc&quot;
+[3] &quot;dissicos_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[4] &quot;dissicos_MRI-ESM2-0_D_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;dissicos_MRI-ESM2-0_D_1_gr_1980-2018_v20210830.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-57.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;fgco2&quot;
+ [1] &quot;fgco2_glob_MRI-ESM2-0_A_1_gm_1980-2018_v20210830.nc&quot;
+ [2] &quot;fgco2_glob_MRI-ESM2-0_B_1_gm_1980-2018_v20210830.nc&quot;
+ [3] &quot;fgco2_glob_MRI-ESM2-0_C_1_gm_1980-2018_v20210830.nc&quot;
+ [4] &quot;fgco2_glob_MRI-ESM2-0_D_1_gm_1980-2018_v20210830.nc&quot;
+ [5] &quot;fgco2_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;     
+ [6] &quot;fgco2_MRI-ESM2-0_B_1_gr_1980-2018_v20210830.nc&quot;     
+ [7] &quot;fgco2_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;     
+ [8] &quot;fgco2_MRI-ESM2-0_D_1_gr_1980-2018_v20210830.nc&quot;     
+ [9] &quot;fgco2_reg_MRI-ESM2-0_A_1_gmr_1980-2018_v20210830.nc&quot;
+[10] &quot;fgco2_reg_MRI-ESM2-0_B_1_gmr_1980-2018_v20210830.nc&quot;
+[11] &quot;fgco2_reg_MRI-ESM2-0_C_1_gmr_1980-2018_v20210830.nc&quot;
+[12] &quot;fgco2_reg_MRI-ESM2-0_D_1_gmr_1980-2018_v20210830.nc&quot;
+[1] &quot;fgco2_MRI-ESM2-0_D_1_gr_1980-2018_v20210830.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-58.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;spco2&quot;
+[1] &quot;spco2_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[2] &quot;spco2_MRI-ESM2-0_B_1_gr_1980-2018_v20210830.nc&quot;
+[3] &quot;spco2_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[4] &quot;spco2_MRI-ESM2-0_D_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;spco2_MRI-ESM2-0_D_1_gr_1980-2018_v20210830.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-59.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;ORCA025-GEOMAR_2D_CO2_v20210804&quot;
+[1] &quot;A&quot;
+[1] &quot;dissicos&quot; &quot;fgco2&quot;    &quot;po4os&quot;    &quot;sos&quot;      &quot;spco2&quot;    &quot;talkos&quot;   &quot;tos&quot;     
+[1] &quot;dissicos&quot;
+[1] &quot;dissicos_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;
+[2] &quot;dissicos_ORCA025-GEOMAR_B_1_gr_1980-2018_v20210804.nc&quot;
+[3] &quot;dissicos_ORCA025-GEOMAR_C_1_gr_1980-2018_v20210804.nc&quot;
+[4] &quot;dissicos_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;
+[1] &quot;dissicos_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-60.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;fgco2&quot;
+ [1] &quot;fgco2_glob_ORCA025-GEOMAR_A_1_1980-2018_v20210804.nc&quot;
+ [2] &quot;fgco2_glob_ORCA025-GEOMAR_B_1_1980-2018_v20210804.nc&quot;
+ [3] &quot;fgco2_glob_ORCA025-GEOMAR_C_1_1980-2018_v20210804.nc&quot;
+ [4] &quot;fgco2_glob_ORCA025-GEOMAR_D_1_1980-2018_v20210804.nc&quot;
+ [5] &quot;fgco2_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;  
+ [6] &quot;fgco2_ORCA025-GEOMAR_B_1_gr_1980-2018_v20210804.nc&quot;  
+ [7] &quot;fgco2_ORCA025-GEOMAR_C_1_gr_1980-2018_v20210804.nc&quot;  
+ [8] &quot;fgco2_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;  
+ [9] &quot;fgco2_reg_ORCA025-GEOMAR_A_1_1980-2018_v20210804.nc&quot; 
+[10] &quot;fgco2_reg_ORCA025-GEOMAR_B_1_1980-2018_v20210804.nc&quot; 
+[11] &quot;fgco2_reg_ORCA025-GEOMAR_C_1_1980-2018_v20210804.nc&quot; 
+[12] &quot;fgco2_reg_ORCA025-GEOMAR_D_1_1980-2018_v20210804.nc&quot; 
+[1] &quot;fgco2_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-61.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;po4os&quot;
+[1] &quot;po4os_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;
+[2] &quot;po4os_ORCA025-GEOMAR_B_1_gr_1980-2018_v20210804.nc&quot;
+[3] &quot;po4os_ORCA025-GEOMAR_C_1_gr_1980-2018_v20210804.nc&quot;
+[4] &quot;po4os_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;
+[1] &quot;po4os_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-62.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;sos&quot;
+[1] &quot;sos_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;
+[2] &quot;sos_ORCA025-GEOMAR_B_1_gr_1980-2018_v20210804.nc&quot;
+[3] &quot;sos_ORCA025-GEOMAR_C_1_gr_1980-2018_v20210804.nc&quot;
+[4] &quot;sos_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;
+[1] &quot;sos_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-63.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;spco2&quot;
+[1] &quot;spco2_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;
+[2] &quot;spco2_ORCA025-GEOMAR_B_1_gr_1980-2018_v20210804.nc&quot;
+[3] &quot;spco2_ORCA025-GEOMAR_C_1_gr_1980-2018_v20210804.nc&quot;
+[4] &quot;spco2_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;
+[1] &quot;spco2_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-64.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;talkos&quot;
+[1] &quot;talkos_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;
+[2] &quot;talkos_ORCA025-GEOMAR_B_1_gr_1980-2018_v20210804.nc&quot;
+[3] &quot;talkos_ORCA025-GEOMAR_C_1_gr_1980-2018_v20210804.nc&quot;
+[4] &quot;talkos_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;
+[1] &quot;talkos_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-65.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;tos&quot;
+[1] &quot;tos_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;
+[2] &quot;tos_ORCA025-GEOMAR_B_1_gr_1980-2018_v20210804.nc&quot;
+[3] &quot;tos_ORCA025-GEOMAR_C_1_gr_1980-2018_v20210804.nc&quot;
+[4] &quot;tos_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;
+[1] &quot;tos_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-66.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;D&quot;
+[1] &quot;dissicos&quot; &quot;fgco2&quot;    &quot;po4os&quot;    &quot;sos&quot;      &quot;spco2&quot;    &quot;talkos&quot;   &quot;tos&quot;     
+[1] &quot;dissicos&quot;
+[1] &quot;dissicos_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;
+[2] &quot;dissicos_ORCA025-GEOMAR_B_1_gr_1980-2018_v20210804.nc&quot;
+[3] &quot;dissicos_ORCA025-GEOMAR_C_1_gr_1980-2018_v20210804.nc&quot;
+[4] &quot;dissicos_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;
+[1] &quot;dissicos_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-67.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;fgco2&quot;
+ [1] &quot;fgco2_glob_ORCA025-GEOMAR_A_1_1980-2018_v20210804.nc&quot;
+ [2] &quot;fgco2_glob_ORCA025-GEOMAR_B_1_1980-2018_v20210804.nc&quot;
+ [3] &quot;fgco2_glob_ORCA025-GEOMAR_C_1_1980-2018_v20210804.nc&quot;
+ [4] &quot;fgco2_glob_ORCA025-GEOMAR_D_1_1980-2018_v20210804.nc&quot;
+ [5] &quot;fgco2_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;  
+ [6] &quot;fgco2_ORCA025-GEOMAR_B_1_gr_1980-2018_v20210804.nc&quot;  
+ [7] &quot;fgco2_ORCA025-GEOMAR_C_1_gr_1980-2018_v20210804.nc&quot;  
+ [8] &quot;fgco2_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;  
+ [9] &quot;fgco2_reg_ORCA025-GEOMAR_A_1_1980-2018_v20210804.nc&quot; 
+[10] &quot;fgco2_reg_ORCA025-GEOMAR_B_1_1980-2018_v20210804.nc&quot; 
+[11] &quot;fgco2_reg_ORCA025-GEOMAR_C_1_1980-2018_v20210804.nc&quot; 
+[12] &quot;fgco2_reg_ORCA025-GEOMAR_D_1_1980-2018_v20210804.nc&quot; 
+[1] &quot;fgco2_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-68.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;po4os&quot;
+[1] &quot;po4os_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;
+[2] &quot;po4os_ORCA025-GEOMAR_B_1_gr_1980-2018_v20210804.nc&quot;
+[3] &quot;po4os_ORCA025-GEOMAR_C_1_gr_1980-2018_v20210804.nc&quot;
+[4] &quot;po4os_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;
+[1] &quot;po4os_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-69.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;sos&quot;
+[1] &quot;sos_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;
+[2] &quot;sos_ORCA025-GEOMAR_B_1_gr_1980-2018_v20210804.nc&quot;
+[3] &quot;sos_ORCA025-GEOMAR_C_1_gr_1980-2018_v20210804.nc&quot;
+[4] &quot;sos_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;
+[1] &quot;sos_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-70.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;spco2&quot;
+[1] &quot;spco2_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;
+[2] &quot;spco2_ORCA025-GEOMAR_B_1_gr_1980-2018_v20210804.nc&quot;
+[3] &quot;spco2_ORCA025-GEOMAR_C_1_gr_1980-2018_v20210804.nc&quot;
+[4] &quot;spco2_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;
+[1] &quot;spco2_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-71.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;talkos&quot;
+[1] &quot;talkos_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;
+[2] &quot;talkos_ORCA025-GEOMAR_B_1_gr_1980-2018_v20210804.nc&quot;
+[3] &quot;talkos_ORCA025-GEOMAR_C_1_gr_1980-2018_v20210804.nc&quot;
+[4] &quot;talkos_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;
+[1] &quot;talkos_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-72.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;tos&quot;
+[1] &quot;tos_ORCA025-GEOMAR_A_1_gr_1980-2018_v20210804.nc&quot;
+[2] &quot;tos_ORCA025-GEOMAR_B_1_gr_1980-2018_v20210804.nc&quot;
+[3] &quot;tos_ORCA025-GEOMAR_C_1_gr_1980-2018_v20210804.nc&quot;
+[4] &quot;tos_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;
+[1] &quot;tos_ORCA025-GEOMAR_D_1_gr_1980-2018_v20210804.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-73.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;ORCA1-LIM3-PISCES_2D_CO2_v20211215&quot;
+[1] &quot;A&quot;
+[1] &quot;dissicos&quot; &quot;fgco2&quot;    &quot;po4os&quot;    &quot;sios&quot;     &quot;sos&quot;      &quot;spco2&quot;    &quot;talkos&quot;  
+[8] &quot;tos&quot;     
+[1] &quot;dissicos&quot;
+[1] &quot;dissicos_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[2] &quot;dissicos_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot;
+[3] &quot;dissicos_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot;
+[4] &quot;dissicos_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;dissicos_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-74.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;fgco2&quot;
+ [1] &quot;fgco2_glob_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+ [2] &quot;fgco2_glob_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot;
+ [3] &quot;fgco2_glob_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot;
+ [4] &quot;fgco2_glob_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+ [5] &quot;fgco2_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;     
+ [6] &quot;fgco2_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot;     
+ [7] &quot;fgco2_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot;     
+ [8] &quot;fgco2_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;     
+ [9] &quot;fgco2_reg_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot; 
+[10] &quot;fgco2_reg_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot; 
+[11] &quot;fgco2_reg_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot; 
+[12] &quot;fgco2_reg_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot; 
+[1] &quot;fgco2_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-75.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;po4os&quot;
+[1] &quot;po4os_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[2] &quot;po4os_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot;
+[3] &quot;po4os_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot;
+[4] &quot;po4os_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;po4os_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-76.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;sios&quot;
+[1] &quot;sios_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[2] &quot;sios_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot;
+[3] &quot;sios_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot;
+[4] &quot;sios_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;sios_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-77.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;sos&quot;
+[1] &quot;sos_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[2] &quot;sos_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot;
+[3] &quot;sos_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot;
+[4] &quot;sos_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;sos_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-78.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;spco2&quot;
+[1] &quot;spco2_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[2] &quot;spco2_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot;
+[3] &quot;spco2_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot;
+[4] &quot;spco2_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;spco2_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-79.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;talkos&quot;
+[1] &quot;talkos_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[2] &quot;talkos_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot;
+[3] &quot;talkos_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot;
+[4] &quot;talkos_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;talkos_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-80.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;tos&quot;
+[1] &quot;tos_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[2] &quot;tos_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot;
+[3] &quot;tos_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot;
+[4] &quot;tos_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;tos_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-81.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;D&quot;
+[1] &quot;dissicos&quot; &quot;fgco2&quot;    &quot;po4os&quot;    &quot;sios&quot;     &quot;sos&quot;      &quot;spco2&quot;    &quot;talkos&quot;  
+[8] &quot;tos&quot;     
+[1] &quot;dissicos&quot;
+[1] &quot;dissicos_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[2] &quot;dissicos_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot;
+[3] &quot;dissicos_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot;
+[4] &quot;dissicos_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;dissicos_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-82.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;fgco2&quot;
+ [1] &quot;fgco2_glob_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+ [2] &quot;fgco2_glob_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot;
+ [3] &quot;fgco2_glob_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot;
+ [4] &quot;fgco2_glob_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+ [5] &quot;fgco2_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;     
+ [6] &quot;fgco2_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot;     
+ [7] &quot;fgco2_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot;     
+ [8] &quot;fgco2_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;     
+ [9] &quot;fgco2_reg_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot; 
+[10] &quot;fgco2_reg_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot; 
+[11] &quot;fgco2_reg_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot; 
+[12] &quot;fgco2_reg_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot; 
+[1] &quot;fgco2_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-83.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;po4os&quot;
+[1] &quot;po4os_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[2] &quot;po4os_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot;
+[3] &quot;po4os_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot;
+[4] &quot;po4os_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;po4os_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-84.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;sios&quot;
+[1] &quot;sios_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[2] &quot;sios_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot;
+[3] &quot;sios_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot;
+[4] &quot;sios_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;sios_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-85.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;sos&quot;
+[1] &quot;sos_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[2] &quot;sos_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot;
+[3] &quot;sos_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot;
+[4] &quot;sos_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;sos_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-86.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;spco2&quot;
+[1] &quot;spco2_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[2] &quot;spco2_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot;
+[3] &quot;spco2_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot;
+[4] &quot;spco2_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;spco2_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-87.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;talkos&quot;
+[1] &quot;talkos_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[2] &quot;talkos_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot;
+[3] &quot;talkos_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot;
+[4] &quot;talkos_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;talkos_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-88.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;tos&quot;
+[1] &quot;tos_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[2] &quot;tos_ORCA1-LIM3-PISCES_B_1_gr_1980-2018_v20211215.nc&quot;
+[3] &quot;tos_ORCA1-LIM3-PISCES_C_1_gr_1980-2018_v20211215.nc&quot;
+[4] &quot;tos_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;tos_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/subset_cmorized_variable_forcing_data-89.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="air-sea-disequilibrium" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Air-sea disequilibrium</h1>
 <pre class="r"><code># set name of model to be subsetted
+# model_IDs &lt;- c(&quot;A&quot;)
 model_IDs &lt;- c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;)
-
-file &lt;- paste(&quot;area&quot;,
-              &quot;_CESM-ETHZ_&quot;,
-              &quot;1_gr_v20211122.nc&quot;,
-              sep = &quot;&quot;)
-
-area_grid &lt;-
-  variable_data &lt;-
-  read_ncdf(paste(path_cmorized_ancillary,
-                  file,
-                  sep = &quot;&quot;),
-            make_units = FALSE) %&gt;% 
-  as_tibble()
-
-area_grid &lt;- area_grid %&gt;%
-  mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
 
 # for loop across variables
 variables &lt;-
@@ -2631,163 +3583,2097 @@ variables &lt;-
     &quot;alpha&quot;,
     &quot;fice&quot;)
 
-for (i_model_ID in model_IDs) {
-  # i_model_ID &lt;- model_IDs[1]
-  
-  for (i_variable in variables) {
-    # i_variable &lt;- variables[5]
-    
-    # read list of all files
-    file &lt;- paste(i_variable,
-                  &quot;_CESM-ETHZ_&quot;,
-                  i_model_ID,
-                  &quot;_1_gr_1980-2018_v20211122.nc&quot;,
-                  sep = &quot;&quot;)
-    print(file)
 
-    # read in data
-    variable_data &lt;-
-      read_ncdf(paste(path_cmorized,
-                      file,
-                      sep = &quot;&quot;),
-                make_units = FALSE)
-    
-    # convert to tibble
-    variable_data_tibble &lt;- variable_data %&gt;%
-      as_tibble()
-    
-    # remove open link to nc file
-    rm(variable_data)
-    
-    # remove na values
-    variable_data_tibble &lt;-
-      variable_data_tibble %&gt;%
-      drop_na()
-    
-    # harmonize longitudes
-    variable_data_tibble &lt;- variable_data_tibble %&gt;%
-      mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
-    
-    # only consider model grids within basinmask
-    variable_data_tibble &lt;-
-      inner_join(variable_data_tibble, basinmask) %&gt;%
-      select(-basin_AIP)
-    
-    if (exists(&quot;all_variables&quot;)) {
-      all_variables &lt;- inner_join(all_variables, variable_data_tibble)
-    }
-    
-    if (!exists(&quot;all_variables&quot;)) {
-      all_variables &lt;- variable_data_tibble
-    }
-    
-    
+mol_to_g &lt;- 12
+P &lt;- 1e-15
+m3_to_kg &lt;- 1030
+sec_to_yr &lt;- 60 * 60 * 24 * 365
+
+unit_conversion_to_PgCyr &lt;-
+  mol_to_g * P * sec_to_yr / m3_to_kg
+
+# models &lt;- models[7:length(models)]
+
+for (i_model in models) {
+  # i_model &lt;- models[7]
+  print(i_model)
+  
+  file &lt;-
+    list.files(path = paste0(
+      path_cmorized_ancillary,
+      str_replace(i_model, &quot;2D_CO2&quot;, &quot;Ancillary_data&quot;)
+    ),
+    pattern = &quot;area&quot;)
+  
+  print(file)
+  
+  if (i_model == &quot;CNRM-ESM2-1_2D_CO2_v20211208&quot;) {
+    file &lt;-
+      file[str_detect(file, pattern = paste0(&quot;_A_&quot;))]
   }
   
-  all_variables &lt;- inner_join(all_variables,
-                              area_grid)
+  if (i_model %in% c(&quot;ORCA025-GEOMAR_2D_CO2_v20210804&quot;,
+                     &quot;ORCA1-LIM3-PISCES_2D_CO2_v20211215&quot;)) {
+    file &lt;-
+      file[str_detect(file, pattern = paste0(&quot;area_O&quot;))]
+  }
   
-  mol_to_g &lt;- 12
-  P &lt;- 1e-15
-  m3_to_kg &lt;- 1030
-  sec_to_yr &lt;- 60*60*24*365
-
-  unit_conversion_to_PgCyr &lt;- mol_to_g * P * sec_to_yr / m3_to_kg
-
-  all_variables &lt;- all_variables %&gt;%
-    mutate(delta_pco2 = spco2 - pco2atm,
-           scale = area * Kw * alpha * (1-fice),
-           fgco2 = delta_pco2 * scale)
+  area_grid &lt;-
+    variable_data &lt;-
+    read_ncdf(paste0(
+      path_cmorized_ancillary,
+      str_replace(i_model, &quot;2D_CO2&quot;, &quot;Ancillary_data&quot;),
+      &quot;/&quot;,
+      file
+    ),
+    make_units = FALSE) %&gt;%
+    as_tibble()
   
-  delta_pco2_monthly &lt;- all_variables %&gt;%
-    group_by(time_mon) %&gt;%
-    summarise(
-      scaling_glob = sum(scale),
-      fgco2_glob = sum(fgco2),
-      delta_pco2_glob = fgco2_glob / scaling_glob
-    ) %&gt;%
-    ungroup() %&gt;% 
-    mutate(fgco2_glob = fgco2_glob * unit_conversion_to_PgCyr)
-  
-  delta_pco2_annual &lt;- delta_pco2_monthly %&gt;%
-    mutate(year = year(time_mon)) %&gt;%
-    group_by(year) %&gt;%
-    summarise(
-      scaling_glob = mean(scaling_glob),
-      fgco2_glob = mean(fgco2_glob),
-      delta_pco2_glob = mean(delta_pco2_glob)
-    ) %&gt;%
-    ungroup()
-  
-  print(
-  ggplot() +
-    geom_path(data = delta_pco2_monthly,
-              aes(decimal_date(time_mon), delta_pco2_glob, col = &quot;monthly&quot;)) +
-    geom_path(data = delta_pco2_annual,
-              aes(year, delta_pco2_glob, col = &quot;annual&quot;)) +
-    scale_color_brewer(palette = &quot;Set1&quot;, name = &quot;Average&quot;) +
-    labs(title = paste(&quot;model_id:&quot;,i_model_ID),
-         x = &quot;year&quot;)
-  )
-  
-  print(
-  ggplot() +
-    geom_path(data = delta_pco2_monthly,
-              aes(decimal_date(time_mon), fgco2_glob, col = &quot;monthly&quot;)) +
-    geom_path(data = delta_pco2_annual,
-              aes(year, fgco2_glob, col = &quot;annual&quot;)) +
-    scale_color_brewer(palette = &quot;Set1&quot;, name = &quot;Average&quot;) +
-    labs(title = paste(&quot;model_id:&quot;,i_model_ID),
-         x = &quot;year&quot;)
-  )
-  
-  print(
-    ggplot() +
-      geom_path(
-        data = delta_pco2_annual,
-        aes(
-          year,
-          scaling_glob * unit_conversion_to_PgCyr
-        )
+  for (i_model_ID in model_IDs) {
+    # i_model_ID &lt;- model_IDs[1]
+    print(i_model_ID)
+    
+    variables_available &lt;-
+      list.files(
+        path = paste0(path_cmorized, i_model),
+        pattern = paste0(&quot;_&quot;, i_model_ID, &quot;_&quot;)
       )
-  )
-  
-  print(
-    ggplot() +
-      geom_path(
-        data = delta_pco2_annual,
-        aes(
-          year,
-          scaling_glob * delta_pco2_glob * unit_conversion_to_PgCyr,
-          col = &quot;scaled&quot;
+    
+    if (length(variables_available) &gt; 0) {
+      variables_available &lt;-
+        str_split(variables_available,
+                  pattern = &quot;_&quot;,
+                  simplify = TRUE)[, 1]
+      variables_available &lt;-
+        variables_available[variables_available %in% variables]
+      variables_available &lt;- unique(variables_available)
+      
+      print(variables_available)
+      
+      if (length(variables_available) == 5) {
+        for (i_variable in variables_available) {
+          # i_variable &lt;- variables_available[1]
+          
+          print(i_variable)
+          
+          # print(&quot;sleep&quot;)
+          Sys.sleep(1)
+          
+          # read list of all files
+          file &lt;-
+            list.files(
+              path = paste0(path_cmorized, i_model),
+              pattern = paste0(i_variable, &quot;_&quot;)
+            )
+          
+          print(file)
+          
+          file &lt;-
+            file[str_detect(file, pattern = paste0(&quot;_&quot;, i_model_ID, &quot;_&quot;))]
+          
+          file &lt;- file[!str_detect(file, pattern = &quot;_reg&quot;)]
+          file &lt;- file[!str_detect(file, pattern = &quot;_glob&quot;)]
+          file &lt;- file[!str_detect(file, pattern = &quot;dissicnatos&quot;)]
+          
+          print(file)
+          
+          # read in data
+          variable_data &lt;-
+            read_ncdf(paste0(path_cmorized,
+                             i_model,
+                             &quot;/&quot;,
+                             file),
+                      make_units = FALSE)
+          
+          # convert to tibble
+          variable_data_tibble &lt;- variable_data %&gt;%
+            as_tibble()
+          
+          # remove open link to nc file
+          rm(variable_data)
+          
+          # remove na values
+          variable_data_tibble &lt;-
+            variable_data_tibble %&gt;%
+            drop_na()
+          
+
+          if (exists(&quot;all_variables&quot;)) {
+            all_variables &lt;- inner_join(all_variables, variable_data_tibble)
+          }
+          
+          if (!exists(&quot;all_variables&quot;)) {
+            all_variables &lt;- variable_data_tibble
+          }
+          
+          
+        }
+        
+        all_variables &lt;- inner_join(all_variables,
+                                    area_grid)
+        
+        if (i_model == &quot;CESM-ETHZ_2D_CO2_v20211122&quot;) {
+          all_variables &lt;- all_variables %&gt;%
+            rename(time = time_mon)
+        }
+        
+        if (i_model == &quot;FESOM_REcoM_LR_2D_CO2_v20211119&quot;) {
+          all_variables &lt;- all_variables %&gt;%
+            rename(lat = Lat,
+                   lon = Lon,
+                   time = Time) %&gt;%
+            mutate(time = as.Date(time, origin = &#39;1980-01-01&#39;))
+        }
+        
+        # harmonize longitudes
+        all_variables &lt;- all_variables %&gt;%
+          mutate(lon = if_else(lon &lt; 20, lon + 360, lon))
+        
+        # only consider model grids within basinmask
+        all_variables &lt;-
+          inner_join(all_variables, basinmask) %&gt;%
+          select(-basin_AIP)
+        
+        
+        all_variables &lt;- all_variables %&gt;%
+          mutate(
+            delta_pco2 = spco2 - pco2atm,
+            scale = area * Kw * alpha * (1 - fice),
+            fgco2 = delta_pco2 * scale
+          )
+        
+        delta_pco2_monthly &lt;- all_variables %&gt;%
+          group_by(time) %&gt;%
+          summarise(
+            scaling_glob = sum(scale),
+            fgco2_glob = sum(fgco2),
+            delta_pco2_glob = fgco2_glob / scaling_glob
+          ) %&gt;%
+          ungroup() %&gt;%
+          mutate(fgco2_glob = fgco2_glob * unit_conversion_to_PgCyr)
+        
+        delta_pco2_annual &lt;- delta_pco2_monthly %&gt;%
+          mutate(year = year(time)) %&gt;%
+          group_by(year) %&gt;%
+          summarise(
+            scaling_glob = mean(scaling_glob),
+            fgco2_glob = mean(fgco2_glob),
+            delta_pco2_glob = mean(delta_pco2_glob)
+          ) %&gt;%
+          ungroup()
+        
+        print(
+          ggplot() +
+            geom_path(
+              data = delta_pco2_monthly,
+              aes(decimal_date(time), delta_pco2_glob, col = &quot;monthly&quot;)
+            ) +
+            geom_path(data = delta_pco2_annual,
+                      aes(year, delta_pco2_glob, col = &quot;annual&quot;)) +
+            scale_color_brewer(palette = &quot;Set1&quot;, name = &quot;Average&quot;) +
+            labs(
+              title = paste(
+                str_remove(i_model, &quot;2D_CO2_&quot;),
+                &quot;| model_id:&quot;,
+                i_model_ID
+              ),
+              x = &quot;year&quot;
+            )
         )
-      ) +
-      geom_path(
-        data = delta_pco2_annual,
-        aes(year, fgco2_glob, col = &quot;integrated&quot;)
-      ) +
-      scale_color_brewer(palette = &quot;Set1&quot;, name = &quot;Estimate&quot;) +
-      scale_y_continuous(name = &quot;Air-sea flux [PgC yr-1]&quot;) +
-      labs(title = paste(&quot;model_id:&quot;, i_model_ID),
-           x = &quot;year&quot;)
-  )
-  
-  # write raw data file for GLODAP-based subsetting model variables
-  delta_pco2_annual %&gt;%
-    select(-c(scaling_glob, fgco2_glob)) %&gt;% 
-    write_csv(
-      file = paste(
-        path_preprocessing,
-        &quot;surface_ocean_disequilibrium/&quot;,
-        i_model_ID,
-        &quot;_annual.csv&quot;,
-        sep = &quot;&quot;
-      )
-    )
-  
-  rm(i_variable, all_variables, delta_pco2_annual, delta_pco2_monthly)
-  
+        
+        print(
+          ggplot() +
+            geom_path(data = delta_pco2_monthly,
+                      aes(
+                        decimal_date(time), fgco2_glob, col = &quot;monthly&quot;
+                      )) +
+            geom_path(data = delta_pco2_annual,
+                      aes(year, fgco2_glob, col = &quot;annual&quot;)) +
+            scale_color_brewer(palette = &quot;Set1&quot;, name = &quot;Average&quot;) +
+            labs(
+              title = paste(
+                str_remove(i_model, &quot;2D_CO2_&quot;) ,
+                &quot;| model_id:&quot;,
+                i_model_ID
+              ),
+              x = &quot;year&quot;
+            )
+        )
+        
+        print(ggplot() +
+                geom_path(
+                  data = delta_pco2_annual,
+                  aes(year,
+                      scaling_glob * unit_conversion_to_PgCyr)
+                ))
+        
+        print(
+          ggplot() +
+            geom_path(
+              data = delta_pco2_annual,
+              aes(
+                year,
+                scaling_glob * delta_pco2_glob * unit_conversion_to_PgCyr,
+                col = &quot;scaled&quot;
+              )
+            ) +
+            geom_path(data = delta_pco2_annual,
+                      aes(year, fgco2_glob, col = &quot;integrated&quot;)) +
+            scale_color_brewer(palette = &quot;Set1&quot;, name = &quot;Estimate&quot;) +
+            scale_y_continuous(name = &quot;Air-sea flux [PgC yr-1]&quot;) +
+            labs(
+              title = paste(
+                str_remove(i_model, &quot;2D_CO2_&quot;),
+                &quot;| model_id:&quot;,
+                i_model_ID
+              ),
+              x = &quot;year&quot;
+            )
+        )
+        
+        # write raw data file for GLODAP-based subsetting model variables
+        delta_pco2_annual %&gt;%
+          select(-c(scaling_glob, fgco2_glob)) %&gt;%
+          write_csv(
+            file = paste0(
+              path_preprocessing,
+              &quot;surface_ocean_disequilibrium/&quot;,
+              str_remove(i_model, &quot;2D_CO2_&quot;),
+              &quot;_&quot;,
+              i_model_ID,
+              &quot;_annual.csv&quot;
+            )
+          )
+        
+        rm(i_variable,
+           all_variables,
+           delta_pco2_annual,
+           delta_pco2_monthly)
+        
+      }
+    }
+  }
 }</code></pre>
+<pre><code>[1] &quot;CESM-ETHZ_2D_CO2_v20211122&quot;
+[1] &quot;area_CESM-ETHZ_1_gr_v20211122.nc&quot;
+[1] &quot;A&quot;
+[1] &quot;alpha&quot;   &quot;fice&quot;    &quot;Kw&quot;      &quot;pco2atm&quot; &quot;spco2&quot;  
+[1] &quot;alpha&quot;
+[1] &quot;alpha_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;alpha_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;alpha_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;alpha_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;alpha_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;fice&quot;
+[1] &quot;fice_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;fice_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;fice_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;fice_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;fice_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;Kw&quot;
+[1] &quot;Kw_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;Kw_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;Kw_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;Kw_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;Kw_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;pco2atm&quot;
+[1] &quot;pco2atm_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;pco2atm_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;pco2atm_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;pco2atm_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;pco2atm_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;spco2&quot;
+[1] &quot;spco2_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;spco2_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;spco2_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;spco2_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;spco2_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-1">
+Past versions of air_sea_disequilibria-1.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-1.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-1.png" target="_blank">06054b2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/85b0624e33a96dc82f20dd4176dda09310b17c37/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-1.png" target="_blank">85b0624</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-06-25
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/8c6e49f7da24699e33c474bfca89bf8bab4d3983/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-1.png" target="_blank">8c6e49f</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-17
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-1.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/c424d181fbe4f3b8e33507c78a57bf7bd1092198/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-1.png" target="_blank">c424d18</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-11
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/13659b921b1817076b8ac43f31c7ef55f7dbc441/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-1.png" target="_blank">13659b9</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-09
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0e663e368b5734d22aa6af65802cafc75ee8d06a/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-1.png" target="_blank">0e663e3</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-2">
+Past versions of air_sea_disequilibria-2.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-2.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-2.png" target="_blank">06054b2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/85b0624e33a96dc82f20dd4176dda09310b17c37/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-2.png" target="_blank">85b0624</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-06-25
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/8c6e49f7da24699e33c474bfca89bf8bab4d3983/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-2.png" target="_blank">8c6e49f</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-17
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-2.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/c424d181fbe4f3b8e33507c78a57bf7bd1092198/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-2.png" target="_blank">c424d18</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-11
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/13659b921b1817076b8ac43f31c7ef55f7dbc441/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-2.png" target="_blank">13659b9</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-3">
+Past versions of air_sea_disequilibria-3.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-3.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-3.png" target="_blank">06054b2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/85b0624e33a96dc82f20dd4176dda09310b17c37/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-3.png" target="_blank">85b0624</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-06-25
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/8c6e49f7da24699e33c474bfca89bf8bab4d3983/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-3.png" target="_blank">8c6e49f</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-17
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-3.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/c424d181fbe4f3b8e33507c78a57bf7bd1092198/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-3.png" target="_blank">c424d18</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-11
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/13659b921b1817076b8ac43f31c7ef55f7dbc441/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-3.png" target="_blank">13659b9</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-4">
+Past versions of air_sea_disequilibria-4.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-4.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-4.png" target="_blank">06054b2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/85b0624e33a96dc82f20dd4176dda09310b17c37/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-4.png" target="_blank">85b0624</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-06-25
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/8c6e49f7da24699e33c474bfca89bf8bab4d3983/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-4.png" target="_blank">8c6e49f</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-17
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-4.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/c424d181fbe4f3b8e33507c78a57bf7bd1092198/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-4.png" target="_blank">c424d18</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-11
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/13659b921b1817076b8ac43f31c7ef55f7dbc441/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-4.png" target="_blank">13659b9</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;B&quot;
+[1] &quot;alpha&quot;   &quot;fice&quot;    &quot;Kw&quot;      &quot;pco2atm&quot; &quot;spco2&quot;  
+[1] &quot;alpha&quot;
+[1] &quot;alpha_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;alpha_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;alpha_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;alpha_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;alpha_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;fice&quot;
+[1] &quot;fice_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;fice_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;fice_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;fice_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;fice_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;Kw&quot;
+[1] &quot;Kw_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;Kw_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;Kw_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;Kw_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;Kw_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;pco2atm&quot;
+[1] &quot;pco2atm_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;pco2atm_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;pco2atm_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;pco2atm_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;pco2atm_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;spco2&quot;
+[1] &quot;spco2_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;spco2_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;spco2_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;spco2_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;spco2_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-5">
+Past versions of air_sea_disequilibria-5.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-5.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-5.png" target="_blank">06054b2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/85b0624e33a96dc82f20dd4176dda09310b17c37/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-5.png" target="_blank">85b0624</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-06-25
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/8c6e49f7da24699e33c474bfca89bf8bab4d3983/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-5.png" target="_blank">8c6e49f</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-17
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-5.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/c424d181fbe4f3b8e33507c78a57bf7bd1092198/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-5.png" target="_blank">c424d18</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-6">
+Past versions of air_sea_disequilibria-6.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-6.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-6.png" target="_blank">06054b2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/85b0624e33a96dc82f20dd4176dda09310b17c37/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-6.png" target="_blank">85b0624</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-06-25
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/8c6e49f7da24699e33c474bfca89bf8bab4d3983/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-6.png" target="_blank">8c6e49f</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-17
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-6.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/c424d181fbe4f3b8e33507c78a57bf7bd1092198/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-6.png" target="_blank">c424d18</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-7.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-7">
+Past versions of air_sea_disequilibria-7.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-7.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-7.png" target="_blank">06054b2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/85b0624e33a96dc82f20dd4176dda09310b17c37/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-7.png" target="_blank">85b0624</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-06-25
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/8c6e49f7da24699e33c474bfca89bf8bab4d3983/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-7.png" target="_blank">8c6e49f</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-17
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-7.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/c424d181fbe4f3b8e33507c78a57bf7bd1092198/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-7.png" target="_blank">c424d18</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-8.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-8">
+Past versions of air_sea_disequilibria-8.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-8.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-8.png" target="_blank">06054b2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/85b0624e33a96dc82f20dd4176dda09310b17c37/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-8.png" target="_blank">85b0624</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-06-25
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/8c6e49f7da24699e33c474bfca89bf8bab4d3983/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-8.png" target="_blank">8c6e49f</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-17
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-8.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/c424d181fbe4f3b8e33507c78a57bf7bd1092198/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-8.png" target="_blank">c424d18</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;C&quot;
+[1] &quot;alpha&quot;   &quot;fice&quot;    &quot;Kw&quot;      &quot;pco2atm&quot; &quot;spco2&quot;  
+[1] &quot;alpha&quot;
+[1] &quot;alpha_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;alpha_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;alpha_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;alpha_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;alpha_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;fice&quot;
+[1] &quot;fice_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;fice_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;fice_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;fice_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;fice_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;Kw&quot;
+[1] &quot;Kw_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;Kw_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;Kw_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;Kw_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;Kw_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;pco2atm&quot;
+[1] &quot;pco2atm_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;pco2atm_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;pco2atm_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;pco2atm_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;pco2atm_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;spco2&quot;
+[1] &quot;spco2_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;spco2_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;spco2_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;spco2_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;spco2_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-9.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-9">
+Past versions of air_sea_disequilibria-9.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-9" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-9.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-9.png" target="_blank">06054b2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/85b0624e33a96dc82f20dd4176dda09310b17c37/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-9.png" target="_blank">85b0624</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-06-25
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/8c6e49f7da24699e33c474bfca89bf8bab4d3983/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-9.png" target="_blank">8c6e49f</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-17
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-9.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-10.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-10">
+Past versions of air_sea_disequilibria-10.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-10" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-10.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-10.png" target="_blank">06054b2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/85b0624e33a96dc82f20dd4176dda09310b17c37/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-10.png" target="_blank">85b0624</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-06-25
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/8c6e49f7da24699e33c474bfca89bf8bab4d3983/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-10.png" target="_blank">8c6e49f</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-17
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-10.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-11.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-11">
+Past versions of air_sea_disequilibria-11.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-11" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-11.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-11.png" target="_blank">06054b2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/85b0624e33a96dc82f20dd4176dda09310b17c37/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-11.png" target="_blank">85b0624</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-06-25
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/8c6e49f7da24699e33c474bfca89bf8bab4d3983/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-11.png" target="_blank">8c6e49f</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-17
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-11.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-12.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-12">
+Past versions of air_sea_disequilibria-12.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-12" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-12.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-12.png" target="_blank">06054b2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/85b0624e33a96dc82f20dd4176dda09310b17c37/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-12.png" target="_blank">85b0624</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-06-25
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/8c6e49f7da24699e33c474bfca89bf8bab4d3983/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-12.png" target="_blank">8c6e49f</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-17
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/a64f00ba2bdad5776ee7bc6aaea6bd9b0b1eec32/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-12.png" target="_blank">a64f00b</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;D&quot;
+[1] &quot;alpha&quot;   &quot;fice&quot;    &quot;Kw&quot;      &quot;pco2atm&quot; &quot;spco2&quot;  
+[1] &quot;alpha&quot;
+[1] &quot;alpha_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;alpha_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;alpha_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;alpha_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;alpha_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;fice&quot;
+[1] &quot;fice_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;fice_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;fice_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;fice_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;fice_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;Kw&quot;
+[1] &quot;Kw_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;Kw_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;Kw_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;Kw_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;Kw_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;pco2atm&quot;
+[1] &quot;pco2atm_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;pco2atm_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;pco2atm_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;pco2atm_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;pco2atm_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;spco2&quot;
+[1] &quot;spco2_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[2] &quot;spco2_CESM-ETHZ_B_1_gr_1980-2018_v20211122.nc&quot;
+[3] &quot;spco2_CESM-ETHZ_C_1_gr_1980-2018_v20211122.nc&quot;
+[4] &quot;spco2_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;spco2_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-13.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-13">
+Past versions of air_sea_disequilibria-13.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-13" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-13.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-13.png" target="_blank">06054b2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/85b0624e33a96dc82f20dd4176dda09310b17c37/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-13.png" target="_blank">85b0624</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-06-25
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/8c6e49f7da24699e33c474bfca89bf8bab4d3983/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-13.png" target="_blank">8c6e49f</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-17
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-14.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-14">
+Past versions of air_sea_disequilibria-14.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-14" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-14.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-14.png" target="_blank">06054b2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/85b0624e33a96dc82f20dd4176dda09310b17c37/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-14.png" target="_blank">85b0624</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-06-25
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/8c6e49f7da24699e33c474bfca89bf8bab4d3983/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-14.png" target="_blank">8c6e49f</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-17
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-15.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-15">
+Past versions of air_sea_disequilibria-15.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-15" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-15.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-15.png" target="_blank">06054b2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/85b0624e33a96dc82f20dd4176dda09310b17c37/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-15.png" target="_blank">85b0624</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-06-25
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/8c6e49f7da24699e33c474bfca89bf8bab4d3983/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-15.png" target="_blank">8c6e49f</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-17
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-16.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-air_sea_disequilibria-16">
+Past versions of air_sea_disequilibria-16.png
+</button>
+</p>
+<div id="fig-air_sea_disequilibria-16" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/df15df5437bc8a496737a6c4da5340e4642be17c/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-16.png" target="_blank">df15df5</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-12
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-16.png" target="_blank">06054b2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/85b0624e33a96dc82f20dd4176dda09310b17c37/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-16.png" target="_blank">85b0624</a>
+</td>
+<td>
+Donghe-Zhu
+</td>
+<td>
+2021-06-25
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/8c6e49f7da24699e33c474bfca89bf8bab4d3983/docs/figure/surface_ocean.Rmd/air_sea_disequilibria-16.png" target="_blank">8c6e49f</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2021-06-17
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;CNRM-ESM2-1_2D_CO2_v20211208&quot;
+[1] &quot;area_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
+[2] &quot;area_CNRM-ESM2-1_B_1_gr_1980-2018_v20211208.nc&quot;
+[3] &quot;area_CNRM-ESM2-1_C_1_gr_1980-2018_v20211208.nc&quot;
+[4] &quot;area_CNRM-ESM2-1_D_1_gr_1980-2018_v20211208.nc&quot;
+[1] &quot;A&quot;
+[1] &quot;fice&quot;  &quot;spco2&quot;
+[1] &quot;B&quot;
+[1] &quot;fice&quot;  &quot;spco2&quot;
+[1] &quot;C&quot;
+[1] &quot;fice&quot;  &quot;spco2&quot;
+[1] &quot;D&quot;
+[1] &quot;fice&quot;  &quot;spco2&quot;
+[1] &quot;FESOM_REcoM_LR_2D_CO2_v20211119&quot;
+[1] &quot;area_FESOM_REcoM_LR_v20211119.nc&quot;
+[1] &quot;A&quot;
+[1] &quot;alpha&quot;   &quot;fice&quot;    &quot;Kw&quot;      &quot;pco2atm&quot; &quot;spco2&quot;  
+[1] &quot;alpha&quot;
+[1] &quot;alpha_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;alpha_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;alpha_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;alpha_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;alpha_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;fice&quot;
+[1] &quot;fice_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;fice_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;fice_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;fice_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;fice_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;Kw&quot;
+[1] &quot;Kw_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;Kw_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;Kw_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;Kw_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;Kw_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;pco2atm&quot;
+[1] &quot;pco2atm_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;pco2atm_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;pco2atm_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;pco2atm_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;pco2atm_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;spco2&quot;
+[1] &quot;spco2_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;spco2_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;spco2_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;spco2_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;spco2_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-17.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-18.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-19.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-20.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;B&quot;
+[1] &quot;alpha&quot;   &quot;fice&quot;    &quot;Kw&quot;      &quot;pco2atm&quot; &quot;spco2&quot;  
+[1] &quot;alpha&quot;
+[1] &quot;alpha_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;alpha_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;alpha_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;alpha_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;alpha_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;fice&quot;
+[1] &quot;fice_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;fice_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;fice_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;fice_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;fice_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;Kw&quot;
+[1] &quot;Kw_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;Kw_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;Kw_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;Kw_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;Kw_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;pco2atm&quot;
+[1] &quot;pco2atm_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;pco2atm_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;pco2atm_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;pco2atm_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;pco2atm_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;spco2&quot;
+[1] &quot;spco2_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;spco2_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;spco2_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;spco2_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;spco2_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-21.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-22.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-23.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-24.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;C&quot;
+[1] &quot;alpha&quot;   &quot;fice&quot;    &quot;Kw&quot;      &quot;pco2atm&quot; &quot;spco2&quot;  
+[1] &quot;alpha&quot;
+[1] &quot;alpha_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;alpha_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;alpha_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;alpha_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;alpha_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;fice&quot;
+[1] &quot;fice_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;fice_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;fice_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;fice_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;fice_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;Kw&quot;
+[1] &quot;Kw_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;Kw_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;Kw_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;Kw_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;Kw_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;pco2atm&quot;
+[1] &quot;pco2atm_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;pco2atm_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;pco2atm_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;pco2atm_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;pco2atm_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;spco2&quot;
+[1] &quot;spco2_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;spco2_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;spco2_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;spco2_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;spco2_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-25.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-26.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-27.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-28.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;D&quot;
+[1] &quot;alpha&quot;   &quot;fice&quot;    &quot;Kw&quot;      &quot;pco2atm&quot; &quot;spco2&quot;  
+[1] &quot;alpha&quot;
+[1] &quot;alpha_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;alpha_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;alpha_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;alpha_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;alpha_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;fice&quot;
+[1] &quot;fice_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;fice_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;fice_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;fice_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;fice_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;Kw&quot;
+[1] &quot;Kw_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;Kw_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;Kw_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;Kw_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;Kw_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;pco2atm&quot;
+[1] &quot;pco2atm_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;pco2atm_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;pco2atm_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;pco2atm_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;pco2atm_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;spco2&quot;
+[1] &quot;spco2_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[2] &quot;spco2_FESOM_REcoM_LR_B_1_gr_1980-2018_v20211119.nc&quot;
+[3] &quot;spco2_FESOM_REcoM_LR_C_1_gr_1980-2018_v20211119.nc&quot;
+[4] &quot;spco2_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;spco2_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-29.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-30.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-31.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-32.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;MOM6-Princeton_2D_CO2_v20220125&quot;
+[1] &quot;area_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;A&quot;
+[1] &quot;alpha&quot;   &quot;fice&quot;    &quot;Kw&quot;      &quot;pco2atm&quot; &quot;spco2&quot;  
+[1] &quot;alpha&quot;
+[1] &quot;alpha_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[2] &quot;alpha_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;alpha_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;fice&quot;
+[1] &quot;fice_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[2] &quot;fice_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;fice_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;Kw&quot;
+[1] &quot;Kw_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[2] &quot;Kw_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;Kw_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;pco2atm&quot;
+[1] &quot;pco2atm_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[2] &quot;pco2atm_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;pco2atm_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;spco2&quot;
+[1] &quot;spco2_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[2] &quot;spco2_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;spco2_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-33.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-34.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-35.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-36.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;B&quot;
+[1] &quot;alpha&quot;   &quot;fice&quot;    &quot;Kw&quot;      &quot;pco2atm&quot; &quot;spco2&quot;  
+[1] &quot;alpha&quot;
+[1] &quot;alpha_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[2] &quot;alpha_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;alpha_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;fice&quot;
+[1] &quot;fice_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[2] &quot;fice_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;fice_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;Kw&quot;
+[1] &quot;Kw_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[2] &quot;Kw_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;Kw_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;pco2atm&quot;
+[1] &quot;pco2atm_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[2] &quot;pco2atm_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;pco2atm_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;spco2&quot;
+[1] &quot;spco2_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+[2] &quot;spco2_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;
+[1] &quot;spco2_MOM6-Princeton_B_1_gr_1980-2018_v20220125.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-37.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-38.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-39.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-40.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;C&quot;
+[1] &quot;D&quot;
+[1] &quot;MRI-ESM2-0_2D_CO2_v20210830&quot;
+[1] &quot;area_MRI-ESM2-0_1_gr_1980-1980_v20210830.nc&quot;
+[1] &quot;A&quot;
+[1] &quot;alpha&quot;   &quot;fice&quot;    &quot;Kw&quot;      &quot;pco2atm&quot; &quot;spco2&quot;  
+[1] &quot;alpha&quot;
+[1] &quot;alpha_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[2] &quot;alpha_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;alpha_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;fice&quot;
+[1] &quot;fice_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[2] &quot;fice_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;fice_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;Kw&quot;
+[1] &quot;Kw_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[2] &quot;Kw_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;Kw_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;pco2atm&quot;
+[1] &quot;pco2atm_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[2] &quot;pco2atm_MRI-ESM2-0_B_1_gr_1980-2018_v20210830.nc&quot;
+[3] &quot;pco2atm_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[4] &quot;pco2atm_MRI-ESM2-0_D_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;pco2atm_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;spco2&quot;
+[1] &quot;spco2_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[2] &quot;spco2_MRI-ESM2-0_B_1_gr_1980-2018_v20210830.nc&quot;
+[3] &quot;spco2_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[4] &quot;spco2_MRI-ESM2-0_D_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;spco2_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-41.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-42.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-43.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-44.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;B&quot;
+[1] &quot;pco2atm&quot; &quot;spco2&quot;  
+[1] &quot;C&quot;
+[1] &quot;alpha&quot;   &quot;fice&quot;    &quot;Kw&quot;      &quot;pco2atm&quot; &quot;spco2&quot;  
+[1] &quot;alpha&quot;
+[1] &quot;alpha_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[2] &quot;alpha_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;alpha_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;fice&quot;
+[1] &quot;fice_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[2] &quot;fice_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;fice_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;Kw&quot;
+[1] &quot;Kw_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[2] &quot;Kw_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;Kw_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;pco2atm&quot;
+[1] &quot;pco2atm_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[2] &quot;pco2atm_MRI-ESM2-0_B_1_gr_1980-2018_v20210830.nc&quot;
+[3] &quot;pco2atm_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[4] &quot;pco2atm_MRI-ESM2-0_D_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;pco2atm_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;spco2&quot;
+[1] &quot;spco2_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[2] &quot;spco2_MRI-ESM2-0_B_1_gr_1980-2018_v20210830.nc&quot;
+[3] &quot;spco2_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;
+[4] &quot;spco2_MRI-ESM2-0_D_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;spco2_MRI-ESM2-0_C_1_gr_1980-2018_v20210830.nc&quot;</code></pre>
+<p><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-45.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-46.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-47.png" width="672" style="display: block; margin: auto;" /><img src="figure/surface_ocean.Rmd/air_sea_disequilibria-48.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;D&quot;
+[1] &quot;pco2atm&quot; &quot;spco2&quot;  
+[1] &quot;ORCA025-GEOMAR_2D_CO2_v20210804&quot;
+[1] &quot;area_ORCA025-GEOMAR_1_gr_1980-2018_v20210804.nc&quot;        
+[2] &quot;area_tot_native_ORCA025-GEOMAR_1_1980-2018_v20210804.nc&quot;
+[1] &quot;A&quot;
+[1] &quot;fice&quot;  &quot;spco2&quot;
+[1] &quot;B&quot;
+[1] &quot;fice&quot;  &quot;spco2&quot;
+[1] &quot;C&quot;
+[1] &quot;fice&quot;  &quot;spco2&quot;
+[1] &quot;D&quot;
+[1] &quot;fice&quot;  &quot;spco2&quot;
+[1] &quot;ORCA1-LIM3-PISCES_2D_CO2_v20211215&quot;
+[1] &quot;area_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;            
+[2] &quot;area_tot_native_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.txt&quot;
+[1] &quot;A&quot;
+[1] &quot;fice&quot;  &quot;spco2&quot;
+[1] &quot;B&quot;
+[1] &quot;fice&quot;  &quot;spco2&quot;
+[1] &quot;C&quot;
+[1] &quot;fice&quot;  &quot;spco2&quot;
+[1] &quot;D&quot;
+[1] &quot;fice&quot;  &quot;spco2&quot;</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -2833,21 +5719,21 @@ loaded via a namespace (and not attached):
 [21] Matrix_1.4-0       fastmap_1.1.0      cli_3.1.1          later_1.3.0       
 [25] tweenr_1.0.2       htmltools_0.5.2    tools_4.1.2        gtable_0.3.0      
 [29] glue_1.6.0         Rcpp_1.0.8         cellranger_1.1.0   jquerylib_0.1.4   
-[33] RNetCDF_2.5-2      vctrs_0.3.8        lwgeom_0.2-8       xfun_0.29         
-[37] ps_1.6.0           rvest_1.0.2        lifecycle_1.0.1    ncmeta_0.3.0      
-[41] getPass_0.2-2      MASS_7.3-55        scales_1.1.1       vroom_1.5.7       
-[45] hms_1.1.1          promises_1.2.0.1   parallel_4.1.2     yaml_2.2.1        
-[49] sass_0.4.0         stringi_1.7.6      highr_0.9          e1071_1.7-9       
-[53] checkmate_2.0.0    rlang_1.0.2        pkgconfig_2.0.3    evaluate_0.14     
-[57] lattice_0.20-45    SolveSAPHE_2.1.0   labeling_0.4.2     bit_4.0.4         
-[61] processx_3.5.2     tidyselect_1.1.1   seacarb_3.3.0      magrittr_2.0.1    
-[65] R6_2.5.1           generics_0.1.1     DBI_1.1.2          pillar_1.6.4      
-[69] haven_2.4.3        whisker_0.4        withr_2.4.3        units_0.7-2       
-[73] modelr_0.1.8       crayon_1.4.2       KernSmooth_2.23-20 utf8_1.2.2        
-[77] tzdb_0.2.0         rmarkdown_2.11     grid_4.1.2         readxl_1.3.1      
-[81] data.table_1.14.2  callr_3.7.0        git2r_0.29.0       reprex_2.0.1      
-[85] digest_0.6.29      classInt_0.4-3     httpuv_1.6.5       munsell_0.5.0     
-[89] viridisLite_0.4.0  bslib_0.3.1       </code></pre>
+[33] RNetCDF_2.5-2      vctrs_0.3.8        PCICt_0.5-4.1      lwgeom_0.2-8      
+[37] xfun_0.29          ps_1.6.0           rvest_1.0.2        lifecycle_1.0.1   
+[41] ncmeta_0.3.0       getPass_0.2-2      MASS_7.3-55        scales_1.1.1      
+[45] vroom_1.5.7        hms_1.1.1          promises_1.2.0.1   parallel_4.1.2    
+[49] RColorBrewer_1.1-2 yaml_2.2.1         sass_0.4.0         stringi_1.7.6     
+[53] highr_0.9          e1071_1.7-9        checkmate_2.0.0    rlang_1.0.2       
+[57] pkgconfig_2.0.3    evaluate_0.14      lattice_0.20-45    SolveSAPHE_2.1.0  
+[61] labeling_0.4.2     bit_4.0.4          processx_3.5.2     tidyselect_1.1.1  
+[65] seacarb_3.3.0      magrittr_2.0.1     R6_2.5.1           generics_0.1.1    
+[69] DBI_1.1.2          pillar_1.6.4       haven_2.4.3        whisker_0.4       
+[73] withr_2.4.3        units_0.7-2        modelr_0.1.8       crayon_1.4.2      
+[77] KernSmooth_2.23-20 utf8_1.2.2         tzdb_0.2.0         rmarkdown_2.11    
+[81] grid_4.1.2         readxl_1.3.1       data.table_1.14.2  callr_3.7.0       
+[85] git2r_0.29.0       reprex_2.0.1       digest_0.6.29      classInt_0.4-3    
+[89] httpuv_1.6.5       munsell_0.5.0      viridisLite_0.4.0  bslib_0.3.1       </code></pre>
 </div>
 </div>
 
