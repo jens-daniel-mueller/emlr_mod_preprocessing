@@ -5,7 +5,7 @@
 
 # commit regular changes (locally) and rebuild site
 # this takes only changed files into account
-wflow_publish(all = TRUE, message = "read data from all models and write individual files")
+wflow_publish(all = TRUE, message = "included more models")
 
 # commit changes including _site.yml (locally) and rebuild site in the specified order
 # you can also run this code with only some of the files. In this case remove the rebuild=TRUE command
@@ -21,8 +21,18 @@ wflow_publish(here::here(
     "surface_ocean.Rmd"
   )
 ),
-message = "rerun all with multi model subsetting",
+message = "read data from all models and write individual files",
 republish = TRUE)
+
+
+wflow_publish(here::here(
+  "analysis",
+  c(
+    "surface_ocean.Rmd",
+    "GLODAP_subset_A_annual_all_models.Rmd"
+  )
+),
+message = "read data from all models and write individual files")
 
 
 # Push latest version to GitHub

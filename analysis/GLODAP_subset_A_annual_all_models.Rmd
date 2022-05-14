@@ -100,24 +100,24 @@ variables <-
 models <- list.files(path_cmorized)
 
 models <-
-  models[!str_detect(models, pattern = "\\.")]
+  models[!str_detect(models, pattern = "\\.t|\\.z")]
 
 models <-
   models[str_detect(
     models,
     pattern = c(
-      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|ORCA025-GEOMAR|ORCA1-LIM3-PISCES"
+      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12"
     )
   )]
 
 # depth named lev, contains only depth levels not actual depth in m
 # time ranges from 0-1154 (i.e only years 1980-83), yet length is 39
-models <-
-  models[!str_detect(models, pattern = "CNRM")]
+# models <-
+#   models[!str_detect(models, pattern = "CNRM")]
 
 # time with offset 2110-01-01, yet length is 39
-models <-
-  models[!str_detect(models, pattern = "EC-Earth3")]
+# models <-
+#   models[!str_detect(models, pattern = "EC-Earth3")]
 
 # files chunked into decades
 models <-
@@ -131,8 +131,10 @@ models <-
 ```{r subset_cmorized_variable_forcing_data}
 
 
+models <- models[c(2,3,7,9)]
+
 for (i_model in models) {
-  # i_model <- models[1]
+  # i_model <- models[2]
   print(i_model)
   
   variables_available <-
@@ -150,7 +152,7 @@ for (i_model in models) {
   GLODAP_joined <- GLODAP
   
   for (i_variable in variables_available) {
-    # i_variable <- variables_available[2]
+    # i_variable <- variables_available[1]
     
     # read list of all files
     file <-
@@ -163,11 +165,29 @@ for (i_model in models) {
     print(file)
     
     # read in data
-    variable_data <-
-      read_ncdf(paste(paste0(path_cmorized, i_model),
-                      file,
-                      sep = "/"),
-                make_units = FALSE)
+    if (i_model == "NorESM-OC1.2_3D_ALL_v20211125") {
+      variable_data <-
+        tidync::tidync(paste(paste0(path_cmorized, i_model),
+                             file,
+                             sep = "/")) %>%
+        tidync::hyper_tibble() %>% 
+        mutate(time = as.Date(time, origin = "1980-01-01"))
+    } else if (i_model %in% c("EC-Earth3_3D_ALL_v20220323",
+                            "CNRM-ESM2-1_3D_ALL_v20211208")) {
+      variable_data <-
+        read_ncdf(paste(paste0(path_cmorized, i_model),
+                        file,
+                        sep = "/"),
+                  make_units = FALSE,
+                  make_time = FALSE)
+    } else {
+      variable_data <-
+        read_ncdf(paste(paste0(path_cmorized, i_model),
+                        file,
+                        sep = "/"),
+                  make_units = FALSE)
+    }
+    
     
     # convert to tibble
     variable_data_tibble <- variable_data %>%
@@ -185,10 +205,22 @@ for (i_model in models) {
       variable_data_tibble <- variable_data_tibble %>%
         rename(time = time_ann)
     }
+
+    if (i_model == "EC-Earth3_3D_ALL_v20220323") {
+      variable_data_tibble <- variable_data_tibble %>%
+        mutate(time = as.Date(time, origin = "1850-06-01"))
+    }
     
     if (i_model == "CNRM-ESM2-1_3D_ALL_v20211208") {
       variable_data_tibble <- variable_data_tibble %>%
-        rename(depth = lev)
+        rename(depth = lev) %>% 
+        group_by(time) %>% 
+        mutate(year = as.character(1979 + cur_group_id())) %>% 
+        ungroup()
+      
+      variable_data_tibble <- variable_data_tibble %>% 
+        mutate(time = as.Date(year, format = "%Y")) %>% 
+        select(-year)
     }
     
     if (i_model == "FESOM_REcoM_LR_3D_all_v20211119") {
@@ -210,6 +242,15 @@ for (i_model in models) {
     if (i_model == "MRI-ESM2-0_3D_ALL_v20210830") {
       variable_data_tibble <- variable_data_tibble %>%
         rename(depth = lev)
+    }
+    
+    
+    if (i_model == "planktom12_3d_all_v20220404") {
+      variable_data_tibble <- variable_data_tibble %>%
+        rename(lon = LONGITUDE,
+               lat = LATITUDE,
+               depth = DEPTH,
+               time = TIME)
     }
     
     
@@ -336,14 +377,12 @@ for (i_model in models) {
         filter(depth == min(depth))
       
       # surface map of variable
-      map +
+      p_map <- map +
         geom_raster(data = variable_data_tibble_year_surface,
                     aes(lon, lat, fill = !!sym(i_variable))) +
         scale_fill_viridis_c(name = i_variable) +
-        geom_raster(data = model_obs_interpo,
-                    aes(lon, lat), fill = "black") +
-        geom_raster(data = na_model,
-                    aes(lon, lat), fill = "red") +
+        geom_tile(data = model_obs_interpo,
+                    aes(lon, lat, width = 1, height = 1), fill = "black") +
         labs(
           title = "GLODAP-based cmorized subset distribution",
           subtitle = paste(
@@ -354,6 +393,14 @@ for (i_model in models) {
           x = "Longitude",
           y = "Latitude"
         )
+      
+      if (nrow(na_model) > 0){
+      p_map <- p_map +
+        geom_tile(data = na_model,
+                    aes(lon, lat, width = 1, height = 1), fill = "red")
+      }
+      
+      p_map
       
       ggsave(
         paste(
