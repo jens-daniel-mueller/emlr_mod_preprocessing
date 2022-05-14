@@ -411,7 +411,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">GLODAP subset variable climate A</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">13 May, 2022</h4>
+<h4 class="date">14 May, 2022</h4>
 
 </div>
 
@@ -436,7 +436,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-05-13
+<strong>Last updated:</strong> 2022-05-14
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -527,16 +527,16 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree010eeb66a8f4ce264e0dd83ea724f469dbd180dftargetblank010eeb6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/010eeb66a8f4ce264e0dd83ea724f469dbd180df" target="_blank">010eeb6</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree7e3794d4bf8b889c8cf109d349748dd0d0c3d4cdtargetblank7e3794da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/7e3794d4bf8b889c8cf109d349748dd0d0c3d4cd" target="_blank">7e3794d</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree010eeb66a8f4ce264e0dd83ea724f469dbd180dftargetblank010eeb6a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree7e3794d4bf8b889c8cf109d349748dd0d0c3d4cdtargetblank7e3794da" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/010eeb66a8f4ce264e0dd83ea724f469dbd180df" target="_blank">010eeb6</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/7e3794d4bf8b889c8cf109d349748dd0d0c3d4cd" target="_blank">7e3794d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -550,9 +550,6 @@ Untracked files:
     Untracked:  analysis/RECCAP2_flux_products.Rmd
     Untracked:  code/backup_analysis_scripts/
     Untracked:  code/reprex_read_nc_file.R
-
-Unstaged changes:
-    Modified:   code/Workflowr_project_managment.R
 
 </code></pre>
 <p>
@@ -591,6 +588,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/7e3794d4bf8b889c8cf109d349748dd0d0c3d4cd/analysis/GLODAP_subset_A_annual_all_models.Rmd" target="_blank">7e3794d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-14
+</td>
+<td>
+included more models
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/26d8b1d4b33945dcec473b0fd6582540882d540e/docs/GLODAP_subset_A_annual_all_models.html" target="_blank">26d8b1d</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-13
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -725,30 +756,32 @@ variables &lt;-
 models &lt;- list.files(path_cmorized)
 
 models &lt;-
-  models[!str_detect(models, pattern = &quot;\\.&quot;)]
+  models[!str_detect(models, pattern = &quot;\\.t|\\.z&quot;)]
 
 models &lt;-
   models[str_detect(
     models,
     pattern = c(
-      &quot;CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|ORCA025-GEOMAR|ORCA1-LIM3-PISCES&quot;
+      &quot;CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12&quot;
     )
   )]
 
 # depth named lev, contains only depth levels not actual depth in m
 # time ranges from 0-1154 (i.e only years 1980-83), yet length is 39
-models &lt;-
-  models[!str_detect(models, pattern = &quot;CNRM&quot;)]
+# models &lt;-
+#   models[!str_detect(models, pattern = &quot;CNRM&quot;)]
 
 # time with offset 2110-01-01, yet length is 39
-models &lt;-
-  models[!str_detect(models, pattern = &quot;EC-Earth3&quot;)]
+# models &lt;-
+#   models[!str_detect(models, pattern = &quot;EC-Earth3&quot;)]
 
 # files chunked into decades
 models &lt;-
   models[!str_detect(models, pattern = &quot;ORCA025-GEOMAR&quot;)]</code></pre>
-<pre class="r"><code>for (i_model in models) {
-  # i_model &lt;- models[1]
+<pre class="r"><code>models &lt;- models[c(2,3,7,9)]
+
+for (i_model in models) {
+  # i_model &lt;- models[2]
   print(i_model)
   
   variables_available &lt;-
@@ -766,7 +799,7 @@ models &lt;-
   GLODAP_joined &lt;- GLODAP
   
   for (i_variable in variables_available) {
-    # i_variable &lt;- variables_available[2]
+    # i_variable &lt;- variables_available[1]
     
     # read list of all files
     file &lt;-
@@ -779,11 +812,29 @@ models &lt;-
     print(file)
     
     # read in data
-    variable_data &lt;-
-      read_ncdf(paste(paste0(path_cmorized, i_model),
-                      file,
-                      sep = &quot;/&quot;),
-                make_units = FALSE)
+    if (i_model == &quot;NorESM-OC1.2_3D_ALL_v20211125&quot;) {
+      variable_data &lt;-
+        tidync::tidync(paste(paste0(path_cmorized, i_model),
+                             file,
+                             sep = &quot;/&quot;)) %&gt;%
+        tidync::hyper_tibble() %&gt;% 
+        mutate(time = as.Date(time, origin = &quot;1980-01-01&quot;))
+    } else if (i_model %in% c(&quot;EC-Earth3_3D_ALL_v20220323&quot;,
+                            &quot;CNRM-ESM2-1_3D_ALL_v20211208&quot;)) {
+      variable_data &lt;-
+        read_ncdf(paste(paste0(path_cmorized, i_model),
+                        file,
+                        sep = &quot;/&quot;),
+                  make_units = FALSE,
+                  make_time = FALSE)
+    } else {
+      variable_data &lt;-
+        read_ncdf(paste(paste0(path_cmorized, i_model),
+                        file,
+                        sep = &quot;/&quot;),
+                  make_units = FALSE)
+    }
+    
     
     # convert to tibble
     variable_data_tibble &lt;- variable_data %&gt;%
@@ -801,10 +852,22 @@ models &lt;-
       variable_data_tibble &lt;- variable_data_tibble %&gt;%
         rename(time = time_ann)
     }
+
+    if (i_model == &quot;EC-Earth3_3D_ALL_v20220323&quot;) {
+      variable_data_tibble &lt;- variable_data_tibble %&gt;%
+        mutate(time = as.Date(time, origin = &quot;1850-06-01&quot;))
+    }
     
     if (i_model == &quot;CNRM-ESM2-1_3D_ALL_v20211208&quot;) {
       variable_data_tibble &lt;- variable_data_tibble %&gt;%
-        rename(depth = lev)
+        rename(depth = lev) %&gt;% 
+        group_by(time) %&gt;% 
+        mutate(year = as.character(1979 + cur_group_id())) %&gt;% 
+        ungroup()
+      
+      variable_data_tibble &lt;- variable_data_tibble %&gt;% 
+        mutate(time = as.Date(year, format = &quot;%Y&quot;)) %&gt;% 
+        select(-year)
     }
     
     if (i_model == &quot;FESOM_REcoM_LR_3D_all_v20211119&quot;) {
@@ -826,6 +889,15 @@ models &lt;-
     if (i_model == &quot;MRI-ESM2-0_3D_ALL_v20210830&quot;) {
       variable_data_tibble &lt;- variable_data_tibble %&gt;%
         rename(depth = lev)
+    }
+    
+    
+    if (i_model == &quot;planktom12_3d_all_v20220404&quot;) {
+      variable_data_tibble &lt;- variable_data_tibble %&gt;%
+        rename(lon = LONGITUDE,
+               lat = LATITUDE,
+               depth = DEPTH,
+               time = TIME)
     }
     
     
@@ -952,14 +1024,12 @@ models &lt;-
         filter(depth == min(depth))
       
       # surface map of variable
-      map +
+      p_map &lt;- map +
         geom_raster(data = variable_data_tibble_year_surface,
                     aes(lon, lat, fill = !!sym(i_variable))) +
         scale_fill_viridis_c(name = i_variable) +
-        geom_raster(data = model_obs_interpo,
-                    aes(lon, lat), fill = &quot;black&quot;) +
-        geom_raster(data = na_model,
-                    aes(lon, lat), fill = &quot;red&quot;) +
+        geom_tile(data = model_obs_interpo,
+                    aes(lon, lat, width = 1, height = 1), fill = &quot;black&quot;) +
         labs(
           title = &quot;GLODAP-based cmorized subset distribution&quot;,
           subtitle = paste(
@@ -970,6 +1040,14 @@ models &lt;-
           x = &quot;Longitude&quot;,
           y = &quot;Latitude&quot;
         )
+      
+      if (nrow(na_model) &gt; 0){
+      p_map &lt;- p_map +
+        geom_tile(data = na_model,
+                    aes(lon, lat, width = 1, height = 1), fill = &quot;red&quot;)
+      }
+      
+      p_map
       
       ggsave(
         paste(
@@ -1022,8 +1100,8 @@ models &lt;-
   
   
 }</code></pre>
-<pre><code>[1] &quot;CESM-ETHZ_3D_ALL_v20211122&quot;
-[1] &quot;dissic_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+<pre><code>[1] &quot;CNRM-ESM2-1_3D_ALL_v20211208&quot;
+[1] &quot;dissic_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1062,7 +1140,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;no3_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+<pre><code>[1] &quot;no3_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1101,7 +1179,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;o2_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+<pre><code>[1] &quot;o2_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1140,7 +1218,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;po4_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+<pre><code>[1] &quot;po4_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1179,7 +1257,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;si_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+<pre><code>[1] &quot;si_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1218,7 +1296,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;so_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+<pre><code>[1] &quot;so_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1257,7 +1335,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;talk_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+<pre><code>[1] &quot;talk_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1296,7 +1374,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;thetao_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+<pre><code>[1] &quot;thetao_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1335,8 +1413,8 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;FESOM_REcoM_LR_3D_all_v20211119&quot;
-[1] &quot;dissic_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+<pre><code>[1] &quot;EC-Earth3_3D_ALL_v20220323&quot;
+[1] &quot;dissic_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1375,7 +1453,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;no3_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+<pre><code>[1] &quot;no3_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1414,7 +1492,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;o2_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+<pre><code>[1] &quot;o2_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1453,7 +1531,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;si_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+<pre><code>[1] &quot;po4_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1492,7 +1570,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;so_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+<pre><code>[1] &quot;si_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1531,7 +1609,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;talk_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+<pre><code>[1] &quot;so_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1570,7 +1648,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;thetao_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+<pre><code>[1] &quot;talk_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1609,8 +1687,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;MOM6-Princeton_3D_ALL_v20220125&quot;
-[1] &quot;dissic_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+<pre><code>[1] &quot;thetao_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1649,7 +1726,8 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;no3_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+<pre><code>[1] &quot;NorESM-OC1.2_3D_ALL_v20211125&quot;
+[1] &quot;dissic_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1688,7 +1766,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;o2_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+<pre><code>[1] &quot;no3_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1727,7 +1805,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;po4_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+<pre><code>[1] &quot;o2_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1766,7 +1844,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;si_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+<pre><code>[1] &quot;po4_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1805,34 +1883,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;so_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
-[1] 1981</code></pre>
-<pre><code>[1] 1982</code></pre>
-<pre><code>[1] 1983</code></pre>
-<pre><code>[1] 1984</code></pre>
-<pre><code>[1] 1985</code></pre>
-<pre><code>[1] 1986</code></pre>
-<pre><code>[1] 1987</code></pre>
-<pre><code>[1] 1988</code></pre>
-<pre><code>[1] 1989</code></pre>
-<pre><code>[1] 1990</code></pre>
-<pre><code>[1] 1991</code></pre>
-<pre><code>[1] 1992</code></pre>
-<pre><code>[1] 1993</code></pre>
-<pre><code>[1] 1994</code></pre>
-<pre><code>[1] 1995</code></pre>
-<pre><code>[1] 1996</code></pre>
-<pre><code>[1] 1997</code></pre>
-<pre><code>[1] 1998</code></pre>
-<pre><code>[1] 1999</code></pre>
-<pre><code>[1] 2000</code></pre>
-<pre><code>[1] 2001</code></pre>
-<pre><code>[1] 2002</code></pre>
-<pre><code>[1] 2003</code></pre>
-<pre><code>[1] 2004</code></pre>
-<pre><code>[1] 2005</code></pre>
-<pre><code>[1] 2006</code></pre>
-<pre><code>[1] &quot;talk_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+<pre><code>[1] &quot;si_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1871,7 +1922,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;thetao_MOM6-Princeton_A_1_gr_1980-2018_v20220125.nc&quot;
+<pre><code>[1] &quot;so_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1910,8 +1961,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;MRI-ESM2-0_3D_ALL_v20210830&quot;
-[1] &quot;dissic_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+<pre><code>[1] &quot;talk_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1950,7 +2000,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;no3_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+<pre><code>[1] &quot;thetao_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -1989,7 +2039,8 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;o2_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+<pre><code>[1] &quot;planktom12_3d_all_v20220404&quot;
+[1] &quot;dissic_PlankTOM12_A_1_gr_1980-2018_v20220404.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -2028,7 +2079,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;po4_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+<pre><code>[1] &quot;o2_PlankTOM12_A_1_gr_1980-2018_v20220404.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -2067,8 +2118,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;si_MRI-ESM2-0_A_1_gr_1980-1980_v20210830.nc&quot;
-[1] &quot;so_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+<pre><code>[1] &quot;po4_PlankTOM12_A_1_gr_1980-2018_v20220404.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -2107,7 +2157,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;talk_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+<pre><code>[1] &quot;si_PlankTOM12_A_1_gr_1980-2018_v20220404.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -2146,7 +2196,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;thetao_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+<pre><code>[1] &quot;so_PlankTOM12_A_1_gr_1980-2018_v20220404.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -2185,8 +2235,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;ORCA1-LIM3-PISCES_3D_ALL_v20211215&quot;
-[1] &quot;dissic_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+<pre><code>[1] &quot;talk_PlankTOM12_A_1_gr_1980-2018_v20220404.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -2225,241 +2274,7 @@ models &lt;-
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;no3_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-[1] 1981</code></pre>
-<pre><code>[1] 1982</code></pre>
-<pre><code>[1] 1983</code></pre>
-<pre><code>[1] 1984</code></pre>
-<pre><code>[1] 1985</code></pre>
-<pre><code>[1] 1986</code></pre>
-<pre><code>[1] 1987</code></pre>
-<pre><code>[1] 1988</code></pre>
-<pre><code>[1] 1989</code></pre>
-<pre><code>[1] 1990</code></pre>
-<pre><code>[1] 1991</code></pre>
-<pre><code>[1] 1992</code></pre>
-<pre><code>[1] 1993</code></pre>
-<pre><code>[1] 1994</code></pre>
-<pre><code>[1] 1995</code></pre>
-<pre><code>[1] 1996</code></pre>
-<pre><code>[1] 1997</code></pre>
-<pre><code>[1] 1998</code></pre>
-<pre><code>[1] 1999</code></pre>
-<pre><code>[1] 2000</code></pre>
-<pre><code>[1] 2001</code></pre>
-<pre><code>[1] 2002</code></pre>
-<pre><code>[1] 2003</code></pre>
-<pre><code>[1] 2004</code></pre>
-<pre><code>[1] 2005</code></pre>
-<pre><code>[1] 2006</code></pre>
-<pre><code>[1] 2007</code></pre>
-<pre><code>[1] 2008</code></pre>
-<pre><code>[1] 2009</code></pre>
-<pre><code>[1] 2010</code></pre>
-<pre><code>[1] 2011</code></pre>
-<pre><code>[1] 2012</code></pre>
-<pre><code>[1] 2013</code></pre>
-<pre><code>[1] 2014</code></pre>
-<pre><code>[1] 2015</code></pre>
-<pre><code>[1] 2016</code></pre>
-<pre><code>[1] 2017</code></pre>
-<pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;o2_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-[1] 1981</code></pre>
-<pre><code>[1] 1982</code></pre>
-<pre><code>[1] 1983</code></pre>
-<pre><code>[1] 1984</code></pre>
-<pre><code>[1] 1985</code></pre>
-<pre><code>[1] 1986</code></pre>
-<pre><code>[1] 1987</code></pre>
-<pre><code>[1] 1988</code></pre>
-<pre><code>[1] 1989</code></pre>
-<pre><code>[1] 1990</code></pre>
-<pre><code>[1] 1991</code></pre>
-<pre><code>[1] 1992</code></pre>
-<pre><code>[1] 1993</code></pre>
-<pre><code>[1] 1994</code></pre>
-<pre><code>[1] 1995</code></pre>
-<pre><code>[1] 1996</code></pre>
-<pre><code>[1] 1997</code></pre>
-<pre><code>[1] 1998</code></pre>
-<pre><code>[1] 1999</code></pre>
-<pre><code>[1] 2000</code></pre>
-<pre><code>[1] 2001</code></pre>
-<pre><code>[1] 2002</code></pre>
-<pre><code>[1] 2003</code></pre>
-<pre><code>[1] 2004</code></pre>
-<pre><code>[1] 2005</code></pre>
-<pre><code>[1] 2006</code></pre>
-<pre><code>[1] 2007</code></pre>
-<pre><code>[1] 2008</code></pre>
-<pre><code>[1] 2009</code></pre>
-<pre><code>[1] 2010</code></pre>
-<pre><code>[1] 2011</code></pre>
-<pre><code>[1] 2012</code></pre>
-<pre><code>[1] 2013</code></pre>
-<pre><code>[1] 2014</code></pre>
-<pre><code>[1] 2015</code></pre>
-<pre><code>[1] 2016</code></pre>
-<pre><code>[1] 2017</code></pre>
-<pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;po4_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-[1] 1981</code></pre>
-<pre><code>[1] 1982</code></pre>
-<pre><code>[1] 1983</code></pre>
-<pre><code>[1] 1984</code></pre>
-<pre><code>[1] 1985</code></pre>
-<pre><code>[1] 1986</code></pre>
-<pre><code>[1] 1987</code></pre>
-<pre><code>[1] 1988</code></pre>
-<pre><code>[1] 1989</code></pre>
-<pre><code>[1] 1990</code></pre>
-<pre><code>[1] 1991</code></pre>
-<pre><code>[1] 1992</code></pre>
-<pre><code>[1] 1993</code></pre>
-<pre><code>[1] 1994</code></pre>
-<pre><code>[1] 1995</code></pre>
-<pre><code>[1] 1996</code></pre>
-<pre><code>[1] 1997</code></pre>
-<pre><code>[1] 1998</code></pre>
-<pre><code>[1] 1999</code></pre>
-<pre><code>[1] 2000</code></pre>
-<pre><code>[1] 2001</code></pre>
-<pre><code>[1] 2002</code></pre>
-<pre><code>[1] 2003</code></pre>
-<pre><code>[1] 2004</code></pre>
-<pre><code>[1] 2005</code></pre>
-<pre><code>[1] 2006</code></pre>
-<pre><code>[1] 2007</code></pre>
-<pre><code>[1] 2008</code></pre>
-<pre><code>[1] 2009</code></pre>
-<pre><code>[1] 2010</code></pre>
-<pre><code>[1] 2011</code></pre>
-<pre><code>[1] 2012</code></pre>
-<pre><code>[1] 2013</code></pre>
-<pre><code>[1] 2014</code></pre>
-<pre><code>[1] 2015</code></pre>
-<pre><code>[1] 2016</code></pre>
-<pre><code>[1] 2017</code></pre>
-<pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;si_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-[1] 1981</code></pre>
-<pre><code>[1] 1982</code></pre>
-<pre><code>[1] 1983</code></pre>
-<pre><code>[1] 1984</code></pre>
-<pre><code>[1] 1985</code></pre>
-<pre><code>[1] 1986</code></pre>
-<pre><code>[1] 1987</code></pre>
-<pre><code>[1] 1988</code></pre>
-<pre><code>[1] 1989</code></pre>
-<pre><code>[1] 1990</code></pre>
-<pre><code>[1] 1991</code></pre>
-<pre><code>[1] 1992</code></pre>
-<pre><code>[1] 1993</code></pre>
-<pre><code>[1] 1994</code></pre>
-<pre><code>[1] 1995</code></pre>
-<pre><code>[1] 1996</code></pre>
-<pre><code>[1] 1997</code></pre>
-<pre><code>[1] 1998</code></pre>
-<pre><code>[1] 1999</code></pre>
-<pre><code>[1] 2000</code></pre>
-<pre><code>[1] 2001</code></pre>
-<pre><code>[1] 2002</code></pre>
-<pre><code>[1] 2003</code></pre>
-<pre><code>[1] 2004</code></pre>
-<pre><code>[1] 2005</code></pre>
-<pre><code>[1] 2006</code></pre>
-<pre><code>[1] 2007</code></pre>
-<pre><code>[1] 2008</code></pre>
-<pre><code>[1] 2009</code></pre>
-<pre><code>[1] 2010</code></pre>
-<pre><code>[1] 2011</code></pre>
-<pre><code>[1] 2012</code></pre>
-<pre><code>[1] 2013</code></pre>
-<pre><code>[1] 2014</code></pre>
-<pre><code>[1] 2015</code></pre>
-<pre><code>[1] 2016</code></pre>
-<pre><code>[1] 2017</code></pre>
-<pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;so_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-[1] 1981</code></pre>
-<pre><code>[1] 1982</code></pre>
-<pre><code>[1] 1983</code></pre>
-<pre><code>[1] 1984</code></pre>
-<pre><code>[1] 1985</code></pre>
-<pre><code>[1] 1986</code></pre>
-<pre><code>[1] 1987</code></pre>
-<pre><code>[1] 1988</code></pre>
-<pre><code>[1] 1989</code></pre>
-<pre><code>[1] 1990</code></pre>
-<pre><code>[1] 1991</code></pre>
-<pre><code>[1] 1992</code></pre>
-<pre><code>[1] 1993</code></pre>
-<pre><code>[1] 1994</code></pre>
-<pre><code>[1] 1995</code></pre>
-<pre><code>[1] 1996</code></pre>
-<pre><code>[1] 1997</code></pre>
-<pre><code>[1] 1998</code></pre>
-<pre><code>[1] 1999</code></pre>
-<pre><code>[1] 2000</code></pre>
-<pre><code>[1] 2001</code></pre>
-<pre><code>[1] 2002</code></pre>
-<pre><code>[1] 2003</code></pre>
-<pre><code>[1] 2004</code></pre>
-<pre><code>[1] 2005</code></pre>
-<pre><code>[1] 2006</code></pre>
-<pre><code>[1] 2007</code></pre>
-<pre><code>[1] 2008</code></pre>
-<pre><code>[1] 2009</code></pre>
-<pre><code>[1] 2010</code></pre>
-<pre><code>[1] 2011</code></pre>
-<pre><code>[1] 2012</code></pre>
-<pre><code>[1] 2013</code></pre>
-<pre><code>[1] 2014</code></pre>
-<pre><code>[1] 2015</code></pre>
-<pre><code>[1] 2016</code></pre>
-<pre><code>[1] 2017</code></pre>
-<pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;talk_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-[1] 1981</code></pre>
-<pre><code>[1] 1982</code></pre>
-<pre><code>[1] 1983</code></pre>
-<pre><code>[1] 1984</code></pre>
-<pre><code>[1] 1985</code></pre>
-<pre><code>[1] 1986</code></pre>
-<pre><code>[1] 1987</code></pre>
-<pre><code>[1] 1988</code></pre>
-<pre><code>[1] 1989</code></pre>
-<pre><code>[1] 1990</code></pre>
-<pre><code>[1] 1991</code></pre>
-<pre><code>[1] 1992</code></pre>
-<pre><code>[1] 1993</code></pre>
-<pre><code>[1] 1994</code></pre>
-<pre><code>[1] 1995</code></pre>
-<pre><code>[1] 1996</code></pre>
-<pre><code>[1] 1997</code></pre>
-<pre><code>[1] 1998</code></pre>
-<pre><code>[1] 1999</code></pre>
-<pre><code>[1] 2000</code></pre>
-<pre><code>[1] 2001</code></pre>
-<pre><code>[1] 2002</code></pre>
-<pre><code>[1] 2003</code></pre>
-<pre><code>[1] 2004</code></pre>
-<pre><code>[1] 2005</code></pre>
-<pre><code>[1] 2006</code></pre>
-<pre><code>[1] 2007</code></pre>
-<pre><code>[1] 2008</code></pre>
-<pre><code>[1] 2009</code></pre>
-<pre><code>[1] 2010</code></pre>
-<pre><code>[1] 2011</code></pre>
-<pre><code>[1] 2012</code></pre>
-<pre><code>[1] 2013</code></pre>
-<pre><code>[1] 2014</code></pre>
-<pre><code>[1] 2015</code></pre>
-<pre><code>[1] 2016</code></pre>
-<pre><code>[1] 2017</code></pre>
-<pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;thetao_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+<pre><code>[1] &quot;thetao_PlankTOM12_A_1_gr_1980-2018_v20220404.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -3240,27 +3055,27 @@ other attached packages:
 loaded via a namespace (and not attached):
  [1] ellipsis_0.3.2     class_7.3-20       rprojroot_2.0.2    fs_1.5.2          
  [5] rstudioapi_0.13    proxy_0.4-26       farver_2.1.0       bit64_4.0.5       
- [9] fansi_1.0.2        xml2_1.3.3         knitr_1.37         polyclip_1.10-0   
-[13] jsonlite_1.7.3     broom_0.7.11       dbplyr_2.1.1       png_0.1-7         
-[17] compiler_4.1.2     httr_1.4.2         backports_1.4.1    assertthat_0.2.1  
-[21] Matrix_1.4-0       fastmap_1.1.0      cli_3.1.1          later_1.3.0       
-[25] tweenr_1.0.2       htmltools_0.5.2    tools_4.1.2        gtable_0.3.0      
-[29] glue_1.6.0         rappdirs_0.3.3     Rcpp_1.0.8         cellranger_1.1.0  
-[33] jquerylib_0.1.4    RNetCDF_2.5-2      vctrs_0.3.8        lwgeom_0.2-8      
-[37] xfun_0.29          ps_1.6.0           rvest_1.0.2        lifecycle_1.0.1   
-[41] ncmeta_0.3.0       getPass_0.2-2      MASS_7.3-55        scales_1.1.1      
-[45] vroom_1.5.7        hms_1.1.1          promises_1.2.0.1   parallel_4.1.2    
-[49] yaml_2.2.1         sass_0.4.0         stringi_1.7.6      e1071_1.7-9       
-[53] checkmate_2.0.0    rlang_1.0.2        pkgconfig_2.0.3    evaluate_0.14     
-[57] lattice_0.20-45    labeling_0.4.2     bit_4.0.4          processx_3.5.2    
-[61] tidyselect_1.1.1   here_1.0.1         magrittr_2.0.1     R6_2.5.1          
-[65] generics_0.1.1     DBI_1.1.2          pillar_1.6.4       haven_2.4.3       
-[69] whisker_0.4        withr_2.4.3        units_0.7-2        modelr_0.1.8      
-[73] crayon_1.4.2       KernSmooth_2.23-20 utf8_1.2.2         tzdb_0.2.0        
-[77] rmarkdown_2.11     grid_4.1.2         readxl_1.3.1       data.table_1.14.2 
-[81] callr_3.7.0        git2r_0.29.0       reprex_2.0.1       digest_0.6.29     
-[85] classInt_0.4-3     httpuv_1.6.5       munsell_0.5.0      viridisLite_0.4.0 
-[89] bslib_0.3.1       </code></pre>
+ [9] fansi_1.0.2        xml2_1.3.3         ncdf4_1.19         knitr_1.37        
+[13] polyclip_1.10-0    jsonlite_1.7.3     broom_0.7.11       dbplyr_2.1.1      
+[17] png_0.1-7          compiler_4.1.2     httr_1.4.2         backports_1.4.1   
+[21] assertthat_0.2.1   Matrix_1.4-0       fastmap_1.1.0      cli_3.1.1         
+[25] later_1.3.0        tweenr_1.0.2       htmltools_0.5.2    tools_4.1.2       
+[29] gtable_0.3.0       glue_1.6.0         rappdirs_0.3.3     Rcpp_1.0.8        
+[33] cellranger_1.1.0   jquerylib_0.1.4    RNetCDF_2.5-2      vctrs_0.3.8       
+[37] lwgeom_0.2-8       xfun_0.29          ps_1.6.0           rvest_1.0.2       
+[41] lifecycle_1.0.1    ncmeta_0.3.0       tidync_0.2.4       getPass_0.2-2     
+[45] MASS_7.3-55        scales_1.1.1       vroom_1.5.7        hms_1.1.1         
+[49] promises_1.2.0.1   parallel_4.1.2     yaml_2.2.1         sass_0.4.0        
+[53] stringi_1.7.6      e1071_1.7-9        checkmate_2.0.0    rlang_1.0.2       
+[57] pkgconfig_2.0.3    evaluate_0.14      lattice_0.20-45    labeling_0.4.2    
+[61] bit_4.0.4          processx_3.5.2     tidyselect_1.1.1   here_1.0.1        
+[65] magrittr_2.0.1     R6_2.5.1           generics_0.1.1     DBI_1.1.2         
+[69] pillar_1.6.4       haven_2.4.3        whisker_0.4        withr_2.4.3       
+[73] units_0.7-2        modelr_0.1.8       crayon_1.4.2       KernSmooth_2.23-20
+[77] utf8_1.2.2         tzdb_0.2.0         rmarkdown_2.11     grid_4.1.2        
+[81] readxl_1.3.1       data.table_1.14.2  callr_3.7.0        git2r_0.29.0      
+[85] reprex_2.0.1       digest_0.6.29      classInt_0.4-3     httpuv_1.6.5      
+[89] munsell_0.5.0      viridisLite_0.4.0  bslib_0.3.1       </code></pre>
 </div>
 </div>
 
