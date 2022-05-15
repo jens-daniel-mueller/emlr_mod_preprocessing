@@ -57,7 +57,7 @@ models <-
   models[str_detect(
     models,
     pattern = c(
-      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES"
+      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12"
     )
   )]
 
@@ -68,6 +68,9 @@ models <-
 # no run D
 models <-
   models[!str_detect(models, pattern = "MOM6-Princeton")]
+
+models <-
+  models[str_detect(models, pattern = "planktom12")]
 
 
 ```
@@ -199,7 +202,8 @@ for (i_model in models) {
         rename(lon = LONGITUDE,
                lat = LATITUDE,
                depth = DEPTH,
-               time = TIME)
+               time = TIME) %>% 
+        mutate(depth = as.numeric(depth))
     }
       
       variable_data_tibble <- variable_data_tibble %>%
