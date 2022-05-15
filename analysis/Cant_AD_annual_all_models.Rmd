@@ -69,8 +69,8 @@ models <-
 models <-
   models[!str_detect(models, pattern = "MOM6-Princeton")]
 
-models <-
-  models[str_detect(models, pattern = "planktom12")]
+# models <-
+#   models[str_detect(models, pattern = "planktom12")]
 
 
 ```
