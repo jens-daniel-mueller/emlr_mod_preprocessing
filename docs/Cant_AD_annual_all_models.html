@@ -527,16 +527,16 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree9fbdbc207e036c94a730d92177dae50b77e17270targetblank9fbdbc2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/9fbdbc207e036c94a730d92177dae50b77e17270" target="_blank">9fbdbc2</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree3db4fceb713a290f90e86a4a52b8d626fc72a860targetblank3db4fcea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/3db4fceb713a290f90e86a4a52b8d626fc72a860" target="_blank">3db4fce</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree9fbdbc207e036c94a730d92177dae50b77e17270targetblank9fbdbc2a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree3db4fceb713a290f90e86a4a52b8d626fc72a860targetblank3db4fcea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/9fbdbc207e036c94a730d92177dae50b77e17270" target="_blank">9fbdbc2</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/3db4fceb713a290f90e86a4a52b8d626fc72a860" target="_blank">3db4fce</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -588,6 +588,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/3db4fceb713a290f90e86a4a52b8d626fc72a860/analysis/Cant_AD_annual_all_models.Rmd" target="_blank">3db4fce</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-15
+</td>
+<td>
+include planktom12
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/f742a8553d6c56eaa6b6fa421a54b28cb0c5800d/docs/Cant_AD_annual_all_models.html" target="_blank">f742a85</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-15
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -706,8 +740,8 @@ models &lt;-
 models &lt;-
   models[!str_detect(models, pattern = &quot;MOM6-Princeton&quot;)]
 
-models &lt;-
-  models[str_detect(models, pattern = &quot;planktom12&quot;)]</code></pre>
+# models &lt;-
+#   models[str_detect(models, pattern = &quot;planktom12&quot;)]</code></pre>
 <div id="calculate-annual-cant-field" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Calculate annual Cant field</h1>
 <pre class="r"><code># for loop across variables
@@ -935,7 +969,70 @@ for (i_model in models) {
   rm(AD_annual)
   
 }</code></pre>
-<pre><code>[1] &quot;planktom12_3d_all_v20220404&quot;
+<pre><code>[1] &quot;CESM-ETHZ_3D_ALL_v20211122&quot;
+[1] &quot;A&quot;
+[1] &quot;so_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;D&quot;
+[1] &quot;so_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;thetao_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;dissic_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
+[1] &quot;CNRM-ESM2-1_3D_ALL_v20211208&quot;
+[1] &quot;A&quot;
+[1] &quot;so_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
+[1] &quot;thetao_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
+[1] &quot;dissic_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
+[1] &quot;D&quot;
+[1] &quot;so_CNRM-ESM2-1_D_1_gr_1980-2018_v20211208.nc&quot;
+[1] &quot;thetao_CNRM-ESM2-1_D_1_gr_1980-2018_v20211208.nc&quot;
+[1] &quot;dissic_CNRM-ESM2-1_D_1_gr_1980-2018_v20211208.nc&quot;
+[1] &quot;EC-Earth3_3D_ALL_v20220323&quot;
+[1] &quot;A&quot;
+[1] &quot;so_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
+[1] &quot;thetao_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
+[1] &quot;dissic_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
+[1] &quot;D&quot;
+[1] &quot;so_EC-Earth3_D_1_gr_1980-2018_v20220323.nc&quot;
+[1] &quot;thetao_EC-Earth3_D_1_gr_1980-2018_v20220323.nc&quot;
+[1] &quot;dissic_EC-Earth3_D_1_gr_1980-2018_v20220323.nc&quot;
+[1] &quot;FESOM_REcoM_LR_3D_all_v20211119&quot;
+[1] &quot;A&quot;
+[1] &quot;so_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;thetao_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;dissic_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;D&quot;
+[1] &quot;so_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;thetao_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;dissic_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
+[1] &quot;MRI-ESM2-0_3D_ALL_v20210830&quot;
+[1] &quot;A&quot;
+[1] &quot;so_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;thetao_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;dissic_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;D&quot;
+[1] &quot;so_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;thetao_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;dissic_MRI-ESM2-0_D_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;NorESM-OC1.2_3D_ALL_v20211125&quot;
+[1] &quot;A&quot;
+[1] &quot;so_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
+[1] &quot;thetao_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
+[1] &quot;dissic_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
+[1] &quot;D&quot;
+[1] &quot;so_NorESM-OC1.2_D_1_gr_1980-2018_v20211125.nc&quot;
+[1] &quot;thetao_NorESM-OC1.2_D_1_gr_1980-2018_v20211125.nc&quot;
+[1] &quot;dissic_NorESM-OC1.2_D_1_gr_1980-2018_v20211125.nc&quot;
+[1] &quot;ORCA1-LIM3-PISCES_3D_ALL_v20211215&quot;
+[1] &quot;A&quot;
+[1] &quot;so_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;thetao_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;dissic_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;D&quot;
+[1] &quot;so_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;thetao_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;dissic_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
+[1] &quot;planktom12_3d_all_v20220404&quot;
 [1] &quot;A&quot;
 [1] &quot;so_PlankTOM12_A_1_gr_1980-2018_v20220404.nc&quot;
 [1] &quot;thetao_PlankTOM12_A_1_gr_1980-2018_v20220404.nc&quot;
@@ -975,7 +1072,14 @@ for (i_model in models) {
   }
   
 }</code></pre>
-<pre><code>[1] &quot;planktom12_3d_all_v20220404&quot;</code></pre>
+<pre><code>[1] &quot;CESM-ETHZ_3D_ALL_v20211122&quot;
+[1] &quot;CNRM-ESM2-1_3D_ALL_v20211208&quot;
+[1] &quot;EC-Earth3_3D_ALL_v20220323&quot;
+[1] &quot;FESOM_REcoM_LR_3D_all_v20211119&quot;
+[1] &quot;MRI-ESM2-0_3D_ALL_v20210830&quot;
+[1] &quot;NorESM-OC1.2_3D_ALL_v20211125&quot;
+[1] &quot;ORCA1-LIM3-PISCES_3D_ALL_v20211215&quot;
+[1] &quot;planktom12_3d_all_v20220404&quot;</code></pre>
 <pre class="r"><code>tcant &lt;- tcant %&gt;%
   # head(10) %&gt;%
   arrange(year) %&gt;%
@@ -1039,6 +1143,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f742a8553d6c56eaa6b6fa421a54b28cb0c5800d/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_dcant-1.png" target="_blank">f742a85</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-15
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_dcant-1.png" target="_blank">0dd6813</a>
 </td>
 <td>
@@ -1090,6 +1205,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f742a8553d6c56eaa6b6fa421a54b28cb0c5800d/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_dcant-2.png" target="_blank">f742a85</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-15
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_dcant-2.png" target="_blank">0dd6813</a>
 </td>
 <td>
@@ -1139,6 +1265,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f742a8553d6c56eaa6b6fa421a54b28cb0c5800d/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_dcant-3.png" target="_blank">f742a85</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-15
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_dcant-3.png" target="_blank">0dd6813</a>
@@ -1209,6 +1346,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f742a8553d6c56eaa6b6fa421a54b28cb0c5800d/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_tcant-1.png" target="_blank">f742a85</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-15
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_tcant-1.png" target="_blank">0dd6813</a>
 </td>
 <td>
@@ -1260,6 +1408,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f742a8553d6c56eaa6b6fa421a54b28cb0c5800d/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_tcant-2.png" target="_blank">f742a85</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-15
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_tcant-2.png" target="_blank">0dd6813</a>
 </td>
 <td>
@@ -1309,6 +1468,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f742a8553d6c56eaa6b6fa421a54b28cb0c5800d/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_tcant-3.png" target="_blank">f742a85</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-15
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_tcant-3.png" target="_blank">0dd6813</a>
@@ -1379,6 +1549,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/f742a8553d6c56eaa6b6fa421a54b28cb0c5800d/docs/figure/Cant_AD_annual_all_models.Rmd/dcant_column_inventory-1.png" target="_blank">f742a85</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-15
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Cant_AD_annual_all_models.Rmd/dcant_column_inventory-1.png" target="_blank">0dd6813</a>
