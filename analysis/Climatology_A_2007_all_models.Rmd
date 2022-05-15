@@ -79,24 +79,16 @@ variables <-
 models <- list.files(path_cmorized)
 
 models <-
-  models[!str_detect(models, pattern = "\\.")]
+  models[!str_detect(models, pattern = "\\.t|\\.z")]
 
 models <-
   models[str_detect(
     models,
     pattern = c(
-      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|ORCA025-GEOMAR|ORCA1-LIM3-PISCES"
+      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES"
     )
   )]
 
-# depth named lev, contains only depth levels not actual depth in m
-# time ranges from 0-1154 (i.e only years 1980-83), yet length is 39
-models <-
-  models[!str_detect(models, pattern = "CNRM")]
-
-# time with offset 2110-01-01, yet length is 39
-models <-
-  models[!str_detect(models, pattern = "EC-Earth3")]
 
 # files chunked into decades
 models <-
@@ -125,7 +117,7 @@ source_python(paste0(
 # models <- models[2:5]
 
 for (i_model in models) {
-  # i_model <- models[3]
+  # i_model <- models[8]
   print(i_model)
   
   variables_available <-
@@ -139,6 +131,7 @@ for (i_model in models) {
   variables_available <-
     variables_available[variables_available %in% variables]
   variables_available <- unique(variables_available)
+  print(variables_available)
   
   for (i_variable in variables_available) {
     # i_variable <- variables_available[1]
@@ -154,17 +147,18 @@ for (i_model in models) {
     print(file)
     
     # read in data
-    variable_data <-
-      read_ncdf(
-        paste(paste0(path_cmorized, i_model),
-              file,
-              sep = "/"),
-        make_units = FALSE
-        # make_time = FALSE,
-        # ncsub = cbind(
-        #   start = c(1, 1, 1, 28),
-        #   count = c(NA, NA, NA, NA))
-      )
+    if (i_model == "NorESM-OC1.2_3D_ALL_v20211125") {
+      variable_data <-
+        tidync::tidync(paste(paste0(path_cmorized, i_model),
+                             file,
+                             sep = "/"))
+    } else {
+      variable_data <-
+        read_ncdf(paste(paste0(path_cmorized, i_model),
+                        file,
+                        sep = "/"),
+                  make_units = FALSE)
+    }
     
     if (i_model == "CESM-ETHZ_3D_ALL_v20211122") {
       variable_data <-
@@ -172,10 +166,18 @@ for (i_model in models) {
     } else if (i_model == "FESOM_REcoM_LR_3D_all_v20211119") {
       variable_data <-
         variable_data %>% slice(index = 28, along = "Time")
+    } else if (i_model == "planktom12_3d_all_v20220404") {
+      variable_data <-
+        variable_data %>% slice(index = 28, along = "TIME")
     } else if (i_model == "MRI-ESM2-0_3D_ALL_v20210830" &
                i_variable == "si") {
       variable_data <-
         variable_data %>% slice(index = 1, along = "time")
+    } else if (i_model == "NorESM-OC1.2_3D_ALL_v20211125") {
+      variable_data <- variable_data %>%
+        tidync::hyper_filter(time = index == 28) %>%
+        tidync::hyper_tibble() %>%
+        select(-time)
     } else {
       variable_data <- variable_data %>% slice(index = 28, along = "time")
     }
@@ -194,11 +196,7 @@ for (i_model in models) {
       variable_data_tibble %>%
       filter(!is.na(!!sym(i_variable)))
     
-    # if (i_model == "CESM-ETHZ_3D_ALL_v20211122") {
-    #   variable_data_tibble <- variable_data_tibble %>%
-    #     rename(time = time_ann)
-    # }
-    
+
     if (i_model == "CNRM-ESM2-1_3D_ALL_v20211208") {
       variable_data_tibble <- variable_data_tibble %>%
         rename(depth = lev)
@@ -210,10 +208,8 @@ for (i_model in models) {
           lat = Lat,
           lon = Lon,
           depth = Depth
-          # time = Time
         )
-        # mutate(time = as.Date(time, origin = '1980-01-01'))
-    }
+      }
     
     if (i_model == "MOM6-Princeton_3D_ALL_v20220125") {
       variable_data_tibble <- variable_data_tibble %>%
@@ -225,6 +221,13 @@ for (i_model in models) {
         rename(depth = lev)
     }
     
+    if (i_model == "planktom12_3d_all_v20220404") {
+      variable_data_tibble <- variable_data_tibble %>%
+        rename(lon = LONGITUDE,
+               lat = LATITUDE,
+               depth = DEPTH)
+    }
+    
     
     # harmonize longitudes
     variable_data_tibble <- variable_data_tibble %>%
@@ -234,13 +237,6 @@ for (i_model in models) {
     variable_data_tibble <-
       inner_join(variable_data_tibble, basinmask) %>%
       select(-basin_AIP)
-    
-    # mutate variables
-    # variable_data_tibble <- variable_data_tibble %>%
-    #   mutate(year = year(time)) %>%
-    #   select(-time)
-    
-    # print(unique(variable_data_tibble$year))
     
     
     if (exists("climatology")) {
@@ -257,6 +253,11 @@ for (i_model in models) {
   if (i_model == "FESOM_REcoM_LR_3D_all_v20211119") {
     climatology <- climatology %>%
       mutate(po4 = NA)
+  }
+
+  if (i_model == "planktom12_3d_all_v20220404") {
+    climatology <- climatology %>%
+      mutate(no3 = NA)
   }
   
   climatology <- climatology %>%

@@ -51,24 +51,15 @@ basinmask <- basinmask %>%
 models <- list.files(path_cmorized)
 
 models <-
-  models[!str_detect(models, pattern = "\\.")]
+  models[!str_detect(models, pattern = "\\.t|\\.z")]
 
 models <-
   models[str_detect(
     models,
     pattern = c(
-      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|ORCA025-GEOMAR|ORCA1-LIM3-PISCES"
+      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES"
     )
   )]
-
-# depth named lev, contains only depth levels not actual depth in m
-# time ranges from 0-1154 (i.e only years 1980-83), yet length is 39
-models <-
-  models[!str_detect(models, pattern = "CNRM")]
-
-# time with offset 2110-01-01, yet length is 39
-models <-
-  models[!str_detect(models, pattern = "EC-Earth3")]
 
 # files chunked into decades
 models <-
@@ -91,12 +82,12 @@ variables <-
   c("so", "thetao", "dissic")
 
 for (i_model in models) {
-  # i_model <- models[3]
+  # i_model <- models[8]
   print(i_model)
   
   for (i_model_ID in c("A", "D")) {
     # i_model_ID <- c("A", "D")[1]
-
+    
     print(i_model_ID)
     
     for (i_variable in variables) {
@@ -122,11 +113,28 @@ for (i_model in models) {
       print(file)
       
       # read in data
-      variable_data <-
-        read_ncdf(paste(paste0(path_cmorized, i_model),
-                        file,
-                        sep = "/"),
-                  make_units = FALSE)
+      if (i_model == "NorESM-OC1.2_3D_ALL_v20211125") {
+        variable_data <-
+          tidync::tidync(paste(paste0(path_cmorized, i_model),
+                               file,
+                               sep = "/")) %>%
+          tidync::hyper_tibble() %>%
+          mutate(time = as.Date(time, origin = "1980-01-01"))
+      } else if (i_model %in% c("EC-Earth3_3D_ALL_v20220323",
+                                "CNRM-ESM2-1_3D_ALL_v20211208")) {
+        variable_data <-
+          read_ncdf(paste(paste0(path_cmorized, i_model),
+                          file,
+                          sep = "/"),
+                    make_units = FALSE,
+                    make_time = FALSE)
+      } else {
+        variable_data <-
+          read_ncdf(paste(paste0(path_cmorized, i_model),
+                          file,
+                          sep = "/"),
+                    make_units = FALSE)
+      }
       
       # convert to tibble
       variable_data_tibble <- variable_data %>%
@@ -143,13 +151,25 @@ for (i_model in models) {
       
       if (i_model == "CESM-ETHZ_3D_ALL_v20211122") {
         variable_data_tibble <- variable_data_tibble %>%
-          rename(time = time_ann) %>% 
+          rename(time = time_ann) %>%
           mutate(depth = as.numeric(depth))
       }
       
       if (i_model == "CNRM-ESM2-1_3D_ALL_v20211208") {
         variable_data_tibble <- variable_data_tibble %>%
-          rename(depth = lev)
+          rename(depth = lev) %>%
+          group_by(time) %>%
+          mutate(year = as.character(1979 + cur_group_id())) %>%
+          ungroup()
+        
+        variable_data_tibble <- variable_data_tibble %>%
+          mutate(time = as.Date(year, format = "%Y")) %>%
+          select(-year)
+      }
+      
+      if (i_model == "EC-Earth3_3D_ALL_v20220323") {
+        variable_data_tibble <- variable_data_tibble %>%
+          mutate(time = as.Date(time, origin = "1850-06-01"))
       }
       
       if (i_model == "FESOM_REcoM_LR_3D_all_v20211119") {
@@ -173,6 +193,14 @@ for (i_model in models) {
         variable_data_tibble <- variable_data_tibble %>%
           rename(depth = lev)
       }
+      
+     if (i_model == "planktom12_3d_all_v20220404") {
+      variable_data_tibble <- variable_data_tibble %>%
+        rename(lon = LONGITUDE,
+               lat = LATITUDE,
+               depth = DEPTH,
+               time = TIME)
+    }
       
       variable_data_tibble <- variable_data_tibble %>%
         mutate(time = year(time))
@@ -239,10 +267,8 @@ for (i_model in models) {
     
   }
   
-  AD_annual <- AD_annual %>% pivot_wider(
-    names_from = model_ID,
-    values_from = dissic
-  )
+  AD_annual <- AD_annual %>% pivot_wider(names_from = model_ID,
+                                         values_from = dissic)
   
   
   AD_annual <- AD_annual %>%
@@ -255,8 +281,8 @@ for (i_model in models) {
   AD_annual <- AD_annual %>%
     mutate(tcant = A - D) %>%
     select(-c(A, D))
-
-
+  
+  
   # write annual Cant files
   for (i_year in unique(AD_annual$year)) {
     # i_year = unique(AD_annual$year)[1]
@@ -265,14 +291,14 @@ for (i_model in models) {
     
     cant_year %>%
       write_csv(paste0(path_preprocessing,
-                      i_year,
-                      "_",
-                      i_model,
-                      ".csv"))
+                       i_year,
+                       "_",
+                       i_model,
+                       ".csv"))
   }
   
   rm(AD_annual)
-
+  
 }
 
 
@@ -349,7 +375,7 @@ tcant_zonal <- tcant %>%
 
 ## delta Cant
 
-```{r zonal_mean_section_dcant, fig.asp=1.5}
+```{r zonal_mean_section_dcant, fig.asp=2}
 
 tcant_zonal %>%
   filter(depth <= params_global$inventory_depth_standard) %>%
@@ -370,7 +396,7 @@ tcant_zonal %>%
 
 ## total Cant
 
-```{r zonal_mean_section_tcant, fig.asp=1.5}
+```{r zonal_mean_section_tcant, fig.asp=2}
 
 tcant_zonal %>%
   filter(depth <= params_global$inventory_depth_standard) %>%
@@ -395,7 +421,7 @@ tcant_zonal %>%
 
 ## delta Cant
 
-```{r dcant_column_inventory, fig.asp=1.5}
+```{r dcant_column_inventory, fig.asp=2}
 
 dcant_inv <- tcant %>%
   select(-year) %>%
