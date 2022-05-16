@@ -110,6 +110,10 @@ models <-
     )
   )]
 
+# no depth levels
+models <-
+  models[!str_detect(models, pattern = "CNRM")]
+
 # files chunked into decades
 models <-
   models[!str_detect(models, pattern = "ORCA025-GEOMAR")]
@@ -125,7 +129,7 @@ models <-
 # models <- models[c(2,3,7,9)]
 
 for (i_model in models) {
-  # i_model <- models[6]
+  # i_model <- models[2]
   print(i_model)
   
   variables_available <-
@@ -869,6 +873,8 @@ files <- fs::dir_ls(path_preprocessing)
 
 files <- files[str_detect(files, pattern = "preprocessed_model_runA_both_ann.csv")]
 
+files <- files[!str_detect(files, pattern = "CNRM")]
+
 GLODAP_cmorized <- files %>% 
   map_dfr(read_csv, .id = "model")
 
@@ -930,6 +936,7 @@ GLODAP_cmorized_beta <- GLODAP_cmorized %>%
 
 ```{r GLODAP_vs_cmorized_subset_comparison}
 
+
 # for loop across variables
 obs_var <-
   c(
@@ -964,16 +971,21 @@ model_var <-
   )
 
 for (i in 1:12) {
-#  i <- 1
+  #  i <- 1
   
   pdf(
-    file = paste0(path_preprocessing, "models_vs_GLODAP/", obs_var[i],
-    "_RECCAP2_models_vs_GLODAPv2-2021.pdf"),
-    width = 7,
-    height = 12)
+    file = paste0(
+      path_preprocessing,
+      "models_vs_GLODAP/",
+      str_remove(model_var[i], "_model"),
+      "_RECCAP2_models_vs_GLODAPv2-2021.pdf"
+    ),
+    width = 14,
+    height = 8
+  )
   
   # select correlated observation and model variable
-    if (obs_var[i] == "BetaD") {
+  if (obs_var[i] == "BetaD") {
     GLODAP_cmorized_var <- GLODAP_cmorized_beta %>%
       select(model,
              year,
@@ -993,26 +1005,26 @@ for (i in 1:12) {
           month %in% c(12, 1, 2) ~ "Winter"
         )
       )
-    } else{
+  } else{
     GLODAP_cmorized_var <- GLODAP_cmorized %>%
-    select(model,
-           year,
-           month,
-           lat,
-           lon,
-           depth,
-           basin_AIP,
-           !!sym(obs_var[i]),
-           !!sym(model_var[i])) %>%
-    drop_na() %>%
-    mutate(
-      season = case_when(
-        month %in% c(3, 4, 5) ~ "Spring",
-        month %in% c(6, 7, 8) ~ "Summer",
-        month %in% c(9, 10, 11) ~ "Autumn",
-        month %in% c(12, 1, 2) ~ "Winter"
+      select(model,
+             year,
+             month,
+             lat,
+             lon,
+             depth,
+             basin_AIP,
+             !!sym(obs_var[i]),
+             !!sym(model_var[i])) %>%
+      drop_na() %>%
+      mutate(
+        season = case_when(
+          month %in% c(3, 4, 5) ~ "Spring",
+          month %in% c(6, 7, 8) ~ "Summer",
+          month %in% c(9, 10, 11) ~ "Autumn",
+          month %in% c(12, 1, 2) ~ "Winter"
+        )
       )
-    )
   }
   
   # calculate equal axis limits and binwidth
@@ -1047,7 +1059,7 @@ for (i in 1:12) {
                   col = 'red') +
       coord_equal(xlim = axis_lims,
                   ylim = axis_lims) +
-      facet_grid(model ~ season)
+      facet_grid(season ~ model)
   )
   
   # obs-model plot (year)
@@ -1063,13 +1075,13 @@ for (i in 1:12) {
       geom_abline(slope = 1, col = 'red') +
       coord_equal(xlim = axis_lims,
                   ylim = axis_lims) +
-      facet_wrap(~model, ncol = 2)
+      facet_wrap( ~ model, ncol = 5)
   )
   
   
   # Calculate variable offset
   GLODAP_cmorized_var <- GLODAP_cmorized_var %>%
-    mutate(offset = !!sym(model_var[i]) -!!sym(obs_var[i]))
+    mutate(offset = !!sym(model_var[i])-!!sym(obs_var[i]))
   
   # Calculate annual mean offset
   GLODAP_cmorized_var_year <- GLODAP_cmorized_var %>%
@@ -1080,7 +1092,7 @@ for (i in 1:12) {
   # plot annual mean offset
   print(
     GLODAP_cmorized_var_year %>%
-      ggplot(aes(year, offset, col=model)) +
+      ggplot(aes(year, offset, col = model)) +
       geom_point() +
       geom_line() +
       labs(title = "Annual mean offset",
@@ -1091,11 +1103,42 @@ for (i in 1:12) {
   
   # spatial distribution of the model-observations offset for 4 depth intervals
   intervals <- c(0, 150, 500, 2000, 8000)
+  
   for (j in 1:4) {
     # j <- 1
-    GLODAP_cmorized_var_grid <- GLODAP_cmorized_var %>%
+    GLODAP_cmorized_var_interval <- GLODAP_cmorized_var %>%
       filter(depth >= intervals[j],
-             depth < intervals[j + 1]) %>%
+             depth < intervals[j + 1])
+    
+    
+    # Calculate annual mean offset
+    GLODAP_cmorized_var_year <- GLODAP_cmorized_var_interval %>%
+      group_by(year, model) %>%
+      summarise(offset = mean(offset)) %>%
+      ungroup()
+    
+    # plot annual mean offset
+    print(
+      GLODAP_cmorized_var_year %>%
+        ggplot(aes(year, offset, col = model)) +
+        geom_point() +
+        geom_line() +
+        labs(
+          title = paste(
+            "Annual mean offset | Depth interval:",
+            intervals[j],
+            "-",
+            intervals[j + 1],
+            "m"
+          ),
+          subtitle = paste(sym(model_var[i]), "-", sym(obs_var[i]))
+        ) +
+        theme(legend.position = "bottom",
+              legend.direction = "vertical")
+    )
+    
+    
+    GLODAP_cmorized_var_grid <- GLODAP_cmorized_var_interval %>%
       group_by(lat, lon, model) %>%
       summarise(offset = mean(offset)) %>%
       ungroup()
@@ -1112,7 +1155,7 @@ for (i in 1:12) {
           limit = limit,
           na.value = "red"
         ) +
-        coord_quickmap(expand = 0) +
+
         labs(
           title = paste(model_var[i],
                         "-",
@@ -1128,7 +1171,7 @@ for (i in 1:12) {
           x = "Longitude",
           y = "Latitude"
         ) +
-        facet_wrap(~ model, ncol = 2)
+        facet_wrap( ~ model, ncol = 3)
     )
     
     print(
@@ -1147,17 +1190,17 @@ for (i in 1:12) {
                            intervals[j], "-", intervals[j + 1], "m")
         ) +
         coord_cartesian(expand = FALSE) +
-        facet_wrap( ~ model, ncol = 2)
+        facet_wrap(~ model, ncol = 3)
     )
   }
   
   # zonal mean section of the model-observations offset for each basin
   for (i_basin_AIP in unique(GLODAP_cmorized_var$basin_AIP)) {
-   # i_basin_AIP = "Atlantic"
+    # i_basin_AIP = "Atlantic"
     GLODAP_cmorized_var_zonal <- GLODAP_cmorized_var %>%
       filter(basin_AIP == i_basin_AIP) %>%
       group_by(lat, depth, model) %>%
-      summarise(offset = mean(offset, na.rm=TRUE)) %>%
+      summarise(offset = mean(offset, na.rm = TRUE)) %>%
       ungroup()
     
     # plot zonal mean section (model - obs)
@@ -1169,15 +1212,16 @@ for (i in 1:12) {
     print(
       GLODAP_cmorized_var_zonal %>%
         ggplot(aes(lat, depth, z = offset)) +
-        stat_summary_2d(binwidth = c(1,100)) +
+        stat_summary_2d(binwidth = c(1, 100)) +
         scale_fill_scico(
           palette = "vik",
           name = "offset",
           limit = limit,
           na.value = "red"
         ) +
-        coord_cartesian(expand = 0,
-                        xlim = c(lat_min, lat_max)) +
+        coord_fixed(expand = 0,
+                        xlim = c(lat_min, lat_max),
+                    ratio = 0.01) +
         scale_y_reverse() +
         labs(
           title = paste(model_var[i],
@@ -1189,7 +1233,7 @@ for (i in 1:12) {
           x = "Latitude",
           y = "Depth"
         ) +
-        facet_wrap( ~ model, ncol = 2)
+        facet_wrap(~ model, ncol = 3)
     )
   }
   
