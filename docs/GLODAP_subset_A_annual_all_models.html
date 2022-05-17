@@ -411,7 +411,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">GLODAP subset variable climate A</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">16 May, 2022</h4>
+<h4 class="date">17 May, 2022</h4>
 
 </div>
 
@@ -436,7 +436,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-05-16
+<strong>Last updated:</strong> 2022-05-17
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -527,16 +527,16 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtreee29c6c74b99aaa377addd66dc536ab5e8872fa5ctargetblanke29c6c7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/e29c6c74b99aaa377addd66dc536ab5e8872fa5c" target="_blank">e29c6c7</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree71c48ae2f5b2bef6b676aef9fe1c7ec070ea087ctargetblank71c48aea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/71c48ae2f5b2bef6b676aef9fe1c7ec070ea087c" target="_blank">71c48ae</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtreee29c6c74b99aaa377addd66dc536ab5e8872fa5ctargetblanke29c6c7a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree71c48ae2f5b2bef6b676aef9fe1c7ec070ea087ctargetblank71c48aea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/e29c6c74b99aaa377addd66dc536ab5e8872fa5c" target="_blank">e29c6c7</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/71c48ae2f5b2bef6b676aef9fe1c7ec070ea087c" target="_blank">71c48ae</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -550,10 +550,6 @@ Untracked files:
     Untracked:  analysis/RECCAP2_flux_products.Rmd
     Untracked:  code/backup_analysis_scripts/
     Untracked:  code/reprex_read_nc_file.R
-
-Unstaged changes:
-    Modified:   analysis/Cant_AD_annual_all_models.Rmd
-    Modified:   code/Workflowr_project_managment.R
 
 </code></pre>
 <p>
@@ -592,6 +588,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/71c48ae2f5b2bef6b676aef9fe1c7ec070ea087c/analysis/GLODAP_subset_A_annual_all_models.Rmd" target="_blank">71c48ae</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-17
+</td>
+<td>
+write files with betaD included
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/1507d4449add759ac66161db5bd506994e4effd7/docs/GLODAP_subset_A_annual_all_models.html" target="_blank">1507d44</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-16
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1615,6 +1645,17 @@ GLODAP_cmorized &lt;- GLODAP_cmorized %&gt;%
       warn = &quot;n&quot;
     )$BetaD
   )</code></pre>
+<pre class="r"><code>GLODAP_cmorized_beta %&gt;%
+  group_by(model) %&gt;%
+  group_walk(~ write_csv(
+    .x,
+    paste(
+      path_preprocessing,
+      .y$model,
+      &quot;_GLODAPv2.2021_preprocessed_model_runA_both_ann_incl_betaD.csv&quot;,
+      sep = &quot;&quot;
+    )
+  ))</code></pre>
 <pre class="r"><code># for loop across variables
 obs_var &lt;-
   c(
