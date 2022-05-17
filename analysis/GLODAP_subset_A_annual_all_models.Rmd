@@ -932,6 +932,22 @@ GLODAP_cmorized_beta <- GLODAP_cmorized %>%
 
 ```
 
+```{r write_files_with_betaD}
+
+GLODAP_cmorized_beta %>%
+  group_by(model) %>%
+  group_walk(~ write_csv(
+    .x,
+    paste(
+      path_preprocessing,
+      .y$model,
+      "_GLODAPv2.2021_preprocessed_model_runA_both_ann_incl_betaD.csv",
+      sep = ""
+    )
+  ))
+
+```
+
 
 
 ```{r GLODAP_vs_cmorized_subset_comparison}

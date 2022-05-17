@@ -61,6 +61,10 @@ models <-
     )
   )]
 
+# depth levels not available
+models <-
+  models[!str_detect(models, pattern = "CNRM")]
+
 # files chunked into decades
 models <-
   models[!str_detect(models, pattern = "ORCA025-GEOMAR")]
@@ -69,15 +73,13 @@ models <-
 models <-
   models[!str_detect(models, pattern = "MOM6-Princeton")]
 
-# models <-
-#   models[str_detect(models, pattern = "planktom12")]
-
 
 ```
 
 # Calculate annual Cant field
 
-```{r read_cmorized_Runs_A_D}
+```{r read_cmorized_Runs_A_D, eval=FALSE}
+
 
 # for loop across variables
 # 3d variables
@@ -85,7 +87,7 @@ variables <-
   c("so", "thetao", "dissic")
 
 for (i_model in models) {
-  # i_model <- models[8]
+  # i_model <- models[2]
   print(i_model)
   
   for (i_model_ID in c("A", "D")) {
@@ -151,6 +153,8 @@ for (i_model in models) {
         variable_data_tibble %>%
         filter(!is.na(!!sym(i_variable)))
       
+      # sort(unique(variable_data_tibble$lev))
+      # sort(unique(variable_data_tibble$lon))
       
       if (i_model == "CESM-ETHZ_3D_ALL_v20211122") {
         variable_data_tibble <- variable_data_tibble %>%
@@ -197,14 +201,16 @@ for (i_model in models) {
           rename(depth = lev)
       }
       
-     if (i_model == "planktom12_3d_all_v20220404") {
-      variable_data_tibble <- variable_data_tibble %>%
-        rename(lon = LONGITUDE,
-               lat = LATITUDE,
-               depth = DEPTH,
-               time = TIME) %>% 
-        mutate(depth = as.numeric(depth))
-    }
+      if (i_model == "planktom12_3d_all_v20220404") {
+        variable_data_tibble <- variable_data_tibble %>%
+          rename(
+            lon = LONGITUDE,
+            lat = LATITUDE,
+            depth = DEPTH,
+            time = TIME
+          ) %>%
+          mutate(depth = as.numeric(depth))
+      }
       
       variable_data_tibble <- variable_data_tibble %>%
         mutate(time = year(time))
@@ -220,7 +226,7 @@ for (i_model in models) {
       rm(variable_data_tibble)
       
     }
-    
+
     # harmonize column names and coordinates
     annual <- annual %>%
       select(
@@ -270,6 +276,10 @@ for (i_model in models) {
     rm(annual)
     
   }
+  
+      
+  # sort(unique(AD_annual$depth))
+  # sort(unique(AD_annual$lon))
   
   AD_annual <- AD_annual %>% pivot_wider(names_from = model_ID,
                                          values_from = dissic)
@@ -385,7 +395,7 @@ tcant_zonal %>%
   filter(depth <= params_global$inventory_depth_standard) %>%
   group_by(basin_AIP) %>%
   group_split() %>%
-  # head(1) %>% 
+  head(1) %>%
   map(
     ~ p_section_zonal_continous_depth(
       df = .x,

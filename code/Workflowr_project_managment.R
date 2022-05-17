@@ -5,7 +5,7 @@
 
 # commit regular changes (locally) and rebuild site
 # this takes only changed files into account
-wflow_publish(all = TRUE, message = "include planktom12")
+wflow_publish(all = TRUE, message = "write files with betaD included")
 
 # commit changes including _site.yml (locally) and rebuild site in the specified order
 # you can also run this code with only some of the files. In this case remove the rebuild=TRUE command
@@ -32,7 +32,7 @@ wflow_publish(here::here(
     "GLODAP_subset_A_annual_all_models.Rmd"
   )
 ),
-message = "read data from all models and write individual files")
+message = "revise pdf plot output")
 
 
 # Push latest version to GitHub
