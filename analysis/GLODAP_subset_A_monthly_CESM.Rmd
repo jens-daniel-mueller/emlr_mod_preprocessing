@@ -26,7 +26,7 @@ path_cmorized <-
   "/nfs/kryo/work/loher/CESM_output/RECCAP2/cmorized_March2021/split_monthly/"
 
 path_preprocessing <-
-  paste(path_root, "/model/preprocessing/GLODAP_subset_A_monthly_CESM/", sep = "")
+  paste0(path_root, "/model/preprocessing/GLODAP_subset_A_all_models/")
 ```
 
 ```{r load_libraries_specific, include=FALSE}
@@ -296,6 +296,7 @@ for (i_year in years) {
       paste(
         path_preprocessing,
         "regular_subset_distribution_runA_2021/",
+        "CESM-ETHZ_v20211122_monthly_",
         i_variable,
         "_",
         i_year,
@@ -314,7 +315,7 @@ GLODAP %>%
   write_csv(
     paste(
       path_preprocessing,
-      "GLODAPv2.2021_preprocessed_model_runA_raw_subset.csv",
+      "CESM-ETHZ_v20211122_monthly_GLODAPv2.2021_preprocessed_model_runA_raw_subset.csv",
       sep = ""
     )
   )
@@ -325,6 +326,8 @@ stats_summary %>%
     paste(
       path_preprocessing,
       "regular_subset_distribution_runA_2021/",
+      "CESM-ETHZ_v20211122_monthly",
+      "_",
       model_ID,
       "_summary_stats.csv",
       sep = ""
@@ -340,7 +343,7 @@ GLODAP <-
   read_csv(
     paste(
       path_preprocessing,
-      "GLODAPv2.2021_preprocessed_model_runA_raw_subset.csv",
+      "CESM-ETHZ_v20211122_monthly_GLODAPv2.2021_preprocessed_model_runA_raw_subset.csv",
       sep = ""
     ),
     col_types = cols(
@@ -476,7 +479,7 @@ GLODAP %>%
   write_csv(
     paste(
       path_preprocessing,
-      "GLODAPv2.2021_preprocessed_model_runA_both.csv",
+      "CESM-ETHZ_v20211122_monthly_GLODAPv2.2021_preprocessed_model_runA_both.csv",
       sep = ""
     )
   )
@@ -485,7 +488,7 @@ GLODAP_NA_filled %>%
   write_csv(
     paste(
       path_preprocessing,
-      "GLODAPv2.2021_preprocessed_model_runA_both_NA_filled.csv",
+      "CESM-ETHZ_v20211122_monthly_GLODAPv2.2021_preprocessed_model_runA_both_NA_filled.csv",
       sep = ""
     )
   )
@@ -558,13 +561,13 @@ GLODAP_NA_filled <- GLODAP_NA_filled %>%
 GLODAP %>%
   select(-row_number) %>% 
   write_csv(paste(path_preprocessing,
-                  "GLODAPv2.2021_preprocessed_model_runA_final.csv",
+                  "CESM-ETHZ_v20211122_monthly_GLODAPv2.2021_preprocessed_model_runA_final.csv",
                   sep = ""))
 
 GLODAP_NA_filled %>%
   select(-row_number) %>% 
   write_csv(paste(path_preprocessing,
-                  "GLODAPv2.2021_preprocessed_model_runA_final_NA_filled.csv",
+                  "CESM-ETHZ_v20211122_monthly_GLODAPv2.2021_preprocessed_model_runA_final_NA_filled.csv",
                   sep = ""))
 
 ```
@@ -572,7 +575,7 @@ GLODAP_NA_filled %>%
 
 # Test for interpolation
 
-```{r test_for_interpolation}
+```{r test_for_interpolation, eval=FALSE}
 
 GLODAP <-
   read_csv(paste(path_GLODAP_preprocessing,
@@ -709,7 +712,7 @@ map +
 ```{r read_GLODAP_with_cmorized_subset_file}
 
 GLODAP_cmorized <- read_csv(paste(path_preprocessing,
-                                  "GLODAPv2.2021_preprocessed_model_runA_both.csv",
+                                  "CESM-ETHZ_v20211122_monthly_GLODAPv2.2021_preprocessed_model_runA_both.csv",
                                   sep = ""))
 
 ```

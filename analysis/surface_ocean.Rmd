@@ -101,7 +101,7 @@ variables <-
     "sos",
     "tos")
 
-# models <- models[7:length(models)]
+models <- models[1]
 
 for (i_model in models) {
   # i_model <- models[4]
