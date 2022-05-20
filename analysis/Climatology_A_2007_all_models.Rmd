@@ -114,7 +114,7 @@ source_python(paste0(
 
 ```{r read_climatology_fields_2007}
 
-# models <- models[2:5]
+models <- models[1]
 
 for (i_model in models) {
   # i_model <- models[8]
@@ -374,6 +374,9 @@ for (i_model in models) {
   # select relevant columns
   climatology <- climatology %>%
     select(-c(rho))
+  
+  # Remove 3D_all from model name
+  i_model <- str_remove(i_model, "3D_ALL_|3D_all_")
   
   # write csv file
   climatology %>%

@@ -78,7 +78,7 @@ models <-
 
 # Calculate annual Cant field
 
-```{r read_cmorized_Runs_A_D, eval=FALSE}
+```{r read_cmorized_Runs_A_D}
 
 
 # for loop across variables
@@ -86,8 +86,11 @@ models <-
 variables <-
   c("so", "thetao", "dissic")
 
+
+models <- models[1]
+
 for (i_model in models) {
-  # i_model <- models[2]
+  # i_model <- models[1]
   print(i_model)
   
   for (i_model_ID in c("A", "D")) {
@@ -297,6 +300,9 @@ for (i_model in models) {
     select(-c(A, D))
   
   
+  # Remove 3D_all from model name
+  i_model <- str_remove(i_model, "3D_ALL_|3D_all_")
+  
   # write annual Cant files
   for (i_year in unique(AD_annual$year)) {
     # i_year = unique(AD_annual$year)[1]
@@ -334,7 +340,7 @@ for (i_model in models) {
       read_csv(paste0(path_preprocessing,
                       i_year,
                       "_",
-                      i_model,
+                      str_remove(i_model, "3D_ALL_|3D_all_"),
                       ".csv"))
     
     cant_year <- cant_year %>% 
