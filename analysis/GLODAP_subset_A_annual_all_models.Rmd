@@ -27,7 +27,7 @@ path_cmorized <-
   "/nfs/kryo/work/updata/reccap2/Models/3D_ALL/"
 
 path_preprocessing <-
-  paste0(path_root, "/model/preprocessing/GLODAP_subset_A_annual_all_models/")
+  paste0(path_root, "/model/preprocessing/GLODAP_subset_A_all_models/")
 ```
 
 ```{r load_libraries_specific, include=FALSE}
@@ -123,10 +123,9 @@ models <-
 
 
 
-```{r subset_cmorized_variable_forcing_data, eval=FALSE}
+```{r subset_cmorized_variable_forcing_data}
 
-
-# models <- models[c(2,3,7,9)]
+# models <- models[1]
 
 for (i_model in models) {
   # i_model <- models[2]
@@ -400,7 +399,7 @@ for (i_model in models) {
       ggsave(
         paste(
           path_preprocessing,
-          "regular_subset_distribution_runA_2021_ann/",
+          "regular_subset_distribution_runA_2021/",
           str_remove(i_model, "3D_ALL_|3D_all_"),
           "_",
           i_variable,
@@ -438,8 +437,9 @@ for (i_model in models) {
     write_csv(
       paste(
         path_preprocessing,
-        "regular_subset_distribution_runA_2021_ann/",
+        "regular_subset_distribution_runA_2021/",
         i_model,
+        "_",
         model_ID,
         "_summary_stats.csv",
         sep = ""
@@ -451,7 +451,7 @@ for (i_model in models) {
 
 ```
 
-```{r prepare_model_subset, eval=FALSE}
+```{r prepare_model_subset}
 
 rm(GLODAP, GLODAP_joined)
 
@@ -701,7 +701,7 @@ GLODAP_NA_filled <- GLODAP_NA_filled %>%
 
 # Write files
 
-```{r write_files, eval=FALSE}
+```{r write_files}
 
 # write final file for GLODAP-based subsetting model variables
 GLODAP %>%
@@ -932,7 +932,7 @@ GLODAP_cmorized_beta <- GLODAP_cmorized %>%
 
 ```
 
-```{r write_files_with_betaD}
+```{r write_files_with_betaD, eval=FALSE}
 
 GLODAP_cmorized_beta %>%
   group_by(model) %>%
@@ -950,7 +950,7 @@ GLODAP_cmorized_beta %>%
 
 
 
-```{r GLODAP_vs_cmorized_subset_comparison}
+```{r GLODAP_vs_cmorized_subset_comparison, eval=FALSE}
 
 
 # for loop across variables

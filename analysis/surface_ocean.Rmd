@@ -77,8 +77,6 @@ models <-
 # models <-
 #   models[!str_detect(models, pattern = "MOM6-Princeton")]
 
-# models <- models[1]
-
 ```
 
 
@@ -101,7 +99,7 @@ variables <-
     "sos",
     "tos")
 
-models <- models[1]
+# models <- models[1]
 
 for (i_model in models) {
   # i_model <- models[4]
