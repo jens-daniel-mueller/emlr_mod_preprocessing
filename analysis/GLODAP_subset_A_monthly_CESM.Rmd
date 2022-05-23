@@ -674,7 +674,7 @@ ggplot() +
 
 # Test for obs-model depth offset
 
-```{r test_for_depth_offset}
+```{r test_for_depth_offset, eval=FALSE}
 
 GLODAP_max_depth <- GLODAP %>%
   select(lon, lat, depth) %>%

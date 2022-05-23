@@ -73,25 +73,11 @@ models <-
 models <-
   models[!str_detect(models, pattern = "MOM6-Princeton")]
 
-# no run D
-models <-
-  models[!str_detect(models, pattern = "MRI-ESM2-0")]
-
-# no po4
-models <-
-  models[!str_detect(models, pattern = "FESOM_REcoM_LR")]
-
-# no no3
-models <-
-  models[!str_detect(models, pattern = "planktom12")]
-
-
 ```
 
 # Calculate annual Cant field
 
 ```{r read_cmorized_Runs_A_D}
-
 
 # for loop across variables
 # 3d variables
@@ -99,19 +85,34 @@ variables <-
   c("so", "thetao", "dissic", "talk", "po4", "no3")
 
 
-# models <- models[3]
+# models <- models[c(3,6)]
 
 for (i_model in models) {
-  # i_model <- models[3]
+  # i_model <- models[4]
   print(i_model)
   
   for (i_model_ID in c("A", "D")) {
-    # i_model_ID <- c("A", "D")[1]
+    # i_model_ID <- c("A", "D")[2]
     
     print(i_model_ID)
     
-    for (i_variable in variables) {
-      #  i_variable <- variables[5]
+    variables_available <-
+      list.files(
+        path = paste0(path_cmorized, i_model),
+        pattern = paste0("_", i_model_ID, "_")
+      )
+    
+    variables_available <-
+      str_split(variables_available,
+                pattern = "_",
+                simplify = TRUE)[, 1]
+    variables_available <-
+      variables_available[variables_available %in% variables]
+    variables_available <- unique(variables_available)
+    print(variables_available)
+    
+    for (i_variable in variables_available) {
+      #  i_variable <- variables_available[1]
       
       # read list of all files
       file <-
@@ -155,7 +156,7 @@ for (i_model in models) {
                           sep = "/"),
                     make_units = FALSE)
       }
-
+      
       # convert to tibble
       variable_data_tibble <- variable_data %>%
         as_tibble()
@@ -243,57 +244,21 @@ for (i_model in models) {
     }
     
     if (i_model == "FESOM_REcoM_LR_3D_all_v20211119") {
-      climatology <- climatology %>%
-        mutate(po4 = NA)
+      annual <- annual %>%
+        mutate(po4 = no3 / 16)
     }
     
     if (i_model == "planktom12_3d_all_v20220404") {
-      climatology <- climatology %>%
-        mutate(no3 = NA)
+      annual <- annual %>%
+        mutate(no3 = po4 * 16)
     }
     
-    # harmonize column names and coordinates
-    annual <- annual %>%
-      select(
-        year = time,
-        lon,
-        lat,
-        depth,
-        sal = so,
-        theta = thetao,
-        dissic,
-        talk,
-        phosphate = po4,
-        nitrate = no3
-      ) %>%
-      mutate(lon = if_else(lon < 20, lon + 360, lon))
-    
-    # calculate model temperature
-    annual <- annual %>%
-      mutate(temp = gsw_pt_from_t(
-        SA = sal,
-        t = theta,
-        p = 10.1325,
-        p_ref = depth
-      ))
-    
-    # unit transfer from mol/m3 to µmol/kg
-    annual <- annual %>%
-      mutate(
-        rho = gsw_pot_rho_t_exact(
-          SA = sal,
-          t = temp,
-          p = depth,
-          p_ref = 10.1325
-        ),
-        dissic = dissic * (1e+6 / rho),
-        talk = talk * (1e+6 / rho),
-        phosphate = phosphate * (1e+6 / rho),
-        nitrate = nitrate * (1e+6 / rho)
-      ) 
-    
-    annual <- annual %>%
-      select(-c(sal, temp, theta, rho))
+    if (i_model == "MRI-ESM2-0_3D_ALL_v20210830" &
+        i_model_ID == "D") {
+      annual <- right_join(annual,
+                           AD_annual %>%
+                             select(-dissic))
+    }
     
     annual <- annual %>%
       mutate(model_ID = i_model_ID)
@@ -310,7 +275,51 @@ for (i_model in models) {
     
   }
   
-      
+  # harmonize column names and coordinates
+  AD_annual <- AD_annual %>%
+    select(
+      year = time,
+      lon,
+      lat,
+      depth,
+      sal = so,
+      theta = thetao,
+      dissic,
+      talk,
+      phosphate = po4,
+      nitrate = no3,
+      model_ID
+    ) %>%
+    mutate(lon = if_else(lon < 20, lon + 360, lon))
+  
+  # calculate model temperature
+  AD_annual <- AD_annual %>%
+    mutate(temp = gsw_pt_from_t(
+      SA = sal,
+      t = theta,
+      p = 10.1325,
+      p_ref = depth
+    ))
+  
+  # unit transfer from mol/m3 to µmol/kg
+  AD_annual <- AD_annual %>%
+    mutate(
+      rho = gsw_pot_rho_t_exact(
+        SA = sal,
+        t = temp,
+        p = depth,
+        p_ref = 10.1325
+      ),
+      dissic = dissic * (1e+6 / rho),
+      talk = talk * (1e+6 / rho),
+      phosphate = phosphate * (1e+6 / rho),
+      nitrate = nitrate * (1e+6 / rho)
+    )
+  
+  AD_annual <- AD_annual %>%
+    select(-c(sal, temp, theta, rho))
+  
+  
   # sort(unique(AD_annual$depth))
   # sort(unique(AD_annual$lon))
   
@@ -323,14 +332,13 @@ for (i_model in models) {
   # calculate cstar field
   AD_annual_cstar <- AD_annual
   
-  AD_annual_cstar <- AD_annual_cstar %>% 
+  AD_annual_cstar <- AD_annual_cstar %>%
     filter(model_ID == "A")
   
-  params_local <- lst(
-    rCP = 117,
-    rNP = 16)
-
-
+  params_local <- lst(rCP = 117,
+                      rNP = 16)
+  
+  
   AD_annual_cstar <- AD_annual_cstar %>%
     mutate(
       cstar_no3 = b_cstar_nitrate(
@@ -349,12 +357,12 @@ for (i_model in models) {
   
   # Calculate Cant fields
   
-  AD_annual <- AD_annual %>% 
+  AD_annual <- AD_annual %>%
     select(year, lon, lat, depth, dissic, model_ID, basin_AIP)
-
+  
   AD_annual <- AD_annual %>% pivot_wider(names_from = model_ID,
                                          values_from = dissic)
-
+  
   
   AD_annual <- AD_annual %>%
     mutate(tcant = A - D) %>%
@@ -362,7 +370,7 @@ for (i_model in models) {
   
   
   # Remove 3D_all from model name
-  i_model <- str_remove(i_model, "3D_ALL_|3D_all_")
+  i_model <- str_remove(i_model, "3D_ALL_|3D_all_|3d_all_")
   
   # write annual Cant files
   for (i_year in unique(AD_annual$year)) {
@@ -379,7 +387,7 @@ for (i_model in models) {
           ".csv"
         )
       )
-
+    
     AD_annual_cstar %>%
       filter(year == i_year) %>%
       write_csv(
@@ -419,7 +427,7 @@ for (i_model in models) {
                       "Cant_AD_annual_all_models/",
                       i_year,
                       "_",
-                      str_remove(i_model, "3D_ALL_|3D_all_"),
+                      str_remove(i_model, "3D_ALL_|3D_all_|3d_all_"),
                       ".csv"))
     
     cant_year <- cant_year %>% 

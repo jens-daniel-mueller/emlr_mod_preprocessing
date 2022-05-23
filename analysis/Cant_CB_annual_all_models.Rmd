@@ -73,16 +73,13 @@ models <-
 models <-
   models[!str_detect(models, pattern = "MOM6-Princeton")]
 
-# no run D
-models <-
-  models[!str_detect(models, pattern = "MRI-ESM2-0")]
-
 
 ```
 
 # Calculate annual Cant field
 
 ```{r read_cmorized_Runs_C_B}
+
 
 
 # for loop across variables
@@ -102,8 +99,23 @@ for (i_model in models) {
     
     print(i_model_ID)
     
-    for (i_variable in variables) {
-      #  i_variable <- variables[3]
+    variables_available <-
+      list.files(
+        path = paste0(path_cmorized, i_model),
+        pattern = paste0("_", i_model_ID, "_")
+      )
+    
+    variables_available <-
+      str_split(variables_available,
+                pattern = "_",
+                simplify = TRUE)[, 1]
+    variables_available <-
+      variables_available[variables_available %in% variables]
+    variables_available <- unique(variables_available)
+    print(variables_available)
+    
+    for (i_variable in variables_available) {
+      #  i_variable <- variables_available[3]
       
       # read list of all files
       file <-
@@ -233,41 +245,13 @@ for (i_model in models) {
       rm(variable_data_tibble)
       
     }
-
-    # harmonize column names and coordinates
-    annual <- annual %>%
-      select(
-        year = time,
-        lon,
-        lat,
-        depth,
-        dissic,
-        sal = so,
-        theta = thetao
-      ) %>%
-      mutate(lon = if_else(lon < 20, lon + 360, lon))
     
-    # calculate model temperature
-    annual <- annual %>%
-      mutate(temp = gsw_pt_from_t(
-        SA = sal,
-        t = theta,
-        p = 10.1325,
-        p_ref = depth
-      ))
-    
-    # unit transfer from mol/m3 to µmol/kg
-    annual <- annual %>%
-      mutate(
-        rho = gsw_pot_rho_t_exact(
-          SA = sal,
-          t = temp,
-          p = depth,
-          p_ref = 10.1325
-        ),
-        dissic = dissic * (1e+6 / rho)
-      ) %>%
-      select(year, lon, lat, depth, dissic)
+    if (i_model == "MRI-ESM2-0_3D_ALL_v20210830" &
+        i_model_ID == "B") {
+      annual <- right_join(annual,
+                           CB_annual %>%
+                             select(-dissic))
+    }
     
     annual <- annual %>%
       mutate(model_ID = i_model_ID)
@@ -284,7 +268,45 @@ for (i_model in models) {
     
   }
   
-      
+  
+  # harmonize column names and coordinates
+  CB_annual <- CB_annual %>%
+    select(
+      year = time,
+      lon,
+      lat,
+      depth,
+      dissic,
+      sal = so,
+      theta = thetao,
+      model_ID
+    ) %>%
+    mutate(lon = if_else(lon < 20, lon + 360, lon))
+  
+  # calculate model temperature
+  CB_annual <- CB_annual %>%
+    mutate(temp = gsw_pt_from_t(
+      SA = sal,
+      t = theta,
+      p = 10.1325,
+      p_ref = depth
+    ))
+  
+  # unit transfer from mol/m3 to µmol/kg
+  CB_annual <- CB_annual %>%
+    mutate(
+      rho = gsw_pot_rho_t_exact(
+        SA = sal,
+        t = temp,
+        p = depth,
+        p_ref = 10.1325
+      ),
+      dissic = dissic * (1e+6 / rho)
+    )
+  
+  CB_annual <- CB_annual %>%
+    select(year, lon, lat, depth, dissic, model_ID)
+  
   # sort(unique(CB_annual$depth))
   # sort(unique(CB_annual$lon))
   
@@ -305,7 +327,7 @@ for (i_model in models) {
   
   
   # Remove 3D_all from model name
-  i_model <- str_remove(i_model, "3D_ALL_|3D_all_")
+  i_model <- str_remove(i_model, "3D_ALL_|3D_all_|3d_all_")
   
   # write annual Cant files
   for (i_year in unique(CB_annual$year)) {
@@ -344,7 +366,7 @@ for (i_model in models) {
       read_csv(paste0(path_preprocessing,
                       i_year,
                       "_",
-                      str_remove(i_model, "3D_ALL_|3D_all_"),
+                      str_remove(i_model, "3D_ALL_|3D_all_|3d_all_"),
                       ".csv"))
     
     cant_year <- cant_year %>% 

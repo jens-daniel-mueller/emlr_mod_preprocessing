@@ -106,7 +106,7 @@ models <-
   models[str_detect(
     models,
     pattern = c(
-      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES"
+      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12"
     )
   )]
 
@@ -125,10 +125,10 @@ models <-
 
 ```{r subset_cmorized_variable_forcing_data}
 
-# models <- models[1]
+# models <- models[8]
 
 for (i_model in models) {
-  # i_model <- models[2]
+  # i_model <- models[5]
   print(i_model)
   
   variables_available <-
@@ -146,7 +146,7 @@ for (i_model in models) {
   GLODAP_joined <- GLODAP
   
   for (i_variable in variables_available) {
-    # i_variable <- variables_available[1]
+    # i_variable <- variables_available[5]
     
     # read list of all files
     file <-
@@ -261,7 +261,15 @@ for (i_model in models) {
     variable_data_tibble <- variable_data_tibble %>%
       mutate(year = year(time)) %>%
       select(-time)
-    # unique(variable_data_tibble$year)
+    
+    
+    if (i_model == "MRI-ESM2-0_3D_ALL_v20210830" &
+        i_variable == "si") {
+      variable_data_tibble <-
+        crossing(variable_data_tibble %>%
+                   select(-year),
+                 year = seq(1980, 2018, 1))
+    }
     
     # for loop across years
     years <- unique(variable_data_tibble$year)
@@ -400,7 +408,7 @@ for (i_model in models) {
         paste(
           path_preprocessing,
           "regular_subset_distribution_runA_2021/",
-          str_remove(i_model, "3D_ALL_|3D_all_"),
+          str_remove(i_model, "3D_ALL_|3D_all_|3d_all_"),
           "_",
           i_variable,
           "_",
@@ -415,8 +423,18 @@ for (i_model in models) {
     
   }
   
+  if (i_model == "FESOM_REcoM_LR_3D_all_v20211119") {
+    GLODAP_joined <- GLODAP_joined %>% 
+      mutate(po4_model = no3_model/16)
+  }
+  
+  if (i_model == "planktom12_3d_all_v20220404") {
+    GLODAP_joined <- GLODAP_joined %>% 
+      mutate(no3_model = po4_model*16)
+  }
+  
   # Remove 3D_all from model name
-  i_model <- str_remove(i_model, "3D_ALL_|3D_all_")
+  i_model <- str_remove(i_model, "3D_ALL_|3D_all_|3d_all_")
   
   # write raw data file for GLODAP-based subsetting model variables
   GLODAP_joined %>%
@@ -456,11 +474,10 @@ for (i_model in models) {
 rm(GLODAP, GLODAP_joined)
 
 for (i_model in models) {
-  # i_model <- models[1]
+  # i_model <- models[3]
   
   # Remove 3D_all from model name
-  i_model <- str_remove(i_model, "3D_ALL_")
-  i_model <- str_remove(i_model, "3D_all_")
+  i_model <- str_remove(i_model, "3D_ALL_|3D_all_|3d_all_")
   
   # read file for GLODAP-based subsetting model variables
   GLODAP_single <-
@@ -873,8 +890,6 @@ files <- fs::dir_ls(path_preprocessing)
 
 files <- files[str_detect(files, pattern = "preprocessed_model_runA_both_ann.csv")]
 
-files <- files[!str_detect(files, pattern = "CNRM")]
-
 GLODAP_cmorized <- files %>% 
   map_dfr(read_csv, .id = "model")
 
@@ -932,7 +947,7 @@ GLODAP_cmorized_beta <- GLODAP_cmorized %>%
 
 ```
 
-```{r write_files_with_betaD, eval=FALSE}
+```{r write_files_with_betaD}
 
 GLODAP_cmorized_beta %>%
   group_by(model) %>%
@@ -950,7 +965,7 @@ GLODAP_cmorized_beta %>%
 
 
 
-```{r GLODAP_vs_cmorized_subset_comparison, eval=FALSE}
+```{r GLODAP_vs_cmorized_subset_comparison}
 
 
 # for loop across variables

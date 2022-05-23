@@ -85,10 +85,13 @@ models <-
   models[str_detect(
     models,
     pattern = c(
-      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES"
+      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12"
     )
   )]
 
+# depth levels not available
+models <-
+  models[!str_detect(models, pattern = "CNRM")]
 
 # files chunked into decades
 models <-
@@ -117,7 +120,7 @@ source_python(paste0(
 # models <- models[1]
 
 for (i_model in models) {
-  # i_model <- models[8]
+  # i_model <- models[4]
   print(i_model)
   
   variables_available <-
@@ -134,7 +137,7 @@ for (i_model in models) {
   print(variables_available)
   
   for (i_variable in variables_available) {
-    # i_variable <- variables_available[1]
+    # i_variable <- variables_available[5]
     
     # read list of all files
     file <-
@@ -252,12 +255,12 @@ for (i_model in models) {
   
   if (i_model == "FESOM_REcoM_LR_3D_all_v20211119") {
     climatology <- climatology %>%
-      mutate(po4 = NA)
+      mutate(po4 = no3/16)
   }
 
   if (i_model == "planktom12_3d_all_v20220404") {
     climatology <- climatology %>%
-      mutate(no3 = NA)
+      mutate(no3 = po4*16)
   }
   
   climatology <- climatology %>%
@@ -376,7 +379,7 @@ for (i_model in models) {
     select(-c(rho))
   
   # Remove 3D_all from model name
-  i_model <- str_remove(i_model, "3D_ALL_|3D_all_")
+  i_model <- str_remove(i_model, "3D_ALL_|3D_all_|3d_all_")
   
   # write csv file
   climatology %>%

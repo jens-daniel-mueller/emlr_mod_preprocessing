@@ -40,19 +40,23 @@ library(stars)
 models <- list.files(path_cmorized)
 
 models <-
-  models[!str_detect(models, pattern = "\\.")]
+  models[!str_detect(models, pattern = "\\.t|\\.z|.p")]
 
 models <-
   models[str_detect(
     models,
     pattern = c(
-      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12"
+      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12"
     )
   )]
 
 # no Atm_CO2 data provided
 models <-
-  models[!str_detect(models, pattern = "ORCA1-LIM3-PISCES_Ancillary_data_v20211215")]
+  models[!str_detect(models, pattern = "NorESM-OC1.2")]
+
+# no Atm_CO2 data provided
+models <-
+  models[!str_detect(models, pattern = "ORCA1-LIM3-PISCES")]
 
 
 ```
@@ -64,7 +68,7 @@ models <-
 # models <- models[1]
 
 for (i_model in models) {
-  # i_model <- models[6]
+  # i_model <- models[7]
   print(i_model)
   
   # read list of all files
@@ -75,9 +79,11 @@ for (i_model in models) {
   print(file)
   
   # read in data
-  if (i_model %in% c("CESM-ETHZ_Ancillary_data_v20211122",
-                     "MOM6-Princeton_Ancillary_data_v20220125",
-                     "ORCA025-GEOMAR_Ancillary_data_v20210804")) {
+  if (i_model %in% c(
+    "CESM-ETHZ_Ancillary_data_v20211122",
+    "MOM6-Princeton_Ancillary_data_v20220125",
+    "ORCA025-GEOMAR_Ancillary_data_v20210804"
+  )) {
     variable_data <-
       read_ncdf(paste(paste0(path_cmorized, i_model),
                       file,
@@ -117,7 +123,7 @@ for (i_model in models) {
                  col_names = FALSE) %>%
       select(year = X1,
              Atm_CO2 = X2)
-    } else {
+  } else {
     variable_data <-
       read_ncdf(paste(paste0(path_cmorized, i_model),
                       file,
@@ -138,23 +144,29 @@ for (i_model in models) {
   }
   
   if (i_model == "FESOM_REcoM_LR_Ancillary_data_v20211119") {
-    variable_data_tibble <- 
+    variable_data_tibble <-
       variable_data_tibble %>%
-      pivot_longer(cols = -NumberOfMonths,
-                   names_to = "year",
-                   values_to = "Atm_CO2",
-                   names_prefix = "AtmCO2_") %>% 
+      pivot_longer(
+        cols = -NumberOfMonths,
+        names_to = "year",
+        values_to = "Atm_CO2",
+        names_prefix = "AtmCO2_"
+      ) %>%
       mutate(year = as.numeric(year))
   }
-
+  
   # mutate variables
-  if (!(i_model %in% c("CNRM-ESM2-1_Ancillary_data_v20211208",
-                       "EC-Earth3_Ancillary_data_v20220323",
-                       "FESOM_REcoM_LR_Ancillary_data_v20211119",
-                       "planktom12_ancillary_data_v20220404"))) {
-  variable_data_tibble <- variable_data_tibble %>%
-    mutate(year = year(time)) %>%
-    select(-time)
+  if (!(
+    i_model %in% c(
+      "CNRM-ESM2-1_Ancillary_data_v20211208",
+      "EC-Earth3_Ancillary_data_v20220323",
+      "FESOM_REcoM_LR_Ancillary_data_v20211119",
+      "planktom12_ancillary_data_v20220404"
+    )
+  )) {
+    variable_data_tibble <- variable_data_tibble %>%
+      mutate(year = year(time)) %>%
+      select(-time)
   }
   
   variable_data_tibble <- variable_data_tibble %>%
@@ -172,15 +184,17 @@ for (i_model in models) {
 }
 
 atm_co2 <- atm_co2 %>%
-  mutate(year = round(year)) %>% 
+  mutate(year = round(year)) %>%
   filter(year > 1979, year < 2019) %>%
   group_by(model, year) %>%
   summarise(Atm_CO2 = mean(Atm_CO2)) %>%
   ungroup()
 
 atm_co2 <- atm_co2 %>%
-  mutate(model = str_remove(model, "Ancillary_data_"),
-         model = str_remove(model, "ancillary_data_"))
+  mutate(
+    model = str_remove(model, "Ancillary_data_"),
+    model = str_remove(model, "ancillary_data_")
+  )
 
 
 ```
