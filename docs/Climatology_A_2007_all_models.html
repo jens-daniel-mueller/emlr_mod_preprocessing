@@ -539,16 +539,16 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtreee82a3025dd9ab928c807a8b75993556a77c56cd3targetblanke82a302a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/e82a3025dd9ab928c807a8b75993556a77c56cd3" target="_blank">e82a302</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree30f99f700bc19a9081ebd33454a57cef2a04cc02targetblank30f99f7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/30f99f700bc19a9081ebd33454a57cef2a04cc02" target="_blank">30f99f7</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtreee82a3025dd9ab928c807a8b75993556a77c56cd3targetblanke82a302a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree30f99f700bc19a9081ebd33454a57cef2a04cc02targetblank30f99f7a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/e82a3025dd9ab928c807a8b75993556a77c56cd3" target="_blank">e82a302</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/30f99f700bc19a9081ebd33454a57cef2a04cc02" target="_blank">30f99f7</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -561,10 +561,6 @@ Ignored files:
 Untracked files:
     Untracked:  code/backup_analysis_scripts/
     Untracked:  code/reprex_read_nc_file.R
-
-Unstaged changes:
-    Modified:   analysis/_site.yml
-    Modified:   code/Workflowr_project_managment.R
 
 </code></pre>
 <p>
@@ -603,6 +599,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/30f99f700bc19a9081ebd33454a57cef2a04cc02/analysis/Climatology_A_2007_all_models.Rmd" target="_blank">30f99f7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-24
+</td>
+<td>
+rerun only for planktom12 with factor /100 for po4
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/42bbb892d4252dc9646fee3bc9f44f5123f8f29c/docs/Climatology_A_2007_all_models.html" target="_blank">42bbb89</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-24
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -840,10 +870,10 @@ source_python(paste0(
   path_functions,
   &quot;python_scripts/Gamma_GLODAP_python.py&quot;
 ))</code></pre>
-<pre class="r"><code># models &lt;- models[1]
+<pre class="r"><code>models &lt;- models[7]
 
 for (i_model in models) {
-  # i_model &lt;- models[4]
+  # i_model &lt;- models[1]
   print(i_model)
   
   variables_available &lt;-
@@ -860,7 +890,7 @@ for (i_model in models) {
   print(variables_available)
   
   for (i_variable in variables_available) {
-    # i_variable &lt;- variables_available[5]
+    # i_variable &lt;- variables_available[3]
     
     # read list of all files
     file &lt;-
@@ -954,6 +984,12 @@ for (i_model in models) {
                depth = DEPTH)
     }
     
+    if (i_model == &quot;planktom12_3d_all_v20220404&quot; &amp;
+        i_variable == &quot;po4&quot;) {
+      variable_data_tibble &lt;-
+        variable_data_tibble %&gt;%
+        mutate(po4 = po4 / 100)
+    }
     
     # harmonize longitudes
     variable_data_tibble &lt;- variable_data_tibble %&gt;%
@@ -1113,915 +1149,6 @@ for (i_model in models) {
   rm(climatology)
   
 }</code></pre>
-<pre><code>[1] &quot;CESM-ETHZ_3D_ALL_v20211122&quot;
-[1] &quot;dissic&quot; &quot;no3&quot;    &quot;o2&quot;     &quot;po4&quot;    &quot;si&quot;     &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
-[1] &quot;dissic_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-           Min.  1st Qu.   Median     Mean  3rd Qu.     Max.  NA&#39;s
-dissic  1.53844 2.063345 2.121567 2.112429 2.172408 2.338243 34720
-dimension(s):
-      from  to offset delta refsys point          values x/y
-lon      1 360      0     1 WGS 84    NA            NULL [x]
-lat      1 180    -90     1 WGS 84    NA            NULL [y]
-depth    1  60     NA    NA     NA    NA [60] 5,...,5375    
-[1] &quot;no3_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-     Min.      1st Qu.      Median        Mean   3rd Qu.       Max.  NA&#39;s
-no3     0 0.0006632728 0.003444489 0.007649824 0.0142726 0.02791386 34720
-dimension(s):
-      from  to offset delta refsys point          values x/y
-lon      1 360      0     1 WGS 84    NA            NULL [x]
-lat      1 180    -90     1 WGS 84    NA            NULL [y]
-depth    1  60     NA    NA     NA    NA [60] 5,...,5375    
-[1] &quot;o2_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-         Min.   1st Qu.    Median      Mean   3rd Qu.      Max.  NA&#39;s
-o2  0.1949853 0.2097159 0.2504627 0.2672393 0.3263081 0.3876033 34720
-dimension(s):
-      from  to offset delta refsys point          values x/y
-lon      1 360      0     1 WGS 84    NA            NULL [x]
-lat      1 180    -90     1 WGS 84    NA            NULL [y]
-depth    1  60     NA    NA     NA    NA [60] 5,...,5375    
-[1] &quot;po4_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-     Min.      1st Qu.       Median         Mean      3rd Qu.        Max.  NA&#39;s
-po4     0 9.326071e-05 0.0002925115 0.0005661223 0.0009729294 0.001930219 34720
-dimension(s):
-      from  to offset delta refsys point          values x/y
-lon      1 360      0     1 WGS 84    NA            NULL [x]
-lat      1 180    -90     1 WGS 84    NA            NULL [y]
-depth    1  60     NA    NA     NA    NA [60] 5,...,5375    
-[1] &quot;si_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-            Min.     1st Qu.      Median       Mean    3rd Qu.      Max.  NA&#39;s
-si  0.0007265678 0.003127281 0.005360665 0.01249062 0.01393934 0.1167264 34720
-dimension(s):
-      from  to offset delta refsys point          values x/y
-lon      1 360      0     1 WGS 84    NA            NULL [x]
-lat      1 180    -90     1 WGS 84    NA            NULL [y]
-depth    1  60     NA    NA     NA    NA [60] 5,...,5375    
-[1] &quot;so_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-        Min.  1st Qu.   Median     Mean  3rd Qu.     Max.  NA&#39;s
-so  17.77432 34.11263 34.72358 34.70072 35.68783 40.53304 34720
-dimension(s):
-      from  to offset delta refsys point          values x/y
-lon      1 360      0     1 WGS 84    NA            NULL [x]
-lat      1 180    -90     1 WGS 84    NA            NULL [y]
-depth    1  60     NA    NA     NA    NA [60] 5,...,5375    
-[1] &quot;talk_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-          Min.  1st Qu.   Median    Mean  3rd Qu.     Max.  NA&#39;s
-talk  1.754645 2.341156 2.360543 2.36032 2.404855 2.692481 34720
-dimension(s):
-      from  to offset delta refsys point          values x/y
-lon      1 360      0     1 WGS 84    NA            NULL [x]
-lat      1 180    -90     1 WGS 84    NA            NULL [y]
-depth    1  60     NA    NA     NA    NA [60] 5,...,5375    
-[1] &quot;thetao_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-             Min.  1st Qu.   Median     Mean  3rd Qu.     Max.  NA&#39;s
-thetao  -1.782697 2.924084 16.20286 14.43304 25.42252 30.07337 34720
-dimension(s):
-      from  to offset delta refsys point          values x/y
-lon      1 360      0     1 WGS 84    NA            NULL [x]
-lat      1 180    -90     1 WGS 84    NA            NULL [y]
-depth    1  60     NA    NA     NA    NA [60] 5,...,5375    </code></pre>
-<p><img src="figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-read_climatology_fields_2007-1">
-Past versions of read_climatology_fields_2007-1.png
-</button>
-</p>
-<div id="fig-read_climatology_fields_2007-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-1.png" target="_blank">06054b2</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-10
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre><code>[1] &quot;EC-Earth3_3D_ALL_v20220323&quot;
-[1] &quot;dissic&quot; &quot;no3&quot;    &quot;o2&quot;     &quot;po4&quot;    &quot;si&quot;     &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
-[1] &quot;dissic_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-             Min.  1st Qu.   Median     Mean 3rd Qu.     Max.  NA&#39;s
-dissic  0.5402265 2.007797 2.065164 2.071406 2.13433 2.557395 34235
-dimension(s):
-      from  to offset delta refsys point                           values x/y
-lon      1 360      0     1 WGS 84    NA                             NULL [x]
-lat      1 180    -90     1 WGS 84    NA                             NULL [y]
-depth    1  75     NA    NA     NA FALSE [0,1.023907),...,[5800,6004.229)    
-[1] &quot;no3_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-             Min.      1st Qu.      Median        Mean    3rd Qu.       Max.
-no3  5.910887e-07 0.0002337237 0.004086725 0.008991736 0.01686225 0.03196622
-      NA&#39;s
-no3  34235
-dimension(s):
-      from  to offset delta refsys point                           values x/y
-lon      1 360      0     1 WGS 84    NA                             NULL [x]
-lat      1 180    -90     1 WGS 84    NA                             NULL [y]
-depth    1  75     NA    NA     NA FALSE [0,1.023907),...,[5800,6004.229)    
-[1] &quot;o2_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-         Min.   1st Qu.    Median      Mean  3rd Qu.      Max.  NA&#39;s
-o2  0.1961801 0.2094422 0.2514559 0.2703499 0.331589 0.4155927 34235
-dimension(s):
-      from  to offset delta refsys point                           values x/y
-lon      1 360      0     1 WGS 84    NA                             NULL [x]
-lat      1 180    -90     1 WGS 84    NA                             NULL [y]
-depth    1  75     NA    NA     NA FALSE [0,1.023907),...,[5800,6004.229)    
-[1] &quot;po4_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-             Min.      1st Qu.       Median         Mean     3rd Qu.
-po4  2.666838e-07 0.0001178296 0.0004282285 0.0007320858 0.001306314
-            Max.  NA&#39;s
-po4  0.004568885 34235
-dimension(s):
-      from  to offset delta refsys point                           values x/y
-lon      1 360      0     1 WGS 84    NA                             NULL [x]
-lat      1 180    -90     1 WGS 84    NA                             NULL [y]
-depth    1  75     NA    NA     NA FALSE [0,1.023907),...,[5800,6004.229)    
-[1] &quot;si_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-            Min.     1st Qu.      Median       Mean    3rd Qu.      Max.  NA&#39;s
-si  0.0007297698 0.001440996 0.002759601 0.01274259 0.01048773 0.1026836 34235
-dimension(s):
-      from  to offset delta refsys point                           values x/y
-lon      1 360      0     1 WGS 84    NA                             NULL [x]
-lat      1 180    -90     1 WGS 84    NA                             NULL [y]
-depth    1  75     NA    NA     NA FALSE [0,1.023907),...,[5800,6004.229)    
-[1] &quot;so_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-        Min.  1st Qu.   Median     Mean  3rd Qu.     Max.  NA&#39;s
-so  4.976272 33.89646 34.33475 34.29951 35.23156 40.07595 34235
-dimension(s):
-      from  to offset delta refsys point                           values x/y
-lon      1 360      0     1 WGS 84    NA                             NULL [x]
-lat      1 180    -90     1 WGS 84    NA                             NULL [y]
-depth    1  75     NA    NA     NA FALSE [0,1.023907),...,[5800,6004.229)    
-[1] &quot;talk_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-           Min.  1st Qu.   Median     Mean  3rd Qu.     Max.  NA&#39;s
-talk  0.5222299 2.282914 2.313059 2.304122 2.338625 2.834188 34235
-dimension(s):
-      from  to offset delta refsys point                           values x/y
-lon      1 360      0     1 WGS 84    NA                             NULL [x]
-lat      1 180    -90     1 WGS 84    NA                             NULL [y]
-depth    1  75     NA    NA     NA FALSE [0,1.023907),...,[5800,6004.229)    
-[1] &quot;thetao_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-            Min.  1st Qu.   Median     Mean  3rd Qu.     Max.  NA&#39;s
-thetao  -1.90141 2.354912 15.96602 14.36113 25.54307 30.26387 34235
-dimension(s):
-      from  to offset delta refsys point                           values x/y
-lon      1 360      0     1 WGS 84    NA                             NULL [x]
-lat      1 180    -90     1 WGS 84    NA                             NULL [y]
-depth    1  75     NA    NA     NA FALSE [0,1.023907),...,[5800,6004.229)    </code></pre>
-<p><img src="figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-read_climatology_fields_2007-2">
-Past versions of read_climatology_fields_2007-2.png
-</button>
-</p>
-<div id="fig-read_climatology_fields_2007-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/40863a2a1b110ac6ab9e6dd3efaf828fe76adc61/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-2.png" target="_blank">40863a2</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-22
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/31ae80a13af1d5e91eecb9be0d53a44e4664b0ea/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-2.png" target="_blank">31ae80a</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-2.png" target="_blank">0dd6813</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-15
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-2.png" target="_blank">06054b2</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-10
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre><code>[1] &quot;FESOM_REcoM_LR_3D_all_v20211119&quot;
-[1] &quot;dissic&quot; &quot;no3&quot;    &quot;o2&quot;     &quot;si&quot;     &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
-[1] &quot;dissic_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-            Min.  1st Qu.   Median     Mean  3rd Qu.     Max.  NA&#39;s
-dissic  1.397473 1.980928 2.056114 2.062378 2.139095 2.243466 33173
-dimension(s):
-      from  to offset delta refsys point          values x/y
-Lon      1 360      0     1     NA    NA            NULL [x]
-Lat      1 180    -90     1     NA    NA            NULL [y]
-Depth    1  46     NA    NA     NA    NA [46] 0,...,5900    
-[1] &quot;no3_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-             Min.      1st Qu.      Median        Mean    3rd Qu.       Max.
-no3  1.154229e-05 3.847795e-05 0.002167632 0.007301974 0.01327029 0.04178772
-      NA&#39;s
-no3  33173
-dimension(s):
-      from  to offset delta refsys point          values x/y
-Lon      1 360      0     1     NA    NA            NULL [x]
-Lat      1 180    -90     1     NA    NA            NULL [y]
-Depth    1  46     NA    NA     NA    NA [46] 0,...,5900    
-[1] &quot;o2_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-         Min.   1st Qu.    Median      Mean   3rd Qu.     Max.  NA&#39;s
-o2  0.1862063 0.2125652 0.2526134 0.2630829 0.3142638 0.367201 33173
-dimension(s):
-      from  to offset delta refsys point          values x/y
-Lon      1 360      0     1     NA    NA            NULL [x]
-Lat      1 180    -90     1     NA    NA            NULL [y]
-Depth    1  46     NA    NA     NA    NA [46] 0,...,5900    
-[1] &quot;si_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-            Min.      1st Qu.       Median       Mean      3rd Qu.       Max.
-si  1.656723e-06 2.832228e-05 9.510469e-05 0.00372529 0.0008885778 0.06004048
-     NA&#39;s
-si  33173
-dimension(s):
-      from  to offset delta refsys point          values x/y
-Lon      1 360      0     1     NA    NA            NULL [x]
-Lat      1 180    -90     1     NA    NA            NULL [y]
-Depth    1  46     NA    NA     NA    NA [46] 0,...,5900    
-[1] &quot;so_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-       Min.  1st Qu.  Median     Mean  3rd Qu.     Max.  NA&#39;s
-so  18.7434 33.80206 34.3102 34.31283 35.22783 39.38908 33173
-dimension(s):
-      from  to offset delta refsys point          values x/y
-Lon      1 360      0     1     NA    NA            NULL [x]
-Lat      1 180    -90     1     NA    NA            NULL [y]
-Depth    1  46     NA    NA     NA    NA [46] 0,...,5900    
-[1] &quot;talk_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-          Min.  1st Qu.  Median    Mean  3rd Qu.     Max.  NA&#39;s
-talk  1.336164 2.276783 2.30378 2.29198 2.317252 2.571417 33173
-dimension(s):
-      from  to offset delta refsys point          values x/y
-Lon      1 360      0     1     NA    NA            NULL [x]
-Lat      1 180    -90     1     NA    NA            NULL [y]
-Depth    1  46     NA    NA     NA    NA [46] 0,...,5900    
-[1] &quot;thetao_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-             Min.  1st Qu.   Median     Mean  3rd Qu.     Max.  NA&#39;s
-thetao  -1.891329 2.555371 15.80864 14.07006 24.94776 29.80794 33173
-dimension(s):
-      from  to offset delta refsys point          values x/y
-Lon      1 360      0     1     NA    NA            NULL [x]
-Lat      1 180    -90     1     NA    NA            NULL [y]
-Depth    1  46     NA    NA     NA    NA [46] 0,...,5900    </code></pre>
-<p><img src="figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-3.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-read_climatology_fields_2007-3">
-Past versions of read_climatology_fields_2007-3.png
-</button>
-</p>
-<div id="fig-read_climatology_fields_2007-3" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/40863a2a1b110ac6ab9e6dd3efaf828fe76adc61/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-3.png" target="_blank">40863a2</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-22
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/31ae80a13af1d5e91eecb9be0d53a44e4664b0ea/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-3.png" target="_blank">31ae80a</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-3.png" target="_blank">0dd6813</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-15
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-3.png" target="_blank">06054b2</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-10
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre><code>[1] &quot;MRI-ESM2-0_3D_ALL_v20210830&quot;
-[1] &quot;dissic&quot; &quot;no3&quot;    &quot;o2&quot;     &quot;po4&quot;    &quot;si&quot;     &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
-[1] &quot;dissic_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-             Min.  1st Qu.   Median     Mean  3rd Qu.     Max.  NA&#39;s
-dissic  0.4188846 2.060656 2.124996 2.114551 2.183622 2.333048 31002
-dimension(s):
-    from  to offset delta refsys point                values x/y
-lon    1 360      0     1 WGS 84    NA                  NULL [x]
-lat    1 180    -90     1 WGS 84    NA                  NULL [y]
-lev    1  61     NA    NA     NA FALSE [0,2),...,[6500,6550)    
-[1] &quot;no3_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-              Min.      1st Qu.      Median        Mean    3rd Qu.       Max.
-no3  -0.0001392347 1.282122e-05 0.002570029 0.008234143 0.01692723 0.05066701
-      NA&#39;s
-no3  31002
-dimension(s):
-    from  to offset delta refsys point                values x/y
-lon    1 360      0     1 WGS 84    NA                  NULL [x]
-lat    1 180    -90     1 WGS 84    NA                  NULL [y]
-lev    1  61     NA    NA     NA FALSE [0,2),...,[6500,6550)    
-[1] &quot;o2_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-         Min.   1st Qu.    Median      Mean   3rd Qu.      Max.  NA&#39;s
-o2  0.1736174 0.2113317 0.2527393 0.2675103 0.3226389 0.3992555 31002
-dimension(s):
-    from  to offset delta refsys point                values x/y
-lon    1 360      0     1 WGS 84    NA                  NULL [x]
-lat    1 180    -90     1 WGS 84    NA                  NULL [y]
-lev    1  61     NA    NA     NA FALSE [0,2),...,[6500,6550)    
-[1] &quot;po4_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-             Min.      1st Qu.       Median         Mean     3rd Qu.
-po4  4.106879e-06 7.300017e-05 0.0002601839 0.0006378438 0.001257896
-            Max.  NA&#39;s
-po4  0.004509379 31002
-dimension(s):
-    from  to offset delta refsys point                values x/y
-lon    1 360      0     1 WGS 84    NA                  NULL [x]
-lat    1 180    -90     1 WGS 84    NA                  NULL [y]
-lev    1  61     NA    NA     NA FALSE [0,2),...,[6500,6550)    
-[1] &quot;si_MRI-ESM2-0_A_1_gr_1980-1980_v20210830.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-            Min.    1st Qu.      Median       Mean     3rd Qu.       Max.  NA&#39;s
-si  0.0004158035 0.00200341 0.003626204 0.01160255 0.009417075 0.09425249 31002
-dimension(s):
-    from  to offset delta refsys point                values x/y
-lon    1 360      0     1 WGS 84    NA                  NULL [x]
-lat    1 180    -90     1 WGS 84    NA                  NULL [y]
-lev    1  61     NA    NA     NA FALSE [0,2),...,[6500,6550)    
-[1] &quot;so_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-        Min.  1st Qu.   Median     Mean  3rd Qu.     Max.  NA&#39;s
-so  6.063694 34.13027 34.58277 34.49589 35.52933 40.81738 31002
-dimension(s):
-    from  to offset delta refsys point                values x/y
-lon    1 360      0     1 WGS 84    NA                  NULL [x]
-lat    1 180    -90     1 WGS 84    NA                  NULL [y]
-lev    1  61     NA    NA     NA FALSE [0,2),...,[6500,6550)    
-[1] &quot;talk_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-          Min.  1st Qu.   Median     Mean  3rd Qu.     Max.  NA&#39;s
-talk  0.402038 2.355891 2.375069 2.364472 2.425962 2.793969 31002
-dimension(s):
-    from  to offset delta refsys point                values x/y
-lon    1 360      0     1 WGS 84    NA                  NULL [x]
-lat    1 180    -90     1 WGS 84    NA                  NULL [y]
-lev    1  61     NA    NA     NA FALSE [0,2),...,[6500,6550)    
-[1] &quot;thetao_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-             Min. 1st Qu.  Median     Mean  3rd Qu.     Max.  NA&#39;s
-thetao  -1.743968 2.44228 15.7754 14.28007 25.47853 30.01714 31002
-dimension(s):
-    from  to offset delta refsys point                values x/y
-lon    1 360      0     1 WGS 84    NA                  NULL [x]
-lat    1 180    -90     1 WGS 84    NA                  NULL [y]
-lev    1  61     NA    NA     NA FALSE [0,2),...,[6500,6550)    </code></pre>
-<p><img src="figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-4.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-read_climatology_fields_2007-4">
-Past versions of read_climatology_fields_2007-4.png
-</button>
-</p>
-<div id="fig-read_climatology_fields_2007-4" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/40863a2a1b110ac6ab9e6dd3efaf828fe76adc61/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-4.png" target="_blank">40863a2</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-22
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/31ae80a13af1d5e91eecb9be0d53a44e4664b0ea/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-4.png" target="_blank">31ae80a</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-4.png" target="_blank">0dd6813</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-15
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-4.png" target="_blank">06054b2</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-10
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre><code>[1] &quot;NorESM-OC1.2_3D_ALL_v20211125&quot;
-[1] &quot;dissic&quot; &quot;no3&quot;    &quot;o2&quot;     &quot;po4&quot;    &quot;si&quot;     &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
-[1] &quot;dissic_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
-# A tibble: 2,360,500 × 4
-   dissic   lon   lat depth
-    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1   2.17  184. -78.5     0
- 2   2.17  184. -78.5     0
- 3   2.15  186. -78.5     0
- 4   2.15  186. -78.5     0
- 5   2.14  188. -78.5     0
- 6   2.14  188. -78.5     0
- 7   2.13  190. -78.5     0
- 8   2.13  190. -78.5     0
- 9   2.12  192. -78.5     0
-10   2.12  192. -78.5     0
-# … with 2,360,490 more rows
-[1] &quot;no3_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
-# A tibble: 2,360,500 × 4
-      no3   lon   lat depth
-    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1 0.0199  184. -78.5     0
- 2 0.0198  184. -78.5     0
- 3 0.0201  186. -78.5     0
- 4 0.0205  186. -78.5     0
- 5 0.0208  188. -78.5     0
- 6 0.0210  188. -78.5     0
- 7 0.0210  190. -78.5     0
- 8 0.0210  190. -78.5     0
- 9 0.0209  192. -78.5     0
-10 0.0208  192. -78.5     0
-# … with 2,360,490 more rows
-[1] &quot;o2_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
-# A tibble: 2,360,500 × 4
-      o2   lon   lat depth
-   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1 0.379  184. -78.5     0
- 2 0.381  184. -78.5     0
- 3 0.378  186. -78.5     0
- 4 0.375  186. -78.5     0
- 5 0.371  188. -78.5     0
- 6 0.368  188. -78.5     0
- 7 0.367  190. -78.5     0
- 8 0.366  190. -78.5     0
- 9 0.365  192. -78.5     0
-10 0.364  192. -78.5     0
-# … with 2,360,490 more rows
-[1] &quot;po4_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
-# A tibble: 2,360,500 × 4
-       po4   lon   lat depth
-     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1 0.00135  184. -78.5     0
- 2 0.00135  184. -78.5     0
- 3 0.00136  186. -78.5     0
- 4 0.00139  186. -78.5     0
- 5 0.00141  188. -78.5     0
- 6 0.00142  188. -78.5     0
- 7 0.00142  190. -78.5     0
- 8 0.00142  190. -78.5     0
- 9 0.00141  192. -78.5     0
-10 0.00140  192. -78.5     0
-# … with 2,360,490 more rows
-[1] &quot;si_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
-# A tibble: 2,360,500 × 4
-       si   lon   lat depth
-    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1 0.0352  184. -78.5     0
- 2 0.0354  184. -78.5     0
- 3 0.0355  186. -78.5     0
- 4 0.0355  186. -78.5     0
- 5 0.0354  188. -78.5     0
- 6 0.0353  188. -78.5     0
- 7 0.0352  190. -78.5     0
- 8 0.0351  190. -78.5     0
- 9 0.0350  192. -78.5     0
-10 0.0348  192. -78.5     0
-# … with 2,360,490 more rows
-[1] &quot;so_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
-# A tibble: 2,360,500 × 4
-      so   lon   lat depth
-   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1  32.8  184. -78.5     0
- 2  32.8  184. -78.5     0
- 3  32.7  186. -78.5     0
- 4  32.7  186. -78.5     0
- 5  32.6  188. -78.5     0
- 6  32.6  188. -78.5     0
- 7  32.5  190. -78.5     0
- 8  32.5  190. -78.5     0
- 9  32.5  192. -78.5     0
-10  32.4  192. -78.5     0
-# … with 2,360,490 more rows
-[1] &quot;talk_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
-# A tibble: 2,360,500 × 4
-    talk   lon   lat depth
-   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1  2.31  184. -78.5     0
- 2  2.30  184. -78.5     0
- 3  2.28  186. -78.5     0
- 4  2.27  186. -78.5     0
- 5  2.26  188. -78.5     0
- 6  2.26  188. -78.5     0
- 7  2.25  190. -78.5     0
- 8  2.24  190. -78.5     0
- 9  2.24  192. -78.5     0
-10  2.23  192. -78.5     0
-# … with 2,360,490 more rows
-[1] &quot;thetao_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
-# A tibble: 2,360,500 × 4
-   thetao   lon   lat depth
-    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1  -1.17  184. -78.5     0
- 2  -1.21  184. -78.5     0
- 3  -1.34  186. -78.5     0
- 4  -1.43  186. -78.5     0
- 5  -1.48  188. -78.5     0
- 6  -1.52  188. -78.5     0
- 7  -1.56  190. -78.5     0
- 8  -1.59  190. -78.5     0
- 9  -1.62  192. -78.5     0
-10  -1.64  192. -78.5     0
-# … with 2,360,490 more rows</code></pre>
-<p><img src="figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-5.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-read_climatology_fields_2007-5">
-Past versions of read_climatology_fields_2007-5.png
-</button>
-</p>
-<div id="fig-read_climatology_fields_2007-5" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/40863a2a1b110ac6ab9e6dd3efaf828fe76adc61/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-5.png" target="_blank">40863a2</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-22
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/31ae80a13af1d5e91eecb9be0d53a44e4664b0ea/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-5.png" target="_blank">31ae80a</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-5.png" target="_blank">0dd6813</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre><code>[1] &quot;ORCA1-LIM3-PISCES_3D_ALL_v20211215&quot;
-[1] &quot;dissic&quot; &quot;no3&quot;    &quot;o2&quot;     &quot;po4&quot;    &quot;si&quot;     &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
-[1] &quot;dissic_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-             Min.  1st Qu.   Median     Mean  3rd Qu.     Max.  NA&#39;s
-dissic  0.6356738 2.047529 2.106403 2.107058 2.175867 2.607979 30015
-dimension(s):
-      from  to offset delta refsys point                           values x/y
-lon      1 360      0     1 WGS 84    NA                             NULL [x]
-lat      1 180    -90     1 WGS 84    NA                             NULL [y]
-depth    1  75     NA    NA     NA FALSE [0,1.023907),...,[5800,6004.229)    
-[1] &quot;no3_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-             Min.      1st Qu.      Median       Mean    3rd Qu.       Max.
-no3  3.094286e-07 2.920019e-05 0.003260584 0.00814951 0.01467556 0.03648942
-      NA&#39;s
-no3  30015
-dimension(s):
-      from  to offset delta refsys point                           values x/y
-lon      1 360      0     1 WGS 84    NA                             NULL [x]
-lat      1 180    -90     1 WGS 84    NA                             NULL [y]
-depth    1  75     NA    NA     NA FALSE [0,1.023907),...,[5800,6004.229)    
-[1] &quot;o2_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-         Min.   1st Qu.    Median      Mean   3rd Qu.     Max.  NA&#39;s
-o2  0.1961508 0.2091869 0.2505452 0.2691502 0.3308462 0.436595 30015
-dimension(s):
-      from  to offset delta refsys point                           values x/y
-lon      1 360      0     1 WGS 84    NA                             NULL [x]
-lat      1 180    -90     1 WGS 84    NA                             NULL [y]
-depth    1  75     NA    NA     NA FALSE [0,1.023907),...,[5800,6004.229)    
-[1] &quot;po4_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-             Min.      1st Qu.       Median         Mean     3rd Qu.
-po4  6.226775e-07 0.0001672927 0.0004754509 0.0007070058 0.001179957
-            Max.  NA&#39;s
-po4  0.008807107 30015
-dimension(s):
-      from  to offset delta refsys point                           values x/y
-lon      1 360      0     1 WGS 84    NA                             NULL [x]
-lat      1 180    -90     1 WGS 84    NA                             NULL [y]
-depth    1  75     NA    NA     NA FALSE [0,1.023907),...,[5800,6004.229)    
-[1] &quot;si_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-            Min.     1st Qu.      Median       Mean    3rd Qu.       Max.  NA&#39;s
-si  0.0008841127 0.001731399 0.003098852 0.01157017 0.01246982 0.08248688 30015
-dimension(s):
-      from  to offset delta refsys point                           values x/y
-lon      1 360      0     1 WGS 84    NA                             NULL [x]
-lat      1 180    -90     1 WGS 84    NA                             NULL [y]
-depth    1  75     NA    NA     NA FALSE [0,1.023907),...,[5800,6004.229)    
-[1] &quot;so_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-        Min.  1st Qu.   Median     Mean  3rd Qu.     Max.  NA&#39;s
-so  5.547729 33.98625 34.35794 34.32555 35.19701 38.63853 30015
-dimension(s):
-      from  to offset delta refsys point                           values x/y
-lon      1 360      0     1 WGS 84    NA                             NULL [x]
-lat      1 180    -90     1 WGS 84    NA                             NULL [y]
-depth    1  75     NA    NA     NA FALSE [0,1.023907),...,[5800,6004.229)    
-[1] &quot;talk_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-           Min.  1st Qu.   Median     Mean  3rd Qu.     Max.  NA&#39;s
-talk  0.6077311 2.330598 2.354492 2.350225 2.383013 2.943625 30015
-dimension(s):
-      from  to offset delta refsys point                           values x/y
-lon      1 360      0     1 WGS 84    NA                             NULL [x]
-lat      1 180    -90     1 WGS 84    NA                             NULL [y]
-depth    1  75     NA    NA     NA FALSE [0,1.023907),...,[5800,6004.229)    
-[1] &quot;thetao_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-             Min.  1st Qu.   Median     Mean  3rd Qu.     Max.  NA&#39;s
-thetao  -1.902045 2.372617 16.12284 14.44789 25.67046 30.61959 30015
-dimension(s):
-      from  to offset delta refsys point                           values x/y
-lon      1 360      0     1 WGS 84    NA                             NULL [x]
-lat      1 180    -90     1 WGS 84    NA                             NULL [y]
-depth    1  75     NA    NA     NA FALSE [0,1.023907),...,[5800,6004.229)    </code></pre>
-<p><img src="figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-6.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-read_climatology_fields_2007-6">
-Past versions of read_climatology_fields_2007-6.png
-</button>
-</p>
-<div id="fig-read_climatology_fields_2007-6" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/40863a2a1b110ac6ab9e6dd3efaf828fe76adc61/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-6.png" target="_blank">40863a2</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-22
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/31ae80a13af1d5e91eecb9be0d53a44e4664b0ea/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-6.png" target="_blank">31ae80a</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-6.png" target="_blank">0dd6813</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 <pre><code>[1] &quot;planktom12_3d_all_v20220404&quot;
 [1] &quot;dissic&quot; &quot;o2&quot;     &quot;po4&quot;    &quot;si&quot;     &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
 [1] &quot;dissic_PlankTOM12_A_1_gr_1980-2018_v20220404.nc&quot;
@@ -2096,13 +1223,13 @@ dimension(s):
 LONGITUDE    1 360      0     1     NA    NA                     NULL [x]
 LATITUDE     1 180    -90     1     NA    NA                     NULL [y]
 DEPTH        1  31     NA    NA     NA    NA [31] 4.99994,...,5250.23    </code></pre>
-<p><img src="figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-7.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-read_climatology_fields_2007-7">
-Past versions of read_climatology_fields_2007-7.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-read_climatology_fields_2007-1">
+Past versions of read_climatology_fields_2007-1.png
 </button>
 </p>
-<div id="fig-read_climatology_fields_2007-7" class="collapse">
+<div id="fig-read_climatology_fields_2007-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -2121,35 +1248,13 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/40863a2a1b110ac6ab9e6dd3efaf828fe76adc61/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-7.png" target="_blank">40863a2</a>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-1.png" target="_blank">06054b2</a>
 </td>
 <td>
 jens-daniel-mueller
 </td>
 <td>
-2022-05-22
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/31ae80a13af1d5e91eecb9be0d53a44e4664b0ea/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-7.png" target="_blank">31ae80a</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-7.png" target="_blank">0dd6813</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-15
+2022-05-10
 </td>
 </tr>
 </tbody>
@@ -2237,28 +1342,27 @@ other attached packages:
 loaded via a namespace (and not attached):
  [1] ellipsis_0.3.2     class_7.3-20       rprojroot_2.0.2    fs_1.5.2          
  [5] rstudioapi_0.13    proxy_0.4-26       farver_2.1.0       bit64_4.0.5       
- [9] fansi_1.0.2        xml2_1.3.3         ncdf4_1.19         knitr_1.37        
-[13] polyclip_1.10-0    jsonlite_1.7.3     broom_0.7.11       dbplyr_2.1.1      
-[17] png_0.1-7          compiler_4.1.2     httr_1.4.2         backports_1.4.1   
-[21] assertthat_0.2.1   Matrix_1.4-0       fastmap_1.1.0      cli_3.1.1         
-[25] later_1.3.0        tweenr_1.0.2       htmltools_0.5.2    tools_4.1.2       
-[29] gtable_0.3.0       glue_1.6.0         rappdirs_0.3.3     Rcpp_1.0.8        
-[33] cellranger_1.1.0   jquerylib_0.1.4    RNetCDF_2.5-2      vctrs_0.3.8       
-[37] PCICt_0.5-4.1      lwgeom_0.2-8       xfun_0.29          ps_1.6.0          
-[41] rvest_1.0.2        lifecycle_1.0.1    ncmeta_0.3.0       tidync_0.2.4      
-[45] getPass_0.2-2      MASS_7.3-55        scales_1.1.1       vroom_1.5.7       
-[49] hms_1.1.1          promises_1.2.0.1   parallel_4.1.2     yaml_2.2.1        
-[53] sass_0.4.0         stringi_1.7.6      highr_0.9          e1071_1.7-9       
-[57] checkmate_2.0.0    rlang_1.0.2        pkgconfig_2.0.3    evaluate_0.14     
-[61] lattice_0.20-45    SolveSAPHE_2.1.0   labeling_0.4.2     bit_4.0.4         
-[65] processx_3.5.2     tidyselect_1.1.1   here_1.0.1         seacarb_3.3.0     
-[69] magrittr_2.0.1     R6_2.5.1           generics_0.1.1     DBI_1.1.2         
-[73] pillar_1.6.4       haven_2.4.3        whisker_0.4        withr_2.4.3       
-[77] units_0.7-2        sp_1.4-6           modelr_0.1.8       crayon_1.4.2      
-[81] KernSmooth_2.23-20 utf8_1.2.2         tzdb_0.2.0         rmarkdown_2.11    
-[85] grid_4.1.2         readxl_1.3.1       data.table_1.14.2  callr_3.7.0       
-[89] git2r_0.29.0       reprex_2.0.1       digest_0.6.29      classInt_0.4-3    
-[93] httpuv_1.6.5       munsell_0.5.0      bslib_0.3.1       </code></pre>
+ [9] fansi_1.0.2        xml2_1.3.3         knitr_1.37         polyclip_1.10-0   
+[13] jsonlite_1.7.3     broom_0.7.11       dbplyr_2.1.1       png_0.1-7         
+[17] compiler_4.1.2     httr_1.4.2         backports_1.4.1    assertthat_0.2.1  
+[21] Matrix_1.4-0       fastmap_1.1.0      cli_3.1.1          later_1.3.0       
+[25] tweenr_1.0.2       htmltools_0.5.2    tools_4.1.2        gtable_0.3.0      
+[29] glue_1.6.0         rappdirs_0.3.3     Rcpp_1.0.8         cellranger_1.1.0  
+[33] jquerylib_0.1.4    RNetCDF_2.5-2      vctrs_0.3.8        lwgeom_0.2-8      
+[37] xfun_0.29          ps_1.6.0           rvest_1.0.2        lifecycle_1.0.1   
+[41] ncmeta_0.3.0       getPass_0.2-2      MASS_7.3-55        scales_1.1.1      
+[45] vroom_1.5.7        hms_1.1.1          promises_1.2.0.1   parallel_4.1.2    
+[49] yaml_2.2.1         sass_0.4.0         stringi_1.7.6      highr_0.9         
+[53] e1071_1.7-9        checkmate_2.0.0    rlang_1.0.2        pkgconfig_2.0.3   
+[57] evaluate_0.14      lattice_0.20-45    SolveSAPHE_2.1.0   labeling_0.4.2    
+[61] bit_4.0.4          processx_3.5.2     tidyselect_1.1.1   here_1.0.1        
+[65] seacarb_3.3.0      magrittr_2.0.1     R6_2.5.1           generics_0.1.1    
+[69] DBI_1.1.2          pillar_1.6.4       haven_2.4.3        whisker_0.4       
+[73] withr_2.4.3        units_0.7-2        sp_1.4-6           modelr_0.1.8      
+[77] crayon_1.4.2       KernSmooth_2.23-20 utf8_1.2.2         tzdb_0.2.0        
+[81] rmarkdown_2.11     grid_4.1.2         readxl_1.3.1       data.table_1.14.2 
+[85] callr_3.7.0        git2r_0.29.0       reprex_2.0.1       digest_0.6.29     
+[89] classInt_0.4-3     httpuv_1.6.5       munsell_0.5.0      bslib_0.3.1       </code></pre>
 </div>
 </div>
 

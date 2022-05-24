@@ -423,7 +423,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Cant variable climate AD</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">23 May, 2022</h4>
+<h4 class="date">24 May, 2022</h4>
 
 </div>
 
@@ -448,7 +448,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-05-23
+<strong>Last updated:</strong> 2022-05-24
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -539,16 +539,16 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtreee82a3025dd9ab928c807a8b75993556a77c56cd3targetblanke82a302a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/e82a3025dd9ab928c807a8b75993556a77c56cd3" target="_blank">e82a302</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree30f99f700bc19a9081ebd33454a57cef2a04cc02targetblank30f99f7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/30f99f700bc19a9081ebd33454a57cef2a04cc02" target="_blank">30f99f7</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtreee82a3025dd9ab928c807a8b75993556a77c56cd3targetblanke82a302a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree30f99f700bc19a9081ebd33454a57cef2a04cc02targetblank30f99f7a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/e82a3025dd9ab928c807a8b75993556a77c56cd3" target="_blank">e82a302</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/30f99f700bc19a9081ebd33454a57cef2a04cc02" target="_blank">30f99f7</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -561,10 +561,6 @@ Ignored files:
 Untracked files:
     Untracked:  code/backup_analysis_scripts/
     Untracked:  code/reprex_read_nc_file.R
-
-Unstaged changes:
-    Modified:   analysis/_site.yml
-    Modified:   code/Workflowr_project_managment.R
 
 </code></pre>
 <p>
@@ -603,6 +599,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/30f99f700bc19a9081ebd33454a57cef2a04cc02/analysis/Cant_AD_annual_all_models.Rmd" target="_blank">30f99f7</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-24
+</td>
+<td>
+rerun only for planktom12 with factor /100 for po4
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/42bbb892d4252dc9646fee3bc9f44f5123f8f29c/docs/Cant_AD_annual_all_models.html" target="_blank">42bbb89</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-24
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -902,10 +932,10 @@ variables &lt;-
   c(&quot;so&quot;, &quot;thetao&quot;, &quot;dissic&quot;, &quot;talk&quot;, &quot;po4&quot;, &quot;no3&quot;)
 
 
-# models &lt;- models[c(3,6)]
+models &lt;- models[7]
 
 for (i_model in models) {
-  # i_model &lt;- models[4]
+  # i_model &lt;- models[1]
   print(i_model)
   
   for (i_model_ID in c(&quot;A&quot;, &quot;D&quot;)) {
@@ -929,7 +959,7 @@ for (i_model in models) {
     print(variables_available)
     
     for (i_variable in variables_available) {
-      #  i_variable &lt;- variables_available[1]
+      #  i_variable &lt;- variables_available[2]
       
       # read list of all files
       file &lt;-
@@ -1043,6 +1073,13 @@ for (i_model in models) {
             time = TIME
           ) %&gt;%
           mutate(depth = as.numeric(depth))
+      }
+      
+      if (i_model == &quot;planktom12_3d_all_v20220404&quot; &amp;
+          i_variable == &quot;po4&quot;) {
+        variable_data_tibble &lt;-
+          variable_data_tibble %&gt;%
+          mutate(po4 = po4 / 100)
       }
       
       variable_data_tibble &lt;- variable_data_tibble %&gt;%
@@ -1223,102 +1260,7 @@ for (i_model in models) {
   rm(AD_annual)
   
 }</code></pre>
-<pre><code>[1] &quot;CESM-ETHZ_3D_ALL_v20211122&quot;
-[1] &quot;A&quot;
-[1] &quot;dissic&quot; &quot;no3&quot;    &quot;po4&quot;    &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
-[1] &quot;dissic_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
-[1] &quot;no3_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
-[1] &quot;po4_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
-[1] &quot;so_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
-[1] &quot;talk_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
-[1] &quot;thetao_CESM-ETHZ_A_1_gr_1980-2018_v20211122.nc&quot;
-[1] &quot;D&quot;
-[1] &quot;dissic&quot; &quot;no3&quot;    &quot;po4&quot;    &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
-[1] &quot;dissic_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
-[1] &quot;no3_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
-[1] &quot;po4_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
-[1] &quot;so_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
-[1] &quot;talk_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
-[1] &quot;thetao_CESM-ETHZ_D_1_gr_1980-2018_v20211122.nc&quot;
-[1] &quot;EC-Earth3_3D_ALL_v20220323&quot;
-[1] &quot;A&quot;
-[1] &quot;dissic&quot; &quot;no3&quot;    &quot;po4&quot;    &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
-[1] &quot;dissic_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
-[1] &quot;no3_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
-[1] &quot;po4_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
-[1] &quot;so_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
-[1] &quot;talk_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
-[1] &quot;thetao_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
-[1] &quot;D&quot;
-[1] &quot;dissic&quot; &quot;no3&quot;    &quot;po4&quot;    &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
-[1] &quot;dissic_EC-Earth3_D_1_gr_1980-2018_v20220323.nc&quot;
-[1] &quot;no3_EC-Earth3_D_1_gr_1980-2018_v20220323.nc&quot;
-[1] &quot;po4_EC-Earth3_D_1_gr_1980-2018_v20220323.nc&quot;
-[1] &quot;so_EC-Earth3_D_1_gr_1980-2018_v20220323.nc&quot;
-[1] &quot;talk_EC-Earth3_D_1_gr_1980-2018_v20220323.nc&quot;
-[1] &quot;thetao_EC-Earth3_D_1_gr_1980-2018_v20220323.nc&quot;
-[1] &quot;FESOM_REcoM_LR_3D_all_v20211119&quot;
-[1] &quot;A&quot;
-[1] &quot;dissic&quot; &quot;no3&quot;    &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
-[1] &quot;dissic_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
-[1] &quot;no3_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
-[1] &quot;so_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
-[1] &quot;talk_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
-[1] &quot;thetao_FESOM_REcoM_LR_A_1_gr_1980-2018_v20211119.nc&quot;
-[1] &quot;D&quot;
-[1] &quot;dissic&quot; &quot;no3&quot;    &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
-[1] &quot;dissic_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
-[1] &quot;no3_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
-[1] &quot;so_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
-[1] &quot;talk_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
-[1] &quot;thetao_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
-[1] &quot;MRI-ESM2-0_3D_ALL_v20210830&quot;
-[1] &quot;A&quot;
-[1] &quot;dissic&quot; &quot;no3&quot;    &quot;po4&quot;    &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
-[1] &quot;dissic_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
-[1] &quot;no3_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
-[1] &quot;po4_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
-[1] &quot;so_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
-[1] &quot;talk_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
-[1] &quot;thetao_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
-[1] &quot;D&quot;
-[1] &quot;dissic&quot;
-[1] &quot;dissic_MRI-ESM2-0_D_1_gr_1980-2018_v20210830.nc&quot;
-[1] &quot;NorESM-OC1.2_3D_ALL_v20211125&quot;
-[1] &quot;A&quot;
-[1] &quot;dissic&quot; &quot;no3&quot;    &quot;po4&quot;    &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
-[1] &quot;dissic_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
-[1] &quot;no3_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
-[1] &quot;po4_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
-[1] &quot;so_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
-[1] &quot;talk_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
-[1] &quot;thetao_NorESM-OC1.2_A_1_gr_1980-2018_v20211125.nc&quot;
-[1] &quot;D&quot;
-[1] &quot;dissic&quot; &quot;no3&quot;    &quot;po4&quot;    &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
-[1] &quot;dissic_NorESM-OC1.2_D_1_gr_1980-2018_v20211125.nc&quot;
-[1] &quot;no3_NorESM-OC1.2_D_1_gr_1980-2018_v20211125.nc&quot;
-[1] &quot;po4_NorESM-OC1.2_D_1_gr_1980-2018_v20211125.nc&quot;
-[1] &quot;so_NorESM-OC1.2_D_1_gr_1980-2018_v20211125.nc&quot;
-[1] &quot;talk_NorESM-OC1.2_D_1_gr_1980-2018_v20211125.nc&quot;
-[1] &quot;thetao_NorESM-OC1.2_D_1_gr_1980-2018_v20211125.nc&quot;
-[1] &quot;ORCA1-LIM3-PISCES_3D_ALL_v20211215&quot;
-[1] &quot;A&quot;
-[1] &quot;dissic&quot; &quot;no3&quot;    &quot;po4&quot;    &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
-[1] &quot;dissic_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-[1] &quot;no3_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-[1] &quot;po4_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-[1] &quot;so_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-[1] &quot;talk_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-[1] &quot;thetao_ORCA1-LIM3-PISCES_A_1_gr_1980-2018_v20211215.nc&quot;
-[1] &quot;D&quot;
-[1] &quot;dissic&quot; &quot;no3&quot;    &quot;po4&quot;    &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
-[1] &quot;dissic_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
-[1] &quot;no3_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
-[1] &quot;po4_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
-[1] &quot;so_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
-[1] &quot;talk_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
-[1] &quot;thetao_ORCA1-LIM3-PISCES_D_1_gr_1980-2018_v20211215.nc&quot;
-[1] &quot;planktom12_3d_all_v20220404&quot;
+<pre><code>[1] &quot;planktom12_3d_all_v20220404&quot;
 [1] &quot;A&quot;
 [1] &quot;dissic&quot; &quot;po4&quot;    &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
 [1] &quot;dissic_PlankTOM12_A_1_gr_1980-2018_v20220404.nc&quot;
@@ -1365,13 +1307,7 @@ for (i_model in models) {
   }
   
 }</code></pre>
-<pre><code>[1] &quot;CESM-ETHZ_3D_ALL_v20211122&quot;
-[1] &quot;EC-Earth3_3D_ALL_v20220323&quot;
-[1] &quot;FESOM_REcoM_LR_3D_all_v20211119&quot;
-[1] &quot;MRI-ESM2-0_3D_ALL_v20210830&quot;
-[1] &quot;NorESM-OC1.2_3D_ALL_v20211125&quot;
-[1] &quot;ORCA1-LIM3-PISCES_3D_ALL_v20211215&quot;
-[1] &quot;planktom12_3d_all_v20220404&quot;</code></pre>
+<pre><code>[1] &quot;planktom12_3d_all_v20220404&quot;</code></pre>
 <pre class="r"><code>tcant &lt;- tcant %&gt;%
   # head(10) %&gt;%
   arrange(year) %&gt;%
@@ -1433,6 +1369,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/42bbb892d4252dc9646fee3bc9f44f5123f8f29c/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_dcant-1.png" target="_blank">42bbb89</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-24
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/40863a2a1b110ac6ab9e6dd3efaf828fe76adc61/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_dcant-1.png" target="_blank">40863a2</a>
@@ -1558,6 +1505,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/42bbb892d4252dc9646fee3bc9f44f5123f8f29c/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_tcant-1.png" target="_blank">42bbb89</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-24
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/40863a2a1b110ac6ab9e6dd3efaf828fe76adc61/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_tcant-1.png" target="_blank">40863a2</a>
 </td>
 <td>
@@ -1664,6 +1622,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/42bbb892d4252dc9646fee3bc9f44f5123f8f29c/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_tcant-2.png" target="_blank">42bbb89</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-24
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/40863a2a1b110ac6ab9e6dd3efaf828fe76adc61/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_tcant-2.png" target="_blank">40863a2</a>
 </td>
 <td>
@@ -1768,6 +1737,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/42bbb892d4252dc9646fee3bc9f44f5123f8f29c/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_tcant-3.png" target="_blank">42bbb89</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-24
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/40863a2a1b110ac6ab9e6dd3efaf828fe76adc61/docs/figure/Cant_AD_annual_all_models.Rmd/zonal_mean_section_tcant-3.png" target="_blank">40863a2</a>
@@ -1893,6 +1873,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/42bbb892d4252dc9646fee3bc9f44f5123f8f29c/docs/figure/Cant_AD_annual_all_models.Rmd/dcant_column_inventory-1.png" target="_blank">42bbb89</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-24
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/40863a2a1b110ac6ab9e6dd3efaf828fe76adc61/docs/figure/Cant_AD_annual_all_models.Rmd/dcant_column_inventory-1.png" target="_blank">40863a2</a>
