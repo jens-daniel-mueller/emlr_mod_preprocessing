@@ -117,10 +117,10 @@ source_python(paste0(
 
 ```{r read_climatology_fields_2007}
 
-# models <- models[1]
+models <- models[7]
 
 for (i_model in models) {
-  # i_model <- models[4]
+  # i_model <- models[1]
   print(i_model)
   
   variables_available <-
@@ -137,7 +137,7 @@ for (i_model in models) {
   print(variables_available)
   
   for (i_variable in variables_available) {
-    # i_variable <- variables_available[5]
+    # i_variable <- variables_available[3]
     
     # read list of all files
     file <-
@@ -231,6 +231,12 @@ for (i_model in models) {
                depth = DEPTH)
     }
     
+    if (i_model == "planktom12_3d_all_v20220404" &
+        i_variable == "po4") {
+      variable_data_tibble <-
+        variable_data_tibble %>%
+        mutate(po4 = po4 / 100)
+    }
     
     # harmonize longitudes
     variable_data_tibble <- variable_data_tibble %>%

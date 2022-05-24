@@ -85,10 +85,10 @@ variables <-
   c("so", "thetao", "dissic", "talk", "po4", "no3")
 
 
-# models <- models[c(3,6)]
+models <- models[7]
 
 for (i_model in models) {
-  # i_model <- models[4]
+  # i_model <- models[1]
   print(i_model)
   
   for (i_model_ID in c("A", "D")) {
@@ -112,7 +112,7 @@ for (i_model in models) {
     print(variables_available)
     
     for (i_variable in variables_available) {
-      #  i_variable <- variables_available[1]
+      #  i_variable <- variables_available[2]
       
       # read list of all files
       file <-
@@ -226,6 +226,13 @@ for (i_model in models) {
             time = TIME
           ) %>%
           mutate(depth = as.numeric(depth))
+      }
+      
+      if (i_model == "planktom12_3d_all_v20220404" &
+          i_variable == "po4") {
+        variable_data_tibble <-
+          variable_data_tibble %>%
+          mutate(po4 = po4 / 100)
       }
       
       variable_data_tibble <- variable_data_tibble %>%

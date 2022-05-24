@@ -101,10 +101,10 @@ variables <-
     "tos")
 
 
-# models <- models[1]
+models <- models[8]
 
 for (i_model in models) {
-  # i_model <- models[2]
+  # i_model <- models[1]
   print(i_model)
   
   for (i_model_ID in model_IDs) {
@@ -129,7 +129,7 @@ for (i_model in models) {
     
     
     for (i_variable in variables_available) {
-      # i_variable <- variables_available[1]
+      # i_variable <- variables_available[4]
       print(i_variable)
       
       # print("sleep")
@@ -204,6 +204,14 @@ for (i_model in models) {
             lat = LATITUDE,
             time = TIME
           )
+      }
+      
+      
+      if (i_model == "planktom12_2d_co2_v20220404" &
+          i_variable == "po4os") {
+        variable_data_tibble <-
+          variable_data_tibble %>%
+          mutate(po4os = po4os / 100)
       }
       
       # remove na values

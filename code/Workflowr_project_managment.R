@@ -5,7 +5,7 @@
 
 # commit regular changes (locally) and rebuild site
 # this takes only changed files into account
-wflow_publish(all = TRUE, message = "write files without 3D_ALL insert")
+wflow_publish(all = TRUE, message = "rerun only for planktom12 with factor /100 for po4")
 
 # commit changes including _site.yml (locally) and rebuild site in the specified order
 # you can also run this code with only some of the files. In this case remove the rebuild=TRUE command
@@ -14,6 +14,7 @@ wflow_publish(here::here(
   c(
     "index.Rmd",
     "Cant_AD_annual_all_models.Rmd",
+    "Cant_CB_annual_all_models.Rmd",
     "Climatology_A_2007_all_models.Rmd",
     "co2_atm.Rmd",
     "GLODAP_subset_A_annual_all_models.Rmd",
@@ -21,18 +22,9 @@ wflow_publish(here::here(
     "surface_ocean.Rmd"
   )
 ),
-message = "read data from all models and write individual files",
+message = "bug fixes for 5 models",
 republish = TRUE)
 
-
-wflow_publish(here::here(
-  "analysis",
-  c(
-    "surface_ocean.Rmd",
-    "GLODAP_subset_A_annual_all_models.Rmd"
-  )
-),
-message = "revise pdf plot output")
 
 
 # Push latest version to GitHub

@@ -11,8 +11,12 @@ navbar:
       href: GLODAP_subset_A_monthly_CESM.html
     - text: GLODAP A annual
       href: GLODAP_subset_A_annual_all_models.html
-  - text: Cant AD
-    href: Cant_AD_annual_all_models.html
+  - text: Cant
+    menu:
+    - text: Cant AD
+      href: Cant_AD_annual_all_models.html
+    - text: Cant CB
+      href: Cant_CB_annual_all_models.html
   - text: Surface data
     menu:
     - text: Surface Ocean
