@@ -423,7 +423,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Climatology variable A</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">21 May, 2022</h4>
+<h4 class="date">24 May, 2022</h4>
 
 </div>
 
@@ -448,7 +448,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-05-21
+<strong>Last updated:</strong> 2022-05-24
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -539,16 +539,16 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtreed9d4d68934de41746d0504d4bfc76bc20a13130ctargetblankd9d4d68a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/d9d4d68934de41746d0504d4bfc76bc20a13130c" target="_blank">d9d4d68</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtreee82a3025dd9ab928c807a8b75993556a77c56cd3targetblanke82a302a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/e82a3025dd9ab928c807a8b75993556a77c56cd3" target="_blank">e82a302</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtreed9d4d68934de41746d0504d4bfc76bc20a13130ctargetblankd9d4d68a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtreee82a3025dd9ab928c807a8b75993556a77c56cd3targetblanke82a302a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/d9d4d68934de41746d0504d4bfc76bc20a13130c" target="_blank">d9d4d68</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/e82a3025dd9ab928c807a8b75993556a77c56cd3" target="_blank">e82a302</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -603,6 +603,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/e82a3025dd9ab928c807a8b75993556a77c56cd3/analysis/Climatology_A_2007_all_models.Rmd" target="_blank">e82a302</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-23
+</td>
+<td>
+bug fixes for 5 models
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/40863a2a1b110ac6ab9e6dd3efaf828fe76adc61/docs/Climatology_A_2007_all_models.html" target="_blank">40863a2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-22
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -786,10 +820,13 @@ models &lt;-
   models[str_detect(
     models,
     pattern = c(
-      &quot;CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES&quot;
+      &quot;CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12&quot;
     )
   )]
 
+# depth levels not available
+models &lt;-
+  models[!str_detect(models, pattern = &quot;CNRM&quot;)]
 
 # files chunked into decades
 models &lt;-
@@ -806,7 +843,7 @@ source_python(paste0(
 <pre class="r"><code># models &lt;- models[1]
 
 for (i_model in models) {
-  # i_model &lt;- models[8]
+  # i_model &lt;- models[4]
   print(i_model)
   
   variables_available &lt;-
@@ -823,7 +860,7 @@ for (i_model in models) {
   print(variables_available)
   
   for (i_variable in variables_available) {
-    # i_variable &lt;- variables_available[1]
+    # i_variable &lt;- variables_available[5]
     
     # read list of all files
     file &lt;-
@@ -941,12 +978,12 @@ for (i_model in models) {
   
   if (i_model == &quot;FESOM_REcoM_LR_3D_all_v20211119&quot;) {
     climatology &lt;- climatology %&gt;%
-      mutate(po4 = NA)
+      mutate(po4 = no3/16)
   }
 
   if (i_model == &quot;planktom12_3d_all_v20220404&quot;) {
     climatology &lt;- climatology %&gt;%
-      mutate(no3 = NA)
+      mutate(no3 = po4*16)
   }
   
   climatology &lt;- climatology %&gt;%
@@ -1065,7 +1102,7 @@ for (i_model in models) {
     select(-c(rho))
   
   # Remove 3D_all from model name
-  i_model &lt;- str_remove(i_model, &quot;3D_ALL_|3D_all_&quot;)
+  i_model &lt;- str_remove(i_model, &quot;3D_ALL_|3D_all_|3d_all_&quot;)
   
   # write csv file
   climatology %&gt;%
@@ -1196,152 +1233,6 @@ jens-daniel-mueller
 </table>
 </div>
 </div>
-<pre><code>[1] &quot;CNRM-ESM2-1_3D_ALL_v20211208&quot;
-[1] &quot;dissic&quot; &quot;no3&quot;    &quot;o2&quot;     &quot;po4&quot;    &quot;si&quot;     &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
-[1] &quot;dissic_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-             Min.  1st Qu.   Median    Mean  3rd Qu.     Max.  NA&#39;s
-dissic  0.7282749 1.982887 2.050304 2.06025 2.136758 2.555877 30236
-dimension(s):
-    from  to offset delta refsys point values x/y
-lon    1 360      0     1 WGS 84    NA   NULL [x]
-lat    1 180    -90     1 WGS 84    NA   NULL [y]
-lev    1  75    0.5     1     NA    NA   NULL    
-[1] &quot;no3_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-             Min.      1st Qu.      Median        Mean    3rd Qu.       Max.
-no3  4.208204e-07 4.619621e-05 0.003797689 0.008458562 0.01597501 0.03022428
-      NA&#39;s
-no3  30236
-dimension(s):
-    from  to offset delta refsys point values x/y
-lon    1 360      0     1 WGS 84    NA   NULL [x]
-lat    1 180    -90     1 WGS 84    NA   NULL [y]
-lev    1  75    0.5     1     NA    NA   NULL    
-[1] &quot;o2_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-         Min.   1st Qu.    Median      Mean   3rd Qu.      Max.  NA&#39;s
-o2  0.1969141 0.2095934 0.2508053 0.2694206 0.3334444 0.4061781 30236
-dimension(s):
-    from  to offset delta refsys point values x/y
-lon    1 360      0     1 WGS 84    NA   NULL [x]
-lat    1 180    -90     1 WGS 84    NA   NULL [y]
-lev    1  75    0.5     1     NA    NA   NULL    
-[1] &quot;po4_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-             Min.      1st Qu.       Median         Mean     3rd Qu.
-po4  6.206308e-08 7.779858e-05 0.0004800163 0.0007152379 0.001257823
-            Max.  NA&#39;s
-po4  0.004342848 30236
-dimension(s):
-    from  to offset delta refsys point values x/y
-lon    1 360      0     1 WGS 84    NA   NULL [x]
-lat    1 180    -90     1 WGS 84    NA   NULL [y]
-lev    1  75    0.5     1     NA    NA   NULL    
-[1] &quot;si_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-            Min.     1st Qu.      Median       Mean    3rd Qu.       Max.  NA&#39;s
-si  0.0005262352 0.001710361 0.003134898 0.01145567 0.01090034 0.09988265 30236
-dimension(s):
-    from  to offset delta refsys point values x/y
-lon    1 360      0     1 WGS 84    NA   NULL [x]
-lat    1 180    -90     1 WGS 84    NA   NULL [y]
-lev    1  75    0.5     1     NA    NA   NULL    
-[1] &quot;so_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-        Min.  1st Qu.   Median     Mean 3rd Qu.     Max.  NA&#39;s
-so  5.508164 33.86287 34.26906 34.24725 35.1038 40.91588 30236
-dimension(s):
-    from  to offset delta refsys point values x/y
-lon    1 360      0     1 WGS 84    NA   NULL [x]
-lat    1 180    -90     1 WGS 84    NA   NULL [y]
-lev    1  75    0.5     1     NA    NA   NULL    
-[1] &quot;talk_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-           Min.  1st Qu. Median     Mean  3rd Qu.     Max.  NA&#39;s
-talk  0.7085091 2.263741 2.3096 2.293559 2.336079 2.855406 30236
-dimension(s):
-    from  to offset delta refsys point values x/y
-lon    1 360      0     1 WGS 84    NA   NULL [x]
-lat    1 180    -90     1 WGS 84    NA   NULL [y]
-lev    1  75    0.5     1     NA    NA   NULL    
-[1] &quot;thetao_CNRM-ESM2-1_A_1_gr_1980-2018_v20211208.nc&quot;
-stars object with 3 dimensions and 1 attribute
-attribute(s), summary of first 1e+05 cells:
-             Min.  1st Qu.   Median     Mean  3rd Qu.     Max.  NA&#39;s
-thetao  -1.812377 2.487759 16.03098 14.36608 25.54574 30.65528 30236
-dimension(s):
-    from  to offset delta refsys point values x/y
-lon    1 360      0     1 WGS 84    NA   NULL [x]
-lat    1 180    -90     1 WGS 84    NA   NULL [y]
-lev    1  75    0.5     1     NA    NA   NULL    </code></pre>
-<p><img src="figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-read_climatology_fields_2007-2">
-Past versions of read_climatology_fields_2007-2.png
-</button>
-</p>
-<div id="fig-read_climatology_fields_2007-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/31ae80a13af1d5e91eecb9be0d53a44e4664b0ea/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-2.png" target="_blank">31ae80a</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-20
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-2.png" target="_blank">0dd6813</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-15
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-2.png" target="_blank">06054b2</a>
-</td>
-<td>
-jens-daniel-mueller
-</td>
-<td>
-2022-05-10
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 <pre><code>[1] &quot;EC-Earth3_3D_ALL_v20220323&quot;
 [1] &quot;dissic&quot; &quot;no3&quot;    &quot;o2&quot;     &quot;po4&quot;    &quot;si&quot;     &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
 [1] &quot;dissic_EC-Earth3_A_1_gr_1980-2018_v20220323.nc&quot;
@@ -1428,13 +1319,13 @@ dimension(s):
 lon      1 360      0     1 WGS 84    NA                             NULL [x]
 lat      1 180    -90     1 WGS 84    NA                             NULL [y]
 depth    1  75     NA    NA     NA FALSE [0,1.023907),...,[5800,6004.229)    </code></pre>
-<p><img src="figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-2.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-read_climatology_fields_2007-3">
-Past versions of read_climatology_fields_2007-3.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-read_climatology_fields_2007-2">
+Past versions of read_climatology_fields_2007-2.png
 </button>
 </p>
-<div id="fig-read_climatology_fields_2007-3" class="collapse">
+<div id="fig-read_climatology_fields_2007-2" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -1453,7 +1344,18 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/31ae80a13af1d5e91eecb9be0d53a44e4664b0ea/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-3.png" target="_blank">31ae80a</a>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/40863a2a1b110ac6ab9e6dd3efaf828fe76adc61/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-2.png" target="_blank">40863a2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-22
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/31ae80a13af1d5e91eecb9be0d53a44e4664b0ea/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-2.png" target="_blank">31ae80a</a>
 </td>
 <td>
 jens-daniel-mueller
@@ -1464,7 +1366,7 @@ jens-daniel-mueller
 </tr>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-3.png" target="_blank">0dd6813</a>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-2.png" target="_blank">0dd6813</a>
 </td>
 <td>
 jens-daniel-mueller
@@ -1475,7 +1377,7 @@ jens-daniel-mueller
 </tr>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-3.png" target="_blank">06054b2</a>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-2.png" target="_blank">06054b2</a>
 </td>
 <td>
 jens-daniel-mueller
@@ -1564,13 +1466,13 @@ dimension(s):
 Lon      1 360      0     1     NA    NA            NULL [x]
 Lat      1 180    -90     1     NA    NA            NULL [y]
 Depth    1  46     NA    NA     NA    NA [46] 0,...,5900    </code></pre>
-<p><img src="figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-3.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-read_climatology_fields_2007-4">
-Past versions of read_climatology_fields_2007-4.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-read_climatology_fields_2007-3">
+Past versions of read_climatology_fields_2007-3.png
 </button>
 </p>
-<div id="fig-read_climatology_fields_2007-4" class="collapse">
+<div id="fig-read_climatology_fields_2007-3" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -1589,7 +1491,18 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/31ae80a13af1d5e91eecb9be0d53a44e4664b0ea/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-4.png" target="_blank">31ae80a</a>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/40863a2a1b110ac6ab9e6dd3efaf828fe76adc61/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-3.png" target="_blank">40863a2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-22
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/31ae80a13af1d5e91eecb9be0d53a44e4664b0ea/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-3.png" target="_blank">31ae80a</a>
 </td>
 <td>
 jens-daniel-mueller
@@ -1600,7 +1513,7 @@ jens-daniel-mueller
 </tr>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-4.png" target="_blank">0dd6813</a>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-3.png" target="_blank">0dd6813</a>
 </td>
 <td>
 jens-daniel-mueller
@@ -1611,7 +1524,7 @@ jens-daniel-mueller
 </tr>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-4.png" target="_blank">06054b2</a>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-3.png" target="_blank">06054b2</a>
 </td>
 <td>
 jens-daniel-mueller
@@ -1710,13 +1623,13 @@ dimension(s):
 lon    1 360      0     1 WGS 84    NA                  NULL [x]
 lat    1 180    -90     1 WGS 84    NA                  NULL [y]
 lev    1  61     NA    NA     NA FALSE [0,2),...,[6500,6550)    </code></pre>
-<p><img src="figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-4.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-read_climatology_fields_2007-5">
-Past versions of read_climatology_fields_2007-5.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-read_climatology_fields_2007-4">
+Past versions of read_climatology_fields_2007-4.png
 </button>
 </p>
-<div id="fig-read_climatology_fields_2007-5" class="collapse">
+<div id="fig-read_climatology_fields_2007-4" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -1735,7 +1648,18 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/31ae80a13af1d5e91eecb9be0d53a44e4664b0ea/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-5.png" target="_blank">31ae80a</a>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/40863a2a1b110ac6ab9e6dd3efaf828fe76adc61/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-4.png" target="_blank">40863a2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-22
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/31ae80a13af1d5e91eecb9be0d53a44e4664b0ea/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-4.png" target="_blank">31ae80a</a>
 </td>
 <td>
 jens-daniel-mueller
@@ -1746,13 +1670,24 @@ jens-daniel-mueller
 </tr>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-5.png" target="_blank">0dd6813</a>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-4.png" target="_blank">0dd6813</a>
 </td>
 <td>
 jens-daniel-mueller
 </td>
 <td>
 2022-05-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/06054b2f209824d03a92df2825e23707558bf33e/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-4.png" target="_blank">06054b2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-10
 </td>
 </tr>
 </tbody>
@@ -1881,13 +1816,13 @@ jens-daniel-mueller
  9  -1.62  192. -78.5     0
 10  -1.64  192. -78.5     0
 # … with 2,360,490 more rows</code></pre>
-<p><img src="figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-5.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-read_climatology_fields_2007-6">
-Past versions of read_climatology_fields_2007-6.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-read_climatology_fields_2007-5">
+Past versions of read_climatology_fields_2007-5.png
 </button>
 </p>
-<div id="fig-read_climatology_fields_2007-6" class="collapse">
+<div id="fig-read_climatology_fields_2007-5" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -1906,7 +1841,18 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/31ae80a13af1d5e91eecb9be0d53a44e4664b0ea/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-6.png" target="_blank">31ae80a</a>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/40863a2a1b110ac6ab9e6dd3efaf828fe76adc61/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-5.png" target="_blank">40863a2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-22
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/31ae80a13af1d5e91eecb9be0d53a44e4664b0ea/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-5.png" target="_blank">31ae80a</a>
 </td>
 <td>
 jens-daniel-mueller
@@ -1917,7 +1863,7 @@ jens-daniel-mueller
 </tr>
 <tr>
 <td>
-<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-6.png" target="_blank">0dd6813</a>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-5.png" target="_blank">0dd6813</a>
 </td>
 <td>
 jens-daniel-mueller
@@ -2016,6 +1962,140 @@ dimension(s):
 lon      1 360      0     1 WGS 84    NA                             NULL [x]
 lat      1 180    -90     1 WGS 84    NA                             NULL [y]
 depth    1  75     NA    NA     NA FALSE [0,1.023907),...,[5800,6004.229)    </code></pre>
+<p><img src="figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-read_climatology_fields_2007-6">
+Past versions of read_climatology_fields_2007-6.png
+</button>
+</p>
+<div id="fig-read_climatology_fields_2007-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/40863a2a1b110ac6ab9e6dd3efaf828fe76adc61/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-6.png" target="_blank">40863a2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-22
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/31ae80a13af1d5e91eecb9be0d53a44e4664b0ea/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-6.png" target="_blank">31ae80a</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-20
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/0dd68137b28aa8f60fe8cbb48a8f6a453afcf045/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-6.png" target="_blank">0dd6813</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre><code>[1] &quot;planktom12_3d_all_v20220404&quot;
+[1] &quot;dissic&quot; &quot;o2&quot;     &quot;po4&quot;    &quot;si&quot;     &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
+[1] &quot;dissic_PlankTOM12_A_1_gr_1980-2018_v20220404.nc&quot;
+stars object with 3 dimensions and 1 attribute
+attribute(s), summary of first 1e+05 cells:
+             Min.  1st Qu.  Median     Mean  3rd Qu.     Max.  NA&#39;s
+dissic  0.3604033 1.986821 2.02884 2.063821 2.127698 2.448838 34691
+dimension(s):
+          from  to offset delta refsys point                   values x/y
+LONGITUDE    1 360      0     1     NA    NA                     NULL [x]
+LATITUDE     1 180    -90     1     NA    NA                     NULL [y]
+DEPTH        1  31     NA    NA     NA    NA [31] 4.99994,...,5250.23    
+[1] &quot;o2_PlankTOM12_A_1_gr_1980-2018_v20220404.nc&quot;
+stars object with 3 dimensions and 1 attribute
+attribute(s), summary of first 1e+05 cells:
+          Min.   1st Qu.    Median      Mean   3rd Qu.      Max.  NA&#39;s
+o2  0.06550782 0.2083643 0.2492491 0.2661756 0.3294328 0.3942035 34691
+dimension(s):
+          from  to offset delta refsys point                   values x/y
+LONGITUDE    1 360      0     1     NA    NA                     NULL [x]
+LATITUDE     1 180    -90     1     NA    NA                     NULL [y]
+DEPTH        1  31     NA    NA     NA    NA [31] 4.99994,...,5250.23    
+[1] &quot;po4_PlankTOM12_A_1_gr_1980-2018_v20220404.nc&quot;
+stars object with 3 dimensions and 1 attribute
+attribute(s), summary of first 1e+05 cells:
+            Min.   1st Qu.     Median      Mean  3rd Qu.      Max.  NA&#39;s
+po4  0.001492676 0.0351725 0.09724818 0.1070409 0.166172 0.2820027 34691
+dimension(s):
+          from  to offset delta refsys point                   values x/y
+LONGITUDE    1 360      0     1     NA    NA                     NULL [x]
+LATITUDE     1 180    -90     1     NA    NA                     NULL [y]
+DEPTH        1  31     NA    NA     NA    NA [31] 4.99994,...,5250.23    
+[1] &quot;si_PlankTOM12_A_1_gr_1980-2018_v20220404.nc&quot;
+stars object with 3 dimensions and 1 attribute
+attribute(s), summary of first 1e+05 cells:
+            Min.      1st Qu.       Median       Mean     3rd Qu.      Max.
+si  1.032564e-05 3.253466e-05 7.616759e-05 0.01748056 0.006404537 0.1061623
+     NA&#39;s
+si  34691
+dimension(s):
+          from  to offset delta refsys point                   values x/y
+LONGITUDE    1 360      0     1     NA    NA                     NULL [x]
+LATITUDE     1 180    -90     1     NA    NA                     NULL [y]
+DEPTH        1  31     NA    NA     NA    NA [31] 4.99994,...,5250.23    
+[1] &quot;so_PlankTOM12_A_1_gr_1980-2018_v20220404.nc&quot;
+stars object with 3 dimensions and 1 attribute
+attribute(s), summary of first 1e+05 cells:
+        Min.  1st Qu.   Median     Mean  3rd Qu.     Max.  NA&#39;s
+so  1.501021 33.65757 34.32087 34.22928 36.15146 42.97074 34691
+dimension(s):
+          from  to offset delta refsys point                   values x/y
+LONGITUDE    1 360      0     1     NA    NA                     NULL [x]
+LATITUDE     1 180    -90     1     NA    NA                     NULL [y]
+DEPTH        1  31     NA    NA     NA    NA [31] 4.99994,...,5250.23    
+[1] &quot;talk_PlankTOM12_A_1_gr_1980-2018_v20220404.nc&quot;
+stars object with 3 dimensions and 1 attribute
+attribute(s), summary of first 1e+05 cells:
+           Min.  1st Qu.   Median     Mean  3rd Qu.     Max.  NA&#39;s
+talk  0.3749107 2.286771 2.331598 2.313961 2.375072 3.040825 34691
+dimension(s):
+          from  to offset delta refsys point                   values x/y
+LONGITUDE    1 360      0     1     NA    NA                     NULL [x]
+LATITUDE     1 180    -90     1     NA    NA                     NULL [y]
+DEPTH        1  31     NA    NA     NA    NA [31] 4.99994,...,5250.23    
+[1] &quot;thetao_PlankTOM12_A_1_gr_1980-2018_v20220404.nc&quot;
+stars object with 3 dimensions and 1 attribute
+attribute(s), summary of first 1e+05 cells:
+             Min.  1st Qu.   Median     Mean  3rd Qu.     Max.  NA&#39;s
+thetao  -1.839474 2.963888 16.64129 14.84514 25.90274 32.04654 34691
+dimension(s):
+          from  to offset delta refsys point                   values x/y
+LONGITUDE    1 360      0     1     NA    NA                     NULL [x]
+LATITUDE     1 180    -90     1     NA    NA                     NULL [y]
+DEPTH        1  31     NA    NA     NA    NA [31] 4.99994,...,5250.23    </code></pre>
 <p><img src="figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-7.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-read_climatology_fields_2007-7">
@@ -2039,6 +2119,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/40863a2a1b110ac6ab9e6dd3efaf828fe76adc61/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-7.png" target="_blank">40863a2</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-05-22
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/31ae80a13af1d5e91eecb9be0d53a44e4664b0ea/docs/figure/Climatology_A_2007_all_models.Rmd/read_climatology_fields_2007-7.png" target="_blank">31ae80a</a>
