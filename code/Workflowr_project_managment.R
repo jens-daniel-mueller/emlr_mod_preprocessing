@@ -22,7 +22,7 @@ wflow_publish(here::here(
     "surface_ocean.Rmd"
   )
 ),
-message = "bug fixes for 5 models",
+message = "rerun for all models",
 republish = TRUE)
 
 

@@ -1,0 +1,437 @@
+---
+title: "Cant variable climate AD"
+author: "Jens Daniel Müller"
+date:  "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  workflowr::wflow_html:
+    number_sections: true
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+editor_options:
+  chunk_output_type: console
+---
+
+```{r parent, child = "/nfs/kryo/work/jenmueller/emlr_cant/utilities/setup.Rmd"}
+# this chunk runs the code stored in setup.Rmd
+# if required, please refer to instructions given here:
+# https://jdblischak.github.io/workflowr/articles/wflow-07-common-code.html
+```
+
+```{r define_paths, include=FALSE}
+path_cmorized <-
+  "/nfs/kryo/work/loher/CESM_output/RECCAP2/cmorized_June2021/"
+path_preprocessing  <-
+  paste(path_root, "/model/preprocessing/", sep = "")
+```
+
+```{r load_libraries_specific, include=FALSE}
+library(tidync)
+library(stars)
+library(gsw)
+```
+
+```{r select_basin_mask}
+
+# use only three basin to assign general basin mask
+# ie this is not specific to the MLR fitting
+basinmask <- basinmask %>%
+  filter(MLR_basins == "2") %>%
+  select(lat, lon, basin_AIP)
+
+```
+
+
+# Calculate annual Cant field
+
+## Read in Run A
+
+```{r read_cmorized_RunA}
+
+# read in cmorized variable forcing model file
+A_annual <- tidync(paste(path_cmorized,
+                         "RECCAP2_RunA.nc",
+                         sep = ""))
+
+A_annual <- A_annual %>% hyper_tibble()
+
+# calculate model temperature
+A_annual <- A_annual %>%
+  mutate(temp = gsw_pt_from_t(
+    SA = so,
+    t = thetao,
+    p = 10.1325,
+    p_ref = depth
+  ))
+
+# calculate model density
+A_annual <- A_annual %>%
+  mutate(
+    rho = gsw_pot_rho_t_exact(
+      SA = so,
+      t = temp,
+      p = depth,
+      p_ref = 10.1325
+    ))
+
+# unit transfer from mol/m3 to µmol/kg
+A_annual <- A_annual %>%
+  mutate(
+    dissic = dissic * (1e+6 / rho),
+    talk = talk * (1e+6 / rho),
+    no3 = no3 * (1e+6 / rho),
+    po4 = po4 * (1e+6 / rho)
+  )
+
+# harmonize column names and coordinates
+A_annual <- A_annual %>%
+  rename(
+    year = time_ann
+  ) %>%
+  # compute year from days since Jan 1, 1980
+  mutate(year = (year - 181) / 365 + 1980) %>%
+  mutate(lon = if_else(lon < 20, lon + 360, lon))
+
+# create backup for cstar calculation
+cstar_A <- A_annual %>% 
+  select(year, depth,
+         lon, lat,
+         dissic, talk, no3, po4)
+
+# harmonize column names and coordinates
+A_annual <- A_annual %>%
+  select(year, lon, lat, depth, tco2_A = dissic)
+
+```
+
+## Read in Run D
+
+```{r read_cmorized_RunD}
+
+# read in cmorized variable forcing model file
+D_annual <- tidync(paste(path_cmorized,
+                         "RECCAP2_RunD.nc",
+                         sep = ""))
+
+D_annual <- D_annual %>% hyper_tibble()
+
+# harmonize column names and coordinates
+D_annual <- D_annual  %>%
+  select(
+    year = time_ann,
+    lon,
+    lat,
+    depth,
+    tco2_D = dissic,
+    sal = so,
+    theta = thetao
+  ) %>%
+  # compute year from days since Jan 1, 1980
+  mutate(year = (year - 181) / 365 + 1980) %>%
+  mutate(lon = if_else(lon < 20, lon + 360, lon))
+
+# calculate model temperature
+D_annual <- D_annual %>%
+  mutate(temp = gsw_pt_from_t(
+    SA = sal,
+    t = theta,
+    p = 10.1325,
+    p_ref = depth
+  ))
+
+# unit transfer from mol/m3 to µmol/kg
+D_annual <- D_annual %>%
+  mutate(
+    rho = gsw_pot_rho_t_exact(
+      SA = sal,
+      t = temp,
+      p = depth,
+      p_ref = 10.1325
+    ),
+    tco2_D = tco2_D * (1e+6 / rho)
+  ) %>%
+  select(year, lon, lat, depth, tco2_D)
+
+```
+
+## Join tco2 fields
+
+```{r join_tco2_fields}
+
+cant <- inner_join(A_annual, D_annual)
+rm(A_annual, D_annual)
+
+```
+
+## Round depth levels
+
+```{r round_depth_levels}
+
+cant <- cant %>%
+  mutate(depth = round(depth))
+
+```
+
+## Apply basin mask
+
+```{r apply_basin_mask}
+
+# restrict Cant field to basin mask grid
+cant <- inner_join(cant, basinmask)
+
+```
+
+## Calculate Cant total
+
+```{r calc_cant}
+
+cant <- cant %>%
+  mutate(cant_total = tco2_A - tco2_D) %>% 
+  select(-c(tco2_A, tco2_D))
+
+
+```
+
+## Write Cant files
+
+```{r write_annual_Cant_files}
+
+# write annual Cant files
+years <- c(1982:2019)
+
+for (i_year in years) {
+  
+ # i_year = years[1]
+  cant_year <- cant %>%
+    filter(year == i_year)
+  
+  cant_year %>%
+    write_csv(paste(path_preprocessing,
+                    "cant_annual_field_AD/cant_", i_year, ".csv",
+                    sep = ""))
+}
+
+```
+
+# Cstar fields
+
+## Round depth levels
+
+```{r round_depth_levels_cstar}
+
+cstar_A <- cstar_A %>%
+  mutate(depth = round(depth))
+
+```
+
+## Apply basin mask
+
+```{r apply_basin_mask_cstar}
+
+# restrict cstar_A field to basin mask grid
+cstar_A <- inner_join(cstar_A, basinmask)
+
+```
+
+## Calculate cstar
+
+```{r calc_cstar_A, eval=FALSE}
+
+params_local <- lst(# Stoichiometric ratio of C to P
+  rCP = 117,
+  # Stoichiometric ratio of N to P
+  rNP = 16,)
+
+
+cstar_A <- cstar_A %>%
+  mutate(
+    cstar_no3 = b_cstar_nitrate(
+      tco2 = dissic,
+      nitrate = no3,
+      talk = talk
+    ),
+    cstar_po4 = b_cstar_phosphate(
+      tco2 = dissic,
+      phosphate = po4,
+      talk = talk
+    )
+  )
+
+rm(params_local)
+
+# cstar_A %>%
+#   ggplot(aes(cstar_no3, cstar_po4)) +
+#   geom_bin2d()
+
+```
+
+## Write cstar_A files
+
+```{r write_annual_cstar_A_files, eval=FALSE}
+
+# write annual cstar_A files
+years <- c(1982:2019)
+
+for (i_year in years) {
+  
+ # i_year = years[1]
+  cstar_A_year <- cstar_A %>%
+    filter(year == i_year)
+  
+  cstar_A_year %>%
+    write_csv(paste(path_preprocessing,
+                    "cstar_annual_field_A/cstar_A_", i_year, ".csv",
+                    sep = ""))
+}
+
+```
+
+
+# Calculate change in Cant 1994 - 2007
+
+```{r calculate_cant_1994_2007}
+
+cant_1994 <- cant %>%
+  filter(year == 1994) %>%
+  select(-c(year)) %>%
+  rename(cant_1994 = cant_total)
+
+cant_2007 <- cant %>%
+  filter(year == 2007) %>%
+  select(-c(year)) %>%
+  rename(cant_2007 = cant_total)
+
+cant_gruber <- left_join(cant_1994, cant_2007) %>%
+  mutate(cant = cant_2007 - cant_1994)
+
+cant_gruber <- cant_gruber %>% 
+   mutate(cant_pos = if_else(cant <= 0, 0, cant))
+
+rm(cant_1994, cant_2007)
+
+```
+
+
+# Zonal mean sections
+
+```{r calc_zonal_mean_gruber}
+
+cant_gruber <- cant_gruber %>% 
+  mutate(eras = "JGOFS/WOCE")
+
+cant_gruber_zonal <- m_zonal_mean_section(cant_gruber)
+
+```
+
+## 1994 - 2007
+
+```{r zonal_mean_section_cant_gruber}
+
+for (i_basin_AIP in unique(cant_gruber_zonal$basin_AIP)) {
+  print(
+    p_section_zonal(
+      cant_gruber_zonal %>% filter(basin_AIP == i_basin_AIP),
+      var = "cant_pos_mean",
+      plot_slabs = "n",
+      subtitle_text = paste("Basin: ", i_basin_AIP)
+    )
+  )
+}
+
+```
+
+## Cant total 1994
+
+```{r zonal_mean_section_cant_total_1994}
+
+for (i_basin_AIP in unique(cant_gruber_zonal$basin_AIP)) {
+  print(
+    p_section_zonal(
+      cant_gruber_zonal %>% filter(basin_AIP == i_basin_AIP),
+      var = "cant_1994_mean",
+      plot_slabs = "n",
+      breaks = seq(0,100,10),
+      subtitle_text = paste("Basin: ", i_basin_AIP)
+    )
+  )
+}
+
+```
+
+## Cant total 2007
+
+```{r zonal_mean_section_cant_total_2007}
+
+for (i_basin_AIP in unique(cant_gruber_zonal$basin_AIP)) {
+  print(
+    p_section_zonal(
+      cant_gruber_zonal %>% filter(basin_AIP == i_basin_AIP),
+      var = "cant_2007_mean",
+      plot_slabs = "n",
+      breaks = seq(0,100,10),
+      subtitle_text = paste("Basin: ", i_basin_AIP)
+    )
+  )
+}
+
+```
+
+
+# Column inventory 
+
+## 1994 - 2007
+
+```{r calc_inventory_gruber}
+
+cant_gruber_inv <- m_cant_inv(cant_gruber)
+
+```
+
+```{r cant_inventory_gruber}
+
+p_map_cant_inv(cant_gruber_inv %>% filter(inv_depth == 3000))
+
+```
+
+## Cant total 1994
+
+```{r calc_total_inventory_1994}
+
+# this is just a work around, because the function is designed to calculate cant inventories, but not cant_total inventories
+
+cant_gruber_total_inv <- m_cant_inv(
+  cant_gruber %>% 
+    select(-cant_pos) %>% 
+    rename(cant_pos = cant_1994))
+
+```
+
+```{r cant_inventory_1994}
+
+p_map_cant_inv(cant_gruber_total_inv %>% filter(inv_depth == 3000),
+               breaks = seq(0,100,10),
+               subtitle_text = "Cant total in 1994")
+
+```
+
+## Cant total 2007
+
+```{r calc_total_inventory_2007}
+
+# this is just a work around, because the function is designed to calculate cant inventories, but not cant_total inventories
+
+cant_gruber_total_inv <- m_cant_inv(
+  cant_gruber %>% 
+    select(-cant_pos) %>% 
+    rename(cant_pos = cant_2007))
+
+```
+
+```{r cant_inventory_2007}
+
+p_map_cant_inv(cant_gruber_total_inv %>% filter(inv_depth == 3000),
+               breaks = seq(0,100,10),
+               subtitle_text = "Cant total in 2007")
+
+```
+
