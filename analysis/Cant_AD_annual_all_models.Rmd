@@ -85,7 +85,7 @@ variables <-
   c("so", "thetao", "dissic", "talk", "po4", "no3")
 
 
-models <- models[7]
+# models <- models[7]
 
 for (i_model in models) {
   # i_model <- models[1]

@@ -101,7 +101,7 @@ variables <-
     "tos")
 
 
-models <- models[8]
+# models <- models[8]
 
 for (i_model in models) {
   # i_model <- models[1]

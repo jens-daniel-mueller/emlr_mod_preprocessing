@@ -117,7 +117,7 @@ source_python(paste0(
 
 ```{r read_climatology_fields_2007}
 
-models <- models[7]
+# models <- models[7]
 
 for (i_model in models) {
   # i_model <- models[1]
