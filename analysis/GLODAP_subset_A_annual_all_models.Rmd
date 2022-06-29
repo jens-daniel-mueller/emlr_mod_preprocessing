@@ -114,7 +114,7 @@ models <-
 models <-
   models[!str_detect(models, pattern = "CNRM")]
 
-# files chunked into decades
+# files chunked into decades, no silicate
 models <-
   models[!str_detect(models, pattern = "ORCA025-GEOMAR")]
 
@@ -128,7 +128,7 @@ models <-
 # models <- models[8]
 
 for (i_model in models) {
-  # i_model <- models[1]
+  # i_model <- models[2]
   print(i_model)
   
   variables_available <-
@@ -146,7 +146,7 @@ for (i_model in models) {
   GLODAP_joined <- GLODAP
   
   for (i_variable in variables_available) {
-    # i_variable <- variables_available[4]
+    # i_variable <- variables_available[1]
     
     # read list of all files
     file <-
@@ -182,6 +182,41 @@ for (i_model in models) {
                   make_units = FALSE)
     }
     
+    
+    
+  # if (i_model == "CNRM-ESM2-1_3D_ALL_v20211208") {
+  #   CNRM_depth <-
+  #     read_ncdf(
+  #       paste(
+  #         paste0(path_cmorized, i_model),
+  #         "depth_CNRM-ESM2-1_1_gr_1980-2018_v20211208.nc",
+  #         sep = "/"
+  #       ),
+  #       make_units = FALSE,
+  #       make_time = FALSE
+  #     ) %>%
+  #     as_tibble()
+  #   
+  #   CNRM_depth %>%
+  #     distinct(lev)
+  #   
+  #   CNRM_depth %>%
+  #     slice_sample(n = 1e4) %>%
+  #     ggplot(aes(lev, depth)) +
+  #     geom_point(alpha = 0.3) +
+  #     labs(title = "depth_CNRM-ESM2-1_1_gr_1980-2018_v20211208.nc",
+  #          subtitle = "random sample of 1000 data points")
+  #   
+  #   CNRM_depth %>%
+  #     filter(lev == unique(CNRM_depth$lev)[70]) %>%
+  #     ggplot(aes(lon, lat, fill = depth)) +
+  #     geom_tile() +
+  #     scale_fill_viridis_c(direction = -1) +
+  #     coord_quickmap(expand = 0) +
+  #     labs(title = "depth_CNRM-ESM2-1_1_gr_1980-2018_v20211208.nc",
+  #          subtitle = "lev == 4787.702 (position 70)")
+  #       
+  #   }
     
     # convert to tibble
     variable_data_tibble <- variable_data %>%

@@ -371,6 +371,8 @@ for (i_model in models) {
                                          values_from = dissic)
   
   
+  AD_annual_dissic <- AD_annual
+  
   AD_annual <- AD_annual %>%
     mutate(tcant = A - D) %>%
     select(-c(A, D))
@@ -388,6 +390,19 @@ for (i_model in models) {
         paste0(
           path_preprocessing,
           "Cant_AD_annual_all_models/",
+          i_year,
+          "_",
+          i_model,
+          ".csv"
+        )
+      )
+
+    AD_annual_dissic %>%
+      filter(year == i_year) %>%
+      write_csv(
+        paste0(
+          path_preprocessing,
+          "Cant_AD_annual_all_models/dissic/",
           i_year,
           "_",
           i_model,
