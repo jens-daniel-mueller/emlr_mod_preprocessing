@@ -320,6 +320,8 @@ for (i_model in models) {
   ## Apply basin mask
   CB_annual <- inner_join(CB_annual, basinmask)
   
+  CB_annual_dissic <- CB_annual
+  
   ## Calculate Cant total
   CB_annual <- CB_annual %>%
     mutate(tcant = C - B) %>%
@@ -332,15 +334,28 @@ for (i_model in models) {
   # write annual Cant files
   for (i_year in unique(CB_annual$year)) {
     # i_year = unique(CB_annual$year)[1]
-    cant_year <- CB_annual %>%
-      filter(year == i_year)
     
-    cant_year %>%
+    CB_annual %>%
+      filter(year == i_year) %>%
       write_csv(paste0(path_preprocessing,
                        i_year,
                        "_",
                        i_model,
                        ".csv"))
+    
+    CB_annual_dissic %>%
+      filter(year == i_year) %>%
+      write_csv(
+        paste0(
+          path_preprocessing,
+          "dissic/",
+          i_year,
+          "_",
+          i_model,
+          ".csv"
+        )
+      )
+    
   }
   
   rm(CB_annual)
