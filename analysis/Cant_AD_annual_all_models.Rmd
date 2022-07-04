@@ -338,10 +338,7 @@ for (i_model in models) {
   
   # calculate cstar field
   AD_annual_cstar <- AD_annual
-  
-  AD_annual_cstar <- AD_annual_cstar %>%
-    filter(model_ID == "A")
-  
+
   params_local <- lst(rCP = 117,
                       rNP = 16)
   
@@ -411,11 +408,26 @@ for (i_model in models) {
       )
     
     AD_annual_cstar %>%
-      filter(year == i_year) %>%
+      filter(year == i_year,
+             model_ID == "A") %>%
       write_csv(
         paste0(
           path_preprocessing,
           "Cstar_A_annual_all_models/",
+          i_year,
+          "_",
+          i_model,
+          ".csv"
+        )
+      )
+    
+    AD_annual_cstar %>%
+      filter(year == i_year,
+             model_ID == "D") %>%
+      write_csv(
+        paste0(
+          path_preprocessing,
+          "Cstar_D_annual_all_models/",
           i_year,
           "_",
           i_model,
