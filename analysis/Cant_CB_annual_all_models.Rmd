@@ -24,7 +24,7 @@ path_cmorized <-
   "/nfs/kryo/work/updata/reccap2/Models/3D_ALL/"
 
 path_preprocessing <-
-  paste0(path_root, "/model/preprocessing/Cant_CB_annual_all_models/")
+  paste0(path_root, "/model/preprocessing/")
 
 ```
 
@@ -57,7 +57,7 @@ models <-
   models[str_detect(
     models,
     pattern = c(
-      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12"
+      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-1|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12"
     )
   )]
 
@@ -73,29 +73,26 @@ models <-
 models <-
   models[!str_detect(models, pattern = "MOM6-Princeton")]
 
-
 ```
 
 # Calculate annual Cant field
 
-```{r read_cmorized_Runs_C_B}
-
-
+```{r read_cmorized_Runs_A_D}
 
 # for loop across variables
 # 3d variables
 variables <-
-  c("so", "thetao", "dissic")
+  c("so", "thetao", "dissic", "talk", "po4", "no3")
 
 
-# models <- models[1]
+# models <- models[7]
 
 for (i_model in models) {
   # i_model <- models[1]
   print(i_model)
   
   for (i_model_ID in c("C", "B")) {
-    # i_model_ID <- c("C", "B")[1]
+    # i_model_ID <- c("C", "B")[2]
     
     print(i_model_ID)
     
@@ -115,7 +112,7 @@ for (i_model in models) {
     print(variables_available)
     
     for (i_variable in variables_available) {
-      #  i_variable <- variables_available[3]
+      #  i_variable <- variables_available[2]
       
       # read list of all files
       file <-
@@ -124,9 +121,9 @@ for (i_model in models) {
           pattern = paste0(i_variable, "_")
         )
       
-      if (i_model == "MRI-ESM2-0_3D_ALL_v20210830" &
-          i_model_ID == "D" &
-          i_variable %in% c("so", "thetao")) {
+      if (i_model == "MRI-ESM2-1_3D_ALL_v20220502" &
+          i_model_ID == "B" &
+          i_variable %in%   c("so", "thetao", "talk", "po4", "no3")) {
         file <-
           file[str_detect(file, pattern = paste0("_", "A", "_"))]
       } else {
@@ -215,7 +212,7 @@ for (i_model in models) {
           rename(depth = z_l)
       }
       
-      if (i_model == "MRI-ESM2-0_3D_ALL_v20210830") {
+      if (i_model == "MRI-ESM2-1_3D_ALL_v20220502") {
         variable_data_tibble <- variable_data_tibble %>%
           rename(depth = lev)
       }
@@ -229,6 +226,13 @@ for (i_model in models) {
             time = TIME
           ) %>%
           mutate(depth = as.numeric(depth))
+      }
+      
+      if (i_model == "planktom12_3d_all_v20220404" &
+          i_variable == "po4") {
+        variable_data_tibble <-
+          variable_data_tibble %>%
+          mutate(po4 = po4 / 100)
       }
       
       variable_data_tibble <- variable_data_tibble %>%
@@ -246,8 +250,18 @@ for (i_model in models) {
       
     }
     
-    if (i_model == "MRI-ESM2-0_3D_ALL_v20210830" &
-        i_model_ID == "B") {
+    if (i_model == "FESOM_REcoM_LR_3D_all_v20211119") {
+      annual <- annual %>%
+        mutate(po4 = no3 / 16)
+    }
+    
+    if (i_model == "planktom12_3d_all_v20220404") {
+      annual <- annual %>%
+        mutate(no3 = po4 * 16)
+    }
+    
+    if (i_model == "MRI-ESM2-1_3D_ALL_v20220502" &
+        i_model_ID == "D") {
       annual <- right_join(annual,
                            CB_annual %>%
                              select(-dissic))
@@ -268,7 +282,6 @@ for (i_model in models) {
     
   }
   
-  
   # harmonize column names and coordinates
   CB_annual <- CB_annual %>%
     select(
@@ -276,9 +289,12 @@ for (i_model in models) {
       lon,
       lat,
       depth,
-      dissic,
       sal = so,
       theta = thetao,
+      dissic,
+      talk,
+      phosphate = po4,
+      nitrate = no3,
       model_ID
     ) %>%
     mutate(lon = if_else(lon < 20, lon + 360, lon))
@@ -301,18 +317,18 @@ for (i_model in models) {
         p = depth,
         p_ref = 10.1325
       ),
-      dissic = dissic * (1e+6 / rho)
+      dissic = dissic * (1e+6 / rho),
+      talk = talk * (1e+6 / rho),
+      phosphate = phosphate * (1e+6 / rho),
+      nitrate = nitrate * (1e+6 / rho)
     )
   
   CB_annual <- CB_annual %>%
-    select(year, lon, lat, depth, dissic, model_ID)
+    select(-c(sal, temp, theta, rho))
+  
   
   # sort(unique(CB_annual$depth))
   # sort(unique(CB_annual$lon))
-  
-  CB_annual <- CB_annual %>% pivot_wider(names_from = model_ID,
-                                         values_from = dissic)
-  
   
   CB_annual <- CB_annual %>%
     mutate(depth = round(depth))
@@ -320,9 +336,40 @@ for (i_model in models) {
   ## Apply basin mask
   CB_annual <- inner_join(CB_annual, basinmask)
   
+  # calculate cstar field
+  CB_annual_cstar <- CB_annual
+
+  params_local <- lst(rCP = 117,
+                      rNP = 16)
+  
+  
+  CB_annual_cstar <- CB_annual_cstar %>%
+    mutate(
+      cstar_no3 = b_cstar_nitrate(
+        tco2 = dissic,
+        nitrate = nitrate,
+        talk = talk
+      ),
+      cstar_po4 = b_cstar_phosphate(
+        tco2 = dissic,
+        phosphate = phosphate,
+        talk = talk
+      )
+    )
+  
+  rm(params_local)
+  
+  # Calculate Cant fields
+  
+  CB_annual <- CB_annual %>%
+    select(year, lon, lat, depth, dissic, model_ID, basin_AIP)
+  
+  CB_annual <- CB_annual %>% pivot_wider(names_from = model_ID,
+                                         values_from = dissic)
+  
+  
   CB_annual_dissic <- CB_annual
   
-  ## Calculate Cant total
   CB_annual <- CB_annual %>%
     mutate(tcant = C - B) %>%
     select(-c(C, B))
@@ -334,21 +381,53 @@ for (i_model in models) {
   # write annual Cant files
   for (i_year in unique(CB_annual$year)) {
     # i_year = unique(CB_annual$year)[1]
-    
     CB_annual %>%
       filter(year == i_year) %>%
-      write_csv(paste0(path_preprocessing,
-                       i_year,
-                       "_",
-                       i_model,
-                       ".csv"))
-    
+      write_csv(
+        paste0(
+          path_preprocessing,
+          "Cant_CB_annual_all_models/",
+          i_year,
+          "_",
+          i_model,
+          ".csv"
+        )
+      )
+
     CB_annual_dissic %>%
       filter(year == i_year) %>%
       write_csv(
         paste0(
           path_preprocessing,
-          "dissic/",
+          "Cant_CB_annual_all_models/dissic/",
+          i_year,
+          "_",
+          i_model,
+          ".csv"
+        )
+      )
+    
+    CB_annual_cstar %>%
+      filter(year == i_year,
+             model_ID == "C") %>%
+      write_csv(
+        paste0(
+          path_preprocessing,
+          "Cant_CB_annual_all_models/Cstar_C_annual_all_models/",
+          i_year,
+          "_",
+          i_model,
+          ".csv"
+        )
+      )
+    
+    CB_annual_cstar %>%
+      filter(year == i_year,
+             model_ID == "B") %>%
+      write_csv(
+        paste0(
+          path_preprocessing,
+          "Cant_CB_annual_all_models/Cstar_B_annual_all_models/",
           i_year,
           "_",
           i_model,
@@ -379,6 +458,7 @@ for (i_model in models) {
     
     cant_year <-
       read_csv(paste0(path_preprocessing,
+                      "Cant_CB_annual_all_models/",
                       i_year,
                       "_",
                       str_remove(i_model, "3D_ALL_|3D_all_|3d_all_"),

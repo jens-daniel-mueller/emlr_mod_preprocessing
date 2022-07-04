@@ -57,7 +57,7 @@ models <-
   models[str_detect(
     models,
     pattern = c(
-      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12"
+      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-1|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12"
     )
   )]
 
@@ -88,11 +88,11 @@ variables <-
 # models <- models[7]
 
 for (i_model in models) {
-  # i_model <- models[1]
+  # i_model <- models[4]
   print(i_model)
   
   for (i_model_ID in c("A", "D")) {
-    # i_model_ID <- c("A", "D")[2]
+    # i_model_ID <- c("A", "D")[1]
     
     print(i_model_ID)
     
@@ -112,7 +112,7 @@ for (i_model in models) {
     print(variables_available)
     
     for (i_variable in variables_available) {
-      #  i_variable <- variables_available[2]
+      #  i_variable <- variables_available[1]
       
       # read list of all files
       file <-
@@ -121,9 +121,9 @@ for (i_model in models) {
           pattern = paste0(i_variable, "_")
         )
       
-      if (i_model == "MRI-ESM2-0_3D_ALL_v20210830" &
+      if (i_model == "MRI-ESM2-1_3D_ALL_v20220502" &
           i_model_ID == "D" &
-          i_variable %in% c("so", "thetao")) {
+          i_variable %in% c("so", "thetao", "talk", "po4", "no3")) {
         file <-
           file[str_detect(file, pattern = paste0("_", "A", "_"))]
       } else {
@@ -212,7 +212,7 @@ for (i_model in models) {
           rename(depth = z_l)
       }
       
-      if (i_model == "MRI-ESM2-0_3D_ALL_v20210830") {
+      if (i_model == "MRI-ESM2-1_3D_ALL_v20220502") {
         variable_data_tibble <- variable_data_tibble %>%
           rename(depth = lev)
       }
@@ -260,7 +260,7 @@ for (i_model in models) {
         mutate(no3 = po4 * 16)
     }
     
-    if (i_model == "MRI-ESM2-0_3D_ALL_v20210830" &
+    if (i_model == "MRI-ESM2-1_3D_ALL_v20220502" &
         i_model_ID == "D") {
       annual <- right_join(annual,
                            AD_annual %>%
@@ -413,7 +413,7 @@ for (i_model in models) {
       write_csv(
         paste0(
           path_preprocessing,
-          "Cstar_A_annual_all_models/",
+          "Cant_AD_annual_all_models/Cstar_A_annual_all_models/",
           i_year,
           "_",
           i_model,
@@ -427,7 +427,7 @@ for (i_model in models) {
       write_csv(
         paste0(
           path_preprocessing,
-          "Cstar_D_annual_all_models/",
+          "Cant_AD_annual_all_models/Cstar_D_annual_all_models/",
           i_year,
           "_",
           i_model,

@@ -64,7 +64,7 @@ models <-
   models[str_detect(
     models,
     pattern = c(
-      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12"
+      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-1|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12"
     )
   )]
 
@@ -271,7 +271,7 @@ for (i_model in models) {
       }
       
       
-      # if (i_model == "MRI-ESM2-0_2D_CO2_v20210830" &
+      # if (i_model == "MRI-ESM2-1_2D_CO2_v20220502" &
       #     !(i_variable %in% c("dissicos", "fgco2", "spco2"))) {
       #
       # }
@@ -289,7 +289,7 @@ for (i_model in models) {
         mutate(no3os = po4os * 16)
     }
     
-    if (i_model == "MRI-ESM2-0_2D_CO2_v20210830" &
+    if (i_model == "MRI-ESM2-1_2D_CO2_v20220502" &
         i_model_ID == "D") {
       annual <- right_join(annual,
                            AD_annual %>%

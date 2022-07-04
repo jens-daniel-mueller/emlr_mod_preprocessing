@@ -85,7 +85,7 @@ models <-
   models[str_detect(
     models,
     pattern = c(
-      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12"
+      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-1|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12"
     )
   )]
 
@@ -172,7 +172,7 @@ for (i_model in models) {
     } else if (i_model == "planktom12_3d_all_v20220404") {
       variable_data <-
         variable_data %>% slice(index = 28, along = "TIME")
-    } else if (i_model == "MRI-ESM2-0_3D_ALL_v20210830" &
+    } else if (i_model == "MRI-ESM2-1_3D_ALL_v20220502" &
                i_variable == "si") {
       variable_data <-
         variable_data %>% slice(index = 1, along = "time")
@@ -219,7 +219,7 @@ for (i_model in models) {
         rename(depth = z_l)
     }
     
-    if (i_model == "MRI-ESM2-0_3D_ALL_v20210830") {
+    if (i_model == "MRI-ESM2-1_3D_ALL_v20220502") {
       variable_data_tibble <- variable_data_tibble %>%
         rename(depth = lev)
     }

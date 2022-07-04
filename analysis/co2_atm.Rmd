@@ -46,7 +46,7 @@ models <-
   models[str_detect(
     models,
     pattern = c(
-      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12"
+      "CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-1|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12"
     )
   )]
 
@@ -107,7 +107,7 @@ for (i_model in models) {
                  col_names = FALSE) %>%
       rename(year = X1,
              Atm_CO2 = X2)
-  } else if (i_model == "MRI-ESM2-0_Ancillary_data_v20210830") {
+  } else if (i_model == "MRI-ESM2-1_Ancillary_data_v20220502") {
     variable_data <-
       tidync(paste(paste0(path_cmorized, i_model),
                    file,
