@@ -539,16 +539,16 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree5d7c0eaa4567e51894afaddd5cdfd1850950a91ftargetblank5d7c0eaa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/5d7c0eaa4567e51894afaddd5cdfd1850950a91f" target="_blank">5d7c0ea</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree923e07e9d732d684bc21b7f505b634a64ec9d16dtargetblank923e07ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/923e07e9d732d684bc21b7f505b634a64ec9d16d" target="_blank">923e07e</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree5d7c0eaa4567e51894afaddd5cdfd1850950a91ftargetblank5d7c0eaa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree923e07e9d732d684bc21b7f505b634a64ec9d16dtargetblank923e07ea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/5d7c0eaa4567e51894afaddd5cdfd1850950a91f" target="_blank">5d7c0ea</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/923e07e9d732d684bc21b7f505b634a64ec9d16d" target="_blank">923e07e</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -559,12 +559,10 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Untracked files:
-    Untracked:  depth_CNRM-ESM2-1_depth_vs_lev.png
-    Untracked:  depth_CNRM-ESM2-1_depth_vs_z.png
-    Untracked:  depth_CNRM-ESM2-1_lev_50.png
-    Untracked:  depth_CNRM-ESM2-1_lev_70.png
-    Untracked:  depth_CNRM-ESM2-1_z_50.png
-    Untracked:  depth_CNRM-ESM2-1_z_70.png
+    Untracked:  code/backup_analysis_scripts/Cant_CB_annual_all_models_backup_20220704.Rmd
+
+Unstaged changes:
+    Modified:   code/backup_analysis_scripts/RECCAP2_flux_products.Rmd
 
 </code></pre>
 <p>
@@ -603,6 +601,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/923e07e9d732d684bc21b7f505b634a64ec9d16d/analysis/Cant_AD_annual_all_models.Rmd" target="_blank">923e07e</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-07-04
+</td>
+<td>
+rerun for all models
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/791fe64cf3d6b259aebfb988a78774aa4f0a507c/docs/Cant_AD_annual_all_models.html" target="_blank">791fe64</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-07-04
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1015,7 +1047,7 @@ models &lt;-
   models[str_detect(
     models,
     pattern = c(
-      &quot;CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12&quot;
+      &quot;CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-1|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12&quot;
     )
   )]
 
@@ -1041,11 +1073,11 @@ variables &lt;-
 # models &lt;- models[7]
 
 for (i_model in models) {
-  # i_model &lt;- models[1]
+  # i_model &lt;- models[4]
   print(i_model)
   
   for (i_model_ID in c(&quot;A&quot;, &quot;D&quot;)) {
-    # i_model_ID &lt;- c(&quot;A&quot;, &quot;D&quot;)[2]
+    # i_model_ID &lt;- c(&quot;A&quot;, &quot;D&quot;)[1]
     
     print(i_model_ID)
     
@@ -1065,7 +1097,7 @@ for (i_model in models) {
     print(variables_available)
     
     for (i_variable in variables_available) {
-      #  i_variable &lt;- variables_available[2]
+      #  i_variable &lt;- variables_available[1]
       
       # read list of all files
       file &lt;-
@@ -1074,9 +1106,9 @@ for (i_model in models) {
           pattern = paste0(i_variable, &quot;_&quot;)
         )
       
-      if (i_model == &quot;MRI-ESM2-0_3D_ALL_v20210830&quot; &amp;
+      if (i_model == &quot;MRI-ESM2-1_3D_ALL_v20220502&quot; &amp;
           i_model_ID == &quot;D&quot; &amp;
-          i_variable %in% c(&quot;so&quot;, &quot;thetao&quot;)) {
+          i_variable %in% c(&quot;so&quot;, &quot;thetao&quot;, &quot;talk&quot;, &quot;po4&quot;, &quot;no3&quot;)) {
         file &lt;-
           file[str_detect(file, pattern = paste0(&quot;_&quot;, &quot;A&quot;, &quot;_&quot;))]
       } else {
@@ -1165,7 +1197,7 @@ for (i_model in models) {
           rename(depth = z_l)
       }
       
-      if (i_model == &quot;MRI-ESM2-0_3D_ALL_v20210830&quot;) {
+      if (i_model == &quot;MRI-ESM2-1_3D_ALL_v20220502&quot;) {
         variable_data_tibble &lt;- variable_data_tibble %&gt;%
           rename(depth = lev)
       }
@@ -1213,7 +1245,7 @@ for (i_model in models) {
         mutate(no3 = po4 * 16)
     }
     
-    if (i_model == &quot;MRI-ESM2-0_3D_ALL_v20210830&quot; &amp;
+    if (i_model == &quot;MRI-ESM2-1_3D_ALL_v20220502&quot; &amp;
         i_model_ID == &quot;D&quot;) {
       annual &lt;- right_join(annual,
                            AD_annual %&gt;%
@@ -1366,7 +1398,7 @@ for (i_model in models) {
       write_csv(
         paste0(
           path_preprocessing,
-          &quot;Cstar_A_annual_all_models/&quot;,
+          &quot;Cant_AD_annual_all_models/Cstar_A_annual_all_models/&quot;,
           i_year,
           &quot;_&quot;,
           i_model,
@@ -1380,7 +1412,7 @@ for (i_model in models) {
       write_csv(
         paste0(
           path_preprocessing,
-          &quot;Cstar_D_annual_all_models/&quot;,
+          &quot;Cant_AD_annual_all_models/Cstar_D_annual_all_models/&quot;,
           i_year,
           &quot;_&quot;,
           i_model,
@@ -1442,18 +1474,18 @@ for (i_model in models) {
 [1] &quot;so_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
 [1] &quot;talk_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
 [1] &quot;thetao_FESOM_REcoM_LR_D_1_gr_1980-2018_v20211119.nc&quot;
-[1] &quot;MRI-ESM2-0_3D_ALL_v20210830&quot;
+[1] &quot;MRI-ESM2-1_3D_ALL_v20220502&quot;
 [1] &quot;A&quot;
 [1] &quot;dissic&quot; &quot;no3&quot;    &quot;po4&quot;    &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
-[1] &quot;dissic_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
-[1] &quot;no3_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
-[1] &quot;po4_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
-[1] &quot;so_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
-[1] &quot;talk_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
-[1] &quot;thetao_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;dissic_MRI-ESM2-1_A_1_gr_1980-2018_v20220502.nc&quot;
+[1] &quot;no3_MRI-ESM2-1_A_1_gr_1980-2018_v20220502.nc&quot;
+[1] &quot;po4_MRI-ESM2-1_A_1_gr_1980-2018_v20220502.nc&quot;
+[1] &quot;so_MRI-ESM2-1_A_1_gr_1980-2018_v20220502.nc&quot;
+[1] &quot;talk_MRI-ESM2-1_A_1_gr_1980-2018_v20220502.nc&quot;
+[1] &quot;thetao_MRI-ESM2-1_A_1_gr_1980-2018_v20220502.nc&quot;
 [1] &quot;D&quot;
 [1] &quot;dissic&quot;
-[1] &quot;dissic_MRI-ESM2-0_D_1_gr_1980-2018_v20210830.nc&quot;
+[1] &quot;dissic_MRI-ESM2-1_D_1_gr_1980-2018_v20220502.nc&quot;
 [1] &quot;NorESM-OC1.2_3D_ALL_v20211125&quot;
 [1] &quot;A&quot;
 [1] &quot;dissic&quot; &quot;no3&quot;    &quot;po4&quot;    &quot;so&quot;     &quot;talk&quot;   &quot;thetao&quot;
@@ -1538,7 +1570,7 @@ for (i_model in models) {
 <pre><code>[1] &quot;CESM-ETHZ_3D_ALL_v20211122&quot;
 [1] &quot;EC-Earth3_3D_ALL_v20220323&quot;
 [1] &quot;FESOM_REcoM_LR_3D_all_v20211119&quot;
-[1] &quot;MRI-ESM2-0_3D_ALL_v20210830&quot;
+[1] &quot;MRI-ESM2-1_3D_ALL_v20220502&quot;
 [1] &quot;NorESM-OC1.2_3D_ALL_v20211125&quot;
 [1] &quot;ORCA1-LIM3-PISCES_3D_ALL_v20211215&quot;
 [1] &quot;planktom12_3d_all_v20220404&quot;</code></pre>

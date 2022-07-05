@@ -423,7 +423,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">GLODAP subset variable climate A</h1>
 <h4 class="author">Jens Daniel Müller</h4>
-<h4 class="date">29 June, 2022</h4>
+<h4 class="date">05 July, 2022</h4>
 
 </div>
 
@@ -448,7 +448,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-06-29
+<strong>Last updated:</strong> 2022-07-05
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -539,16 +539,16 @@ This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a> analysi
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree55a3fb635076baf99f4f175d0ba29ef879e1b708targetblank55a3fb6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/55a3fb635076baf99f4f175d0ba29ef879e1b708" target="_blank">55a3fb6</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree923e07e9d732d684bc21b7f505b634a64ec9d16dtargetblank923e07ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/923e07e9d732d684bc21b7f505b634a64ec9d16d" target="_blank">923e07e</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree55a3fb635076baf99f4f175d0ba29ef879e1b708targetblank55a3fb6a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjensdanielmuelleremlrmodpreprocessingtree923e07e9d732d684bc21b7f505b634a64ec9d16dtargetblank923e07ea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/55a3fb635076baf99f4f175d0ba29ef879e1b708" target="_blank">55a3fb6</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/tree/923e07e9d732d684bc21b7f505b634a64ec9d16d" target="_blank">923e07e</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -559,12 +559,10 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Untracked files:
-    Untracked:  depth_CNRM-ESM2-1_depth_vs_lev.png
-    Untracked:  depth_CNRM-ESM2-1_depth_vs_z.png
-    Untracked:  depth_CNRM-ESM2-1_lev_50.png
-    Untracked:  depth_CNRM-ESM2-1_lev_70.png
-    Untracked:  depth_CNRM-ESM2-1_z_50.png
-    Untracked:  depth_CNRM-ESM2-1_z_70.png
+    Untracked:  code/backup_analysis_scripts/Cant_CB_annual_all_models_backup_20220704.Rmd
+
+Unstaged changes:
+    Modified:   code/backup_analysis_scripts/RECCAP2_flux_products.Rmd
 
 </code></pre>
 <p>
@@ -603,6 +601,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jens-daniel-mueller/emlr_mod_preprocessing/blob/923e07e9d732d684bc21b7f505b634a64ec9d16d/analysis/GLODAP_subset_A_annual_all_models.Rmd" target="_blank">923e07e</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-07-04
+</td>
+<td>
+rerun for all models
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jens-daniel-mueller/emlr_mod_preprocessing/9fdecac67671bf4e695cc1bbb3b4a4a345feac58/docs/GLODAP_subset_A_annual_all_models.html" target="_blank">9fdecac</a>
+</td>
+<td>
+jens-daniel-mueller
+</td>
+<td>
+2022-06-29
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1066,7 +1098,7 @@ models &lt;-
   models[str_detect(
     models,
     pattern = c(
-      &quot;CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-0|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12&quot;
+      &quot;CESM|CNRM|EC-Earth3|FESOM_REcoM_LR|MOM6-Princeton|MRI-ESM2-1|NorESM-OC1.2|ORCA025-GEOMAR|ORCA1-LIM3-PISCES|planktom12&quot;
     )
   )]
 
@@ -1220,7 +1252,7 @@ for (i_model in models) {
         rename(depth = z_l)
     }
     
-    if (i_model == &quot;MRI-ESM2-0_3D_ALL_v20210830&quot;) {
+    if (i_model == &quot;MRI-ESM2-1_3D_ALL_v20220502&quot;) {
       variable_data_tibble &lt;- variable_data_tibble %&gt;%
         rename(depth = lev)
     }
@@ -1250,7 +1282,7 @@ for (i_model in models) {
       select(-time)
     
     
-    if (i_model == &quot;MRI-ESM2-0_3D_ALL_v20210830&quot; &amp;
+    if (i_model == &quot;MRI-ESM2-1_3D_ALL_v20220502&quot; &amp;
         i_variable == &quot;si&quot;) {
       variable_data_tibble &lt;-
         crossing(variable_data_tibble %&gt;%
@@ -2662,8 +2694,8 @@ for (i_model in models) {
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;MRI-ESM2-0_3D_ALL_v20210830&quot;
-[1] &quot;dissic_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+<pre><code>[1] &quot;MRI-ESM2-1_3D_ALL_v20220502&quot;
+[1] &quot;dissic_MRI-ESM2-1_A_1_gr_1980-2018_v20220502.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -2702,7 +2734,7 @@ for (i_model in models) {
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;no3_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+<pre><code>[1] &quot;no3_MRI-ESM2-1_A_1_gr_1980-2018_v20220502.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -2741,7 +2773,7 @@ for (i_model in models) {
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;o2_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+<pre><code>[1] &quot;o2_MRI-ESM2-1_A_1_gr_1980-2018_v20220502.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -2780,7 +2812,7 @@ for (i_model in models) {
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;po4_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+<pre><code>[1] &quot;po4_MRI-ESM2-1_A_1_gr_1980-2018_v20220502.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -2819,7 +2851,7 @@ for (i_model in models) {
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;si_MRI-ESM2-0_A_1_gr_1980-1980_v20210830.nc&quot;
+<pre><code>[1] &quot;si_MRI-ESM2-1_A_1_gr_1980-1980_v20220502.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -2858,7 +2890,7 @@ for (i_model in models) {
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;so_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+<pre><code>[1] &quot;so_MRI-ESM2-1_A_1_gr_1980-2018_v20220502.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -2897,7 +2929,7 @@ for (i_model in models) {
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;talk_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+<pre><code>[1] &quot;talk_MRI-ESM2-1_A_1_gr_1980-2018_v20220502.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
@@ -2936,7 +2968,7 @@ for (i_model in models) {
 <pre><code>[1] 2016</code></pre>
 <pre><code>[1] 2017</code></pre>
 <pre><code>[1] 2018</code></pre>
-<pre><code>[1] &quot;thetao_MRI-ESM2-0_A_1_gr_1980-2018_v20210830.nc&quot;
+<pre><code>[1] &quot;thetao_MRI-ESM2-1_A_1_gr_1980-2018_v20220502.nc&quot;
 [1] 1981</code></pre>
 <pre><code>[1] 1982</code></pre>
 <pre><code>[1] 1983</code></pre>
