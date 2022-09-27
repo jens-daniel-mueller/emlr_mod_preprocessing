@@ -145,7 +145,7 @@ for (i_surface_co2_products in surface_co2_products) {
       mutate(fgco2_glob = -fgco2_glob)
   }
 
-  if(i_surface_co2_products == "MRI-ESM2-0_2D_CO2_v20210830"){
+  if(i_surface_co2_products == "MRI-ESM2-0_2D_CO2_v20220502"){
     fgco2_glob <- fgco2_glob %>% rename(Time = time)
   }
 

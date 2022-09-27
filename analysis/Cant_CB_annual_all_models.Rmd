@@ -88,11 +88,11 @@ variables <-
 # models <- models[7]
 
 for (i_model in models) {
-  # i_model <- models[1]
+  # i_model <- models[4]
   print(i_model)
   
   for (i_model_ID in c("C", "B")) {
-    # i_model_ID <- c("C", "B")[2]
+    # i_model_ID <- c("C", "B")[1]
     
     print(i_model_ID)
     
@@ -125,7 +125,7 @@ for (i_model in models) {
           i_model_ID == "B" &
           i_variable %in%   c("so", "thetao", "talk", "po4", "no3")) {
         file <-
-          file[str_detect(file, pattern = paste0("_", "A", "_"))]
+          file[str_detect(file, pattern = paste0("_", "C", "_"))]
       } else {
         file <-
           file[str_detect(file, pattern = paste0("_", i_model_ID, "_"))]
@@ -261,7 +261,7 @@ for (i_model in models) {
     }
     
     if (i_model == "MRI-ESM2-1_3D_ALL_v20220502" &
-        i_model_ID == "D") {
+        i_model_ID == "B") {
       annual <- right_join(annual,
                            CB_annual %>%
                              select(-dissic))

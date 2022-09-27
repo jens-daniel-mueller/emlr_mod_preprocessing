@@ -79,6 +79,69 @@ models <-
 
 ```
 
+# CESM fgco2_glob
+
+```{r CESM_fgco2_glob}
+
+CESM_folder <- models[str_detect(models, pattern = "CESM")]
+
+# read list of all files
+file <-
+  list.files(path = paste0(path_cmorized, CESM_folder),
+             pattern = paste0("fgco2_glob"))
+          
+print(file)
+          
+file[str_detect(file, pattern = paste0("_D_"))]
+
+# read in data
+variable_data_D <-
+  read_ncdf(paste0(path_cmorized,
+                   CESM_folder,
+                   "/",
+                   file[str_detect(file, pattern = paste0("_D_"))]),
+            make_units = FALSE,
+            var = "fgco2_glob")
+variable_data_B <-
+  read_ncdf(paste0(path_cmorized,
+                   CESM_folder,
+                   "/",
+                   file[str_detect(file, pattern = paste0("_B_"))]),
+            make_units = FALSE,
+            var = "fgco2_glob")
+          
+variable_data <- variable_data_D - variable_data_B
+
+# convert to tibble
+variable_data_tibble <- variable_data %>%
+  as_tibble()
+          
+# remove na values
+variable_data_tibble <-
+  variable_data_tibble %>%
+  drop_na()
+
+variable_data_tibble <- variable_data_tibble %>%
+  rename(time = time_mon)
+
+variable_data_tibble %>%
+  ggplot(aes(time, fgco2_glob)) +
+  geom_path()
+
+variable_data_tibble %>% 
+  filter(time > as.Date("1994-01-01"),
+         time < as.Date("2003-12-31")) %>% 
+  group_by(year(time)) %>%
+  summarise(fgco2_glob = mean(fgco2_glob)) %>% 
+  pull(fgco2_glob) %>% 
+  max()
+
+rm(variable_data, variable_data_B, variable_data_D, variable_data_tibble)
+rm(CESM_folder, file)
+
+```
+
+
 
 # Extract surface data
 
