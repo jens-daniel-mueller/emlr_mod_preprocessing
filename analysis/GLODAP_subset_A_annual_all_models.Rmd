@@ -111,24 +111,15 @@ models <-
     )
   )]
 
-# # no depth levels
-# models <-
-#   models[!str_detect(models, pattern = "CNRM")]
-
-# # files chunked into decades, no silicate
-# models <-
-#   models[!str_detect(models, pattern = "ORCA025-GEOMAR")]
-
-# models <- models[c(2,8)]
 
 ```
 
 
 
 
-```{r subset_cmorized_variable_forcing_data, eval=FALSE}
+```{r subset_cmorized_variable_forcing_data}
 
-models <- models[c(2,8)]
+# models <- models[c(2,8)]
 
 for (i_model in models) {
   # i_model <- models[8]
@@ -553,7 +544,7 @@ for (i_model in models) {
 
 ```
 
-```{r prepare_model_subset, eval=FALSE}
+```{r prepare_model_subset}
 
 rm(GLODAP, GLODAP_joined)
 
@@ -802,7 +793,7 @@ GLODAP_NA_filled <- GLODAP_NA_filled %>%
 
 # Write files
 
-```{r write_files, eval=FALSE}
+```{r write_files}
 
 # write final file for GLODAP-based subsetting model variables
 GLODAP %>%
@@ -989,7 +980,7 @@ GLODAP_cmorized <- GLODAP_cmorized %>%
 
 ```
 
-```{r calc_revelle_factors, eval=FALSE}
+```{r calc_revelle_factors}
 
 
 GLODAP_cmorized_beta <- GLODAP_cmorized %>% 
@@ -1031,7 +1022,7 @@ GLODAP_cmorized_beta <- GLODAP_cmorized %>%
 
 ```
 
-```{r write_files_with_betaD, eval=FALSE}
+```{r write_files_with_betaD}
 
 GLODAP_cmorized_beta %>%
   group_by(model) %>%
