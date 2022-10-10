@@ -118,12 +118,14 @@ models <-
 # models <-
 #   models[!str_detect(models, pattern = "ORCA025-GEOMAR")]
 
+# models <- models[c(2,8)]
+
 ```
 
 
 
 
-```{r subset_cmorized_variable_forcing_data}
+```{r subset_cmorized_variable_forcing_data, eval=FALSE}
 
 models <- models[c(2,8)]
 
@@ -550,7 +552,7 @@ for (i_model in models) {
 
 ```
 
-```{r prepare_model_subset}
+```{r prepare_model_subset, eval=FALSE}
 
 rm(GLODAP, GLODAP_joined)
 
@@ -799,7 +801,7 @@ GLODAP_NA_filled <- GLODAP_NA_filled %>%
 
 # Write files
 
-```{r write_files}
+```{r write_files, eval=FALSE}
 
 # write final file for GLODAP-based subsetting model variables
 GLODAP %>%
@@ -964,7 +966,7 @@ map +
 
 # GLODAP observations vs cmorized subset comparison
 
-```{r read_GLODAP_with_cmorized_subset_file, eval=FALSE}
+```{r read_GLODAP_with_cmorized_subset_file}
 
 
 files <- fs::dir_ls(path_preprocessing)
@@ -986,7 +988,7 @@ GLODAP_cmorized <- GLODAP_cmorized %>%
 
 ```
 
-```{r calc_revelle_factors, eval=FALSE}
+```{r calc_revelle_factors}
 
 
 GLODAP_cmorized_beta <- GLODAP_cmorized %>% 
@@ -1028,7 +1030,7 @@ GLODAP_cmorized_beta <- GLODAP_cmorized %>%
 
 ```
 
-```{r write_files_with_betaD, eval=FALSE}
+```{r write_files_with_betaD}
 
 GLODAP_cmorized_beta %>%
   group_by(model) %>%
@@ -1046,7 +1048,7 @@ GLODAP_cmorized_beta %>%
 
 
 
-```{r GLODAP_vs_cmorized_subset_comparison, eval=FALSE}
+```{r GLODAP_vs_cmorized_subset_comparison}
 
 
 # for loop across variables
