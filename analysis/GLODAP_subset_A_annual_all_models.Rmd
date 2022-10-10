@@ -110,13 +110,13 @@ models <-
     )
   )]
 
-# no depth levels
-models <-
-  models[!str_detect(models, pattern = "CNRM")]
+# # no depth levels
+# models <-
+#   models[!str_detect(models, pattern = "CNRM")]
 
-# files chunked into decades, no silicate
-models <-
-  models[!str_detect(models, pattern = "ORCA025-GEOMAR")]
+# # files chunked into decades, no silicate
+# models <-
+#   models[!str_detect(models, pattern = "ORCA025-GEOMAR")]
 
 ```
 
@@ -125,10 +125,10 @@ models <-
 
 ```{r subset_cmorized_variable_forcing_data}
 
-# models <- models[8]
+models <- models[c(2,8)]
 
 for (i_model in models) {
-  # i_model <- models[2]
+  # i_model <- models[8]
   print(i_model)
   
   variables_available <-
@@ -174,6 +174,42 @@ for (i_model in models) {
                         sep = "/"),
                   make_units = FALSE,
                   make_time = FALSE)
+    } else if (i_model %in% c("ORCA025-GEOMAR_3D_ALL_v20210804")) {
+      
+      for (i_file in file) {
+        # i_file <- file[1]
+        
+        temp <-
+          read_ncdf(paste(paste0(path_cmorized, i_model),
+                          i_file,
+                          sep = "/"),
+                    make_units = FALSE)
+
+        temp_dates <-
+          read_stars(paste(paste0(path_cmorized, i_model),
+                          i_file,
+                          sep = "/"),
+                    make_units = FALSE)
+          
+        temp_dates <- st_get_dimension_values(temp_dates, "time")
+        
+        temp <-
+          st_set_dimensions(temp,
+                            "time",
+                            values = temp_dates)
+
+        if (exists("variable_data")) {
+          variable_data <- c(variable_data, temp)
+        }
+        
+        if (!exists("variable_data")) {
+          variable_data <- temp
+        }
+        rm(temp, temp_dates)
+        
+      }
+      
+      
     } else {
       variable_data <-
         read_ncdf(paste(paste0(path_cmorized, i_model),
@@ -184,39 +220,53 @@ for (i_model in models) {
     
     
     
-  # if (i_model == "CNRM-ESM2-1_3D_ALL_v20211208") {
-  #   CNRM_depth <-
-  #     read_ncdf(
-  #       paste(
-  #         paste0(path_cmorized, i_model),
-  #         "depth_CNRM-ESM2-1_1_gr_1980-2018_v20211208.nc",
-  #         sep = "/"
-  #       ),
-  #       make_units = FALSE,
-  #       make_time = FALSE
-  #     ) %>%
-  #     as_tibble()
-  #   
-  #   CNRM_depth %>%
-  #     distinct(lev)
-  #   
-  #   CNRM_depth %>%
-  #     slice_sample(n = 1e4) %>%
-  #     ggplot(aes(lev, depth)) +
-  #     geom_point(alpha = 0.3) +
-  #     labs(title = "depth_CNRM-ESM2-1_1_gr_1980-2018_v20211208.nc",
-  #          subtitle = "random sample of 1000 data points")
-  #   
-  #   CNRM_depth %>%
-  #     filter(lev == unique(CNRM_depth$lev)[70]) %>%
-  #     ggplot(aes(lon, lat, fill = depth)) +
-  #     geom_tile() +
-  #     scale_fill_viridis_c(direction = -1) +
-  #     coord_quickmap(expand = 0) +
-  #     labs(title = "depth_CNRM-ESM2-1_1_gr_1980-2018_v20211208.nc",
-  #          subtitle = "lev == 4787.702 (position 70)")
-  #       
-  #   }
+    if (i_model == "CNRM-ESM2-1_3D_ALL_v20211208") {
+      CNRM_depth <-
+        read_ncdf(
+          paste(
+            paste0(path_cmorized, i_model),
+            "depth_CNRM-ESM2-1_1_gr_1980-2018_v20211208.nc",
+            sep = "/"
+          ),
+          make_units = FALSE,
+          make_time = FALSE
+        ) %>%
+        as_tibble()
+      
+      CNRM_depth <- CNRM_depth %>%
+        distinct(lev) %>% 
+        arrange(lev) %>% 
+        rename(depth = lev) %>% 
+        pull()
+      
+      variable_data <-
+        st_set_dimensions(variable_data,
+                          "lev",
+                          values = CNRM_depth,
+                          names = "depth")
+
+      variable_data <-
+        st_set_dimensions(variable_data,
+                          "time",
+                          values = ymd(1980:2018, truncated = 2L))
+      
+      # CNRM_depth %>%
+      #   slice_sample(n = 1e4) %>%
+      #   ggplot(aes(lev, depth)) +
+      #   geom_point(alpha = 0.3) +
+      #   labs(title = "depth_CNRM-ESM2-1_1_gr_1980-2018_v20211208.nc",
+      #        subtitle = "random sample of 1000 data points")
+      # 
+      # CNRM_depth %>%
+      #   filter(lev == unique(CNRM_depth$lev)[70]) %>%
+      #   ggplot(aes(lon, lat, fill = depth)) +
+      #   geom_tile() +
+      #   scale_fill_viridis_c(direction = -1) +
+      #   coord_quickmap(expand = 0) +
+      #   labs(title = "depth_CNRM-ESM2-1_1_gr_1980-2018_v20211208.nc",
+      #        subtitle = "lev == 4787.702 (position 70)")
+      
+    }
     
     # convert to tibble
     variable_data_tibble <- variable_data %>%
@@ -238,18 +288,6 @@ for (i_model in models) {
     if (i_model == "EC-Earth3_3D_ALL_v20220323") {
       variable_data_tibble <- variable_data_tibble %>%
         mutate(time = as.Date(time, origin = "1850-06-01"))
-    }
-    
-    if (i_model == "CNRM-ESM2-1_3D_ALL_v20211208") {
-      variable_data_tibble <- variable_data_tibble %>%
-        rename(depth = lev) %>% 
-        group_by(time) %>% 
-        mutate(year = as.character(1979 + cur_group_id())) %>% 
-        ungroup()
-      
-      variable_data_tibble <- variable_data_tibble %>% 
-        mutate(time = as.Date(year, format = "%Y")) %>% 
-        select(-year)
     }
     
     if (i_model == "FESOM_REcoM_LR_3D_all_v20211119") {
@@ -926,7 +964,7 @@ map +
 
 # GLODAP observations vs cmorized subset comparison
 
-```{r read_GLODAP_with_cmorized_subset_file}
+```{r read_GLODAP_with_cmorized_subset_file, eval=FALSE}
 
 
 files <- fs::dir_ls(path_preprocessing)
@@ -948,7 +986,7 @@ GLODAP_cmorized <- GLODAP_cmorized %>%
 
 ```
 
-```{r calc_revelle_factors}
+```{r calc_revelle_factors, eval=FALSE}
 
 
 GLODAP_cmorized_beta <- GLODAP_cmorized %>% 
@@ -990,7 +1028,7 @@ GLODAP_cmorized_beta <- GLODAP_cmorized %>%
 
 ```
 
-```{r write_files_with_betaD}
+```{r write_files_with_betaD, eval=FALSE}
 
 GLODAP_cmorized_beta %>%
   group_by(model) %>%
@@ -1008,7 +1046,7 @@ GLODAP_cmorized_beta %>%
 
 
 
-```{r GLODAP_vs_cmorized_subset_comparison}
+```{r GLODAP_vs_cmorized_subset_comparison, eval=FALSE}
 
 
 # for loop across variables
