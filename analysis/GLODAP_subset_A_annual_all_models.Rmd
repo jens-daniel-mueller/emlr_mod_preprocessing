@@ -39,7 +39,8 @@ library(marelac)
 library(oce)
 library(reticulate)
 library(seacarb)
-
+library(khroma)
+library(colorspace)
 ```
 
 # Select basin mask
@@ -988,7 +989,7 @@ GLODAP_cmorized <- GLODAP_cmorized %>%
 
 ```
 
-```{r calc_revelle_factors}
+```{r calc_revelle_factors, eval=FALSE}
 
 
 GLODAP_cmorized_beta <- GLODAP_cmorized %>% 
@@ -1030,7 +1031,7 @@ GLODAP_cmorized_beta <- GLODAP_cmorized %>%
 
 ```
 
-```{r write_files_with_betaD}
+```{r write_files_with_betaD, eval=FALSE}
 
 GLODAP_cmorized_beta %>%
   group_by(model) %>%
@@ -1047,8 +1048,41 @@ GLODAP_cmorized_beta %>%
 ```
 
 
+```{r read_files_with_betaD}
+
+files <- fs::dir_ls(path_preprocessing)
+
+files <- files[str_detect(files, pattern = "preprocessed_model_runA_both_ann_incl_betaD.csv")]
+
+GLODAP_cmorized_beta <- files %>% 
+  map_dfr(read_csv, .id = "model")
+
+GLODAP_cmorized_beta <- GLODAP_cmorized_beta %>%
+  mutate(
+    model = str_remove(model, path_preprocessing),
+    model = str_remove(
+      model,
+      "_GLODAPv2.2021_preprocessed_model_runA_both_ann_incl_betaD.csv"
+    )
+  )
+
+
+```
+
+
 
 ```{r GLODAP_vs_cmorized_subset_comparison}
+
+
+GLODAP_cmorized <- GLODAP_cmorized %>%
+  mutate(
+    model = str_split(model, "_v", simplify = TRUE)[,1]
+  )
+
+GLODAP_cmorized_beta <- GLODAP_cmorized_beta %>%
+  mutate(
+    model = str_split(model, "_v", simplify = TRUE)[,1]
+  )
 
 
 # for loop across variables
@@ -1203,16 +1237,19 @@ for (i in 1:12) {
     summarise(offset = mean(offset)) %>%
     ungroup()
   
+  muted <- c(colour("muted", names = FALSE)(9),"#999999")
+
   # plot annual mean offset
   print(
     GLODAP_cmorized_var_year %>%
       ggplot(aes(year, offset, col = model)) +
       geom_point() +
       geom_line() +
+      scale_color_manual(values = muted) +
       labs(title = "Annual mean offset",
            subtitle = paste(sym(model_var[i]), "-", sym(obs_var[i]))) +
       theme(legend.position = "bottom",
-            legend.direction = "vertical")
+            legend.title = element_blank())
   )
   
   # spatial distribution of the model-observations offset for 4 depth intervals
@@ -1247,8 +1284,10 @@ for (i in 1:12) {
           ),
           subtitle = paste(sym(model_var[i]), "-", sym(obs_var[i]))
         ) +
+        
+        scale_color_manual(values = muted) +
         theme(legend.position = "bottom",
-              legend.direction = "vertical")
+              legend.title = element_blank())
     )
     
     
@@ -1256,20 +1295,20 @@ for (i in 1:12) {
       group_by(lat, lon, model) %>%
       summarise(offset = mean(offset)) %>%
       ungroup()
-    
+
     # plot mean spatial distribution (model - obs)
     limit <-
       quantile(abs(GLODAP_cmorized_var_grid$offset), 0.98) * c(-1, 1)
     print(
       map +
         geom_raster(data = GLODAP_cmorized_var_grid, aes(lon, lat, fill = offset)) +
-        scale_fill_scico(
-          palette = "vik",
+        scale_fill_continuous_divergingx(
+          palette = "Spectral",
           name = "offset",
+          rev = TRUE,
           limit = limit,
-          na.value = "red"
+          na.value = "black"
         ) +
-
         labs(
           title = paste(model_var[i],
                         "-",
@@ -1280,12 +1319,12 @@ for (i in 1:12) {
             intervals[j],
             "-",
             intervals[j + 1],
-            "m | red: outside 98th percentile"
+            "m | black: outside 98th percentile"
           ),
           x = "Longitude",
           y = "Latitude"
         ) +
-        facet_wrap( ~ model, ncol = 3)
+        facet_wrap( ~ model, ncol = 4)
     )
     
     print(
@@ -1327,27 +1366,30 @@ for (i in 1:12) {
       GLODAP_cmorized_var_zonal %>%
         ggplot(aes(lat, depth, z = offset)) +
         stat_summary_2d(binwidth = c(1, 100)) +
-        scale_fill_scico(
-          palette = "vik",
+        scale_fill_continuous_divergingx(
+          palette = "Spectral",
           name = "offset",
+          rev = TRUE,
           limit = limit,
-          na.value = "red"
+          na.value = "black"
         ) +
         coord_fixed(expand = 0,
                         xlim = c(lat_min, lat_max),
                     ratio = 0.01) +
-        scale_y_reverse() +
+        scale_y_reverse(limits = c(6000, 0),
+                        breaks = seq(0,6000,2000)) +
         labs(
           title = paste(model_var[i],
                         "-",
                         obs_var[i],
                         " | zonal mean offset"),
           subtitle = paste("Basin:",
-                           i_basin_AIP),
-          x = "Latitude",
-          y = "Depth"
+                           i_basin_AIP,
+            " | black: outside 98th percentile"),
+          x = "Latitude (°N)",
+          y = "Depth (m)"
         ) +
-        facet_wrap(~ model, ncol = 3)
+        facet_wrap(~ model, ncol = 4)
     )
   }
   
