@@ -1057,6 +1057,10 @@ GLODAP_cmorized_beta <- GLODAP_cmorized_beta %>%
     )
   )
 
+GLODAP_cmorized_beta <- GLODAP_cmorized_beta %>% 
+  mutate(BetaD_tco2 = tco2 / BetaD / 100,
+         BetaD_dissic_model = dissic_model / BetaD_model / 100)
+
 
 ```
 
@@ -1090,7 +1094,8 @@ obs_var <-
     "temp",
     "theta",
     "gamma",
-    "BetaD"
+    "BetaD",
+    "BetaD_tco2"
   )
 
 model_var <-
@@ -1106,10 +1111,11 @@ model_var <-
     "temp_model",
     "thetao_model",
     "gamma_model",
-    "BetaD_model"
+    "BetaD_model",
+    "BetaD_dissic_model"
   )
 
-for (i in 1:12) {
+for (i in 1:length(obs_var)) {
   #  i <- 1
   
   pdf(
@@ -1123,8 +1129,10 @@ for (i in 1:12) {
     height = 8
   )
   
+  print(obs_var[i])
+  
   # select correlated observation and model variable
-  if (obs_var[i] == "BetaD") {
+  if (obs_var[i] %in% c("BetaD", "BetaD_tco2")) {
     GLODAP_cmorized_var <- GLODAP_cmorized_beta %>%
       select(model,
              year,
@@ -1247,6 +1255,8 @@ for (i in 1:12) {
   intervals <- c(0, 150, 500, 2000, 8000)
   
   for (j in 1:4) {
+    
+    print(intervals[j])
     # j <- 1
     GLODAP_cmorized_var_interval <- GLODAP_cmorized_var %>%
       filter(depth >= intervals[j],
@@ -1341,6 +1351,8 @@ for (i in 1:12) {
   # zonal mean section of the model-observations offset for each basin
   for (i_basin_AIP in unique(GLODAP_cmorized_var$basin_AIP)) {
     # i_basin_AIP = "Atlantic"
+    print(i_basin_AIP)
+    
     GLODAP_cmorized_var_zonal <- GLODAP_cmorized_var %>%
       filter(basin_AIP == i_basin_AIP) %>%
       group_by(lat, depth, model) %>%
