@@ -345,14 +345,26 @@ for (i_model in models) {
   
   CB_annual_cstar <- CB_annual_cstar %>%
     mutate(
-      cstar_no3 = b_cstar_nitrate(
+      cstar_nitrate_talk = b_cstar_nitrate_talk(
         tco2 = dissic,
         nitrate = nitrate,
         talk = talk
       ),
-      cstar_po4 = b_cstar_phosphate(
+      cstar_phosphate_talk = b_cstar_phosphate_talk(
         tco2 = dissic,
         phosphate = phosphate,
+        talk = talk
+      ),
+      cstar_nitrate = b_cstar_nitrate(
+        tco2 = dissic,
+        nitrate = nitrate
+      ),
+      cstar_phosphate = b_cstar_phosphate(
+        tco2 = dissic,
+        phosphate = phosphate
+      ),
+      cstar_talk = b_cstar_talk(
+        tco2 = dissic,
         talk = talk
       )
     )
